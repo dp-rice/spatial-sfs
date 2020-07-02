@@ -413,10 +413,10 @@ plt.plot(t, left + t * (right - left), 1, linestyle='dashed', color='k')
 
 np.random.seed(100)
 npops = 1000
-%prun [simulate(s=0.025, max_steps=10000) for i in range(npops)]
+# %prun [simulate(s=0.025, max_steps=10000) for i in range(npops)]
 
 # +
-%%prun
+# %%prun
 
 nsamples = 100
 
