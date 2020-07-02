@@ -408,3 +408,36 @@ B2 = W - t * W[-1] + left + t * (right - left)
 plt.plot(t, B2, drawstyle='steps-post')
 plt.plot(t, left + t * (right - left), 1, linestyle='dashed', color='k')
 # -
+
+# ## Profiling
+
+np.random.seed(100)
+npops = 1000
+%prun [simulate(s=0.025, max_steps=10000) for i in range(npops)]
+
+# +
+%%prun
+
+nsamples = 100
+
+sigma1 = 4
+sigma2 = 0.25
+samples1 = np.zeros((nsamples, npops))
+samples2 = np.zeros((nsamples, npops))
+
+ts = np.random.exponential(10, size=nsamples)
+xs = np.random.normal(0, 10, size=nsamples)
+weights = np.zeros((nsamples, npops))
+
+for i in range(nsamples):
+    for j, pop in enumerate(pops):
+        locs = np.array(pop.locations_at(ts[i]))
+
+        w1 = sample(locs, xs[i], sigma1)
+        samples1[i, j] = w1
+
+        w2 = sample(locs, xs[i], sigma2)
+        samples2[i, j] = w2
+
+    weights[i, :] = np.exp(ts[i] / 10) * np.exp((xs[i] / 10)**2 / 2)
+# -
