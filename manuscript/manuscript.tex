@@ -227,12 +227,94 @@ In that case $n_i = 2$ for all subsamples ($n_i = 1$ for haploids), and $\tilde{
 Of particular interest is $\mathbf{n} = (2,2)$, which gives the sample configurations for a pair of diploids sampled according to $(\tilde{\rho}_1, \tilde{\rho}_2)$.
 Below, we use this case to estimate the genetic variance explained by polygenic scores derived from one samples in region applied to individuals living in another region.
 
-\subsection*{Saddle point approximation to the SFS}
+\subsection*{Saddlepoint approximation to the SFS}
+
+For small sample sizes, it suffices to use the Binomial theorem to expand Eq.~\ref{eq:sfs} as a polynomial in $P$ and compute the SFS for $n$ chromosomes as a linear combination of the first $n+1$ moments of $P$.
+We can compute these moments by automatic differentiation of the MGF or, in the spatially and temporally homogeneous case, by $n$ convolutions of Green's functions.
+A difficulty arises for large $n$.
+The terms of the binomial expansion have alternating signs and widely varying magnitudes.
+Summing the series is thus subject to catastrophic cancellation.
+
+We avoid this difficulty by approximating the probability density of the spatially sampled allele frequency, $\xi(p)$, rather than computing its moments.
+There are three advantages to this approach.
+First, it avoids the catastrophic cancellation described above.
+Second, for $n \to \infty$, $k/n \to p$, $\xi^{(n)}_k \to \xi(p)$.
+Therefore, $\xi(p)$ captures the shape of the SFS for large sample sizes, independent of $n$, and is consequently a more fundamental theoretical quantity.
+Finally, for a given $n$ and $k$, we can compute the finite-sample SFS $\xi^{(n)}_k$ from $\xi(p)$ by quadrature using Eq.~\ref{eq:sfs}.
+
+We approximate the probability density of P, $\xi(p)$, from its moment generating function, $\phi(z)$, by a standard saddlepoint approximation.
+Like the Gaussian approximation to a probability density, the saddlepoint approximation uses a second-order Taylor series expansion of the log MGF.
+However, where a Gaussian approximation uses the expansion of $\log \phi(z)$ around $z=0$, the saddlepoint approximation expands $\log \phi(z)$ about a saddlepoint $z_s(p)$, which varies as a function of $p$.
+This affords much greater flexibility in the functional forms for $\xi(p)$ that the saddlepoint approximation can accurately approximate.
+Let $\phi(z) = \exp(K(z))$.
+Then, the saddlepoint appoximation to $\phi$ is given by:
+\begin{equation}
+    \phi(p) \approx \frac{1}{\sqrt{2\pi K''(z_s)}} \exp \left(K(z_s) - z_s p\right),
+    \label{eq:saddlepoint}
+\end{equation}
+where the saddlepoint $z_s$ is the solution to $K'(z_s) = p$.
+Eq.~\ref{eq:saddlepoint} is not guaranteed to integrate to one, but may be normalized appropriately if it important to have a proper probability density.
+
+Before moving on, we gather our important results from the superprocess and spatial sampling sections above.
+Using Eqs.~\ref{eq:sample_mgf} and~\ref{eq:mgf}--\ref{eq:initial_cond}, we have
+\begin{align}
+    K(z) & = \int_0^\infty \left< \mu \mathcal{N}, u_t \right> dt \label{eq:k} \\
+    \frac{\partial}{\partial t} u_t(x) & = \mathcal{L}u - su + u^2 \label{eq:pde2} \\
+    u_0(x) & = z \tilde{\rho}(x). \label{eq:initial_cond2}
+\end{align}
+For a given value of $p$, we could (1) compute $K$, $K'$, and $K''$ by automatic differentiation, (2) solve for $z_s$, and (3) substitute into Eq.~\ref{eq:saddlepoint} to find $\phi(p)$.
+The difficulty of this procedure is that it must be redone for every $p$ we are interested in.
+Instead, in the remainder of this section, we develop an approach that yields a parametric approximation to $\phi(p)$.
+The result is numerically convenient and interpretable in terms of population genetic intuition.
+
+\subsubsection*{Saddlepoint approximation in the single-deme case}
+To demonstrate the usefulness of the saddlepoint approximation and guide our approach to the full spatial model, we first solve the single-deme case, i.e., no spatial structure.
+The advantage of this case is that it is exactly solvable, and, in fact, the saddlepoint approximation gives the exact solution.
+
+In the case of a single deme with population size $N$, Eqs.~\ref{eq:K}--\ref{eq:initial_cond2} reduce to:
+\begin{align}
+    K(z) & = \mu N \int_0^\infty u_t dt \\
+    u'_t& = -su_t + u_t^2 \label{eq:single_deme_eq} \\
+    u_0 & = z/N.
+\end{align}
+Eq.~\ref{eq:single_deme_eq} is a Bernoulli equation, which can be solved in closed form to give:
+\begin{align}
+    u_t & = \frac{sz}{e^{st}(Ns-z) + z} \\
+    K(z) & = N\mu \log \left( \frac{Ns}{Ns-z} \right) \label{eq:K_sd} \\
+    K'(z) & = \frac{N\mu}{Ns-z} \label{eq:Kprime}\\
+    K''(z) & = \frac{N\mu}{{(Ns-z)}^2}.
+\end{align}
+
+We can now find $\phi(p)$ two ways.
+First, exponentiating Eq.~\ref{eq:K_sd} gives $\phi(p) = {\left( \frac{Ns}{Ns-z} \right)}^{N\mu}$, which we recognize as the moment-generating function of a Gamma distribution with rate parameter $Ns$ and shape parameter $N\mu$.
+Second, we can apply the saddlepoint approximation.
+The first step is to solve $K'(z_s) = p$ for the saddlepoint using Eq.~\ref{eq:Kprime}.
+Substituting the result, $z_s = Ns - \frac{N\mu}{p}$, into  Eq.~\ref{eq:saddlepoint} gives the SFS:
+\begin{equation}
+    \phi(p) \propto p^{N\mu - 1} \exp(-Nsp),
+\end{equation}
+which agrees with the exact result up to a normalizing constant.
+
+In the single-deme case, we can see the effect of our rare allele branching process approximation on the SFS.
+In the standard Wright-Fisher diffusion symmetric back-mutation in one deme, the steady-state population SFS is given by
+\begin{equation}
+    \phi_{WF}(p) \propto {\left(p(1-p)\right)}^{N\mu-1} \exp(-Nsp)
+\end{equation}
+\cite{Kimura}.
+The branching process result varies from the Wright-Fisher result in two ways.
+First, it lacks the ${(1-p)}^{N\mu-1}$ factor, which represents saturation and back-mutation.
+This factor is negligible for rare mutations, $p\ll1$.
+Furthermore, when $Ns\gg1$, the exponential term dominates as $p$ increases, so that---outside of a singularity at $p\to1$ that represents fixation of the deleterious allele---the absolute agreement of the equations will be very good.
+The second disagreement between the models is that the Gamma density has support $(0,\infty)$, whereas the Wright-Fisher SFS is constrained to $(0, 1)$.
+This disagreement represents the fact that an allele modeled by an independent branching process cannot fix.
+In practice, we can patch this inconsistency by truncating $\phi(p)$ at $p=1$.
+For $Ns \gg 1$, the mass in this tail is rendered negligible by the exponential term.
+Even for $Ns = 0$, the truncated result is sensible: it is the SFS in a neutral infinite-sites model.
+[NOTE: This truncation issue is another reason to use the saddlepoint approximation. If we compute the moments directly, sufficiently large moments start `feeling' the weight above $p=1$.]
+
+\subsubsection*{A scaling hypothesis}
+
 \begin{enumerate}
-    \item Problems with moments approach for large samples
-    \item SFS approaches the distribution of $P$ anyway
-    \item Saddle point approximation in general
-    \item Exact application to 1-deme model
     \item $\mu \to 0$ limit
     \item Ansatz
 \end{enumerate}
