@@ -150,7 +150,7 @@ def simulate_population(s=0.1, max_steps=10000):
     return population
 
 
-def simulate(n_populations, seed, **kwargs):
+def simulate(n_populations, seed=100, **kwargs):
     np.random.seed(seed)
     return [simulate_population(**kwargs) for i in range(n_populations)]
 
