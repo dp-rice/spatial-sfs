@@ -19,6 +19,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import gamma
 
 from spatialsfs.simulations import load_populations
 
@@ -31,94 +32,100 @@ bins = np.linspace(0, mt + 1, 100)
 plt.hist(maxtimes, bins=bins)
 plt.show()
 plt.hist(maxtimes, bins=np.arange(100))
-
-
-def sample(locs, x, sigma):
-    return np.sum(np.exp(-(
-        (locs - x) / sigma)**2 / 2)) / (np.sqrt(2 * np.pi) * sigma)
+print(mt)
 
 
 # +
-nsamples = 100
-npops = len(pops)
+def gaussian_sum(locs, x, sigmas):
+    return np.sum(np.exp(-((locs[:, None] - x) / sigmas[None, :])**2 / 2),
+                  axis=0) / (np.sqrt(2 * np.pi) * sigmas)
 
-sigma1 = 4
-sigma2 = 0.25
-samples1 = np.zeros((nsamples, npops))
-samples2 = np.zeros((nsamples, npops))
 
-ts = np.random.exponential(10, size=nsamples)
-xs = np.random.normal(0, 10, size=nsamples)
-weights = np.zeros((nsamples, npops))
+def sample_populations(populations, nsamples, sigmas):
+    npops = len(populations)
+    nsigmas = len(sigmas)
 
-for i in range(nsamples):
-    for j, pop in enumerate(pops):
-        locs = np.array(pop.locations_at(ts[i]))
+    ts = np.random.exponential(10, size=nsamples)
+    xs = np.random.normal(0, 10, size=nsamples)
+    weights = np.exp(ts / 10) * np.exp((xs / 10)**2 / 2)
+    weights = np.tile(weights, npops)
 
-        w1 = sample(locs, xs[i], sigma1)
-        samples1[i, j] = w1
+    samples = np.zeros((nsigmas, nsamples * npops))
+    for i in range(nsamples):
+        for j, pop in enumerate(populations):
+            locs = np.array(pop.locations_at(ts[i]))
+            total = gaussian_sum(locs, xs[i], sigmas)
+            samples[:, i + j * nsamples] = total
+    return samples, weights
 
-        w2 = sample(locs, xs[i], sigma2)
-        samples2[i, j] = w2
 
-    weights[i, :] = np.exp(ts[i] / 10) * np.exp((xs[i] / 10)**2 / 2)
 # -
 
-bins = np.arange(0.0, 10, 0.05)
+tc = 1 / (2 * s)
+dc = np.sqrt(tc)
+print(tc, dc)
 
-# +
-plt.hist(samples1.flatten(), weights=weights.flatten(), bins=bins, log=True)
-plt.show()
-
-plt.hist(samples2.flatten(), weights=weights.flatten(), bins=bins, log=True)
-plt.show()
-
-# +
-plt.hist(samples1.flatten(),
-         weights=weights.flatten(),
-         bins=bins,
-         cumulative=True,
-         density=True,
-         histtype='step')
-
-plt.hist(samples2.flatten(),
-         weights=weights.flatten(),
-         bins=bins,
-         cumulative=True,
-         density=True,
-         histtype='step')
-plt.ylim([0.99, 1])
-
-# +
+np.random.seed(102)
 nsamples = 100
-npops = len(pops)
+sigmas = dc * np.logspace(-2, 2, 5, base=2)
+samples, weights = sample_populations(pops, nsamples, sigmas)
 
-bins = np.arange(0.0, 10, 0.05)
-sigmas = np.logspace(-2, 2, 5, base=2)
-
-ts = np.random.exponential(10, size=nsamples)
-xs = np.random.normal(0, 10, size=nsamples)
-weights = np.zeros((nsamples, npops))
-
-for sigma in sigmas:
-    print(sigma)
-    samples = np.zeros((nsamples, npops))
-
-    for i in range(nsamples):
-        for j, pop in enumerate(pops):
-            locs = np.array(pop.locations_at(ts[i]))
-            w = sample(locs, xs[i], sigma)
-            samples[i, j] = w
-            weights[i, :] = np.exp(ts[i] / 10) * np.exp((xs[i] / 10)**2 / 2)
-
-    plt.hist(samples.flatten(),
-             weights=weights.flatten(),
+bins = np.arange(0.0, 6, 0.01)
+for i, sigma in enumerate(sigmas):
+    plt.hist(samples[i],
+             weights=weights,
              bins=bins,
-             cumulative=True,
+             cumulative=-1,
              density=True,
              histtype='step',
-             label=sigma)
-
+             label=sigma / dc)
+plt.ylim([1e-5, 1])
+plt.yscale('log')
 plt.legend()
-plt.ylim([0.99, 1])
-# -
+
+a = 0.02
+rand_gamma = np.random.gamma(a, size=10000)
+plt.hist(rand_gamma, bins=bins, cumulative=-1, density=True, histtype='step')
+plt.yscale('log')
+
+x = bins
+plt.hist(rand_gamma, bins=bins, cumulative=-1, density=True, histtype='step')
+plt.semilogy(x, gamma.sf(x, a))
+plt.ylim([1e-4, 1])
+
+# ## Compress zeros
+
+nzeros = np.sum(samples == 0, axis=1)
+print(nzeros / len(samples[0]))
+
+
+def compress_zeros(samples, weights):
+    zeros = samples[0] == 0
+    nzeros = np.sum(zeros)
+    new_length = samples.shape[1] - nzeros + 1
+    new_samples = np.zeros((samples.shape[0], new_length))
+    new_weights = np.zeros(new_length)
+    new_samples[:, 1:] = samples[:, ~zeros]
+    new_weights[0] = np.sum(weights[zeros])
+    new_weights[1:] = weights[~zeros]
+    return new_samples, new_weights
+
+
+new_samples, new_weights = compress_zeros(samples, weights)
+
+bins = np.arange(0.0, 6, 0.01)
+for i, sigma in enumerate(sigmas):
+    plt.hist(new_samples[i],
+             weights=new_weights,
+             bins=bins,
+             cumulative=-1,
+             density=True,
+             histtype='step',
+             label=sigma / dc)
+plt.ylim([1e-5, 1])
+plt.yscale('log')
+plt.legend()
+
+np.average(samples, axis=1, weights=weights)
+
+np.average(new_samples, axis=1, weights=new_weights)
