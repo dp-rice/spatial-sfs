@@ -1,4 +1,13 @@
+import gzip
+import pickle
+import sys
+
 import numpy as np
+
+# These are highly recursive functions, esp when s is small.
+# Allow for deeper recursion.
+sys.setrecursionlimit(10000)
+
 
 class Individual:
     def __init__(self, parent, birth_time, birth_location):
@@ -119,7 +128,7 @@ class Population:
         return self.ancestor.latest_time
 
 
-def simulate(s=0.1, max_steps=1000):
+def simulate_population(s=0.1, max_steps=10000):
     population = Population()
     p_death = (1 + s) / 2
     t = 0.0
@@ -139,3 +148,19 @@ def simulate(s=0.1, max_steps=1000):
         for indiv in population.living:
             indiv.die(t)
     return population
+
+
+def simulate(n_populations, seed, **kwargs):
+    np.random.seed(seed)
+    return [simulate_population(**kwargs) for i in range(n_populations)]
+
+
+def save_populations(populations, filename):
+    with gzip.open(filename, 'wb') as f:
+        f.write(pickle.dumps(populations))
+
+
+def load_populations(filename):
+    with gzip.open(filename, 'rb') as f:
+        pops = pickle.loads(f.read())
+    return pops

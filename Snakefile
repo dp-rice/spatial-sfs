@@ -1,6 +1,6 @@
 import gzip, pickle
 import numpy as np
-from src.simulations import simulate
+from src.simulations import simulate, save_populations
 
 npops = 10000
 s_list = [f'{s:.3f}' for s in np.arange(0.025, 0.251, 0.025)]
@@ -13,6 +13,6 @@ rule branchdiff:
     output:
         'simulations/branchdiff-s={s}.pkl.gz'
     run:
-        sims = [simulate(s=float(wildcards.s), max_steps=10000) for i in range(npops)]
-        with gzip.open(output[0], 'wb') as f:
-            f.write(pickle.dumps(sims))
+        seed = 100
+        sims = simulate(npops, seed, s=float(wildcards.s))
+        save_populations(sims, output[0])
