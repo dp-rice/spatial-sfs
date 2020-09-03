@@ -1,3 +1,4 @@
+"""Set up the python package."""
 import setuptools
 
 with open("README.md", "r") as fh:
@@ -18,6 +19,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=['numpy>=1.18'],
-    python_requires='>=3.8',
+    install_requires=["numpy>=1.18"],
+    python_requires=">=3.8",
 )

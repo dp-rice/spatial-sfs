@@ -24,7 +24,7 @@ from scipy.stats import gamma
 from spatialsfs.simulations import load_populations
 
 s = 0.025
-pops = load_populations(f'../simulations/branchdiff-s={s:0.3}.pkl.gz')
+pops = load_populations(f"../simulations/branchdiff-s={s:0.3}.pkl.gz")
 
 # Survival times
 
@@ -41,8 +41,9 @@ print(mt)
 
 # +
 def gaussian_sum(locs, x, sigmas):
-    return np.sum(np.exp(-((locs[:, None] - x) / sigmas[None, :])**2 / 2),
-                  axis=0) / (np.sqrt(2 * np.pi) * sigmas)
+    return np.sum(
+        np.exp(-(((locs[:, None] - x) / sigmas[None, :]) ** 2) / 2), axis=0
+    ) / (np.sqrt(2 * np.pi) * sigmas)
 
 
 def sample_populations(populations, nsamples, sigmas):
@@ -51,7 +52,7 @@ def sample_populations(populations, nsamples, sigmas):
 
     ts = np.random.exponential(10, size=nsamples)
     xs = np.random.normal(0, 10, size=nsamples)
-    weights = np.exp(ts / 10) * np.exp((xs / 10)**2 / 2)
+    weights = np.exp(ts / 10) * np.exp((xs / 10) ** 2 / 2)
     weights = np.tile(weights, npops)
 
     samples = np.zeros((nsigmas, nsamples * npops))
@@ -82,43 +83,49 @@ samples, weights = sample_populations(pops, nsamples, sigmas)
 
 bins = np.arange(0.0, 6, 0.01)
 for i, sigma in enumerate(sigmas):
-    plt.hist(samples[i],
-             weights=weights,
-             bins=bins,
-             cumulative=-1,
-             density=True,
-             histtype='step',
-             label=sigma / dc)
+    plt.hist(
+        samples[i],
+        weights=weights,
+        bins=bins,
+        cumulative=-1,
+        density=True,
+        histtype="step",
+        label=sigma / dc,
+    )
 plt.ylim([1e-5, 1])
-plt.yscale('log')
+plt.yscale("log")
 plt.legend()
 
 bins = np.arange(0.0, 6, 0.01)
 for i, sigma in enumerate(sigmas):
-    plt.hist(samples[i],
-             weights=weights,
-             bins=bins,
-             cumulative=-1,
-             density=True,
-             histtype='step',
-             label=sigma / dc)
+    plt.hist(
+        samples[i],
+        weights=weights,
+        bins=bins,
+        cumulative=-1,
+        density=True,
+        histtype="step",
+        label=sigma / dc,
+    )
 plt.ylim([1e-6, 1e-2])
-plt.yscale('log')
+plt.yscale("log")
 plt.legend()
 
 bins = np.arange(0.0, 6, 0.01)
 for i, sigma in enumerate(sigmas):
-    plt.hist(samples[i],
-             weights=weights,
-             bins=bins,
-             cumulative=-1,
-             density=True,
-             histtype='step',
-             label=sigma / dc)
+    plt.hist(
+        samples[i],
+        weights=weights,
+        bins=bins,
+        cumulative=-1,
+        density=True,
+        histtype="step",
+        label=sigma / dc,
+    )
 plt.ylim([1e-5, 1])
 plt.xlim([1e-2, 6])
-plt.yscale('log')
-plt.xscale('log')
+plt.yscale("log")
+plt.xscale("log")
 plt.legend()
 
 # A gamma distribution for comparison
@@ -127,7 +134,7 @@ np.random.seed(101)
 a = 0.02
 rand_gamma = np.random.gamma(a, size=10000)
 x = bins
-plt.hist(rand_gamma, bins=bins, cumulative=-1, density=True, histtype='step')
+plt.hist(rand_gamma, bins=bins, cumulative=-1, density=True, histtype="step")
 plt.semilogy(x, gamma.sf(x, a))
 plt.ylim([1e-4, 1])
 
@@ -153,19 +160,23 @@ new_samples, new_weights = compress_zeros(samples, weights)
 
 bins = np.arange(0.0, 6, 0.01)
 for i, sigma in enumerate(sigmas):
-    plt.hist(new_samples[i],
-             weights=new_weights,
-             bins=bins,
-             cumulative=-1,
-             density=True,
-             histtype='step',
-             label=sigma / dc)
+    plt.hist(
+        new_samples[i],
+        weights=new_weights,
+        bins=bins,
+        cumulative=-1,
+        density=True,
+        histtype="step",
+        label=sigma / dc,
+    )
 plt.ylim([1e-5, 1])
-plt.yscale('log')
+plt.yscale("log")
 plt.legend()
 
-np.isclose(np.average(samples, axis=1, weights=weights),
-           np.average(new_samples, axis=1, weights=new_weights))
+np.isclose(
+    np.average(samples, axis=1, weights=weights),
+    np.average(new_samples, axis=1, weights=new_weights),
+)
 
 # ## Method of moments
 
@@ -181,38 +192,32 @@ weights_nonzero = weights[~zeros]
 
 
 def kth_moment(samples, weights, k):
-    return np.average(samples**k, axis=1, weights=weights)
+    return np.average(samples ** k, axis=1, weights=weights)
 
 
 m1 = kth_moment(samples_nonzero, weights_nonzero, 1)
 m2 = kth_moment(samples_nonzero, weights_nonzero, 2)
 m3 = kth_moment(samples_nonzero, weights_nonzero, 3)
-plt.loglog(sigmas, m1, '.', label='m1')
-plt.loglog(sigmas, m2, '.', label='m2')
-plt.loglog(sigmas, m3, '.', label='m3')
+plt.loglog(sigmas, m1, ".", label="m1")
+plt.loglog(sigmas, m2, ".", label="m2")
+plt.loglog(sigmas, m3, ".", label="m3")
 plt.legend()
 
 # Method-of-moments parameter estmates
 
-alpha_hat = t_surv * m1**2 / m2
+alpha_hat = t_surv * m1 ** 2 / m2
 beta_hat = m1 / m2
 
-plt.loglog(sigmas / dc,
-           beta_hat,
-           '.',
-           label=r'$\hat \beta$ (selection factor)')
-plt.loglog(sigmas / dc,
-           alpha_hat,
-           '.',
-           label=r'$\hat \alpha$ (mutation factor)')
+plt.loglog(sigmas / dc, beta_hat, ".", label=r"$\hat \beta$ (selection factor)")
+plt.loglog(sigmas / dc, alpha_hat, ".", label=r"$\hat \alpha$ (mutation factor)")
 plt.legend()
 
 # ## Goodness-of-fit
 
 # Moment comparisons: in gamma distribution, $m_3 \propto m_2^2 / m_1$
 
-plt.loglog(sigmas, m3, '.')
-plt.loglog(sigmas, m2**2 / m1, 'x')
+plt.loglog(sigmas, m3, ".")
+plt.loglog(sigmas, m2 ** 2 / m1, "x")
 
 # ### KS-Statistics
 
@@ -230,30 +235,39 @@ def augment_zeros(samples, weights, t_surv, theta):
 
 
 theta = 1e-3
-samples_aug, weights_aug = augment_zeros(samples_nonzero, weights_nonzero,
-                                         t_surv, theta)
+samples_aug, weights_aug = augment_zeros(
+    samples_nonzero, weights_nonzero, t_surv, theta
+)
 print(weights_aug[-1], np.sum(weights))
 
 # Check that we've matched moments correctly
 
 print(
-    np.isclose(np.average(samples_aug, weights=weights_aug, axis=1),
-               theta * alpha_hat / beta_hat))
+    np.isclose(
+        np.average(samples_aug, weights=weights_aug, axis=1),
+        theta * alpha_hat / beta_hat,
+    )
+)
 print(
-    np.isclose(np.average(samples_aug**2, weights=weights_aug, axis=1),
-               theta * alpha_hat / beta_hat**2))
+    np.isclose(
+        np.average(samples_aug ** 2, weights=weights_aug, axis=1),
+        theta * alpha_hat / beta_hat ** 2,
+    )
+)
 
 # Compare survival functions
 
 bins = np.arange(0.0, 6, 0.01)
 for i in range(3, 8):
-    plt.hist(samples_aug[i],
-             weights=weights_aug,
-             bins=bins,
-             cumulative=-1,
-             density=True,
-             histtype='step',
-             log=True)
+    plt.hist(
+        samples_aug[i],
+        weights=weights_aug,
+        bins=bins,
+        cumulative=-1,
+        density=True,
+        histtype="step",
+        log=True,
+    )
     plt.semilogy(x, gamma.sf(x, theta * alpha_hat[i], scale=1 / beta_hat[i]))
     plt.show()
 
@@ -314,8 +328,9 @@ def compare_survival_functions(bins, sf_obs, sf_exp):
 
 bins = np.arange(0.0, 6, 0.001)
 for i in range(len(sigmas)):
-    sf_obs, sf_exp = survival_functions(samples_aug[i], weights_aug, bins,
-                                        alpha_hat[i] * theta, beta_hat[i])
+    sf_obs, sf_exp = survival_functions(
+        samples_aug[i], weights_aug, bins, alpha_hat[i] * theta, beta_hat[i]
+    )
     fig = compare_survival_functions(bins, sf_obs, sf_exp)
     fig.suptitle(sigmas[i] / dc)
     plt.show()
@@ -324,8 +339,9 @@ for i in range(len(sigmas)):
 
 bins = np.arange(0.0, 6, 0.001)
 for i in range(len(sigmas)):
-    sf_obs, sf_exp = survival_functions(samples_aug[i], weights_aug, bins,
-                                        alpha_hat[i] * theta, beta_hat[i])
+    sf_obs, sf_exp = survival_functions(
+        samples_aug[i], weights_aug, bins, alpha_hat[i] * theta, beta_hat[i]
+    )
     plt.title(sigmas[i] / dc)
     plt.plot(bins[1:], np.abs(sf_obs - sf_exp) / sf_exp)
     plt.show()

@@ -29,7 +29,8 @@ class Individual:
         self.latest_time = None
 
     def __str__(self):
-        return f"({self.birth_time}--{self.death_time} : [{','.join([str(child) for child in self.children])}])"
+        return f"({self.birth_time}--{self.death_time} : \
+                [{','.join([str(child) for child in self.children])}])"
 
     def die(self, death_time, death_location):
         self.death_time = death_time
@@ -37,9 +38,7 @@ class Individual:
         self.update_latest_time(death_time)
 
     def reproduce(self, n_children, time, location):
-        new_children = [
-            Individual(self, time, location) for i in range(n_children)
-        ]
+        new_children = [Individual(self, time, location) for i in range(n_children)]
         self.children += new_children
         self.die(time, location)
         return new_children
@@ -55,12 +54,14 @@ class Individual:
             return np.nan
 
         if self.death_time:
-            mu = self.birth_location + (
-                self.death_location - self.birth_location
-            ) * (time - self.birth_time) / (self.death_time - self.birth_time)
+            mu = self.birth_location + (self.death_location - self.birth_location) * (
+                time - self.birth_time
+            ) / (self.death_time - self.birth_time)
             sigma = np.sqrt(
-                (self.death_time - time) * (time - self.birth_time) /
-                (self.death_time - self.birth_time))
+                (self.death_time - time)
+                * (time - self.birth_time)
+                / (self.death_time - self.birth_time)
+            )
         else:
             mu = self.birth_location
             sigma = np.sqrt(time - self.birth_time)
@@ -72,8 +73,7 @@ class Individual:
         elif time <= self.death_time:
             return [self]
         elif time <= self.latest_time:
-            return sum([child.descendants_at(time) for child in self.children],
-                       [])
+            return sum([child.descendants_at(time) for child in self.children], [])
         else:
             return []
 
@@ -88,11 +88,13 @@ class Individual:
                 child.resample_locations()
 
     def plot(self, ax, **kwargs):
-        ax.plot([self.birth_time, self.death_time],
-                [self.birth_location, self.death_location],
-                lw=0.5,
-                color='k',
-                **kwargs)
+        ax.plot(
+            [self.birth_time, self.death_time],
+            [self.birth_location, self.death_location],
+            lw=0.5,
+            color="k",
+            **kwargs,
+        )
         for child in self.children:
             child.plot(ax, **kwargs)
 
@@ -123,9 +125,7 @@ class Population:
         self.maxsize = max(self.maxsize, self.popsize)
 
     def locations_at(self, t):
-        return [
-            indiv.location_at(t) for indiv in self.ancestor.descendants_at(t)
-        ]
+        return [indiv.location_at(t) for indiv in self.ancestor.descendants_at(t)]
 
     def resample_locations(self):
         self.ancestor.resample_locations()
@@ -152,7 +152,8 @@ def simulate(s=0.1, max_steps=1000):
             break
     else:
         print(
-            f'Still alive after {max_steps} steps (t={t}). Killing remaining individuals...'
+            f"Still alive after {max_steps} steps (t={t}). \
+            Killing remaining individuals..."
         )
         for indiv in population.living:
             indiv.die(t)
@@ -216,7 +217,7 @@ plt.show()
 
 for t in [0.01, 0.1, 0.5, 0.9, 0.99]:
     X = [a.location_at(t) for i in range(10000)]
-    plt.hist(X, bins=np.linspace(-1, 2, 101), histtype='step')
+    plt.hist(X, bins=np.linspace(-1, 2, 101), histtype="step")
 # -
 
 # ## Example simulations
@@ -229,19 +230,19 @@ maxtimes = [pop.get_latest_time() for pop in pops]
 maxsizes = [pop.maxsize for pop in pops]
 plt.scatter(maxtimes, maxsizes, alpha=0.2)
 m = max(maxtimes)
-plt.plot([0, m], [0, m / 2], c='k')
+plt.plot([0, m], [0, m / 2], c="k")
 plt.xlim([0, 150])
 plt.ylim([0, 75])
 
 cumsizes = [pop.cumsize for pop in pops]
 plt.scatter(maxsizes, cumsizes, alpha=0.5)
 m = max(maxsizes)
-plt.yscale('log')
-plt.xscale('log')
-plt.plot([1, m], [1, m**2], c='k')
+plt.yscale("log")
+plt.xscale("log")
+plt.plot([1, m], [1, m ** 2], c="k")
 
-plt.hist(maxsizes, bins=np.arange(100), histtype='step')
-plt.yscale('log')
+plt.hist(maxsizes, bins=np.arange(100), histtype="step")
+plt.yscale("log")
 
 times = [20, 30]
 to_plot = 5
@@ -253,15 +254,17 @@ for pop in pops:
     ax = plt.subplot(121)
     pop.plot(ax)
     ax.set_ylim([-20, 20])
-    ax.vlines(times, -20, 20, linestyle='dashed', colors=['C0', 'C1'])
+    ax.vlines(times, -20, 20, linestyle="dashed", colors=["C0", "C1"])
 
     ax = plt.subplot(122)
     for t in times:
-        plt.hist(pop.locations_at(t),
-                 histtype='stepfilled',
-                 orientation='horizontal',
-                 bins=np.linspace(-20, 20, 41),
-                 alpha=0.75)
+        plt.hist(
+            pop.locations_at(t),
+            histtype="stepfilled",
+            orientation="horizontal",
+            bins=np.linspace(-20, 20, 41),
+            alpha=0.75,
+        )
     ax.set_ylim([-20, 20])
     plt.show()
     plotted += 1
@@ -277,15 +280,17 @@ for pop in pops:
             ax = plt.subplot(121)
             pop.plot(ax)
             ax.set_ylim([-20, 20])
-            ax.vlines(times, -20, 20, linestyle='dashed', colors=['C0', 'C1'])
+            ax.vlines(times, -20, 20, linestyle="dashed", colors=["C0", "C1"])
 
             ax = plt.subplot(122)
             for t in times:
-                plt.hist(pop.locations_at(t),
-                         histtype='stepfilled',
-                         orientation='horizontal',
-                         bins=np.linspace(-20, 20, 41),
-                         alpha=0.75)
+                plt.hist(
+                    pop.locations_at(t),
+                    histtype="stepfilled",
+                    orientation="horizontal",
+                    bins=np.linspace(-20, 20, 41),
+                    alpha=0.75,
+                )
             ax.set_ylim([-20, 20])
             plt.show()
         break
@@ -295,12 +300,12 @@ for t in [1, 5, 10, 50]:
     for pop in pops:
         locs += pop.locations_at(t)
     print(t, len(locs), np.var(locs))
-    plt.hist(locs, bins=np.linspace(-10, 10, 21), histtype='step')
+    plt.hist(locs, bins=np.linspace(-10, 10, 21), histtype="step")
 
 for t in [1, 5, 10, 50]:
     samples = np.empty(npops)
     for i, pop in enumerate(pops):
-        w = np.sum(np.exp(-(np.array(pop.locations_at(t)) - 2.0)**2 / 2))
+        w = np.sum(np.exp(-((np.array(pop.locations_at(t)) - 2.0) ** 2) / 2))
         samples[i] = w
     plt.hist(samples, bins=np.arange(0.1, 5, 0.1))
     plt.show()
@@ -308,8 +313,9 @@ for t in [1, 5, 10, 50]:
 
 # +
 def sample(locs, x, sigma):
-    return np.sum(np.exp(-(
-        (locs - x) / sigma)**2 / 2)) / (np.sqrt(2 * np.pi) * sigma)
+    return np.sum(np.exp(-(((locs - x) / sigma) ** 2) / 2)) / (
+        np.sqrt(2 * np.pi) * sigma
+    )
 
 
 nsamples = 100
@@ -333,26 +339,30 @@ for i in range(nsamples):
         w2 = sample(locs, xs[i], sigma2)
         samples2[i, j] = w2
 
-    weights[i, :] = np.exp(ts[i] / 10) * np.exp((xs[i] / 10)**2 / 2)
+    weights[i, :] = np.exp(ts[i] / 10) * np.exp((xs[i] / 10) ** 2 / 2)
 
 # +
-plt.hist(samples1.flatten(),
-         weights=weights.flatten(),
-         bins=np.arange(0.0, 10, 0.05),
-         log=True)
+plt.hist(
+    samples1.flatten(),
+    weights=weights.flatten(),
+    bins=np.arange(0.0, 10, 0.05),
+    log=True,
+)
 plt.show()
 
-plt.hist(samples2.flatten(),
-         weights=weights.flatten(),
-         bins=np.arange(0.0, 10, 0.05),
-         log=True)
+plt.hist(
+    samples2.flatten(),
+    weights=weights.flatten(),
+    bins=np.arange(0.0, 10, 0.05),
+    log=True,
+)
 plt.show()
 
 # +
 m1 = np.mean(samples1.flatten() * weights.flatten())
 m2 = np.mean(samples2.flatten() * weights.flatten())
-v1 = np.mean(samples1.flatten()**2 * weights.flatten()) - m1**2
-v2 = np.mean(samples2.flatten()**2 * weights.flatten()) - m2**2
+v1 = np.mean(samples1.flatten() ** 2 * weights.flatten()) - m1 ** 2
+v2 = np.mean(samples2.flatten() ** 2 * weights.flatten()) - m2 ** 2
 
 scale1 = np.sqrt(v1 / m1)
 scale2 = np.sqrt(v2 / m2)
@@ -368,21 +378,17 @@ print(k1, k2)
 bins = np.arange(0.0, 10, 0.05)
 
 z1 = np.random.gamma(k1, scale=scale1, size=100000)
-plt.hist(samples1.flatten(),
-         weights=weights.flatten(),
-         bins=bins,
-         log=True,
-         density=True)
-plt.hist(z1, bins=bins, log=True, histtype='step', density=True)
+plt.hist(
+    samples1.flatten(), weights=weights.flatten(), bins=bins, log=True, density=True
+)
+plt.hist(z1, bins=bins, log=True, histtype="step", density=True)
 plt.show()
 
 z2 = np.random.gamma(k2, scale=scale2, size=100000)
-plt.hist(samples2.flatten(),
-         weights=weights.flatten(),
-         bins=bins,
-         log=True,
-         density=True)
-plt.hist(z2, bins=bins, log=True, histtype='step', density=True)
+plt.hist(
+    samples2.flatten(), weights=weights.flatten(), bins=bins, log=True, density=True
+)
+plt.hist(z2, bins=bins, log=True, histtype="step", density=True)
 # -
 
 # ## Brownian bridge
@@ -394,19 +400,19 @@ dt = 1 / n
 dW = np.zeros(n + 1)
 dW[1:] = np.random.normal(size=n) * np.sqrt(dt)
 W = np.cumsum(dW)
-plt.plot(t, W, drawstyle='steps-post')
+plt.plot(t, W, drawstyle="steps-post")
 
 B = W - t * W[-1]
-plt.plot(t, B, drawstyle='steps-post')
-plt.hlines(0, 0, 1, linestyle='dashed')
+plt.plot(t, B, drawstyle="steps-post")
+plt.hlines(0, 0, 1, linestyle="dashed")
 
 # +
 left = 1.0
 right = 2.0
 
 B2 = W - t * W[-1] + left + t * (right - left)
-plt.plot(t, B2, drawstyle='steps-post')
-plt.plot(t, left + t * (right - left), 1, linestyle='dashed', color='k')
+plt.plot(t, B2, drawstyle="steps-post")
+plt.plot(t, left + t * (right - left), 1, linestyle="dashed", color="k")
 # -
 
 # ## Profiling
@@ -439,5 +445,5 @@ for i in range(nsamples):
         w2 = sample(locs, xs[i], sigma2)
         samples2[i, j] = w2
 
-    weights[i, :] = np.exp(ts[i] / 10) * np.exp((xs[i] / 10)**2 / 2)
+    weights[i, :] = np.exp(ts[i] / 10) * np.exp((xs[i] / 10) ** 2 / 2)
 # -
