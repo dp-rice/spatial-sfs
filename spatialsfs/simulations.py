@@ -1,6 +1,7 @@
 import gzip
 import pickle
 import sys
+from typing import Iterable, List, Tuple
 
 import numpy as np
 
@@ -28,9 +29,7 @@ class Individual:
         self.update_latest_time(death_time)
 
     def reproduce(self, n_children, time, location):
-        new_children = [
-            Individual(self, time, location) for i in range(n_children)
-        ]
+        new_children = [Individual(self, time, location) for i in range(n_children)]
         self.children += new_children
         self.die(time, location)
         return new_children
@@ -46,12 +45,14 @@ class Individual:
             return np.nan
 
         if self.death_time:
-            mu = self.birth_location + (
-                self.death_location - self.birth_location
-            ) * (time - self.birth_time) / (self.death_time - self.birth_time)
+            mu = self.birth_location + (self.death_location - self.birth_location) * (
+                time - self.birth_time
+            ) / (self.death_time - self.birth_time)
             sigma = np.sqrt(
-                (self.death_time - time) * (time - self.birth_time) /
-                (self.death_time - self.birth_time))
+                (self.death_time - time)
+                * (time - self.birth_time)
+                / (self.death_time - self.birth_time)
+            )
         else:
             mu = self.birth_location
             sigma = np.sqrt(time - self.birth_time)
@@ -63,8 +64,7 @@ class Individual:
         elif time <= self.death_time:
             return [self]
         elif time <= self.latest_time:
-            return sum([child.descendants_at(time) for child in self.children],
-                       [])
+            return sum([child.descendants_at(time) for child in self.children], [])
         else:
             return []
 
@@ -79,11 +79,13 @@ class Individual:
                 child.resample_locations()
 
     def plot(self, ax, **kwargs):
-        ax.plot([self.birth_time, self.death_time],
-                [self.birth_location, self.death_location],
-                lw=0.5,
-                color='k',
-                **kwargs)
+        ax.plot(
+            [self.birth_time, self.death_time],
+            [self.birth_location, self.death_location],
+            lw=0.5,
+            color="k",
+            **kwargs,
+        )
         for child in self.children:
             child.plot(ax, **kwargs)
 
@@ -114,9 +116,7 @@ class Population:
         self.maxsize = max(self.maxsize, self.popsize)
 
     def locations_at(self, t):
-        return [
-            indiv.location_at(t) for indiv in self.ancestor.descendants_at(t)
-        ]
+        return [indiv.location_at(t) for indiv in self.ancestor.descendants_at(t)]
 
     def resample_locations(self):
         self.ancestor.resample_locations()
@@ -143,7 +143,7 @@ def simulate_population(s=0.1, max_steps=10000):
             break
     else:
         print(
-            f'Still alive after {max_steps} steps (t={t}). Killing remaining individuals...'
+            f"Still alive after {max_steps} steps (t={t}). Killing remaining individuals..."
         )
         for indiv in population.living:
             indiv.die(t)
@@ -156,11 +156,23 @@ def simulate(n_populations, seed=100, **kwargs):
 
 
 def save_populations(populations, filename):
-    with gzip.open(filename, 'wb') as f:
+    with gzip.open(filename, "wb") as f:
         f.write(pickle.dumps(populations))
 
 
 def load_populations(filename):
-    with gzip.open(filename, 'rb') as f:
+    with gzip.open(filename, "rb") as f:
         pops = pickle.loads(f.read())
     return pops
+
+
+def simulate_tree(
+    selection_coefficient, max_steps
+) -> Tuple[List[int], Iterable[float], Iterable[float], int]:
+    pass
+
+
+def simulate_positions(
+    diffusion_coefficient, parents: List[int], intervals: Iterable[int]
+) -> Tuple[Iterable[float], Iterable[float]]:
+    pass

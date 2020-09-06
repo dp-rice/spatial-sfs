@@ -6,6 +6,8 @@ from typing import BinaryIO, Iterable, List, Optional, Union
 
 import numpy as np
 
+import spatialsfs.simulations as simulations
+
 
 class BranchingDiffusion:
     """Branching diffusion simulation output object."""
@@ -20,10 +22,10 @@ class BranchingDiffusion:
             default: construct an empty BranchingDiffusion.
         """
         self.parents: List[int] = []
-        self.birth_times: Iterable[float] = np.array([], dtype=float)
-        self.death_times: Iterable[float] = np.array([], dtype=float)
-        self.birth_positions: Iterable[float] = np.array([], dtype=float)
-        self.death_positions: Iterable[float] = np.array([], dtype=float)
+        self.birth_times = np.array([], dtype=float)
+        self.death_times = np.array([], dtype=float)
+        self.birth_positions = np.array([], dtype=float)
+        self.death_positions = np.array([], dtype=float)
         self.num_total: int = 0
         self.num_max: int = 0
         self.extinction_time: Optional[float] = None
@@ -105,22 +107,34 @@ class BranchingDiffusion:
         except KeyError:
             self.diffusion_coefficient = None
 
-    def simulate_tree(self, selection_coefficient: float) -> None:
-        """simulate_tree.
+    def simulate_tree(
+        self, selection_coefficient: float, max_steps: int = 10000
+    ) -> None:
+        """Simulate the ancestry tree and tiems.
 
         Parameters
         ----------
         selection_coefficient : float
-            selection_coefficient
-
-        Returns
-        -------
-        None
+            The selection coefficient against the branching process.
+            The birth rate is (1-s/2) and death rate is (1+s/2).
+        max_steps : int
+            The maximum number of steps to take before exiting.
+            Default: 10000
 
         """
-        # Reset positions
-        # Call tree simulator and assign parents and times
-        pass
+        self.selection_coefficient = selection_coefficient
+        # New trees will have different numbers of individuals,
+        # so we have to reset positions
+        self.birth_positions = np.array([], dtype=float)
+        self.death_positions = np.array([], dtype=float)
+        (
+            self.parents,
+            self.birth_times,
+            self.death_times,
+            self.num_max,
+        ) = simulations.simulate_tree(self.selection_coefficient, max_steps)
+        self.num_total = len(self.parents)
+        self.extinction_time = np.max(self.death_times)
 
     def simulate_positions(self, diffusion_coefficient: float) -> None:
         """simulate_positions.
@@ -135,8 +149,11 @@ class BranchingDiffusion:
         None
 
         """
-        # Call position simulator and assign birth and death positions
-        pass
+        self.diffusion_coefficient = diffusion_coefficient
+        intervals = self.death_times - self.birth_times
+        self.birth_positions, self.death_positions = simulations.simulate_positions(
+            self.diffusion_coefficient, self.parents, intervals
+        )
 
     def num_alive_at(self, time: float) -> int:
         """num_alive_at.
