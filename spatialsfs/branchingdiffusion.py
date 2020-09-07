@@ -241,3 +241,31 @@ def load_branching_diffusions(
                 f.seek(0)
                 bd_list.append(BranchingDiffusion(f))
     return bd_list
+
+
+def simulate_branching_diffusions(
+    num_reps: int, selection_coefficient: float, diffusion_coefficient: float = 1.0
+) -> List[BranchingDiffusion]:
+    """Simulate replicate branching diffusions.
+
+    Parameters
+    ----------
+    num_reps : int
+        The number of replicate simulations to run.
+    selection_coefficient : float
+        The selection coefficient for all simulations.
+    diffusion_coefficient : float
+        The diffusion coefficient for all simulations.
+
+    Returns
+    -------
+    List[BranchingDiffusion]
+
+    """
+    bds = []
+    for i in range(num_reps):
+        bd = BranchingDiffusion()
+        bd.simulate_tree(selection_coefficient)
+        bd.simulate_positions(diffusion_coefficient)
+        bds.append(bd)
+    return bds

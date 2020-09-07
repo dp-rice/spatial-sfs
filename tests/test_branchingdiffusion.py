@@ -9,6 +9,7 @@ from spatialsfs import (
     BranchingDiffusion,
     load_branching_diffusions,
     save_branching_diffusions,
+    simulate_branching_diffusions,
 )
 
 
@@ -244,6 +245,21 @@ class TestBranchingDiffusion(TestCase):
         np.testing.assert_array_equal(
             self.bd.positions_at(t), np.array([ep1, ep2], dtype=float)
         )
+
+    @mock.patch("spatialsfs.branchingdiffusion.BranchingDiffusion", autospec=True)
+    def test_simulate_branching_diffusions(self, mock_bd):
+        """Test simulation wrapper function."""
+        num_reps = 3
+        s = 0.1
+        d = 0.5
+        expected_calls = [
+            mock.call(),
+            mock.call().simulate_tree(s),
+            mock.call().simulate_positions(d),
+        ] * num_reps
+        bds = simulate_branching_diffusions(num_reps, s, d)
+        self.assertEqual(mock_bd.mock_calls, expected_calls)
+        self.assertEqual(len(bds), num_reps)
 
 
 if __name__ == "__main__":

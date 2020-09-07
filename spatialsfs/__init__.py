@@ -4,4 +4,5 @@ from spatialsfs.branchingdiffusion import (
     BranchingDiffusion,
     load_branching_diffusions,
     save_branching_diffusions,
+    simulate_branching_diffusions,
 )
