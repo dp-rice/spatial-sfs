@@ -49,10 +49,6 @@ class BranchingDiffusion:
                     return False
             else:
                 return True
-
-            return all(
-                np.all(self.__dict__[k] == other.__dict__[k]) for k in self.__dict__
-            )
         else:
             return NotImplemented
 

@@ -64,8 +64,12 @@ class TestBranchingDiffusion(TestCase):
         bd1 = deepcopy(self.bd)
         bd2 = deepcopy(self.bd)
         self.assertEqual(bd1, bd2)
-        # Value mismatch
+        # Value mismatches
         bd2.selection_coefficient *= 2.0
+        self.assertNotEqual(bd1, bd2)
+        bd2.selection_coefficient = bd1.selection_coefficient
+        self.assertEqual(bd1, bd2)
+        bd2.birth_times[-1] /= 2.0
         self.assertNotEqual(bd1, bd2)
         # Type mismatches
         bd3 = BranchingDiffusion()
@@ -74,6 +78,8 @@ class TestBranchingDiffusion(TestCase):
         bd4 = BranchingDiffusion()
         bd4.num_max = np.array(0)
         self.assertNotEqual(bd1, bd4)
+        # Not a BranchingDiffusion()
+        self.assertNotEqual(bd1, 5)
 
     def test_saveload(self):
         """Test saving and loading with a temporary file."""
@@ -178,10 +184,8 @@ class TestBranchingDiffusion(TestCase):
         bd.simulate_positions(d)
         # Assert called simulate_positions with correct params
         mock_sim.assert_called_once()
-        np.testing.assert_array_equal(
-            self.bd.death_times - self.bd.birth_times,
-            mock_sim.call_args[0][2],
-        )
+        intervals = self.bd.death_times - self.bd.birth_times
+        np.testing.assert_array_equal(intervals, mock_sim.call_args[0][2])
         self.assertEqual(mock_sim.call_args[0][:2], (d, self.bd.parents))
         self.assertEqual(bd.diffusion_coefficient, d)
         # Should assign simulation output
