@@ -22,10 +22,10 @@ class BranchingDiffusion:
             default: construct an empty BranchingDiffusion.
         """
         self.parents: List[int] = []
-        self.birth_times = np.array([], dtype=float)
-        self.death_times = np.array([], dtype=float)
-        self.birth_positions = np.array([], dtype=float)
-        self.death_positions = np.array([], dtype=float)
+        self.birth_times: np.ndarray[float] = np.array([], dtype=float)
+        self.death_times: np.ndarray[float] = np.array([], dtype=float)
+        self.birth_positions: np.ndarray[float] = np.array([], dtype=float)
+        self.death_positions: np.ndarray[float] = np.array([], dtype=float)
         self.num_total: int = 0
         self.num_max: int = 0
         self.extinction_time: Optional[float] = None
@@ -150,9 +150,9 @@ class BranchingDiffusion:
 
         """
         self.diffusion_coefficient = diffusion_coefficient
-        intervals = self.death_times - self.birth_times
+        lifespans = self.death_times - self.birth_times
         self.birth_positions, self.death_positions = simulations.simulate_positions(
-            self.diffusion_coefficient, self.parents, intervals
+            self.diffusion_coefficient, self.parents, lifespans
         )
 
     def num_alive_at(self, time: float) -> int:
@@ -170,7 +170,7 @@ class BranchingDiffusion:
         """
         pass
 
-    def positions_at(self, time: float) -> Iterable[float]:
+    def positions_at(self, time: float) -> np.ndarray[float]:
         """positions_at.
 
         Parameters
@@ -180,7 +180,7 @@ class BranchingDiffusion:
 
         Returns
         -------
-        Iterable[float]
+        np.ndarray[float]
 
         """
         pass
