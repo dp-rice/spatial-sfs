@@ -139,9 +139,9 @@ class TestSimulations(TestCase):
         # Check that ancestor birth time is zero and parent is None
         pass
 
-    def test_simulate_locations(self):
-        """Test simulate_locations."""
-        # Check that birth and death locations are the same length as parents
+    def test_simulate_positions(self):
+        """Test simulate_positions."""
+        # Check that birth and death positions are the same length as parents
         pass
 
 
