@@ -192,17 +192,58 @@ class TestBranchingDiffusion(TestCase):
         np.testing.assert_array_equal(bd.birth_positions, self.bd.birth_positions)
         np.testing.assert_array_equal(bd.death_positions, self.bd.death_positions)
 
-
-class TestAnalysis(TestCase):
-    """TestAnalysis."""
-
     def test_num_alive_at(self):
         """Test num_alive_at."""
-        pass
+        # Birth and death times.
+        # self.bd.birth_times = np.array([0.0, 0.5, 0.5])
+        # self.bd.death_times = np.array([0.5, 1.0, 1.5])
+        self.assertEqual(self.bd.num_alive_at(-1.0), 0)
+        # Lifespan includes birth time
+        self.assertEqual(self.bd.num_alive_at(0.0), 1)
+        self.assertEqual(self.bd.num_alive_at(0.25), 1)
+        # Lifespan does not include death time
+        self.assertEqual(self.bd.num_alive_at(0.5), 2)
+        self.assertEqual(self.bd.num_alive_at(0.75), 2)
+        self.assertEqual(self.bd.num_alive_at(1.0), 1)
+        self.assertEqual(self.bd.num_alive_at(1.25), 1)
+        self.assertEqual(self.bd.num_alive_at(1.5), 0)
+        self.assertEqual(self.bd.num_alive_at(10.0), 0)
 
-    def test_positions_at(self):
+    @mock.patch("spatialsfs.branchingdiffusion.np.random.normal", autospec=True)
+    def test_positions_at(self, mock_normal):
         """Test positions_at."""
-        pass
+        # Use a round value for mocking gaussians with sd=1
+        mock_normal.return_value = 1.0
+        # self.bd.parents = [-1, 0, 0]
+        # self.bd.birth_times = np.array([0.0, 0.5, 0.5])
+        # self.bd.death_times = np.array([0.5, 1.0, 1.5])
+        # self.bd.birth_positions = np.array([0.0, 0.3, 0.3])
+        # self.bd.death_positions = np.array([0.3, -0.1, 1.3])
+
+        # t < 0.0 should give an empty array.
+        np.testing.assert_array_equal(
+            self.bd.positions_at(-0.5), np.array([], dtype=float)
+        )
+
+        # t == 0.0 should give 0.0
+        np.testing.assert_array_equal(
+            self.bd.positions_at(0.0), np.array([0.0], dtype=float)
+        )
+
+        # t == 0.25 should give an interpolation
+        t = 0.25
+        expected_position = (t * 0.3 / 0.5) + np.sqrt((0.5 - t) * t / 0.5)
+        np.testing.assert_array_equal(
+            self.bd.positions_at(t), np.array([expected_position], dtype=float)
+        )
+
+        # t == 0.6 should be length 2
+        t = 0.6
+        ep1 = 0.3 + ((t - 0.5) * (-0.4) / 0.5) + np.sqrt((1.0 - t) * (t - 0.5) / 0.5)
+        ep2 = 0.3 + ((t - 0.5) * 1.0 / 1.0) + np.sqrt((1.5 - t) * (t - 0.5) / 1.0)
+        np.testing.assert_array_equal(
+            self.bd.positions_at(t), np.array([ep1, ep2], dtype=float)
+        )
 
 
 if __name__ == "__main__":
