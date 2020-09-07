@@ -1,7 +1,7 @@
 """Tests for the branchingdiffusion module."""
 from copy import deepcopy
 from tempfile import NamedTemporaryFile, TemporaryFile
-from unittest import TestCase, main
+from unittest import TestCase, main, mock
 
 import numpy as np
 
@@ -129,31 +129,64 @@ class TestBranchingDiffusion(TestCase):
             loaded_data = load_branching_diffusions(tf)
         self.assertEqual(saved_data, loaded_data)
 
-
-class TestSimulations(TestCase):
-    """TestSimulations."""
-
-    def setUp(self):
-        """Set up."""
+    @mock.patch(
+        "spatialsfs.branchingdiffusion.simulations.simulate_tree", autospec=True
+    )
+    def test_simulate_tree(self, mock_sim):
+        """Test simulate_tree method (mocking simulation code)."""
+        mock_sim.return_value = (
+            self.bd.parents,
+            self.bd.birth_times,
+            self.bd.death_times,
+            self.bd.num_max,
+        )
         # Run simulations
-        pass
+        bd = BranchingDiffusion()
+        s = self.bd.selection_coefficient
+        max_steps = 5
+        bd.simulate_tree(s, max_steps=max_steps)
+        # Assert called simulate_tree with correct params
+        mock_sim.assert_called_once_with(s, max_steps)
+        self.assertEqual(bd.selection_coefficient, s)
+        # Should reset the positions
+        self.assertEqual(len(bd.birth_positions), 0)
+        self.assertEqual(len(bd.death_positions), 0)
+        # Should assign simulation output
+        self.assertEqual(bd.parents, self.bd.parents)
+        np.testing.assert_array_equal(bd.birth_times, self.bd.birth_times)
+        np.testing.assert_array_equal(bd.death_times, self.bd.death_times)
+        self.assertEqual(bd.num_total, self.bd.num_total)
+        self.assertEqual(bd.num_max, self.bd.num_max)
+        self.assertEqual(bd.extinction_time, self.bd.extinction_time)
 
-    # Try to push the small value of s without breaking things.
-
-    def test_simulate_tree(self):
-        """Test simulate_tree."""
-        # Iterate over seeds
-        # Check that birth times, death times, and parents have same length
-        # Check that the selection coefficient must be positive
-        # Check that birth times are in order
-        # Check that parents are before children
-        # Check that ancestor birth time is zero and parent is None
-        pass
-
-    def test_simulate_positions(self):
-        """Test simulate_positions."""
-        # Check that birth and death positions are the same length as parents
-        pass
+    @mock.patch(
+        "spatialsfs.branchingdiffusion.simulations.simulate_positions", autospec=True
+    )
+    def test_simulate_positions(self, mock_sim):
+        """Test simulate_positions method (mocking simulation code)."""
+        mock_sim.return_value = (
+            self.bd.birth_positions,
+            self.bd.death_positions,
+        )
+        # Set up bd as though we'd run simulate_times
+        bd = deepcopy(self.bd)
+        bd.diffusion_coefficient = None
+        bd.birth_positions = np.array([], dtype=float)
+        bd.death_positions = np.array([], dtype=float)
+        # Run simulations
+        d = self.bd.diffusion_coefficient
+        bd.simulate_positions(d)
+        # Assert called simulate_positions with correct params
+        mock_sim.assert_called_once()
+        np.testing.assert_array_equal(
+            self.bd.death_times - self.bd.birth_times,
+            mock_sim.call_args[0][2],
+        )
+        self.assertEqual(mock_sim.call_args[0][:2], (d, self.bd.parents))
+        self.assertEqual(bd.diffusion_coefficient, d)
+        # Should assign simulation output
+        np.testing.assert_array_equal(bd.birth_positions, self.bd.birth_positions)
+        np.testing.assert_array_equal(bd.death_positions, self.bd.death_positions)
 
 
 class TestAnalysis(TestCase):

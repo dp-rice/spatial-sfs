@@ -110,7 +110,7 @@ class BranchingDiffusion:
     def simulate_tree(
         self, selection_coefficient: float, max_steps: int = 10000
     ) -> None:
-        """Simulate the ancestry tree and tiems.
+        """Simulate the ancestry tree and times.
 
         Parameters
         ----------
@@ -137,17 +137,12 @@ class BranchingDiffusion:
         self.extinction_time = np.max(self.death_times)
 
     def simulate_positions(self, diffusion_coefficient: float) -> None:
-        """simulate_positions.
+        """Simulate birth and death positions.
 
         Parameters
         ----------
         diffusion_coefficient : float
-            diffusion_coefficient
-
-        Returns
-        -------
-        None
-
+            The diffusion coefficient.
         """
         self.diffusion_coefficient = diffusion_coefficient
         lifespans = self.death_times - self.birth_times
