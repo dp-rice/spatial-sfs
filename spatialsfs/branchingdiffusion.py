@@ -157,8 +157,8 @@ class BranchingDiffusion:
         Returns
         -------
         int
-            The number of living individuals at time.
-            Includes individuals the moment they are born,
+            The number of living individuals at `time`.
+            Includes individuals moment they are born,
             but not at the moment they die.
 
         """
@@ -166,7 +166,7 @@ class BranchingDiffusion:
         return np.count_nonzero(alive)
 
     def positions_at(self, time: float) -> np.ndarray:
-        """positions_at.
+        """Return random interpolated positions of individuals alive at a time.
 
         Parameters
         ----------
@@ -175,10 +175,27 @@ class BranchingDiffusion:
 
         Returns
         -------
-        np.ndarray
+        positions : np.ndarray
+            1D array of interpolated positions.
+            The length of the array is the number of individuals alive at `time`.
+            Includes individuals the moment they are born,
+            but not at the moment they die.
+
+        Notes
+        -----
+        The positions are modeled as a Brownian bridge, conditional on birth and death
+        times and locations. Repeated calls to `positions_at` will generate independent
+        draws from the Brownian bridge.
 
         """
-        pass
+        alive = (self.birth_times <= time) & (time < self.death_times)
+        bt = self.birth_times[alive]
+        dt = self.death_times[alive]
+        bp = self.birth_positions[alive]
+        dp = self.death_positions[alive]
+        means = bp + (time - bt) * (dp - bp) / (dt - bt)
+        variances = (dt - time) * (time - bt) / (dt - bt)
+        return means + np.sqrt(variances) * np.random.normal(size=len(bt))
 
 
 def save_branching_diffusions(
