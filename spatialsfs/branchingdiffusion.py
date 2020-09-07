@@ -22,10 +22,10 @@ class BranchingDiffusion:
             default: construct an empty BranchingDiffusion.
         """
         self.parents: List[int] = []
-        self.birth_times: np.ndarray[float] = np.array([], dtype=float)
-        self.death_times: np.ndarray[float] = np.array([], dtype=float)
-        self.birth_positions: np.ndarray[float] = np.array([], dtype=float)
-        self.death_positions: np.ndarray[float] = np.array([], dtype=float)
+        self.birth_times: np.ndarray = np.array([], dtype=float)
+        self.death_times: np.ndarray = np.array([], dtype=float)
+        self.birth_positions: np.ndarray = np.array([], dtype=float)
+        self.death_positions: np.ndarray = np.array([], dtype=float)
         self.num_total: int = 0
         self.num_max: int = 0
         self.extinction_time: Optional[float] = None
@@ -170,7 +170,7 @@ class BranchingDiffusion:
         """
         pass
 
-    def positions_at(self, time: float) -> np.ndarray[float]:
+    def positions_at(self, time: float) -> np.ndarray:
         """positions_at.
 
         Parameters
@@ -180,7 +180,7 @@ class BranchingDiffusion:
 
         Returns
         -------
-        np.ndarray[float]
+        np.ndarray
 
         """
         pass

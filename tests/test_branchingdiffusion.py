@@ -33,7 +33,12 @@ class TestBranchingDiffusion(TestCase):
         """Test that our example has non-default values for all attributes."""
         bd_default = BranchingDiffusion()
         for attr in list(bd_default.__dict__):
-            self.assertNotEqual(self.bd.__dict__[attr], bd_default.__dict__[attr])
+            if type(self.bd.__dict__[attr]) is np.ndarray:
+                self.assertFalse(
+                    len(self.bd.__dict__[attr]) == len(bd_default.__dict__[attr])
+                )
+            else:
+                self.assertFalse(self.bd.__dict__[attr] == bd_default.__dict__[attr])
 
     def test____init__(self):
         """Test that default initialization creates an empty BranchingDiffusion."""
