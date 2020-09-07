@@ -147,19 +147,23 @@ class BranchingDiffusion:
         )
 
     def num_alive_at(self, time: float) -> int:
-        """num_alive_at.
+        """Return the number of individuals alive at a time.
 
         Parameters
         ----------
         time : float
-            time
+            Time at which to count the living individuals.
 
         Returns
         -------
         int
+            The number of living individuals at time.
+            Includes individuals the moment they are born,
+            but not at the moment they die.
 
         """
-        pass
+        alive = (self.birth_times <= time) & (time < self.death_times)
+        return np.count_nonzero(alive)
 
     def positions_at(self, time: float) -> np.ndarray:
         """positions_at.
