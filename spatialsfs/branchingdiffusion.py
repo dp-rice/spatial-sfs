@@ -111,7 +111,10 @@ class BranchingDiffusion:
             self.diffusion_coefficient = None
 
     def simulate_tree(
-        self, selection_coefficient: float, max_steps: int = 10000
+        self,
+        selection_coefficient: float,
+        max_steps: int,
+        rng: np.random._generator.Generator,
     ) -> None:
         """Simulate the ancestry tree and times.
 
@@ -122,7 +125,8 @@ class BranchingDiffusion:
             The birth rate is (1-s/2) and death rate is (1+s/2).
         max_steps : int
             The maximum number of steps to take before exiting.
-            Default: 10000
+        rng : np.random._generator.Generator
+            A numpy random generator instance.
 
         """
         self.selection_coefficient = selection_coefficient
@@ -135,22 +139,27 @@ class BranchingDiffusion:
             self.birth_times,
             self.death_times,
             self.num_max,
-        ) = simulations.simulate_tree(self.selection_coefficient, max_steps)
+        ) = simulations.simulate_tree(self.selection_coefficient, max_steps, rng)
         self.num_total = len(self.parents)
         self.extinction_time = np.max(self.death_times)
 
-    def simulate_positions(self, diffusion_coefficient: float) -> None:
+    def simulate_positions(
+        self, diffusion_coefficient: float, rng: np.random._generator.Generator
+    ) -> None:
         """Simulate birth and death positions.
 
         Parameters
         ----------
         diffusion_coefficient : float
             The diffusion coefficient.
+        rng : np.random._generator.Generator
+            A numpy random generator instance.
+
         """
         self.diffusion_coefficient = diffusion_coefficient
         lifespans = self.death_times - self.birth_times
         self.birth_positions, self.death_positions = simulations.simulate_positions(
-            self.diffusion_coefficient, self.parents, lifespans
+            self.diffusion_coefficient, self.parents, lifespans, rng
         )
 
     def num_alive_at(self, time: float) -> int:
@@ -174,7 +183,9 @@ class BranchingDiffusion:
         alive = (self.birth_times <= time) & (time < self.death_times)
         return np.count_nonzero(alive)
 
-    def positions_at(self, time: float) -> np.ndarray:
+    def positions_at(
+        self, time: float, rng: np.random._generator.Generator
+    ) -> np.ndarray:
         """Return random interpolated positions of individuals alive at a time.
 
         Parameters
@@ -189,6 +200,8 @@ class BranchingDiffusion:
             The length of the array is the number of individuals alive at `time`.
             Includes individuals the moment they are born,
             but not at the moment they die.
+        rng : np.random._generator.Generator
+            A numpy random generator instance.
 
         Notes
         -----
@@ -206,7 +219,7 @@ class BranchingDiffusion:
         dp = self.death_positions[alive]
         means = bp + (time - bt) * (dp - bp) / (dt - bt)
         variances = (dt - time) * (time - bt) / (dt - bt)
-        return means + np.sqrt(variances) * np.random.normal(size=len(bt))
+        return means + np.sqrt(variances) * rng.standard_normal(size=len(bt))
 
 
 def save_branching_diffusions(
@@ -255,7 +268,11 @@ def load_branching_diffusions(
 
 
 def simulate_branching_diffusions(
-    num_reps: int, selection_coefficient: float, diffusion_coefficient: float = 1.0
+    num_reps: int,
+    selection_coefficient: float,
+    diffusion_coefficient: float = 1.0,
+    max_steps: int = 10000,
+    rng: Optional[np.random._generator.Generator] = None,
 ) -> List[BranchingDiffusion]:
     """Simulate replicate branching diffusions.
 
@@ -267,6 +284,12 @@ def simulate_branching_diffusions(
         The selection coefficient for all simulations.
     diffusion_coefficient : float
         The diffusion coefficient for all simulations.
+    max_steps : int
+        The maximum number of steps to run the simulations for.
+        Default: 10000
+    rng : Optional[np.random._generator.Generator]
+        The numpy random generator to use for rng.
+        Default: create a new genertor with np.random.default_generator()
 
     Returns
     -------
@@ -274,9 +297,11 @@ def simulate_branching_diffusions(
 
     """
     bds = []
+    if rng is None:
+        rng = np.random.default_rng()
     for i in range(num_reps):
         bd = BranchingDiffusion()
-        bd.simulate_tree(selection_coefficient)
-        bd.simulate_positions(diffusion_coefficient)
+        bd.simulate_tree(selection_coefficient, max_steps, rng)
+        bd.simulate_positions(diffusion_coefficient, rng)
         bds.append(bd)
     return bds

@@ -149,11 +149,12 @@ class TestBranchingDiffusion(TestCase):
         )
         # Run simulations
         bd = BranchingDiffusion()
+        rng = np.random.default_rng()
         s = self.bd.selection_coefficient
         max_steps = 5
-        bd.simulate_tree(s, max_steps=max_steps)
+        bd.simulate_tree(s, max_steps, rng)
         # Assert called simulate_tree with correct params
-        mock_sim.assert_called_once_with(s, max_steps)
+        mock_sim.assert_called_once_with(s, max_steps, rng)
         self.assertEqual(bd.selection_coefficient, s)
         # Should reset the positions
         self.assertEqual(len(bd.birth_positions), 0)
@@ -176,6 +177,7 @@ class TestBranchingDiffusion(TestCase):
             self.bd.birth_positions,
             self.bd.death_positions,
         )
+        rng = np.random.default_rng()
         # Set up bd as though we'd run simulate_times
         bd = deepcopy(self.bd)
         bd.diffusion_coefficient = None
@@ -183,7 +185,7 @@ class TestBranchingDiffusion(TestCase):
         bd.death_positions = np.array([], dtype=float)
         # Run simulations
         d = self.bd.diffusion_coefficient
-        bd.simulate_positions(d)
+        bd.simulate_positions(d, rng)
         # Assert called simulate_positions with correct params
         mock_sim.assert_called_once()
         intervals = self.bd.death_times - self.bd.birth_times
@@ -215,20 +217,21 @@ class TestBranchingDiffusion(TestCase):
         self.assertEqual(self.bd.num_alive_at(1.5), 0)
         self.assertEqual(self.bd.num_alive_at(10.0), 0)
 
-    @mock.patch("spatialsfs.branchingdiffusion.np.random.normal", autospec=True)
-    def test_positions_at(self, mock_normal):
+    def test_positions_at(self):
         """Test positions_at."""
+        # Use a round value for mocking gaussians with sd=1
+        mock_rng = mock.Mock()
+        mock_rng.standard_normal.return_value = 1.0
+
         # Can't get positions if haven't run position simulations.
         bd = BranchingDiffusion()
         with self.assertRaises(RuntimeError):
-            bd.positions_at(1.0)
+            bd.positions_at(1.0, mock_rng)
         bd.birth_times = self.bd.birth_times.copy()
         bd.death_times = self.bd.death_times.copy()
         with self.assertRaises(RuntimeError):
-            bd.positions_at(1.0)
+            bd.positions_at(1.0, mock_rng)
 
-        # Use a round value for mocking gaussians with sd=1
-        mock_normal.return_value = 1.0
         # self.bd.parents = [None, 0, 0]
         # self.bd.birth_times = np.array([0.0, 0.5, 0.5])
         # self.bd.death_times = np.array([0.5, 1.0, 1.5])
@@ -237,43 +240,58 @@ class TestBranchingDiffusion(TestCase):
 
         # t < 0.0 should give an empty array.
         np.testing.assert_array_equal(
-            self.bd.positions_at(-0.5), np.array([], dtype=float)
+            self.bd.positions_at(-0.5, mock_rng), np.array([], dtype=float)
         )
+        mock_rng.standard_normal.assert_called_with(size=0)
 
         # t == 0.0 should give 0.0
         np.testing.assert_array_equal(
-            self.bd.positions_at(0.0), np.array([0.0], dtype=float)
+            self.bd.positions_at(0.0, mock_rng), np.array([0.0], dtype=float)
         )
+        mock_rng.standard_normal.assert_called_with(size=1)
 
         # t == 0.25 should give an interpolation
         t = 0.25
         expected_position = (t * 0.3 / 0.5) + np.sqrt((0.5 - t) * t / 0.5)
         np.testing.assert_array_equal(
-            self.bd.positions_at(t), np.array([expected_position], dtype=float)
+            self.bd.positions_at(t, mock_rng),
+            np.array([expected_position], dtype=float),
         )
+        mock_rng.standard_normal.assert_called_with(size=1)
 
         # t == 0.6 should be length 2
         t = 0.6
         ep1 = 0.3 + ((t - 0.5) * (-0.4) / 0.5) + np.sqrt((1.0 - t) * (t - 0.5) / 0.5)
         ep2 = 0.3 + ((t - 0.5) * 1.0 / 1.0) + np.sqrt((1.5 - t) * (t - 0.5) / 1.0)
         np.testing.assert_array_equal(
-            self.bd.positions_at(t), np.array([ep1, ep2], dtype=float)
+            self.bd.positions_at(t, mock_rng), np.array([ep1, ep2], dtype=float)
         )
+        mock_rng.standard_normal.assert_called_with(size=2)
 
+    @mock.patch("spatialsfs.branchingdiffusion.np.random.default_rng", autospec=True)
     @mock.patch("spatialsfs.branchingdiffusion.BranchingDiffusion", autospec=True)
-    def test_simulate_branching_diffusions(self, mock_bd):
+    def test_simulate_branching_diffusions(self, mock_bd, mock_rng):
         """Test simulation wrapper function."""
         num_reps = 3
         s = 0.1
         d = 0.5
+        rng = np.random.default_rng()
+        max_steps = 5
         expected_calls = [
             mock.call(),
-            mock.call().simulate_tree(s),
-            mock.call().simulate_positions(d),
+            mock.call().simulate_tree(s, max_steps, rng),
+            mock.call().simulate_positions(d, rng),
         ] * num_reps
-        bds = simulate_branching_diffusions(num_reps, s, d)
+        bds = simulate_branching_diffusions(
+            num_reps, s, d, rng=rng, max_steps=max_steps
+        )
         self.assertEqual(mock_bd.mock_calls, expected_calls)
         self.assertEqual(len(bds), num_reps)
+
+        # Test initialize rng
+        mock_rng.reset_mock()
+        bds = simulate_branching_diffusions(num_reps, s, d, max_steps=max_steps)
+        mock_rng.assert_called_once()
 
 
 if __name__ == "__main__":

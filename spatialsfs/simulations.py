@@ -170,12 +170,24 @@ def load_populations(filename):
 
 
 def simulate_tree(
-    selection_coefficient: float, max_steps: int
+    selection_coefficient: float, max_steps: int, rng: np.random._generator.Generator
 ) -> Tuple[List[Optional[int]], np.ndarray, np.ndarray, int]:
     pass
 
 
+def _step(
+    alive: List[int], selection_coefficient: float, rng: np.random._generator.Generator
+) -> Tuple[float, int, int]:
+    # Draw time interval ~ Exp(1 / len(alive))
+    # Choose parent at random uniform
+    # Draw n_offpring from {0, 2}
+    pass
+
+
 def simulate_positions(
-    diffusion_coefficient: float, parents: List[Optional[int]], lifespans: np.ndarray
+    diffusion_coefficient: float,
+    parents: List[Optional[int]],
+    lifespans: np.ndarray,
+    rng: np.random._generator.Generator,
 ) -> Tuple[np.ndarray, np.ndarray]:
     pass
