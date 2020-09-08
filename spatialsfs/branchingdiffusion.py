@@ -218,7 +218,7 @@ def save_branching_diffusions(
     branching_diffusions : Iterable[BranchingDiffusion]
         A list (or other Iterable) of BranchingDiffusion objects to write.
     """
-    with zipfile.ZipFile(output_file, "w") as outfile:
+    with zipfile.ZipFile(output_file, "w", compression=zipfile.ZIP_DEFLATED) as outfile:
         for i, bd in enumerate(branching_diffusions):
             with io.BytesIO() as f:
                 bd.save(f)
@@ -241,7 +241,7 @@ def load_branching_diffusions(
     List[BranchingDiffusion]
     """
     bd_list = []
-    with zipfile.ZipFile(input_file, "r") as infile:
+    with zipfile.ZipFile(input_file, "r", compression=zipfile.ZIP_DEFLATED) as infile:
         for i in infile.namelist():
             with io.BytesIO() as f:
                 f.write(infile.read(str(i)))
