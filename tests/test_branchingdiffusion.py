@@ -165,6 +165,7 @@ class TestBranchingDiffusion(TestCase):
         self.assertEqual(bd.num_total, self.bd.num_total)
         self.assertEqual(bd.num_max, self.bd.num_max)
         self.assertEqual(bd.extinction_time, self.bd.extinction_time)
+        self.assertEqual(bd.extinction_time, np.max(bd.death_times))
 
     @mock.patch(
         "spatialsfs.branchingdiffusion.simulations.simulate_positions", autospec=True
@@ -195,6 +196,10 @@ class TestBranchingDiffusion(TestCase):
 
     def test_num_alive_at(self):
         """Test num_alive_at."""
+        # Can't get alive at if haven't run simulations.
+        bd = BranchingDiffusion()
+        with self.assertRaises(RuntimeError):
+            bd.num_alive_at(1.0)
         # Birth and death times.
         # self.bd.birth_times = np.array([0.0, 0.5, 0.5])
         # self.bd.death_times = np.array([0.5, 1.0, 1.5])
@@ -213,6 +218,15 @@ class TestBranchingDiffusion(TestCase):
     @mock.patch("spatialsfs.branchingdiffusion.np.random.normal", autospec=True)
     def test_positions_at(self, mock_normal):
         """Test positions_at."""
+        # Can't get positions if haven't run position simulations.
+        bd = BranchingDiffusion()
+        with self.assertRaises(RuntimeError):
+            bd.positions_at(1.0)
+        bd.birth_times = self.bd.birth_times.copy()
+        bd.death_times = self.bd.death_times.copy()
+        with self.assertRaises(RuntimeError):
+            bd.positions_at(1.0)
+
         # Use a round value for mocking gaussians with sd=1
         mock_normal.return_value = 1.0
         # self.bd.parents = [None, 0, 0]

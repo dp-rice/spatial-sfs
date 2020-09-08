@@ -169,6 +169,8 @@ class BranchingDiffusion:
             but not at the moment they die.
 
         """
+        if self.parents == []:
+            raise RuntimeError("Tree not simulated.")
         alive = (self.birth_times <= time) & (time < self.death_times)
         return np.count_nonzero(alive)
 
@@ -195,6 +197,8 @@ class BranchingDiffusion:
         draws from the Brownian bridge.
 
         """
+        if len(self.birth_positions) == 0:
+            raise RuntimeError("Positions not simulated.")
         alive = (self.birth_times <= time) & (time < self.death_times)
         bt = self.birth_times[alive]
         dt = self.death_times[alive]
