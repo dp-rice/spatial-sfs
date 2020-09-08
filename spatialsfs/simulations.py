@@ -178,10 +178,13 @@ def simulate_tree(
 def _step(
     alive: List[int], selection_coefficient: float, rng: np.random._generator.Generator
 ) -> Tuple[float, int, int]:
-    # Draw time interval ~ Exp(1 / len(alive))
-    # Choose parent at random uniform
-    # Draw n_offpring from {0, 2}
-    pass
+    n_alive = len(alive)
+    time_interval = rng.standard_exponential() / n_alive
+    parent = alive[rng.integers(n_alive)]
+    num_offspring = rng.choice(
+        [0, 2], p=[(1 + selection_coefficient) / 2, (1 - selection_coefficient) / 2]
+    )
+    return time_interval, parent, num_offspring
 
 
 def simulate_positions(
