@@ -23,7 +23,31 @@ def simulate_tree(
     Tuple[List[Optional[int]], np.ndarray, np.ndarray, int]
 
     """
-    pass
+    # Accumulators to return
+    parents: List[Optional[int]] = [None]
+    birth_times = [0.0]
+    death_times = [np.nan]
+    num_max = 1
+    # Simulation variables
+    time = 0.0
+    alive = [0]
+    num_total = 1
+    for i in range(max_steps):
+        time_interval, p, num_offspring = _step(alive, selection_coefficient, rng)
+        # Update simulation variables
+        time += time_interval
+        alive.remove(p)
+        alive += [x for x in range(num_total, num_total + num_offspring)]
+        num_total += num_offspring
+        # Update accumulators
+        parents += [p] * num_offspring
+        birth_times += [time] * num_offspring
+        death_times[p] = time
+        death_times += [np.nan] * num_offspring
+        num_max = max(num_max, len(alive))
+        if len(alive) == 0:
+            break
+    return parents, np.array(birth_times), np.array(death_times), num_max
 
 
 def _step(

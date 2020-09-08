@@ -4,6 +4,8 @@
 
 from unittest import TestCase, main, mock
 
+import numpy as np
+
 import spatialsfs.simulations as sims
 
 
@@ -11,7 +13,7 @@ class TestSimulations(TestCase):
     """TestSimulations."""
 
     def test__step(self):
-        """Test __step."""
+        """Test _step."""
         s = 0.1
 
         # Cases: (alive, parent_choice, num_offspring, expected_output)
@@ -38,22 +40,45 @@ class TestSimulations(TestCase):
                 [0, 2], p=[(1 + s) / 2, (1 - s) / 2]
             )
 
-    def test_simulate_tree(self):
+    @mock.patch("spatialsfs.simulations._step", autospec=True)
+    def test_simulate_tree(self, mock_step):
         """Test simulate_tree."""
-        # Mock patch _step
+        s = 0.1
+        max_steps = 3
+        rng = np.random.default_rng()
 
         # Case: die right away
+        mock_step.reset_mock()
+        mock_step.return_value = (1.0, 0, 0)
+        parents, birth_times, death_times, n_max = sims.simulate_tree(s, max_steps, rng)
+        mock_step.assert_called_once()
+        # mock_step.assert_called_once_with([0], s, rng)
+        self.assertEqual(parents, [None])
+        np.testing.assert_array_equal(birth_times, np.array([0.0]))
+        np.testing.assert_array_equal(death_times, np.array([1.0]))
+        self.assertEqual(n_max, 1)
 
         # Case: birth until max_steps
+        mock_step.reset_mock()
+        mock_step.side_effect = [(1.0, i, 2) for i in range(max_steps)]
+        parents, birth_times, death_times, n_max = sims.simulate_tree(s, max_steps, rng)
+        self.assertEqual(parents, [None, 0, 0, 1, 1, 2, 2])
+        np.testing.assert_array_equal(
+            birth_times, np.array([0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0])
+        )
+        np.testing.assert_array_equal(
+            death_times, np.array([1.0, 2.0, 3.0] + [np.nan] * 4)
+        )
+        self.assertEqual(n_max, max_steps + 1)
 
-        # Case: birth, birth, death
-
-        # Check that birth times, death times, and parents have same length
-        # Check that the selection coefficient must be positive
-        # Check that birth times are in order
-        # Check that parents are before children
-        # Check that ancestor birth time is zero and parent is None
-        pass
+        # Case: birth, death, death
+        mock_step.reset_mock()
+        mock_step.side_effect = [(1.0, 0, 2), (1.0, 1, 0), (1.0, 2, 0)]
+        parents, birth_times, death_times, n_max = sims.simulate_tree(s, max_steps, rng)
+        self.assertEqual(parents, [None, 0, 0])
+        np.testing.assert_array_equal(birth_times, np.array([0.0, 1.0, 1.0]))
+        np.testing.assert_array_equal(death_times, np.array([1.0, 2.0, 3.0]))
+        self.assertEqual(n_max, 2)
 
     def test_simulate_positions(self):
         """Test simulate_positions."""
