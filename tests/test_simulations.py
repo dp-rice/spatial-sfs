@@ -80,6 +80,26 @@ class TestSimulations(TestCase):
         np.testing.assert_array_equal(death_times, np.array([1.0, 2.0, 3.0]))
         self.assertEqual(n_max, 2)
 
+    def test_simulate_tree_random(self):
+        """Test general properties on some random instances."""
+        s = 0.01
+        max_steps = 10
+        rng = np.random.default_rng(1)
+        for rep in range(100):
+            parents, birth_times, death_times, n_max = sims.simulate_tree(
+                s, max_steps, rng
+            )
+            self.assertIs(parents[0], None)
+            n_total = len(parents)
+            self.assertEqual(n_total, len(birth_times))
+            self.assertEqual(n_total, len(death_times))
+            self.assertTrue(n_total <= 2 * max_steps + 1)
+            for i in range(n_total - 1):
+                self.assertTrue(birth_times[i] <= birth_times[i + 1])
+            for i in range(1, n_total):
+                self.assertTrue(0 <= parents[i] and parents[i] < i)
+                self.assertEqual(birth_times[i], death_times[parents[i]])
+
     def test_simulate_positions(self):
         """Test simulate_positions."""
         # Check that birth and death positions are the same length as parents
