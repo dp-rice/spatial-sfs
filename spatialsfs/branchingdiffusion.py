@@ -8,6 +8,9 @@ import numpy as np
 
 import spatialsfs.simulations as simulations
 
+# For saving and loading None objects as integers with np.savez_compressed
+_ROOT = -1
+
 
 class BranchingDiffusion:
     """Branching diffusion simulation output object."""
@@ -21,7 +24,7 @@ class BranchingDiffusion:
             Optional .npz filename or a BinaryIO object to read data from.
             default: construct an empty BranchingDiffusion.
         """
-        self.parents: List[int] = []
+        self.parents: List[Optional[int]] = []
         self.birth_times: np.ndarray = np.array([], dtype=float)
         self.death_times: np.ndarray = np.array([], dtype=float)
         self.birth_positions: np.ndarray = np.array([], dtype=float)
@@ -69,7 +72,11 @@ class BranchingDiffusion:
         output_dict = {}
         for key, value in self.__dict__.items():
             # Numpy can't read in None objects without pickle.
-            if value is not None:
+            if value is None:
+                continue
+            elif key == "parents":
+                output_dict[key] = [_ROOT if p is None else p for p in value]
+            else:
                 output_dict[key] = value
         np.savez_compressed(output_file, **output_dict)
 
@@ -83,7 +90,7 @@ class BranchingDiffusion:
             May be the filename as a string or a BinaryIO object to read data from.
         """
         data = np.load(input_file)
-        self.parents = list(data["parents"])
+        self.parents = [None if p == _ROOT else p for p in data["parents"]]
         self.birth_times = data["birth_times"]
         self.death_times = data["death_times"]
         self.birth_positions = data["birth_positions"]

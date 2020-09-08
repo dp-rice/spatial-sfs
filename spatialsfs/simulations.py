@@ -1,7 +1,7 @@
 import gzip
 import pickle
 import sys
-from typing import Any, List, Tuple
+from typing import List, Optional, Tuple
 
 import numpy as np
 
@@ -171,11 +171,11 @@ def load_populations(filename):
 
 def simulate_tree(
     selection_coefficient: float, max_steps: int
-) -> Tuple[List[int], np.ndarray, np.ndarray, int]:
+) -> Tuple[List[Optional[int]], np.ndarray, np.ndarray, int]:
     pass
 
 
 def simulate_positions(
-    diffusion_coefficient: float, parents: List[int], lifespans: np.ndarray
+    diffusion_coefficient: float, parents: List[Optional[int]], lifespans: np.ndarray
 ) -> Tuple[np.ndarray, np.ndarray]:
     pass

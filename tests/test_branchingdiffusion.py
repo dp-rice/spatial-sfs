@@ -19,7 +19,7 @@ class TestBranchingDiffusion(TestCase):
     def setUp(self):
         """Set up a small instance of BranchingDiffusion."""
         self.bd = BranchingDiffusion()
-        self.bd.parents = [-1, 0, 0]
+        self.bd.parents = [None, 0, 0]
         self.bd.birth_times = np.array([0.0, 0.5, 0.5])
         self.bd.death_times = np.array([0.5, 1.0, 1.5])
         self.bd.birth_positions = np.array([0.0, 0.3, 0.3])
@@ -215,7 +215,7 @@ class TestBranchingDiffusion(TestCase):
         """Test positions_at."""
         # Use a round value for mocking gaussians with sd=1
         mock_normal.return_value = 1.0
-        # self.bd.parents = [-1, 0, 0]
+        # self.bd.parents = [None, 0, 0]
         # self.bd.birth_times = np.array([0.0, 0.5, 0.5])
         # self.bd.death_times = np.array([0.5, 1.0, 1.5])
         # self.bd.birth_positions = np.array([0.0, 0.3, 0.3])
