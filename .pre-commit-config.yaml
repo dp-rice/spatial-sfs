@@ -36,5 +36,5 @@ repos:
         name: Run tests with pytest
         language: system
         types: [python]
-        exclude: notebooks/
         entry: pytest
+        pass_filenames: false

@@ -78,6 +78,7 @@ def plot_branching_diffusion_1D(bd, color="gray"):
 
 
 def plot_branching_diffusion_2D(bd, color="gray"):
+    """Plot birth positions in 2D, colored by birth times."""
     for i in range(bd.num_total):
         col = plt.cm.viridis(bd.birth_times[i] / bd.extinction_time)
         plt.plot(
