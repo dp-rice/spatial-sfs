@@ -220,12 +220,16 @@ class BranchingDiffusion:
         """
         if len(self.birth_positions) == 0:
             raise RuntimeError("Positions not simulated.")
+        if self.diffusion_coefficient is None:
+            raise RuntimeError("Diffusion coefficient not set.")
         alive = (self.birth_times <= time) & (time < self.death_times)
         bt = self.birth_times[alive]
         dt = self.death_times[alive]
         bp = self.birth_positions[alive]
         dp = self.death_positions[alive]
-        return simulations.brownian_bridge(time, bt, dt, bp, dp, rng)
+        return simulations.brownian_bridge(
+            time, bt, dt, bp, dp, self.diffusion_coefficient, rng
+        )
 
 
 def save_branching_diffusions(

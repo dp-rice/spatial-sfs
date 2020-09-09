@@ -68,6 +68,7 @@ def brownian_bridge(
     t_b: np.array,
     x_a: np.array,
     x_b: np.array,
+    diffusion_coefficient: float,
     rng: np.random._generator.Generator,
 ) -> np.array:
     """Return random positions drawn from n independent Brownian bridges.
@@ -88,6 +89,8 @@ def brownian_bridge(
     x_b : np.array
         2D array with the initial positions of the bridges.
         Shape is (n, ndims)
+    diffusion_coefficient : float
+        The diffusion coefficient of the brownian bridge.
     rng : np.random._generator.Generator
         A numpy random generator instance.
 
@@ -97,7 +100,7 @@ def brownian_bridge(
         The positions at t. Shape is (n, ndims).
     """
     means = x_a + (x_b - x_a) * ((t - t_a) / (t_b - t_a))[:, None]
-    variances = (t_b - t) * (t - t_a) / (t_b - t_a)
+    variances = diffusion_coefficient * (t_b - t) * (t - t_a) / (t_b - t_a)
     return means + np.sqrt(variances)[:, None] * rng.standard_normal(size=x_a.shape)
 
 

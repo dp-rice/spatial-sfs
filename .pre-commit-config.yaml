@@ -33,8 +33,7 @@ repos:
   - repo: local
     hooks:
       - id: tests
-        files: spatialsfs
         name: Run tests with pytest
         language: system
         types: [python]
-        entry: pytest
+        entry: pytest tests/

@@ -250,17 +250,26 @@ class TestBranchingDiffusion(TestCase):
 
         # t == 0.25 should give an interpolation
         t = 0.25
-        expected_position = ((t * 0.3 / 0.5) + np.sqrt((0.5 - t) * t / 0.5)).reshape(
-            (-1, 1)
-        )
+        expected_position = (
+            (t * 0.3 / 0.5)
+            + np.sqrt(self.bd.diffusion_coefficient * (0.5 - t) * t / 0.5)
+        ).reshape((-1, 1))
         np.testing.assert_array_equal(
             self.bd.positions_at(t, mock_rng), expected_position
         )
 
         # t == 0.6 should be length 2
         t = 0.6
-        ep1 = 0.3 + ((t - 0.5) * (-0.4) / 0.5) + np.sqrt((1.0 - t) * (t - 0.5) / 0.5)
-        ep2 = 0.3 + ((t - 0.5) * 1.0 / 1.0) + np.sqrt((1.5 - t) * (t - 0.5) / 1.0)
+        ep1 = (
+            0.3
+            + ((t - 0.5) * (-0.4) / 0.5)
+            + np.sqrt(self.bd.diffusion_coefficient * (1.0 - t) * (t - 0.5) / 0.5)
+        )
+        ep2 = (
+            0.3
+            + ((t - 0.5) * 1.0 / 1.0)
+            + np.sqrt(self.bd.diffusion_coefficient * (1.5 - t) * (t - 0.5) / 1.0)
+        )
         expected_position = np.vstack([ep1, ep2]).reshape((-1, 1))
         np.testing.assert_array_equal(
             self.bd.positions_at(t, mock_rng), expected_position
