@@ -16,7 +16,7 @@ class TestSimulations(TestCase):
         """Test _step."""
         s = 0.1
 
-        # Cases: (alive, parent_choice, num_offspring, expected_output)
+        # Cases: (alive, parent_choice, num_offspring)
         cases = [
             ([0], 0, 0),
             ([0], 0, 2),
@@ -26,7 +26,6 @@ class TestSimulations(TestCase):
         mock_rng = mock.Mock()
         for alive, parent_choice, num_offspring in cases:
             mock_rng.reset_mock()
-            mock_rng.standard_exponential.return_value = 1.0
             mock_rng.standard_exponential.return_value = 1.0
             mock_rng.integers.return_value = parent_choice
             mock_rng.choice.return_value = num_offspring
@@ -52,7 +51,6 @@ class TestSimulations(TestCase):
         mock_step.return_value = (1.0, 0, 0)
         parents, birth_times, death_times, n_max = sims.simulate_tree(s, max_steps, rng)
         mock_step.assert_called_once()
-        # mock_step.assert_called_once_with([0], s, rng)
         self.assertEqual(parents, [None])
         np.testing.assert_array_equal(birth_times, np.array([0.0]))
         np.testing.assert_array_equal(death_times, np.array([1.0]))
