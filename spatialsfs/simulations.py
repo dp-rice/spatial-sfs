@@ -66,9 +66,7 @@ def _step(
     n_alive = len(alive)
     time_interval = rng.standard_exponential() / n_alive
     parent = alive[rng.integers(n_alive)]
-    num_offspring = rng.choice(
-        [0, 2], p=[(1 + selection_coefficient) / 2, (1 - selection_coefficient) / 2]
-    )
+    num_offspring = 2 * rng.binomial(1, (1 - selection_coefficient) / 2)
     return time_interval, parent, num_offspring
 
 

@@ -28,16 +28,13 @@ class TestSimulations(TestCase):
             mock_rng.reset_mock()
             mock_rng.standard_exponential.return_value = 1.0
             mock_rng.integers.return_value = parent_choice
-            mock_rng.choice.return_value = num_offspring
+            mock_rng.binomial.return_value = num_offspring // 2
             interval, parent, no = sims._step(alive, s, mock_rng)
             self.assertEqual(interval, 1.0 / len(alive))
             self.assertEqual(parent, alive[parent_choice])
             self.assertEqual(no, num_offspring)
             mock_rng.standard_exponential.assert_called_once()
             mock_rng.integers.assert_called_once_with(len(alive))
-            mock_rng.choice.assert_called_once_with(
-                [0, 2], p=[(1 + s) / 2, (1 - s) / 2]
-            )
 
     @mock.patch("spatialsfs.simulations._step", autospec=True)
     def test_simulate_tree(self, mock_step):
