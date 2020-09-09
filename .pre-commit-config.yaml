@@ -12,7 +12,7 @@ repos:
     hooks:
       - id: black
   - repo: https://github.com/timothycrosley/isort
-    rev: 5.5.0
+    rev: 5.5.1
     hooks:
       - id: isort
   - repo: https://gitlab.com/PyCQA/flake8
@@ -30,3 +30,10 @@ repos:
     rev: v0.782
     hooks:
       - id: mypy
+  - repo: local
+    hooks:
+      - id: tests
+        name: Run tests with pytest
+        language: system
+        types: [python]
+        entry: pytest

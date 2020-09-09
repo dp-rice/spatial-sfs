@@ -62,8 +62,48 @@ def _step(
     return time_interval, parent, num_offspring
 
 
+def brownian_bridge(
+    t: float,
+    t_a: np.array,
+    t_b: np.array,
+    x_a: np.array,
+    x_b: np.array,
+    rng: np.random._generator.Generator,
+) -> np.array:
+    """Return random positions drawn from n independent Brownian bridges.
+
+    Parameters
+    ----------
+    t : float
+        The time at which to sample the Brownian bridges.
+    t_a : np.array
+        1D array with the initial times of the bridges.
+        Shape is (n,)
+    t_b : np.array
+        1D array with the final times of the bridges.
+        Shape is (n,)
+    x_a : np.array
+        2D array with the initial positions of the bridges.
+        Shape is (n, ndims)
+    x_b : np.array
+        2D array with the initial positions of the bridges.
+        Shape is (n, ndims)
+    rng : np.random._generator.Generator
+        A numpy random generator instance.
+
+    Returns
+    -------
+    np.array
+        The positions at t. Shape is (n, ndims).
+    """
+    means = x_a + (x_b - x_a) * ((t - t_a) / (t_b - t_a))[:, None]
+    variances = (t_b - t) * (t - t_a) / (t_b - t_a)
+    return means + np.sqrt(variances)[:, None] * rng.standard_normal(size=x_a.shape)
+
+
 def simulate_positions(
     diffusion_coefficient: float,
+    ndims: int,
     parents: List[Optional[int]],
     lifespans: np.ndarray,
     rng: np.random._generator.Generator,
@@ -74,6 +114,8 @@ def simulate_positions(
     ----------
     diffusion_coefficient : float
         diffusion_coefficient
+    ndims: int
+        The number of spatial dimensions of the position.
     parents : List[Optional[int]]
         parents
     lifespans : np.ndarray

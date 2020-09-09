@@ -22,8 +22,10 @@ class TestBranchingDiffusion(TestCase):
         self.bd.parents = [None, 0, 0]
         self.bd.birth_times = np.array([0.0, 0.5, 0.5])
         self.bd.death_times = np.array([0.5, 1.0, 1.5])
-        self.bd.birth_positions = np.array([0.0, 0.3, 0.3])
-        self.bd.death_positions = np.array([0.3, -0.1, 1.3])
+        # 1D positions
+        self.bd.ndims = 1
+        self.bd.birth_positions = np.array([0.0, 0.3, 0.3]).reshape(3, self.bd.ndims)
+        self.bd.death_positions = np.array([0.3, -0.1, 1.3]).reshape(3, self.bd.ndims)
         self.bd.selection_coefficient = 0.05
         self.bd.diffusion_coefficient = 0.75
         self.bd.num_total = 3
@@ -35,11 +37,14 @@ class TestBranchingDiffusion(TestCase):
         bd_default = BranchingDiffusion()
         for attr in list(bd_default.__dict__):
             if type(self.bd.__dict__[attr]) is np.ndarray:
-                self.assertFalse(
-                    len(self.bd.__dict__[attr]) == len(bd_default.__dict__[attr])
+                np.testing.assert_raises(
+                    AssertionError,
+                    np.testing.assert_array_equal,
+                    self.bd.__dict__[attr],
+                    bd_default.__dict__[attr],
                 )
             else:
-                self.assertFalse(self.bd.__dict__[attr] == bd_default.__dict__[attr])
+                self.assertNotEqual(self.bd.__dict__[attr], bd_default.__dict__[attr])
 
     def test____init__(self):
         """Test that default initialization creates an empty BranchingDiffusion."""
@@ -47,6 +52,7 @@ class TestBranchingDiffusion(TestCase):
         self.assertEqual(bd.parents, [])
         self.assertEqual(len(bd.birth_times), 0)
         self.assertEqual(len(bd.death_times), 0)
+        self.assertEqual(bd.ndims, 0)
         self.assertEqual(len(bd.birth_positions), 0)
         self.assertEqual(len(bd.death_positions), 0)
         self.assertIsNone(bd.selection_coefficient)
@@ -185,13 +191,15 @@ class TestBranchingDiffusion(TestCase):
         bd.death_positions = np.array([], dtype=float)
         # Run simulations
         d = self.bd.diffusion_coefficient
-        bd.simulate_positions(d, rng)
+        ndims = self.bd.ndims
+        bd.simulate_positions(d, ndims, rng)
         # Assert called simulate_positions with correct params
         mock_sim.assert_called_once()
+        self.assertEqual(mock_sim.call_args[0][:3], (d, ndims, self.bd.parents))
         intervals = self.bd.death_times - self.bd.birth_times
-        np.testing.assert_array_equal(intervals, mock_sim.call_args[0][2])
-        self.assertEqual(mock_sim.call_args[0][:2], (d, self.bd.parents))
+        np.testing.assert_array_equal(intervals, mock_sim.call_args[0][3])
         self.assertEqual(bd.diffusion_coefficient, d)
+        self.assertEqual(bd.ndims, ndims)
         # Should assign simulation output
         np.testing.assert_array_equal(bd.birth_positions, self.bd.birth_positions)
         np.testing.assert_array_equal(bd.death_positions, self.bd.death_positions)
@@ -232,41 +240,31 @@ class TestBranchingDiffusion(TestCase):
         with self.assertRaises(RuntimeError):
             bd.positions_at(1.0, mock_rng)
 
-        # self.bd.parents = [None, 0, 0]
-        # self.bd.birth_times = np.array([0.0, 0.5, 0.5])
-        # self.bd.death_times = np.array([0.5, 1.0, 1.5])
-        # self.bd.birth_positions = np.array([0.0, 0.3, 0.3])
-        # self.bd.death_positions = np.array([0.3, -0.1, 1.3])
-
-        # t < 0.0 should give an empty array.
-        np.testing.assert_array_equal(
-            self.bd.positions_at(-0.5, mock_rng), np.array([], dtype=float)
-        )
-        mock_rng.standard_normal.assert_called_with(size=0)
+        # t < 0.0 should give an array with first dimension == zero.
+        self.assertEqual(self.bd.positions_at(-0.5, mock_rng).shape[0], 0)
 
         # t == 0.0 should give 0.0
         np.testing.assert_array_equal(
-            self.bd.positions_at(0.0, mock_rng), np.array([0.0], dtype=float)
+            self.bd.positions_at(0.0, mock_rng), np.zeros((1, 1))
         )
-        mock_rng.standard_normal.assert_called_with(size=1)
 
         # t == 0.25 should give an interpolation
         t = 0.25
-        expected_position = (t * 0.3 / 0.5) + np.sqrt((0.5 - t) * t / 0.5)
-        np.testing.assert_array_equal(
-            self.bd.positions_at(t, mock_rng),
-            np.array([expected_position], dtype=float),
+        expected_position = ((t * 0.3 / 0.5) + np.sqrt((0.5 - t) * t / 0.5)).reshape(
+            (-1, 1)
         )
-        mock_rng.standard_normal.assert_called_with(size=1)
+        np.testing.assert_array_equal(
+            self.bd.positions_at(t, mock_rng), expected_position
+        )
 
         # t == 0.6 should be length 2
         t = 0.6
         ep1 = 0.3 + ((t - 0.5) * (-0.4) / 0.5) + np.sqrt((1.0 - t) * (t - 0.5) / 0.5)
         ep2 = 0.3 + ((t - 0.5) * 1.0 / 1.0) + np.sqrt((1.5 - t) * (t - 0.5) / 1.0)
+        expected_position = np.vstack([ep1, ep2]).reshape((-1, 1))
         np.testing.assert_array_equal(
-            self.bd.positions_at(t, mock_rng), np.array([ep1, ep2], dtype=float)
+            self.bd.positions_at(t, mock_rng), expected_position
         )
-        mock_rng.standard_normal.assert_called_with(size=2)
 
     @mock.patch("spatialsfs.branchingdiffusion.np.random.default_rng", autospec=True)
     @mock.patch("spatialsfs.branchingdiffusion.BranchingDiffusion", autospec=True)
@@ -275,22 +273,23 @@ class TestBranchingDiffusion(TestCase):
         num_reps = 3
         s = 0.1
         d = 0.5
+        ndims = 1
         rng = np.random.default_rng()
         max_steps = 5
         expected_calls = [
             mock.call(),
             mock.call().simulate_tree(s, max_steps, rng),
-            mock.call().simulate_positions(d, rng),
+            mock.call().simulate_positions(d, ndims, rng),
         ] * num_reps
         bds = simulate_branching_diffusions(
-            num_reps, s, d, rng=rng, max_steps=max_steps
+            num_reps, s, d, ndims, rng=rng, max_steps=max_steps
         )
         self.assertEqual(mock_bd.mock_calls, expected_calls)
         self.assertEqual(len(bds), num_reps)
 
         # Test initialize rng
         mock_rng.reset_mock()
-        bds = simulate_branching_diffusions(num_reps, s, d, max_steps=max_steps)
+        bds = simulate_branching_diffusions(num_reps, s, d, ndims, max_steps=max_steps)
         mock_rng.assert_called_once()
 
 

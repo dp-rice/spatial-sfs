@@ -27,6 +27,7 @@ class BranchingDiffusion:
         self.parents: List[Optional[int]] = []
         self.birth_times: np.ndarray = np.array([], dtype=float)
         self.death_times: np.ndarray = np.array([], dtype=float)
+        self.ndims: int = 0
         self.birth_positions: np.ndarray = np.array([], dtype=float)
         self.death_positions: np.ndarray = np.array([], dtype=float)
         self.num_total: int = 0
@@ -93,6 +94,7 @@ class BranchingDiffusion:
         self.parents = [None if p == _ROOT else p for p in data["parents"]]
         self.birth_times = data["birth_times"]
         self.death_times = data["death_times"]
+        self.ndims = int(data["ndims"])
         self.birth_positions = data["birth_positions"]
         self.death_positions = data["death_positions"]
         self.num_total = int(data["num_total"])
@@ -144,7 +146,10 @@ class BranchingDiffusion:
         self.extinction_time = np.max(self.death_times)
 
     def simulate_positions(
-        self, diffusion_coefficient: float, rng: np.random._generator.Generator
+        self,
+        diffusion_coefficient: float,
+        ndims: int,
+        rng: np.random._generator.Generator,
     ) -> None:
         """Simulate birth and death positions.
 
@@ -152,14 +157,17 @@ class BranchingDiffusion:
         ----------
         diffusion_coefficient : float
             The diffusion coefficient.
+        ndims: int
+            The number of spatial dimensions of the position.
         rng : np.random._generator.Generator
             A numpy random generator instance.
 
         """
         self.diffusion_coefficient = diffusion_coefficient
+        self.ndims = ndims
         lifespans = self.death_times - self.birth_times
         self.birth_positions, self.death_positions = simulations.simulate_positions(
-            self.diffusion_coefficient, self.parents, lifespans, rng
+            self.diffusion_coefficient, self.ndims, self.parents, lifespans, rng
         )
 
     def num_alive_at(self, time: float) -> int:
@@ -217,9 +225,7 @@ class BranchingDiffusion:
         dt = self.death_times[alive]
         bp = self.birth_positions[alive]
         dp = self.death_positions[alive]
-        means = bp + (time - bt) * (dp - bp) / (dt - bt)
-        variances = (dt - time) * (time - bt) / (dt - bt)
-        return means + np.sqrt(variances) * rng.standard_normal(size=len(bt))
+        return simulations.brownian_bridge(time, bt, dt, bp, dp, rng)
 
 
 def save_branching_diffusions(
@@ -271,6 +277,7 @@ def simulate_branching_diffusions(
     num_reps: int,
     selection_coefficient: float,
     diffusion_coefficient: float = 1.0,
+    ndims: int = 1,
     max_steps: int = 10000,
     rng: Optional[np.random._generator.Generator] = None,
 ) -> List[BranchingDiffusion]:
@@ -284,6 +291,9 @@ def simulate_branching_diffusions(
         The selection coefficient for all simulations.
     diffusion_coefficient : float
         The diffusion coefficient for all simulations.
+    ndims : int
+        The number of spatial dimensions of the position.
+        Default: 1
     max_steps : int
         The maximum number of steps to run the simulations for.
         Default: 10000
@@ -302,6 +312,6 @@ def simulate_branching_diffusions(
     for i in range(num_reps):
         bd = BranchingDiffusion()
         bd.simulate_tree(selection_coefficient, max_steps, rng)
-        bd.simulate_positions(diffusion_coefficient, rng)
+        bd.simulate_positions(diffusion_coefficient, ndims, rng)
         bds.append(bd)
     return bds
