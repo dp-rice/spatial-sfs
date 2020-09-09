@@ -36,4 +36,5 @@ repos:
         name: Run tests with pytest
         language: system
         types: [python]
-        entry: pytest tests/
+        exclude: notebooks/
+        entry: pytest
