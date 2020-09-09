@@ -33,7 +33,7 @@ repos:
   - repo: local
     hooks:
       - id: tests
-        exclude: docs/
+        files: spatialsfs
         name: Run tests with pytest
         language: system
         types: [python]
