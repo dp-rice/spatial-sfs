@@ -100,8 +100,33 @@ class TestSimulations(TestCase):
 
     def test_simulate_positions(self):
         """Test simulate_positions."""
-        # Check that birth and death positions are the same length as parents
-        pass
+        n = 3
+        scale = 2.0
+        d = scale ** 2
+        parents = [None, 0, 0]
+        lifespans = np.array([1.0, 2.0, 3.0])
+        # Simulations that reached max-steps
+        lifespans_nan = np.array([1.0, np.nan, np.nan])
+        mock_rng = mock.Mock()
+
+        # Should complain about invalid ndims
+        for ndims in [-1, 0]:
+            with self.assertRaises(ValueError):
+                bp, dp = sims.simulate_positions(d, ndims, parents, lifespans, mock_rng)
+
+        for ndims in range(1, 3):
+            mock_rng.standard_normal.return_value = np.ones((n, ndims))
+            bp_expect = scale * np.vstack([[0.0, 1.0, 1.0]] * ndims).T
+            dp_expect = bp_expect + scale * np.sqrt(lifespans)[:, None]
+            bp, dp = sims.simulate_positions(d, ndims, parents, lifespans, mock_rng)
+            np.testing.assert_array_equal(bp, bp_expect)
+            np.testing.assert_array_equal(dp, dp_expect)
+
+            # Simulations that reached max-steps
+            dp_nan = bp_expect + scale * np.sqrt(lifespans_nan)[:, None]
+            bp, dp = sims.simulate_positions(d, ndims, parents, lifespans_nan, mock_rng)
+            np.testing.assert_array_equal(bp, bp_expect)
+            np.testing.assert_array_equal(dp, dp_nan)
 
 
 if __name__ == "__main__":

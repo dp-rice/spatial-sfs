@@ -12,15 +12,25 @@ def simulate_tree(
     Parameters
     ----------
     selection_coefficient : float
-        selection_coefficient
+        The selection coefficient of the branching process.
     max_steps : int
-        max_steps
+        The maximum number of steps to run the process.
+        If not extinct at the end, some individuals will have death time `np.nan`
     rng : np.random._generator.Generator
-        rng
+        A numpy random generator instance.
 
     Returns
     -------
-    Tuple[List[Optional[int]], np.ndarray, np.ndarray, int]
+    parents : List[Optional[int]]
+        A list containing the parents.
+        `parents[i]` is the index of the parent of individual `i`.
+        `parents[i]` is None for the root individual. (Usually only `i==0`)
+    birth_times : np.ndarray
+        1D array containing the birth times.
+    death_times : np.ndarray
+        1D array containing the death times.
+    num_max : int
+        The maximum number of individuals alive at one time.
 
     """
     # Accumulators to return
@@ -116,19 +126,36 @@ def simulate_positions(
     Parameters
     ----------
     diffusion_coefficient : float
-        diffusion_coefficient
+        The diffusion coefficient of the process.
     ndims: int
         The number of spatial dimensions of the position.
     parents : List[Optional[int]]
-        parents
+        A list containing the parents.
+        `parents[i]` is the index of the parent of individual `i`.
+        `parents[i]` is None for the root individual. (Usually only `i==0`)
     lifespans : np.ndarray
-        lifespans
+        1D array of lifespans of individuals.
     rng : np.random._generator.Generator
-        rng
+        A numpy random generator instance.
 
     Returns
     -------
     Tuple[np.ndarray, np.ndarray]
+        2D arrays containing the birth and death positions.
+        Both arrays have shape `(n, ndims)` where n is the number of individuals.
 
     """
-    pass
+    if ndims < 1:
+        raise ValueError("ndims must be >= 1 to simulate positions.")
+    n_indiv = len(parents)
+    birth_positions = np.empty((n_indiv, ndims), dtype=float)
+    death_positions = np.empty((n_indiv, ndims), dtype=float)
+    scales = np.sqrt(diffusion_coefficient * lifespans)
+    distances_traveled = scales[:, None] * rng.standard_normal(size=(n_indiv, ndims))
+    for i in range(n_indiv):
+        if parents[i] is None:
+            birth_positions[i] = 0.0
+        else:
+            birth_positions[i] = death_positions[parents[i]]
+        death_positions[i] = birth_positions[i] + distances_traveled[i]
+    return birth_positions, death_positions

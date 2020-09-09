@@ -302,6 +302,38 @@ class TestBranchingDiffusion(TestCase):
         mock_rng.assert_called_once()
 
 
+def TestIntegration(TestCase):
+    """Test that everything works together."""
+
+    def test_simulate_branching_diffusions(self):
+        """Test that for some random seeds, everything gets set."""
+        num_reps = 100
+        s = 0.1
+        d = 0.5
+        ndims = 2
+        rng = np.random.default_rng(1)
+        max_steps = 10
+        bds = simulate_branching_diffusions(
+            num_reps, s, d, ndims, rng=rng, max_steps=max_steps
+        )
+        self.assertEqual(len(bds), num_reps)
+        for bd in bds:
+            self.assertEqual(bd.selection_coefficient, s)
+            self.assertEqual(bd.diffusion_coefficient, d)
+            self.assertEqual(bd.ndims, ndims)
+            self.assertEqual(len(bd.parents), bd.num_total)
+            self.assertEqual(bd.birth_times.shape, (bd.num_total,))
+            self.assertEqual(bd.birth_positions.shape, (bd.num_total, ndims))
+            self.assertEqual(bd.death_times.shape, (bd.num_total,))
+            self.assertEqual(bd.death_positions.shape, (bd.num_total, ndims))
+            self.assertEqual(bd.extinction_time, np.max(bd.death_times))
+
+        with TemporaryFile() as tf:
+            save_branching_diffusions(tf, bds)
+            tf.seek(0)
+            loaded_data = load_branching_diffusions(tf)
+        self.assertEqual(bds, loaded_data)
+
+
 if __name__ == "__main__":
-    print("Hello world!")
     main()
