@@ -23,7 +23,7 @@ repos:
     rev: 5.1.1
     hooks:
       - id: pydocstyle
-        exclude: (notebooks/|spatialsfs/_legacy.py)
+        exclude: (notebooks/|spatialsfs/_legacy.py|docs/)
         args:
           - --convention=numpy
   - repo: https://github.com/pre-commit/mirrors-mypy
@@ -33,6 +33,7 @@ repos:
   - repo: local
     hooks:
       - id: tests
+        exclude: docs/
         name: Run tests with pytest
         language: system
         types: [python]
