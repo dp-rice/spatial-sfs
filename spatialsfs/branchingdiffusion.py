@@ -2,7 +2,7 @@
 
 import io
 import zipfile
-from typing import BinaryIO, Iterable, List, Optional, Union
+from typing import BinaryIO, Iterable, List, Optional, Tuple, Union
 
 import numpy as np
 
@@ -170,6 +170,21 @@ class BranchingDiffusion:
             self.diffusion_coefficient, self.ndims, self.parents, lifespans, rng
         )
 
+    def __getitem__(
+        self, indices
+    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+        """Apply numpy slice indexing to the times and positions."""
+        return (
+            self.birth_times[indices],
+            self.death_times[indices],
+            self.birth_positions[indices],
+            self.death_positions[indices],
+        )
+
+    def alive_at(self, time: float) -> np.ndarray:
+        """Return an array of bools that are True for individuals alive at `time`."""
+        return (self.birth_times <= time) & (time < self.death_times)
+
     def num_alive_at(self, time: float) -> int:
         """Return the number of individuals alive at a time.
 
@@ -188,8 +203,7 @@ class BranchingDiffusion:
         """
         if self.parents == []:
             raise RuntimeError("Tree not simulated.")
-        alive = (self.birth_times <= time) & (time < self.death_times)
-        return np.count_nonzero(alive)
+        return np.count_nonzero(self.alive_at(time))
 
     def positions_at(
         self, time: float, rng: np.random._generator.Generator
@@ -222,13 +236,8 @@ class BranchingDiffusion:
             raise RuntimeError("Positions not simulated.")
         if self.diffusion_coefficient is None:
             raise RuntimeError("Diffusion coefficient not set.")
-        alive = (self.birth_times <= time) & (time < self.death_times)
-        bt = self.birth_times[alive]
-        dt = self.death_times[alive]
-        bp = self.birth_positions[alive]
-        dp = self.death_positions[alive]
         return simulations.brownian_bridge(
-            time, bt, dt, bp, dp, self.diffusion_coefficient, rng
+            time, *self[self.alive_at(time)], self.diffusion_coefficient, rng
         )
 
 
