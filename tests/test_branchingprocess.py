@@ -4,7 +4,12 @@ from copy import deepcopy
 import numpy as np
 import pytest
 
-from spatialsfs.branchingprocess import BranchingProcess, branch, separate_restarts
+from spatialsfs.branchingprocess import (
+    BranchingProcess,
+    _generate_tree,
+    branch,
+    separate_restarts,
+)
 
 
 @pytest.fixture
@@ -117,6 +122,12 @@ def test_num_restarts(small_bp, large_bp):
     assert large_bp.num_restarts() == 2
 
 
+def test_len(small_bp, large_bp):
+    """Test __len__ function."""
+    assert small_bp.parents.shape == (len(small_bp),)
+    assert large_bp.parents.shape == (len(large_bp),)
+
+
 def test_separate_restarts(large_bp):
     """Test separating restarts."""
     bp_iterator = separate_restarts(large_bp)
@@ -146,3 +157,74 @@ def test_branch_checks_s():
         branch(10, 1.0, 100)
     with pytest.raises(ValueError):
         branch(10, 1.1, 100)
+
+
+def test_generate_tree_asserts():
+    """Test that generate_tree checks array lengths and types."""
+    with pytest.raises(AssertionError):
+        _generate_tree(np.zeros(4), np.zeros(3, dtype=int), np.zeros(3))
+    with pytest.raises(AssertionError):
+        _generate_tree(np.zeros(4), np.zeros(4, dtype=int), np.zeros(3))
+    with pytest.raises(AssertionError):
+        _generate_tree(np.zeros(4), np.zeros(4, dtype=float), np.zeros(4))
+
+
+@pytest.mark.parametrize(
+    "raw_times,num_offspring,parent_choices,expected",
+    [
+        (
+            np.ones(4),
+            np.zeros(4, dtype=int),
+            0.5 * np.ones(4),
+            (
+                np.zeros(4 + 1, dtype=int),
+                np.array([0.0, 0.0, 1.0, 2.0, 3.0]),
+                np.array([0.0, 1.0, 2.0, 3.0, 4.0]),
+            ),
+        ),
+        (
+            np.ones(4),
+            np.array([2, 0, 0, 0]),
+            0.25 * np.ones(4),
+            (
+                np.array([0, 0, 1, 1, 0]),
+                np.array([0.0, 0.0, 1.0, 1.0, 2.5]),
+                np.array([0.0, 1.0, 1.5, 2.5, 3.5]),
+            ),
+        ),
+        (
+            np.ones(4),
+            np.array([2, 0, 0, 0]),
+            np.array([0.25, 0.75, 0.25, 0.25]),
+            (
+                np.array([0, 0, 1, 1, 0]),
+                np.array([0.0, 0.0, 1.0, 1.0, 2.5]),
+                np.array([0.0, 1.0, 2.5, 1.5, 3.5]),
+            ),
+        ),
+        (
+            np.ones(4) / 2,
+            np.array([2, 0, 0, 0]),
+            np.array([0.25, 0.75, 0.25, 0.25]),
+            (
+                np.array([0, 0, 1, 1, 0]),
+                np.array([0.0, 0.0, 1.0, 1.0, 2.5]) / 2,
+                np.array([0.0, 1.0, 2.5, 1.5, 3.5]) / 2,
+            ),
+        ),
+        (
+            np.ones(2),
+            np.array([2, 2]),
+            np.array([0.25, 0.8]),
+            (
+                np.array([0, 0, 1, 1, 3, 3]),
+                np.array([0.0, 0.0, 1.0, 1.0, 1.5, 1.5]),
+                np.array([0.0, 1.0, np.nan, 1.5, np.nan, np.nan]),
+            ),
+        ),
+    ],
+)
+def test_generate_tree(raw_times, num_offspring, parent_choices, expected):
+    """Test _generate_tree on a variety of inputs."""
+    output = _generate_tree(raw_times, num_offspring, parent_choices)
+    np.testing.assert_equal(output, expected)
