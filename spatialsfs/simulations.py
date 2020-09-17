@@ -87,48 +87,6 @@ def _generate_tree(
     return np.array(parents), np.array(birth_times), np.array(death_times)
 
 
-def brownian_bridge(
-    t: float,
-    t_a: np.array,
-    t_b: np.array,
-    x_a: np.array,
-    x_b: np.array,
-    diffusion_coefficient: float,
-    rng: np.random._generator.Generator,
-) -> np.array:
-    """Return random positions drawn from n independent Brownian bridges.
-
-    Parameters
-    ----------
-    t : float
-        The time at which to sample the Brownian bridges.
-    t_a : np.array
-        1D array with the initial times of the bridges.
-        Shape is (n,)
-    t_b : np.array
-        1D array with the final times of the bridges.
-        Shape is (n,)
-    x_a : np.array
-        2D array with the initial positions of the bridges.
-        Shape is (n, ndims)
-    x_b : np.array
-        2D array with the initial positions of the bridges.
-        Shape is (n, ndims)
-    diffusion_coefficient : float
-        The diffusion coefficient of the brownian bridge.
-    rng : np.random._generator.Generator
-        A numpy random generator instance.
-
-    Returns
-    -------
-    np.array
-        The positions at t. Shape is (n, ndims).
-    """
-    means = x_a + (x_b - x_a) * ((t - t_a) / (t_b - t_a))[:, None]
-    variances = diffusion_coefficient * (t_b - t) * (t - t_a) / (t_b - t_a)
-    return means + np.sqrt(variances)[:, None] * rng.standard_normal(size=x_a.shape)
-
-
 def simulate_positions(
     diffusion_coefficient: float,
     ndims: int,
@@ -200,3 +158,46 @@ def simulate_positions(
 #         self.birth_positions, self.death_positions = simulations.simulate_positions(
 #             self.diffusion_coefficient, self.ndim, self.parents, lifespans, rng
 #         )
+
+# def simulate_branching_diffusions(
+#     num_reps: int,
+#     selection_coefficient: float,
+#     diffusion_coefficient: float = 1.0,
+#     ndim: int = 1,
+#     max_steps: int = 10000,
+#     rng: Optional[np.random._generator.Generator] = None,
+# ) -> List[BranchingDiffusion]:
+#     """Simulate replicate branching diffusions.
+
+#     Parameters
+#     ----------
+#     num_reps : int
+#         The number of replicate simulations to run.
+#     selection_coefficient : float
+#         The selection coefficient for all simulations.
+#     diffusion_coefficient : float
+#         The diffusion coefficient for all simulations.
+#     ndim : int
+#         The number of spatial dimensions of the position.
+#         Default: 1
+#     max_steps : int
+#         The maximum number of steps to run the simulations for.
+#         Default: 10000
+#     rng : Optional[np.random._generator.Generator]
+#         The numpy random generator to use for rng.
+#         Default: create a new genertor with np.random.default_generator()
+
+#     Returns
+#     -------
+#     List[BranchingDiffusion]
+
+#     """
+#     bds = []
+#     if rng is None:
+#         rng = np.random.default_rng()
+#     for i in range(num_reps):
+#         bd = BranchingDiffusion()
+#         bd.simulate_tree(selection_coefficient, max_steps, rng)
+#         bd.simulate_positions(diffusion_coefficient, ndim, rng)
+#         bds.append(bd)
+#     return bds

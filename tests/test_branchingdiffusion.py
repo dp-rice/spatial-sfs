@@ -118,9 +118,11 @@ def test_wrappers(small_bd, small_bp, time):
     np.testing.assert_array_equal(small_bd.alive_at(time), small_bp.alive_at(time))
 
 
-def test_positions_at():
-    """Test positions_at."""
-    pass
+# def test_positions_at(small_bd):
+#     """Test positions_at."""
+#     # TODO: write some actual tests
+#     # Placeholder for when I really test it.
+#     small_bd.positions_at(0.25, 100)
 
 
 #     def test_positions_at(self):
@@ -128,15 +130,6 @@ def test_positions_at():
 #         # Use a round value for mocking gaussians with sd=1
 #         mock_rng = mock.Mock()
 #         mock_rng.standard_normal.return_value = 1.0
-
-#         # Can't get positions if haven't run position simulations.
-#         bd = BranchingDiffusion()
-#         with self.assertRaises(RuntimeError):
-#             bd.positions_at(1.0, mock_rng)
-#         bd.birth_times = self.bd.birth_times.copy()
-#         bd.death_times = self.bd.death_times.copy()
-#         with self.assertRaises(RuntimeError):
-#             bd.positions_at(1.0, mock_rng)
 
 #         # t < 0.0 should give an array with first dimension == zero.
 #         self.assertEqual(self.bd.positions_at(-0.5, mock_rng).shape[0], 0)

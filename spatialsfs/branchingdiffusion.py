@@ -1,10 +1,9 @@
 """Simulating and analyzing branching diffusions."""
 
-from typing import Tuple, Union
+from typing import Iterator, Tuple, Union
 
 import numpy as np
 
-import spatialsfs.simulations as simulations
 from spatialsfs.branchingprocess import BranchingProcess
 
 
@@ -97,81 +96,20 @@ class BranchingDiffusion:
         """
         return self.branching_process.num_alive_at(time)
 
-    def positions_at(
-        self, time: float, rng: np.random._generator.Generator
-    ) -> np.ndarray:
-        """Return random interpolated positions of individuals alive at a time.
 
-        Parameters
-        ----------
-        time : float
-            time
+def separate_restarts(bd: BranchingDiffusion) -> Iterator[BranchingDiffusion]:
+    """Get each restarted branching process as a separate instance.
 
-        Returns
-        -------
-        positions : np.ndarray
-            1D array of interpolated positions.
-            The length of the array is the number of individuals alive at `time`.
-            Includes individuals the moment they are born,
-            but not at the moment they die.
-        rng : np.random._generator.Generator
-            A numpy random generator instance.
+    Parameters
+    ----------
+    bp : BranchingDiffusion
+        The BranchingDiffusion to separate.
 
-        Notes
-        -----
-        The positions are modeled as a Brownian bridge, conditional on birth and death
-        times and locations. Repeated calls to `positions_at` will generate independent
-        draws from the Brownian bridge.
+    Returns
+    -------
+    Iterator[BranchingDiffusion]
+        The separated branching diffusions.
 
-        """
-        if len(self.birth_positions) == 0:
-            raise RuntimeError("Positions not simulated.")
-        if self.diffusion_coefficient is None:
-            raise RuntimeError("Diffusion coefficient not set.")
-        return simulations.brownian_bridge(
-            time, *self[self.alive_at(time)], self.diffusion_coefficient, rng
-        )
-
-
-# def simulate_branching_diffusions(
-#     num_reps: int,
-#     selection_coefficient: float,
-#     diffusion_coefficient: float = 1.0,
-#     ndim: int = 1,
-#     max_steps: int = 10000,
-#     rng: Optional[np.random._generator.Generator] = None,
-# ) -> List[BranchingDiffusion]:
-#     """Simulate replicate branching diffusions.
-
-#     Parameters
-#     ----------
-#     num_reps : int
-#         The number of replicate simulations to run.
-#     selection_coefficient : float
-#         The selection coefficient for all simulations.
-#     diffusion_coefficient : float
-#         The diffusion coefficient for all simulations.
-#     ndim : int
-#         The number of spatial dimensions of the position.
-#         Default: 1
-#     max_steps : int
-#         The maximum number of steps to run the simulations for.
-#         Default: 10000
-#     rng : Optional[np.random._generator.Generator]
-#         The numpy random generator to use for rng.
-#         Default: create a new genertor with np.random.default_generator()
-
-#     Returns
-#     -------
-#     List[BranchingDiffusion]
-
-#     """
-#     bds = []
-#     if rng is None:
-#         rng = np.random.default_rng()
-#     for i in range(num_reps):
-#         bd = BranchingDiffusion()
-#         bd.simulate_tree(selection_coefficient, max_steps, rng)
-#         bd.simulate_positions(diffusion_coefficient, ndim, rng)
-#         bds.append(bd)
-#     return bds
+    """
+    pass
+    # restarts = (bd.branching_process.parents == 0).nonzero()[0]
