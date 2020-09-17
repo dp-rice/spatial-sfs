@@ -17,7 +17,7 @@ def small_bp():
     """Return a simple BranchingProcess with no restarts."""
     parents = np.array([0, 0, 1, 1])
     birth_times = np.array([0.0, 0.0, 0.5, 0.5])
-    death_times = np.array([0.0, 0.5, 0.75, np.nan])
+    death_times = np.array([0.0, 0.5, 0.75, np.inf])
     s = 0.05
     return BranchingProcess(parents, birth_times, death_times, s)
 
@@ -29,7 +29,7 @@ def large_bp():
     return BranchingProcess(
         np.array([0, 0, 1, 1, 0, 4, 4]),
         np.array([0.0, 0.0, 1.0, 1.0, 2.0, 3.5, 3.5]),
-        np.array([0.0, 1.0, 1.5, 2.0, 3.5, 4.0, np.nan]),
+        np.array([0.0, 1.0, 1.5, 2.0, 3.5, 4.0, np.inf]),
         s,
     )
 
@@ -38,14 +38,14 @@ def test_setting_attributes():
     """Test __init__."""
     parents = np.array([0, 0, 1, 1])
     birth_times = np.array([0.0, 0.0, 0.5, 0.5])
-    death_times = np.array([0.0, 0.5, 0.75, np.nan])
+    death_times = np.array([0.0, 0.5, 0.75, np.inf])
     s = 0.05
     bp = BranchingProcess(parents, birth_times, death_times, s)
     assert np.array_equal(bp.parents, parents, equal_nan=True)
     assert np.array_equal(bp.birth_times, birth_times, equal_nan=True)
     assert np.array_equal(bp.death_times, death_times, equal_nan=True)
     assert bp.selection_coefficient == s
-    assert bp.final_time == np.nanmax(death_times)
+    assert bp.final_time == np.max(death_times[np.isfinite(death_times)])
 
 
 def test_type_checking():
@@ -131,7 +131,30 @@ def test_len(small_bp, large_bp):
 
 @pytest.mark.parametrize(
     "time,expected",
-    [(-0.5, 0), (0.0, 1), (0.5, 1), (1.0, 2), (1.25, 2), (1.5, 1), (2.0, 1), (3.75, 1)],
+    [
+        (-0.5, np.array([False, False, False, False])),
+        (0.0, np.array([False, True, False, False])),
+        (0.25, np.array([False, True, False, False])),
+        (0.50, np.array([False, False, True, True])),
+        (0.60, np.array([False, False, True, True])),
+    ],
+)
+def test_alive_at(small_bp, time, expected):
+    """Test alive_at."""
+    np.testing.assert_array_equal(small_bp.alive_at(time), expected)
+
+
+def test_alive_at_too_late(small_bp, large_bp):
+    """Test that exception is raised when given a time that's beyond the final time."""
+    with pytest.raises(ValueError):
+        small_bp.alive_at(0.76)
+    with pytest.raises(ValueError):
+        large_bp.alive_at(4.1)
+
+
+@pytest.mark.parametrize(
+    "time,expected",
+    [(-0.5, 0), (0.0, 1), (0.5, 1), (1.0, 2), (1.25, 2), (1.5, 1), (2.0, 1), (3.75, 2)],
 )
 def test_num_alive_at(large_bp, time, expected):
     """Test num_alive_at."""
@@ -158,7 +181,7 @@ def test_separate_restarts(large_bp):
     assert next(bp_iterator) == BranchingProcess(
         np.array([0, 0, 1, 1]),
         np.array([0.0, 0.0, 1.5, 1.5]),
-        np.array([0.0, 1.5, 2.0, np.nan]),
+        np.array([0.0, 1.5, 2.0, np.inf]),
         large_bp.selection_coefficient,
     )
     with pytest.raises(StopIteration):
@@ -237,7 +260,7 @@ def test_generate_tree_asserts():
             (
                 np.array([0, 0, 1, 1, 3, 3]),
                 np.array([0.0, 0.0, 1.0, 1.0, 1.5, 1.5]),
-                np.array([0.0, 1.0, np.nan, 1.5, np.nan, np.nan]),
+                np.array([0.0, 1.0, np.inf, 1.5, np.inf, np.inf]),
             ),
         ),
     ],

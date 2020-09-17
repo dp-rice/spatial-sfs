@@ -32,18 +32,22 @@ class BranchingProcess:
         self.parents = parents
         self.birth_times = birth_times
         self.death_times = death_times
-        self.final_time: float = np.nanmax(death_times)
+        self.final_time: float = np.max(death_times[np.isfinite(death_times)])
         self.selection_coefficient = selection_coefficient
 
     def num_restarts(self) -> int:
         """Return the number times the branching process went extinct and restarted."""
         return np.count_nonzero(self.parents == 0) - 1
 
-    def num_alive_at(self, time: float) -> int:
-        """Return the number of individuals alive at time."""
+    def alive_at(self, time: float) -> np.ndarray:
+        """Return an array of bools that are True for individuals alive at time."""
         if time > self.final_time:
             raise ValueError(f"time ({time}) > final_time ({self.final_time})")
-        return np.count_nonzero((self.birth_times <= time) & (self.death_times > time))
+        return (self.birth_times <= time) & (self.death_times > time)
+
+    def num_alive_at(self, time: float) -> int:
+        """Return the number of individuals alive at time."""
+        return np.count_nonzero(self.alive_at(time))
 
     def __eq__(self, other: Any) -> bool:
         """Return true if all attributes are equal."""
@@ -171,7 +175,7 @@ def _generate_tree(
             # Restart extinct process.
             parents.append(0)
             birth_times.append(t)
-            death_times.append(np.nan)
+            death_times.append(np.inf)
             num_total += 1
             alive.append(num_total)
         t += raw_interval / len(alive)
@@ -184,5 +188,5 @@ def _generate_tree(
             alive.append(num_total)
             parents.append(parent)
             birth_times.append(t)
-            death_times.append(np.nan)
+            death_times.append(np.inf)
     return np.array(parents), np.array(birth_times), np.array(death_times)
