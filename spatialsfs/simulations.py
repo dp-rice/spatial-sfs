@@ -174,3 +174,29 @@ def simulate_positions(
             birth_positions[i] = death_positions[parents[i]]
         death_positions[i] = birth_positions[i] + distances_traveled[i]
     return birth_positions, death_positions
+
+
+#     def simulate_positions(
+#         self,
+#         diffusion_coefficient: float,
+#         ndim: int,
+#         rng: np.random._generator.Generator,
+#     ) -> None:
+#         """Simulate birth and death positions.
+
+#         Parameters
+#         ----------
+#         diffusion_coefficient : float
+#             The diffusion coefficient.
+#         ndim: int
+#             The number of spatial dimensions of the position.
+#         rng : np.random._generator.Generator
+#             A numpy random generator instance.
+
+#         """
+#         self.diffusion_coefficient = diffusion_coefficient
+#         self.ndim = ndim
+#         lifespans = self.death_times - self.birth_times
+#         self.birth_positions, self.death_positions = simulations.simulate_positions(
+#             self.diffusion_coefficient, self.ndim, self.parents, lifespans, rng
+#         )

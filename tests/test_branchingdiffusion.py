@@ -1,303 +1,174 @@
 """Tests for the branchingdiffusion module."""
 from copy import deepcopy
-from tempfile import NamedTemporaryFile, TemporaryFile
-from unittest import TestCase, mock
 
 import numpy as np
+import pytest
 
-from spatialsfs import (
-    BranchingDiffusion,
-    load_branching_diffusions,
-    save_branching_diffusions,
-    simulate_branching_diffusions,
-)
+from spatialsfs.branchingdiffusion import BranchingDiffusion
+from spatialsfs.branchingprocess import BranchingProcess
 
 
-class TestBranchingDiffusion(TestCase):
-    """Test initializing, loading, saving, and equality of BrachingDiffusion class."""
+@pytest.fixture
+def small_bp():
+    """Return a simple BranchingProcess with no restarts."""
+    parents = np.array([0, 0, 1, 1])
+    birth_times = np.array([0.0, 0.0, 0.5, 0.5])
+    death_times = np.array([0.0, 0.5, 0.75, np.inf])
+    s = 0.05
+    return BranchingProcess(parents, birth_times, death_times, s)
 
-    def setUp(self):
-        """Set up a small instance of BranchingDiffusion."""
-        self.bd = BranchingDiffusion()
-        self.bd.parents = [None, 0, 0]
-        self.bd.birth_times = np.array([0.0, 0.5, 0.5])
-        self.bd.death_times = np.array([0.5, 1.0, 1.5])
-        # 1D positions
-        self.bd.ndims = 1
-        self.bd.birth_positions = np.array([0.0, 0.3, 0.3]).reshape(3, self.bd.ndims)
-        self.bd.death_positions = np.array([0.3, -0.1, 1.3]).reshape(3, self.bd.ndims)
-        self.bd.selection_coefficient = 0.05
-        self.bd.diffusion_coefficient = 0.75
-        self.bd.num_total = 3
-        self.bd.num_max = 2
-        self.bd.extinction_time = 1.5
 
-    def test_setUp(self):
-        """Test that our example has non-default values for all attributes."""
-        bd_default = BranchingDiffusion()
-        for attr in list(bd_default.__dict__):
-            if type(self.bd.__dict__[attr]) is np.ndarray:
-                np.testing.assert_raises(
-                    AssertionError,
-                    np.testing.assert_array_equal,
-                    self.bd.__dict__[attr],
-                    bd_default.__dict__[attr],
-                )
-            else:
-                self.assertNotEqual(self.bd.__dict__[attr], bd_default.__dict__[attr])
+@pytest.fixture
+def small_bd(small_bp):
+    """Return a simple BranchingDiffusion with no restarts."""
+    birth_positions = np.array([0.0, 0.0, 0.25, 0.25]).reshape((4, 1))
+    death_positions = np.array([0.0, 0.25, 0.35, np.nan]).reshape((4, 1))
+    d = 0.5
+    return BranchingDiffusion(small_bp, birth_positions, death_positions, d)
 
-    def test____init__(self):
-        """Test that default initialization creates an empty BranchingDiffusion."""
-        bd = BranchingDiffusion()
-        self.assertEqual(bd.parents, [])
-        self.assertEqual(len(bd.birth_times), 0)
-        self.assertEqual(len(bd.death_times), 0)
-        self.assertEqual(bd.ndims, 0)
-        self.assertEqual(len(bd.birth_positions), 0)
-        self.assertEqual(len(bd.death_positions), 0)
-        self.assertIsNone(bd.selection_coefficient)
-        self.assertIsNone(bd.diffusion_coefficient)
-        self.assertEqual(bd.num_total, 0)
-        self.assertEqual(bd.num_max, 0)
-        self.assertIsNone(bd.extinction_time)
 
-    def test___eq__(self):
-        """Test equality."""
-        # Fresh objects
-        bd1 = BranchingDiffusion()
-        bd2 = BranchingDiffusion()
-        self.assertEqual(bd1, bd2)
-        # Objects with some stuff
-        bd1 = deepcopy(self.bd)
-        bd2 = deepcopy(self.bd)
-        self.assertEqual(bd1, bd2)
-        # Value mismatches
-        bd2.selection_coefficient *= 2.0
-        self.assertNotEqual(bd1, bd2)
-        bd2.selection_coefficient = bd1.selection_coefficient
-        self.assertEqual(bd1, bd2)
-        bd2.birth_times[-1] /= 2.0
-        self.assertNotEqual(bd1, bd2)
-        # Type mismatches
-        bd3 = BranchingDiffusion()
-        bd3.parents = np.array([])
-        self.assertNotEqual(bd1, bd3)
-        bd4 = BranchingDiffusion()
-        bd4.num_max = np.array(0)
-        self.assertNotEqual(bd1, bd4)
-        # Not a BranchingDiffusion()
-        self.assertNotEqual(bd1, 5)
+# @pytest.fixture
+# def large_bd():
+#     """Return a more complex BranchingProcess with one restart."""
+#     s = 0.05
+#     return BranchingProcess(
+#         np.array([0, 0, 1, 1, 0, 4, 4]),
+#         np.array([0.0, 0.0, 1.0, 1.0, 2.0, 3.5, 3.5]),
+#         np.array([0.0, 1.0, 1.5, 2.0, 3.5, 4.0, np.inf]),
+#         s,
+#     )
 
-    def test_saveload(self):
-        """Test saving and loading with a temporary file."""
-        # Empty bd
-        bd_empty = BranchingDiffusion()
-        bd1 = BranchingDiffusion()
-        with TemporaryFile() as tf:
-            bd_empty.save(tf)
-            tf.seek(0)
-            bd1.load(tf)
-        self.assertEqual(bd_empty, bd1)
-        # Full bd
-        bd2 = BranchingDiffusion()
-        with TemporaryFile() as tf:
-            self.bd.save(tf)
-            tf.seek(0)
-            bd2.load(tf)
-        self.assertEqual(self.bd, bd2)
 
-    def test_import(self):
-        """Test __init__ with an input file."""
-        # Empty input
-        bd_empty = BranchingDiffusion()
-        with TemporaryFile() as tf:
-            bd_empty.save(tf)
-            tf.seek(0)
-            bd1 = BranchingDiffusion(tf)
-        self.assertEqual(bd_empty, bd1)
-        # Full input
-        with TemporaryFile() as tf:
-            self.bd.save(tf)
-            tf.seek(0)
-            bd2 = BranchingDiffusion(tf)
-        self.assertEqual(self.bd, bd2)
+def test_setting_attributes(small_bp):
+    """Test __init__."""
+    birth_positions = np.array([0.0, 0.0, 0.25, 0.25]).reshape((4, 1))
+    death_positions = np.array([0.0, 0.25, 0.35, np.nan]).reshape((4, 1))
+    d = 0.5
+    bd = BranchingDiffusion(deepcopy(small_bp), birth_positions, death_positions, d)
+    assert bd.branching_process == small_bp
+    assert np.array_equal(bd.birth_positions, birth_positions, equal_nan=True)
+    assert np.array_equal(bd.death_positions, death_positions, equal_nan=True)
+    assert bd.diffusion_coefficient == d
+    assert bd.ndim == 1
 
-    def test_import_filename(self):
-        """Test __init__ with an input filename string."""
-        with NamedTemporaryFile() as tf:
-            self.bd.save(tf)
-            tf.seek(0)
-            bd = BranchingDiffusion(tf.name)
-        self.assertEqual(self.bd, bd)
 
-    def test_saveload_branchingdiffusions(self):
-        """Test save_branching_diffusions and load_branching_diffusions."""
-        bd1 = deepcopy(self.bd)
-        bd2 = deepcopy(self.bd)
-        bd2.selection_coefficient = 0.12
-        saved_data = [bd1, bd2]
-        with TemporaryFile() as tf:
-            save_branching_diffusions(tf, saved_data)
-            tf.seek(0)
-            loaded_data = load_branching_diffusions(tf)
-        self.assertEqual(saved_data, loaded_data)
-
-    @mock.patch(
-        "spatialsfs.branchingdiffusion.simulations.simulate_positions", autospec=True
-    )
-    def test_simulate_positions(self, mock_sim):
-        """Test simulate_positions method (mocking simulation code)."""
-        mock_sim.return_value = (
-            self.bd.birth_positions,
-            self.bd.death_positions,
+@pytest.mark.parametrize("ndim", [1, 2])
+def test_type_checking(small_bp, ndim):
+    """Test type checking in __init__."""
+    n = len(small_bp)
+    d = 0.5
+    with pytest.raises(TypeError):
+        BranchingDiffusion(
+            small_bp,
+            np.zeros((n, ndim), dtype=int),
+            np.zeros((n, ndim), dtype=float),
+            d,
         )
-        rng = np.random.default_rng()
-        # Set up bd as though we'd run simulate_times
-        bd = deepcopy(self.bd)
-        bd.diffusion_coefficient = None
-        bd.birth_positions = np.array([], dtype=float)
-        bd.death_positions = np.array([], dtype=float)
-        # Run simulations
-        d = self.bd.diffusion_coefficient
-        ndims = self.bd.ndims
-        bd.simulate_positions(d, ndims, rng)
-        # Assert called simulate_positions with correct params
-        mock_sim.assert_called_once()
-        self.assertEqual(mock_sim.call_args[0][:3], (d, ndims, self.bd.parents))
-        intervals = self.bd.death_times - self.bd.birth_times
-        np.testing.assert_array_equal(intervals, mock_sim.call_args[0][3])
-        self.assertEqual(bd.diffusion_coefficient, d)
-        self.assertEqual(bd.ndims, ndims)
-        # Should assign simulation output
-        np.testing.assert_array_equal(bd.birth_positions, self.bd.birth_positions)
-        np.testing.assert_array_equal(bd.death_positions, self.bd.death_positions)
-
-    def test_num_alive_at(self):
-        """Test num_alive_at."""
-        # Can't get alive at if haven't run simulations.
-        bd = BranchingDiffusion()
-        with self.assertRaises(RuntimeError):
-            bd.num_alive_at(1.0)
-        # Birth and death times.
-        # self.bd.birth_times = np.array([0.0, 0.5, 0.5])
-        # self.bd.death_times = np.array([0.5, 1.0, 1.5])
-        self.assertEqual(self.bd.num_alive_at(-1.0), 0)
-        # Lifespan includes birth time
-        self.assertEqual(self.bd.num_alive_at(0.0), 1)
-        self.assertEqual(self.bd.num_alive_at(0.25), 1)
-        # Lifespan does not include death time
-        self.assertEqual(self.bd.num_alive_at(0.5), 2)
-        self.assertEqual(self.bd.num_alive_at(0.75), 2)
-        self.assertEqual(self.bd.num_alive_at(1.0), 1)
-        self.assertEqual(self.bd.num_alive_at(1.25), 1)
-        self.assertEqual(self.bd.num_alive_at(1.5), 0)
-        self.assertEqual(self.bd.num_alive_at(10.0), 0)
-
-    def test_positions_at(self):
-        """Test positions_at."""
-        # Use a round value for mocking gaussians with sd=1
-        mock_rng = mock.Mock()
-        mock_rng.standard_normal.return_value = 1.0
-
-        # Can't get positions if haven't run position simulations.
-        bd = BranchingDiffusion()
-        with self.assertRaises(RuntimeError):
-            bd.positions_at(1.0, mock_rng)
-        bd.birth_times = self.bd.birth_times.copy()
-        bd.death_times = self.bd.death_times.copy()
-        with self.assertRaises(RuntimeError):
-            bd.positions_at(1.0, mock_rng)
-
-        # t < 0.0 should give an array with first dimension == zero.
-        self.assertEqual(self.bd.positions_at(-0.5, mock_rng).shape[0], 0)
-
-        # t == 0.0 should give 0.0
-        np.testing.assert_array_equal(
-            self.bd.positions_at(0.0, mock_rng), np.zeros((1, 1))
+    with pytest.raises(TypeError):
+        BranchingDiffusion(
+            small_bp,
+            np.zeros((n, ndim), dtype=float),
+            np.zeros((n, ndim), dtype=int),
+            d,
         )
 
-        # t == 0.25 should give an interpolation
-        t = 0.25
-        expected_position = (
-            (t * 0.3 / 0.5)
-            + np.sqrt(self.bd.diffusion_coefficient * (0.5 - t) * t / 0.5)
-        ).reshape((-1, 1))
-        np.testing.assert_array_equal(
-            self.bd.positions_at(t, mock_rng), expected_position
-        )
 
-        # t == 0.6 should be length 2
-        t = 0.6
-        ep1 = (
-            0.3
-            + ((t - 0.5) * (-0.4) / 0.5)
-            + np.sqrt(self.bd.diffusion_coefficient * (1.0 - t) * (t - 0.5) / 0.5)
-        )
-        ep2 = (
-            0.3
-            + ((t - 0.5) * 1.0 / 1.0)
-            + np.sqrt(self.bd.diffusion_coefficient * (1.5 - t) * (t - 0.5) / 1.0)
-        )
-        expected_position = np.vstack([ep1, ep2]).reshape((-1, 1))
-        np.testing.assert_array_equal(
-            self.bd.positions_at(t, mock_rng), expected_position
-        )
-
-    @mock.patch("spatialsfs.branchingdiffusion.np.random.default_rng", autospec=True)
-    @mock.patch("spatialsfs.branchingdiffusion.BranchingDiffusion", autospec=True)
-    def test_simulate_branching_diffusions(self, mock_bd, mock_rng):
-        """Test simulation wrapper function."""
-        num_reps = 3
-        s = 0.1
-        d = 0.5
-        ndims = 1
-        rng = np.random.default_rng()
-        max_steps = 5
-        expected_calls = [
-            mock.call(),
-            mock.call().simulate_tree(s, max_steps, rng),
-            mock.call().simulate_positions(d, ndims, rng),
-        ] * num_reps
-        bds = simulate_branching_diffusions(
-            num_reps, s, d, ndims, rng=rng, max_steps=max_steps
-        )
-        self.assertEqual(mock_bd.mock_calls, expected_calls)
-        self.assertEqual(len(bds), num_reps)
-
-        # Test initialize rng
-        mock_rng.reset_mock()
-        bds = simulate_branching_diffusions(num_reps, s, d, ndims, max_steps=max_steps)
-        mock_rng.assert_called_once()
+@pytest.mark.parametrize("ndim", [1, 2])
+def test_length_checking(small_bp, ndim):
+    """The input arrays must all be the same length as branching_process."""
+    n = len(small_bp)
+    d = 0.5
+    with pytest.raises(ValueError):
+        BranchingDiffusion(small_bp, np.zeros((n - 1, ndim)), np.zeros((n, ndim)), d)
+    with pytest.raises(ValueError):
+        BranchingDiffusion(small_bp, np.zeros((n, ndim)), np.zeros((n - 1, ndim)), d)
 
 
-def TestIntegration(TestCase):
-    """Test that everything works together."""
+def test_eq(small_bd):
+    """Test that equality means equality of attributes."""
+    bd = deepcopy(small_bd)
+    assert bd == small_bd
+    bd.diffusion_coefficient /= 2
+    assert bd != small_bd
+    bd = deepcopy(small_bd)
+    bd.birth_positions[-1] /= 2
+    assert bd != small_bd
+    bd = deepcopy(small_bd)
+    bd.death_positions[1] /= 2
+    assert bd != small_bd
+    bd = deepcopy(small_bd)
+    bd.branching_process.birth_times[-1] /= 2
+    assert bd != small_bd
 
-    def test_simulate_branching_diffusions(self):
-        """Test that for some random seeds, everything gets set."""
-        num_reps = 100
-        s = 0.1
-        d = 0.5
-        ndims = 2
-        rng = np.random.default_rng(1)
-        max_steps = 10
-        bds = simulate_branching_diffusions(
-            num_reps, s, d, ndims, rng=rng, max_steps=max_steps
-        )
-        self.assertEqual(len(bds), num_reps)
-        for bd in bds:
-            self.assertEqual(bd.selection_coefficient, s)
-            self.assertEqual(bd.diffusion_coefficient, d)
-            self.assertEqual(bd.ndims, ndims)
-            self.assertEqual(len(bd.parents), bd.num_total)
-            self.assertEqual(bd.birth_times.shape, (bd.num_total,))
-            self.assertEqual(bd.birth_positions.shape, (bd.num_total, ndims))
-            self.assertEqual(bd.death_times.shape, (bd.num_total,))
-            self.assertEqual(bd.death_positions.shape, (bd.num_total, ndims))
-            self.assertEqual(bd.extinction_time, np.max(bd.death_times))
 
-        with TemporaryFile() as tf:
-            save_branching_diffusions(tf, bds)
-            tf.seek(0)
-            loaded_data = load_branching_diffusions(tf)
-        self.assertEqual(bds, loaded_data)
+def test_len(small_bd, small_bp):
+    """Test __len__."""
+    assert len(small_bd) == len(small_bp)
+
+
+def test_num_restarts(small_bd, small_bp):
+    """Test num_restarts."""
+    assert small_bd.num_restarts() == small_bp.num_restarts()
+
+
+@pytest.mark.parametrize("time", [-0.5, 0.0, 0.25, 0.5, 0.75])
+def test_wrappers(small_bd, small_bp, time):
+    """Test alive_at and num_alive_at."""
+    assert small_bd.num_alive_at(time) == small_bp.num_alive_at(time)
+    np.testing.assert_array_equal(small_bd.alive_at(time), small_bp.alive_at(time))
+
+
+def test_positions_at():
+    """Test positions_at."""
+    pass
+
+
+#     def test_positions_at(self):
+#         """Test positions_at."""
+#         # Use a round value for mocking gaussians with sd=1
+#         mock_rng = mock.Mock()
+#         mock_rng.standard_normal.return_value = 1.0
+
+#         # Can't get positions if haven't run position simulations.
+#         bd = BranchingDiffusion()
+#         with self.assertRaises(RuntimeError):
+#             bd.positions_at(1.0, mock_rng)
+#         bd.birth_times = self.bd.birth_times.copy()
+#         bd.death_times = self.bd.death_times.copy()
+#         with self.assertRaises(RuntimeError):
+#             bd.positions_at(1.0, mock_rng)
+
+#         # t < 0.0 should give an array with first dimension == zero.
+#         self.assertEqual(self.bd.positions_at(-0.5, mock_rng).shape[0], 0)
+
+#         # t == 0.0 should give 0.0
+#         np.testing.assert_array_equal(
+#             self.bd.positions_at(0.0, mock_rng), np.zeros((1, 1))
+#         )
+
+#         # t == 0.25 should give an interpolation
+#         t = 0.25
+#         expected_position = (
+#             (t * 0.3 / 0.5)
+#             + np.sqrt(self.bd.diffusion_coefficient * (0.5 - t) * t / 0.5)
+#         ).reshape((-1, 1))
+#         np.testing.assert_array_equal(
+#             self.bd.positions_at(t, mock_rng), expected_position
+#         )
+
+#         # t == 0.6 should be length 2
+#         t = 0.6
+#         ep1 = (
+#             0.3
+#             + ((t - 0.5) * (-0.4) / 0.5)
+#             + np.sqrt(self.bd.diffusion_coefficient * (1.0 - t) * (t - 0.5) / 0.5)
+#         )
+#         ep2 = (
+#             0.3
+#             + ((t - 0.5) * 1.0 / 1.0)
+#             + np.sqrt(self.bd.diffusion_coefficient * (1.5 - t) * (t - 0.5) / 1.0)
+#         )
+#         expected_position = np.vstack([ep1, ep2]).reshape((-1, 1))
+#         np.testing.assert_array_equal(
+#             self.bd.positions_at(t, mock_rng), expected_position
+#         )
