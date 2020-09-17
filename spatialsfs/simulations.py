@@ -3,71 +3,88 @@ from typing import List, Optional, Tuple
 
 import numpy as np
 
+from spatialsfs.branchingprocess import BranchingProcess
 
-def simulate_tree(
-    selection_coefficient: float, max_steps: int, rng: np.random._generator.Generator
-) -> Tuple[List[Optional[int]], np.ndarray, np.ndarray, int]:
-    """Simulate parents and birth and death times.
+
+def branch(num_steps: int, selection_coefficient: float, seed: int) -> BranchingProcess:
+    """Simulate a branching process.
 
     Parameters
     ----------
+    num_steps : int
+        The number of steps to simulate.
     selection_coefficient : float
-        The selection coefficient of the branching process.
-    max_steps : int
-        The maximum number of steps to run the process.
-        If not extinct at the end, some individuals will have death time `np.nan`
-    rng : np.random._generator.Generator
-        A numpy random generator instance.
+        The selection coefficient against the process. Must be > 0 and < 1.
+    seed : int
+        A seed for numpy.random random number generation.
 
     Returns
     -------
-    parents : List[Optional[int]]
-        A list containing the parents.
-        `parents[i]` is the index of the parent of individual `i`.
-        `parents[i]` is None for the root individual. (Usually only `i==0`)
-    birth_times : np.ndarray
-        1D array containing the birth times.
-    death_times : np.ndarray
-        1D array containing the death times.
-    num_max : int
-        The maximum number of individuals alive at one time.
+    BranchingProcess
 
     """
-    # Accumulators to return
-    parents: List[Optional[int]] = [None]
+    if selection_coefficient <= 0 or selection_coefficient >= 1:
+        raise ValueError("selection_coefficient must be > 0 and < 1.")
+    seed1, seed2, seed3 = np.random.SeedSequence(seed).spawn(3)
+    return BranchingProcess(
+        *_generate_tree(
+            _raw_times(num_steps, seed1),
+            _num_offspring(num_steps, selection_coefficient, seed2),
+            _parent_choices(num_steps, seed3),
+        ),
+        selection_coefficient,
+    )
+
+
+def _raw_times(num_steps: int, seed: int) -> np.ndarray:
+    return np.random.default_rng(seed).standard_exponential(size=num_steps)
+
+
+def _num_offspring(num_steps: int, s: float, seed: int) -> np.ndarray:
+    return 2 * np.random.default_rng(seed).binomial(1, (1 - s) / 2, size=num_steps)
+
+
+def _parent_choices(num_steps: int, seed: int) -> np.ndarray:
+    return np.random.default_rng(seed).random(size=num_steps)
+
+
+def _generate_tree(
+    raw_times: np.ndarray, num_offspring: np.ndarray, parent_choices: np.ndarray
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    assert raw_times.shape == num_offspring.shape
+    assert raw_times.shape == parent_choices.shape
+    assert raw_times.dtype == float
+    assert num_offspring.dtype == int
+    assert parent_choices.dtype == float
+    t = 0.0
+    alive: List[int] = []
+    num_total = 0
+    # Root of the tree
+    parents = [0]
     birth_times = [0.0]
-    death_times = [np.nan]
-    num_max = 1
-    # Simulation variables
-    time = 0.0
-    alive = [0]
-    num_total = 1
-    for i in range(max_steps):
-        time_interval, p, num_offspring = _step(alive, selection_coefficient, rng)
-        # Update simulation variables
-        time += time_interval
-        alive.remove(p)
-        alive += [x for x in range(num_total, num_total + num_offspring)]
-        num_total += num_offspring
-        # Update accumulators
-        parents += [p] * num_offspring
-        birth_times += [time] * num_offspring
-        death_times[p] = time
-        death_times += [np.nan] * num_offspring
-        num_max = max(num_max, len(alive))
-        if len(alive) == 0:
-            break
-    return parents, np.array(birth_times), np.array(death_times), num_max
-
-
-def _step(
-    alive: List[int], selection_coefficient: float, rng: np.random._generator.Generator
-) -> Tuple[float, int, int]:
-    n_alive = len(alive)
-    time_interval = rng.standard_exponential() / n_alive
-    parent = alive[rng.integers(n_alive)]
-    num_offspring = 2 * rng.binomial(1, (1 - selection_coefficient) / 2)
-    return time_interval, parent, num_offspring
+    death_times = [0.0]
+    for raw_interval, noff, parent_float in zip(
+        raw_times, num_offspring, parent_choices
+    ):
+        if not alive:
+            # Restart extinct process.
+            parents.append(0)
+            birth_times.append(t)
+            death_times.append(np.inf)
+            num_total += 1
+            alive.append(num_total)
+        t += raw_interval / len(alive)
+        # Kill parent
+        parent = alive.pop(int(parent_float * len(alive)))
+        death_times[parent] = t
+        # Reproduce
+        for i in range(noff):
+            num_total += 1
+            alive.append(num_total)
+            parents.append(parent)
+            birth_times.append(t)
+            death_times.append(np.inf)
+    return np.array(parents), np.array(birth_times), np.array(death_times)
 
 
 def brownian_bridge(

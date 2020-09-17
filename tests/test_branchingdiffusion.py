@@ -1,7 +1,7 @@
 """Tests for the branchingdiffusion module."""
 from copy import deepcopy
 from tempfile import NamedTemporaryFile, TemporaryFile
-from unittest import TestCase, main, mock
+from unittest import TestCase, mock
 
 import numpy as np
 
@@ -141,38 +141,6 @@ class TestBranchingDiffusion(TestCase):
             tf.seek(0)
             loaded_data = load_branching_diffusions(tf)
         self.assertEqual(saved_data, loaded_data)
-
-    @mock.patch(
-        "spatialsfs.branchingdiffusion.simulations.simulate_tree", autospec=True
-    )
-    def test_simulate_tree(self, mock_sim):
-        """Test simulate_tree method (mocking simulation code)."""
-        mock_sim.return_value = (
-            self.bd.parents,
-            self.bd.birth_times,
-            self.bd.death_times,
-            self.bd.num_max,
-        )
-        # Run simulations
-        bd = BranchingDiffusion()
-        rng = np.random.default_rng()
-        s = self.bd.selection_coefficient
-        max_steps = 5
-        bd.simulate_tree(s, max_steps, rng)
-        # Assert called simulate_tree with correct params
-        mock_sim.assert_called_once_with(s, max_steps, rng)
-        self.assertEqual(bd.selection_coefficient, s)
-        # Should reset the positions
-        self.assertEqual(len(bd.birth_positions), 0)
-        self.assertEqual(len(bd.death_positions), 0)
-        # Should assign simulation output
-        self.assertEqual(bd.parents, self.bd.parents)
-        np.testing.assert_array_equal(bd.birth_times, self.bd.birth_times)
-        np.testing.assert_array_equal(bd.death_times, self.bd.death_times)
-        self.assertEqual(bd.num_total, self.bd.num_total)
-        self.assertEqual(bd.num_max, self.bd.num_max)
-        self.assertEqual(bd.extinction_time, self.bd.extinction_time)
-        self.assertEqual(bd.extinction_time, np.max(bd.death_times))
 
     @mock.patch(
         "spatialsfs.branchingdiffusion.simulations.simulate_positions", autospec=True
@@ -333,7 +301,3 @@ def TestIntegration(TestCase):
             tf.seek(0)
             loaded_data = load_branching_diffusions(tf)
         self.assertEqual(bds, loaded_data)
-
-
-if __name__ == "__main__":
-    main()
