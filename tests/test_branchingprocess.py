@@ -45,6 +45,7 @@ def test_setting_attributes():
     assert np.array_equal(bp.birth_times, birth_times, equal_nan=True)
     assert np.array_equal(bp.death_times, death_times, equal_nan=True)
     assert bp.selection_coefficient == s
+    assert bp.final_time == np.nanmax(death_times)
 
 
 def test_type_checking():
@@ -126,6 +127,23 @@ def test_len(small_bp, large_bp):
     """Test __len__ function."""
     assert small_bp.parents.shape == (len(small_bp),)
     assert large_bp.parents.shape == (len(large_bp),)
+
+
+@pytest.mark.parametrize(
+    "time,expected",
+    [(-0.5, 0), (0.0, 1), (0.5, 1), (1.0, 2), (1.25, 2), (1.5, 1), (2.0, 1), (3.75, 1)],
+)
+def test_num_alive_at(large_bp, time, expected):
+    """Test num_alive_at."""
+    assert large_bp.num_alive_at(time) == expected
+
+
+def test_num_alive_at_too_late(small_bp, large_bp):
+    """Test that exception is raised when given a time that's beyond the final time."""
+    with pytest.raises(ValueError):
+        small_bp.num_alive_at(0.76)
+    with pytest.raises(ValueError):
+        large_bp.num_alive_at(4.1)
 
 
 def test_separate_restarts(large_bp):

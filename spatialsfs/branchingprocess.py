@@ -32,11 +32,18 @@ class BranchingProcess:
         self.parents = parents
         self.birth_times = birth_times
         self.death_times = death_times
+        self.final_time: float = np.nanmax(death_times)
         self.selection_coefficient = selection_coefficient
 
     def num_restarts(self) -> int:
         """Return the number times the branching process went extinct and restarted."""
         return np.count_nonzero(self.parents == 0) - 1
+
+    def num_alive_at(self, time: float) -> int:
+        """Return the number of individuals alive at time."""
+        if time > self.final_time:
+            raise ValueError(f"time ({time}) > final_time ({self.final_time})")
+        return np.count_nonzero((self.birth_times <= time) & (self.death_times > time))
 
     def __eq__(self, other: Any) -> bool:
         """Return true if all attributes are equal."""
@@ -126,7 +133,7 @@ def branch(num_steps: int, selection_coefficient: float, seed: int) -> Branching
             _num_offspring(num_steps, selection_coefficient, seed2),
             _parent_choices(num_steps, seed3),
         ),
-        selection_coefficient
+        selection_coefficient,
     )
 
 
