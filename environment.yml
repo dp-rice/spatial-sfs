@@ -12,3 +12,6 @@ dependencies:
   - jupytext>=1.5.0
   - jupyterlab>=2.1
   - nodejs>=10.13
+  - pytest
+  - pytest-cov
+  - pre-commit
