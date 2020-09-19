@@ -34,32 +34,38 @@ def small_bd(small_bp):
     return BranchingDiffusion(small_bp, birth_positions, death_positions, d)
 
 
-def test_branch_checks_s():
+@pytest.fixture
+def seedseq():
+    """Return a seed sequence."""
+    return np.random.SeedSequence(100)
+
+
+def test_branch_checks_s(seedseq):
     """Test that branch does not allow s<=0 or s>=1."""
     with pytest.raises(ValueError):
-        branch(10, -0.05, 100)
+        branch(10, -0.05, seedseq)
     with pytest.raises(ValueError):
-        branch(10, 0.0, 100)
+        branch(10, 0.0, seedseq)
     with pytest.raises(ValueError):
-        branch(10, 1.0, 100)
+        branch(10, 1.0, seedseq)
     with pytest.raises(ValueError):
-        branch(10, 1.1, 100)
+        branch(10, 1.1, seedseq)
 
 
-def test_diffuse_checks_ndim(small_bp):
+def test_diffuse_checks_ndim(small_bp, seedseq):
     """Test that diffuse does not allow ndim<=0."""
     with pytest.raises(ValueError):
-        diffuse(small_bp, 0, 0.5, 100)
+        diffuse(small_bp, 0, 0.5, seedseq)
     with pytest.raises(ValueError):
-        diffuse(small_bp, -1, 0.5, 100)
+        diffuse(small_bp, -1, 0.5, seedseq)
 
 
-def test_diffuse_checks_d(small_bp):
+def test_diffuse_checks_d(small_bp, seedseq):
     """Test that diffuse does not allow d<=0."""
     with pytest.raises(ValueError):
-        diffuse(small_bp, 1, -0.05, 100)
+        diffuse(small_bp, 1, -0.05, seedseq)
     with pytest.raises(ValueError):
-        diffuse(small_bp, 2, 0.0, 100)
+        diffuse(small_bp, 2, 0.0, seedseq)
 
 
 def test_generate_tree_asserts():
