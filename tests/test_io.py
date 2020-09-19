@@ -65,3 +65,9 @@ def test_load():
 # #             tf.seek(0)
 # #             loaded_data = load_branching_diffusions(tf)
 # #         self.assertEqual(saved_data, loaded_data)
+
+#         with TemporaryFile() as tf:
+#             save_branching_diffusions(tf, bds)
+#             tf.seek(0)
+#             loaded_data = load_branching_diffusions(tf)
+#         self.assertEqual(bds, loaded_data)

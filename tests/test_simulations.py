@@ -1,6 +1,5 @@
 """Test spatial-sfs.simulations."""
 
-
 import numpy as np
 import pytest
 
@@ -168,53 +167,26 @@ def test_generate_positions(small_bp, ndim):
     np.testing.assert_array_equal(dp, dp_expected)
 
 
-@pytest.mark.parametrize("seed", range(100))
+@pytest.mark.parametrize("seed", range(10))
 @pytest.mark.parametrize("ndim", [1, 2])
 def test_simulate_branching_diffusion(ndim, seed):
     """Test that everything runs."""
-    num_steps = 10
+    num_steps = 100
     s = 0.05
     d = 2.0
-    simulate_branching_diffusion(num_steps, s, ndim, d, seed)
-    # TODO: check some stuff
-
-
-# New parameterized test (parameterized on seed).
-# assert root exists in all output
-# lengths ok?
-# births in order
-# assertTrue(0 <= parents[i] and parents[i] < i)
-# assertEqual(birth_times[i], death_times[parents[i]])
-
-
-# def TestIntegration(TestCase):
-#     """Test that everything works together."""
-
-#     def test_simulate_branching_diffusions(self):
-#         """Test that for some random seeds, everything gets set."""
-#         num_reps = 100
-#         s = 0.1
-#         d = 0.5
-#         ndim = 2
-#         rng = np.random.default_rng(1)
-#         max_steps = 10
-#         bds = simulate_branching_diffusions(
-#             num_reps, s, d, ndim, rng=rng, max_steps=max_steps
-#         )
-#         self.assertEqual(len(bds), num_reps)
-#         for bd in bds:
-#             self.assertEqual(bd.selection_coefficient, s)
-#             self.assertEqual(bd.diffusion_coefficient, d)
-#             self.assertEqual(bd.ndim, ndim)
-#             self.assertEqual(len(bd.parents), bd.num_total)
-#             self.assertEqual(bd.birth_times.shape, (bd.num_total,))
-#             self.assertEqual(bd.birth_positions.shape, (bd.num_total, ndim))
-#             self.assertEqual(bd.death_times.shape, (bd.num_total,))
-#             self.assertEqual(bd.death_positions.shape, (bd.num_total, ndim))
-#             self.assertEqual(bd.extinction_time, np.max(bd.death_times))
-
-#         with TemporaryFile() as tf:
-#             save_branching_diffusions(tf, bds)
-#             tf.seek(0)
-#             loaded_data = load_branching_diffusions(tf)
-#         self.assertEqual(bds, loaded_data)
+    bd = simulate_branching_diffusion(num_steps, s, ndim, d, seed)
+    bp = bd.branching_process
+    assert len(bd) == len(bp)
+    num_indivs = len(bd)
+    assert bd.birth_positions.shape == (num_indivs, ndim)
+    assert bd.death_positions.shape == (num_indivs, ndim)
+    assert bp.parents.shape == (num_indivs,)
+    assert bp.birth_times.shape == (num_indivs,)
+    assert bp.death_times.shape == (num_indivs,)
+    assert bd.diffusion_coefficient == d
+    assert bp.selection_coefficient == s
+    for i in range(1, num_indivs):
+        assert 0 <= bp.parents[i] < i
+        assert bp.birth_times[i - 1] <= bp.birth_times[i]
+        assert bp.parents[i] == 0 or bp.birth_times[i] == bp.death_times[bp.parents[i]]
+        assert np.all(bd.birth_positions[i] == bd.death_positions[bp.parents[i]])
