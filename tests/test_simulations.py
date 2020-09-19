@@ -1,13 +1,37 @@
 """Test spatial-sfs.simulations."""
 
 
-from unittest import TestCase, mock
-
 import numpy as np
 import pytest
 
-import spatialsfs.simulations as sims
-from spatialsfs.simulations import _generate_tree, branch
+from spatialsfs.branchingdiffusion import BranchingDiffusion
+from spatialsfs.branchingprocess import BranchingProcess
+from spatialsfs.simulations import (
+    _generate_positions,
+    _generate_tree,
+    branch,
+    diffuse,
+    simulate_branching_diffusion,
+)
+
+
+@pytest.fixture
+def small_bp():
+    """Return a simple BranchingProcess with no restarts."""
+    parents = np.array([0, 0, 1, 1])
+    birth_times = np.array([0.0, 0.0, 0.5, 0.5])
+    death_times = np.array([0.0, 0.5, 0.75, np.inf])
+    s = 0.05
+    return BranchingProcess(parents, birth_times, death_times, s)
+
+
+@pytest.fixture
+def small_bd(small_bp):
+    """Return a simple BranchingDiffusion with no restarts."""
+    birth_positions = np.array([0.0, 0.0, 0.25, 0.25]).reshape((4, 1))
+    death_positions = np.array([0.0, 0.25, 0.35, np.nan]).reshape((4, 1))
+    d = 0.5
+    return BranchingDiffusion(small_bp, birth_positions, death_positions, d)
 
 
 def test_branch_checks_s():
@@ -22,6 +46,22 @@ def test_branch_checks_s():
         branch(10, 1.1, 100)
 
 
+def test_diffuse_checks_ndim(small_bp):
+    """Test that diffuse does not allow ndim<=0."""
+    with pytest.raises(ValueError):
+        diffuse(small_bp, 0, 0.5, 100)
+    with pytest.raises(ValueError):
+        diffuse(small_bp, -1, 0.5, 100)
+
+
+def test_diffuse_checks_d(small_bp):
+    """Test that diffuse does not allow d<=0."""
+    with pytest.raises(ValueError):
+        diffuse(small_bp, 1, -0.05, 100)
+    with pytest.raises(ValueError):
+        diffuse(small_bp, 2, 0.0, 100)
+
+
 def test_generate_tree_asserts():
     """Test that generate_tree checks array lengths and types."""
     with pytest.raises(AssertionError):
@@ -30,6 +70,21 @@ def test_generate_tree_asserts():
         _generate_tree(np.zeros(4), np.zeros(4, dtype=int), np.zeros(3))
     with pytest.raises(AssertionError):
         _generate_tree(np.zeros(4), np.zeros(4, dtype=float), np.zeros(4))
+
+
+def test_generate_positions_asserts(small_bp):
+    """Test that generate_tree checks array shapes and types."""
+    length = len(small_bp)
+    d = 0.5
+    # Too long
+    with pytest.raises(AssertionError):
+        _generate_positions(small_bp, np.zeros((length + 1, 1)), d)
+    # Wrong shape
+    with pytest.raises(AssertionError):
+        _generate_positions(small_bp, np.zeros(length), d)
+    # Wrong type
+    with pytest.raises(AssertionError):
+        _generate_positions(small_bp, np.zeros((length, 1), dtype=int), d)
 
 
 @pytest.mark.parametrize(
@@ -93,122 +148,37 @@ def test_generate_tree(raw_times, num_offspring, parent_choices, expected):
     np.testing.assert_equal(output, expected)
 
 
+@pytest.mark.parametrize("ndim", [1, 2])
+def test_generate_positions(small_bp, ndim):
+    """Test _generate_positions with ones for rng output."""
+    simple_distances = np.ones((len(small_bp), ndim))
+    d = 4.0
+    bp_expected = np.array([[0.0, 0.0, np.sqrt(0.5 * d), np.sqrt(0.5 * d)]] * ndim).T
+    dp_expected = np.array(
+        [[0.0, np.sqrt(0.5 * d), np.sqrt(0.5 * d) + np.sqrt(0.25 * d), np.inf]] * ndim
+    ).T
+    bp, dp = _generate_positions(small_bp, simple_distances, d)
+    np.testing.assert_array_equal(bp, bp_expected)
+    np.testing.assert_array_equal(dp, dp_expected)
+
+
+@pytest.mark.parametrize("seed", range(100))
+@pytest.mark.parametrize("ndim", [1, 2])
+def test_simulate_branching_diffusion(ndim, seed):
+    """Test that everything runs."""
+    num_steps = 10
+    s = 0.05
+    d = 2.0
+    simulate_branching_diffusion(num_steps, s, ndim, d, seed)
+    # TODO: check some stuff
+
+
 # New parameterized test (parameterized on seed).
 # assert root exists in all output
 # lengths ok?
 # births in order
 # assertTrue(0 <= parents[i] and parents[i] < i)
 # assertEqual(birth_times[i], death_times[parents[i]])
-
-
-class TestSimulations(TestCase):
-    """TestSimulations."""
-
-    def test_simulate_positions(self):
-        """Test simulate_positions."""
-        n = 3
-        scale = 2.0
-        d = scale ** 2
-        parents = [None, 0, 0]
-        lifespans = np.array([1.0, 2.0, 3.0])
-        # Simulations that reached max-steps
-        lifespans_nan = np.array([1.0, np.nan, np.nan])
-        mock_rng = mock.Mock()
-
-        # Should complain about invalid ndims
-        for ndims in [-1, 0]:
-            with self.assertRaises(ValueError):
-                bp, dp = sims.simulate_positions(d, ndims, parents, lifespans, mock_rng)
-
-        for ndims in range(1, 3):
-            mock_rng.standard_normal.return_value = np.ones((n, ndims))
-            bp_expect = scale * np.vstack([[0.0, 1.0, 1.0]] * ndims).T
-            dp_expect = bp_expect + scale * np.sqrt(lifespans)[:, None]
-            bp, dp = sims.simulate_positions(d, ndims, parents, lifespans, mock_rng)
-            np.testing.assert_array_equal(bp, bp_expect)
-            np.testing.assert_array_equal(dp, dp_expect)
-
-            # Simulations that reached max-steps
-            dp_nan = bp_expect + scale * np.sqrt(lifespans_nan)[:, None]
-            bp, dp = sims.simulate_positions(d, ndims, parents, lifespans_nan, mock_rng)
-            np.testing.assert_array_equal(bp, bp_expect)
-            np.testing.assert_array_equal(dp, dp_nan)
-
-
-# class TestBranchingDiffusion(TestCase):
-#     """Test initializing, loading, saving, and equality of BrachingDiffusion class."""
-
-#     def setUp(self):
-#         """Set up a small instance of BranchingDiffusion."""
-#         self.bd = BranchingDiffusion()
-#         self.bd.parents = [None, 0, 0]
-#         self.bd.birth_times = np.array([0.0, 0.5, 0.5])
-#         self.bd.death_times = np.array([0.5, 1.0, 1.5])
-#         # 1D positions
-#         self.bd.ndim = 1
-#         self.bd.birth_positions = np.array([0.0, 0.3, 0.3]).reshape(3, self.bd.ndim)
-#         self.bd.death_positions = np.array([0.3, -0.1, 1.3]).reshape(3, self.bd.ndim)
-#         self.bd.selection_coefficient = 0.05
-#         self.bd.diffusion_coefficient = 0.75
-#         self.bd.num_total = 3
-#         self.bd.num_max = 2
-#         self.bd.extinction_time = 1.5
-
-#     @mock.patch(
-#         "spatialsfs.branchingdiffusion.simulations.simulate_positions", autospec=True
-#     )
-#     def test_simulate_positions(self, mock_sim):
-#         """Test simulate_positions method (mocking simulation code)."""
-#         mock_sim.return_value = (
-#             self.bd.birth_positions,
-#             self.bd.death_positions,
-#         )
-#         rng = np.random.default_rng()
-#         # Set up bd as though we'd run simulate_times
-#         bd = deepcopy(self.bd)
-#         bd.diffusion_coefficient = None
-#         bd.birth_positions = np.array([], dtype=float)
-#         bd.death_positions = np.array([], dtype=float)
-#         # Run simulations
-#         d = self.bd.diffusion_coefficient
-#         ndim = self.bd.ndim
-#         bd.simulate_positions(d, ndim, rng)
-#         # Assert called simulate_positions with correct params
-#         mock_sim.assert_called_once()
-#         self.assertEqual(mock_sim.call_args[0][:3], (d, ndim, self.bd.parents))
-#         intervals = self.bd.death_times - self.bd.birth_times
-#         np.testing.assert_array_equal(intervals, mock_sim.call_args[0][3])
-#         self.assertEqual(bd.diffusion_coefficient, d)
-#         self.assertEqual(bd.ndim, ndim)
-#         # Should assign simulation output
-#         np.testing.assert_array_equal(bd.birth_positions, self.bd.birth_positions)
-#         np.testing.assert_array_equal(bd.death_positions, self.bd.death_positions)
-
-#     @mock.patch("spatialsfs.branchingdiffusion.np.random.default_rng", autospec=True)
-#     @mock.patch("spatialsfs.branchingdiffusion.BranchingDiffusion", autospec=True)
-#     def test_simulate_branching_diffusions(self, mock_bd, mock_rng):
-#         """Test simulation wrapper function."""
-#         num_reps = 3
-#         s = 0.1
-#         d = 0.5
-#         ndim = 1
-#         rng = np.random.default_rng()
-#         max_steps = 5
-#         expected_calls = [
-#             mock.call(),
-#             mock.call().simulate_tree(s, max_steps, rng),
-#             mock.call().simulate_positions(d, ndim, rng),
-#         ] * num_reps
-#         bds = simulate_branching_diffusions(
-#             num_reps, s, d, ndim, rng=rng, max_steps=max_steps
-#         )
-#         self.assertEqual(mock_bd.mock_calls, expected_calls)
-#         self.assertEqual(len(bds), num_reps)
-
-#         # Test initialize rng
-#         mock_rng.reset_mock()
-#         bds = simulate_branching_diffusions(num_reps, s, d, ndim, max_steps=max_steps)
-#         mock_rng.assert_called_once()
 
 
 # def TestIntegration(TestCase):

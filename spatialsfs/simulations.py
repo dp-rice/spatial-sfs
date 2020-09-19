@@ -3,10 +3,49 @@ from typing import List, Optional, Tuple
 
 import numpy as np
 
+from spatialsfs.branchingdiffusion import BranchingDiffusion
 from spatialsfs.branchingprocess import BranchingProcess
 
 
-def branch(num_steps: int, selection_coefficient: float, seed: int) -> BranchingProcess:
+def simulate_branching_diffusion(
+    num_steps: int,
+    selection_coefficient: float,
+    ndim: int,
+    diffusion_coefficient: float,
+    seed: int,
+) -> BranchingDiffusion:
+    """Simulate a branching diffusion.
+
+    Parameters
+    ----------
+    num_steps : int
+        The number of steps to simulate.
+    selection_coefficient : float
+        The selection coefficient against the process. Must be > 0 and < 1.
+    ndim : int
+        The number of spatial dimensions.
+    diffusion_coefficient : float
+        The diffusion coefficient of the motion.
+    seed : int
+        A seed for numpy.random random number generation.
+
+    Returns
+    -------
+    BranchingDiffusion
+
+    """
+    seedseq1, seedseq2 = np.random.SeedSequence(seed).spawn(2)
+    return diffuse(
+        branch(num_steps, selection_coefficient, seedseq1),
+        ndim,
+        diffusion_coefficient,
+        seedseq2,
+    )
+
+
+def branch(
+    num_steps: int, selection_coefficient: float, seedseq: np.random.SeedSequence
+) -> BranchingProcess:
     """Simulate a branching process.
 
     Parameters
@@ -15,8 +54,8 @@ def branch(num_steps: int, selection_coefficient: float, seed: int) -> Branching
         The number of steps to simulate.
     selection_coefficient : float
         The selection coefficient against the process. Must be > 0 and < 1.
-    seed : int
-        A seed for numpy.random random number generation.
+    seedseq : np.random.SeedSequence
+        A SeedSequence for numpy.random random number generation.
 
     Returns
     -------
@@ -25,27 +64,29 @@ def branch(num_steps: int, selection_coefficient: float, seed: int) -> Branching
     """
     if selection_coefficient <= 0 or selection_coefficient >= 1:
         raise ValueError("selection_coefficient must be > 0 and < 1.")
-    seed1, seed2, seed3 = np.random.SeedSequence(seed).spawn(3)
+    seedseq1, seedseq2, seedseq3 = seedseq.spawn(3)
     return BranchingProcess(
         *_generate_tree(
-            _raw_times(num_steps, seed1),
-            _num_offspring(num_steps, selection_coefficient, seed2),
-            _parent_choices(num_steps, seed3),
+            _raw_times(num_steps, seedseq1),
+            _num_offspring(num_steps, selection_coefficient, seedseq2),
+            _parent_choices(num_steps, seedseq3),
         ),
         selection_coefficient,
     )
 
 
-def _raw_times(num_steps: int, seed: int) -> np.ndarray:
-    return np.random.default_rng(seed).standard_exponential(size=num_steps)
+def _raw_times(num_steps: int, seedseq: np.random.SeedSequence) -> np.ndarray:
+    return np.random.default_rng(seedseq).standard_exponential(size=num_steps)
 
 
-def _num_offspring(num_steps: int, s: float, seed: int) -> np.ndarray:
-    return 2 * np.random.default_rng(seed).binomial(1, (1 - s) / 2, size=num_steps)
+def _num_offspring(
+    num_steps: int, s: float, seedseq: np.random.SeedSequence
+) -> np.ndarray:
+    return 2 * np.random.default_rng(seedseq).binomial(1, (1 - s) / 2, size=num_steps)
 
 
-def _parent_choices(num_steps: int, seed: int) -> np.ndarray:
-    return np.random.default_rng(seed).random(size=num_steps)
+def _parent_choices(num_steps: int, seedseq: np.random.SeedSequence) -> np.ndarray:
+    return np.random.default_rng(seedseq).random(size=num_steps)
 
 
 def _generate_tree(
@@ -85,6 +126,75 @@ def _generate_tree(
             birth_times.append(t)
             death_times.append(np.inf)
     return np.array(parents), np.array(birth_times), np.array(death_times)
+
+
+def diffuse(
+    branching_process: BranchingProcess,
+    ndim: int,
+    diffusion_coefficient: float,
+    seedseq: np.random.SeedSequence,
+) -> BranchingDiffusion:
+    """Simulate the positions of a branching diffusion.
+
+    Parameters
+    ----------
+    branching_process : BranchingProcess
+        The branching process defining lifetimes and parental relationships.
+    ndim : int
+        The number of spatial dimensions.
+    diffusion_coefficient : float
+        The diffusion coefficient of the motion.
+    seedseq : np.random.SeedSequence
+        A SeedSequence for numpy.random random number generation.
+
+    Returns
+    -------
+    BranchingDiffusion
+
+    """
+    if ndim <= 0:
+        raise ValueError("ndim must be > 0.")
+    if diffusion_coefficient <= 0:
+        raise ValueError("diffusion_coefficient must be > 0.")
+    return BranchingDiffusion(
+        branching_process,
+        *_generate_positions(
+            branching_process,
+            _raw_distances(len(branching_process), ndim, seedseq),
+            diffusion_coefficient,
+        ),
+        diffusion_coefficient,
+    )
+
+
+def _generate_positions(
+    branching_process: BranchingProcess,
+    raw_distances: np.ndarray,
+    diffusion_coefficient: float,
+) -> Tuple[np.ndarray, np.ndarray]:
+    assert raw_distances.ndim == 2
+    assert raw_distances.shape[0] == len(branching_process)
+    assert raw_distances.dtype == float
+    birth_positions = np.zeros_like(raw_distances)
+    death_positions = np.zeros_like(raw_distances)
+    distances = (
+        np.sqrt(
+            diffusion_coefficient
+            * (branching_process.death_times - branching_process.birth_times)
+        )[:, None]
+        * raw_distances
+    )
+    for i in range(len(branching_process)):
+        birth_positions[i] = death_positions[branching_process.parents[i]]
+        death_positions[i] = birth_positions[i] + distances[i]
+    return birth_positions, death_positions
+
+
+def _raw_distances(
+    num_indivs: int, ndim: int, seedseq: np.random.SeedSequence
+) -> np.ndarray:
+    rng = np.random.default_rng(seedseq)
+    return rng.standard_normal(size=(num_indivs, ndim))
 
 
 def simulate_positions(
@@ -132,72 +242,3 @@ def simulate_positions(
             birth_positions[i] = death_positions[parents[i]]
         death_positions[i] = birth_positions[i] + distances_traveled[i]
     return birth_positions, death_positions
-
-
-#     def simulate_positions(
-#         self,
-#         diffusion_coefficient: float,
-#         ndim: int,
-#         rng: np.random._generator.Generator,
-#     ) -> None:
-#         """Simulate birth and death positions.
-
-#         Parameters
-#         ----------
-#         diffusion_coefficient : float
-#             The diffusion coefficient.
-#         ndim: int
-#             The number of spatial dimensions of the position.
-#         rng : np.random._generator.Generator
-#             A numpy random generator instance.
-
-#         """
-#         self.diffusion_coefficient = diffusion_coefficient
-#         self.ndim = ndim
-#         lifespans = self.death_times - self.birth_times
-#         self.birth_positions, self.death_positions = simulations.simulate_positions(
-#             self.diffusion_coefficient, self.ndim, self.parents, lifespans, rng
-#         )
-
-# def simulate_branching_diffusions(
-#     num_reps: int,
-#     selection_coefficient: float,
-#     diffusion_coefficient: float = 1.0,
-#     ndim: int = 1,
-#     max_steps: int = 10000,
-#     rng: Optional[np.random._generator.Generator] = None,
-# ) -> List[BranchingDiffusion]:
-#     """Simulate replicate branching diffusions.
-
-#     Parameters
-#     ----------
-#     num_reps : int
-#         The number of replicate simulations to run.
-#     selection_coefficient : float
-#         The selection coefficient for all simulations.
-#     diffusion_coefficient : float
-#         The diffusion coefficient for all simulations.
-#     ndim : int
-#         The number of spatial dimensions of the position.
-#         Default: 1
-#     max_steps : int
-#         The maximum number of steps to run the simulations for.
-#         Default: 10000
-#     rng : Optional[np.random._generator.Generator]
-#         The numpy random generator to use for rng.
-#         Default: create a new genertor with np.random.default_generator()
-
-#     Returns
-#     -------
-#     List[BranchingDiffusion]
-
-#     """
-#     bds = []
-#     if rng is None:
-#         rng = np.random.default_rng()
-#     for i in range(num_reps):
-#         bd = BranchingDiffusion()
-#         bd.simulate_tree(selection_coefficient, max_steps, rng)
-#         bd.simulate_positions(diffusion_coefficient, ndim, rng)
-#         bds.append(bd)
-#     return bds
