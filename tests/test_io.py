@@ -1,73 +1,52 @@
 """Test the io module."""
 
+from tempfile import TemporaryFile
 
-def test_save():
-    """TODO."""
-    pass
+import numpy as np
+import pytest
 
-
-def test_load():
-    """TODO."""
-    pass
-
-
-#     def test_saveload(self):
-#         """Test saving and loading with a temporary file."""
-#         # Empty bd
-#         bd_empty = BranchingDiffusion()
-#         bd1 = BranchingDiffusion()
-#         with TemporaryFile() as tf:
-#             bd_empty.save(tf)
-#             tf.seek(0)
-#             bd1.load(tf)
-#         self.assertEqual(bd_empty, bd1)
-#         # Full bd
-#         bd2 = BranchingDiffusion()
-#         with TemporaryFile() as tf:
-#             self.bd.save(tf)
-#             tf.seek(0)
-#             bd2.load(tf)
-#         self.assertEqual(self.bd, bd2)
-
-#     def test_import(self):
-#         """Test __init__ with an input file."""
-#         # Empty input
-#         bd_empty = BranchingDiffusion()
-#         with TemporaryFile() as tf:
-#             bd_empty.save(tf)
-#             tf.seek(0)
-#             bd1 = BranchingDiffusion(tf)
-#         self.assertEqual(bd_empty, bd1)
-#         # Full input
-#         with TemporaryFile() as tf:
-#             self.bd.save(tf)
-#             tf.seek(0)
-#             bd2 = BranchingDiffusion(tf)
-#         self.assertEqual(self.bd, bd2)
-
-#     def test_import_filename(self):
-#         """Test __init__ with an input filename string."""
-#         with NamedTemporaryFile() as tf:
-#             self.bd.save(tf)
-#             tf.seek(0)
-#             bd = BranchingDiffusion(tf.name)
-#         self.assertEqual(self.bd, bd)
+from spatialsfs.branchingdiffusion import BranchingDiffusion
+from spatialsfs.branchingprocess import BranchingProcess
+from spatialsfs.io import (
+    load_branching_diffusion,
+    load_branching_process,
+    save_branching_diffusion,
+    save_branching_process,
+)
 
 
-# # def test_saveload_branchingdiffusions(self):
-# #         """Test save_branching_diffusions and load_branching_diffusions."""
-# #         bd1 = deepcopy(self.bd)
-# #         bd2 = deepcopy(self.bd)
-# #         bd2.selection_coefficient = 0.12
-# #         saved_data = [bd1, bd2]
-# #         with TemporaryFile() as tf:
-# #             save_branching_diffusions(tf, saved_data)
-# #             tf.seek(0)
-# #             loaded_data = load_branching_diffusions(tf)
-# #         self.assertEqual(saved_data, loaded_data)
+@pytest.fixture
+def small_bp():
+    """Return a simple BranchingProcess with no restarts."""
+    parents = np.array([0, 0, 1, 1])
+    birth_times = np.array([0.0, 0.0, 0.5, 0.5])
+    death_times = np.array([0.0, 0.5, 0.75, np.inf])
+    s = 0.05
+    return BranchingProcess(parents, birth_times, death_times, s)
 
-#         with TemporaryFile() as tf:
-#             save_branching_diffusions(tf, bds)
-#             tf.seek(0)
-#             loaded_data = load_branching_diffusions(tf)
-#         self.assertEqual(bds, loaded_data)
+
+@pytest.fixture
+def small_bd(small_bp):
+    """Return a simple BranchingDiffusion with no restarts."""
+    birth_positions = np.array([0.0, 0.0, 0.25, 0.25]).reshape((4, 1))
+    death_positions = np.array([0.0, 0.25, 0.35, np.nan]).reshape((4, 1))
+    d = 0.5
+    return BranchingDiffusion(small_bp, birth_positions, death_positions, d)
+
+
+def test_saveload_branching_process(small_bp):
+    """Test save and load BranchingProcess."""
+    with TemporaryFile() as tf:
+        save_branching_process(tf, small_bp)
+        tf.seek(0)
+        bp = load_branching_process(tf)
+    assert bp == small_bp
+
+
+def test_saveload_branching_diffusion(small_bd):
+    """Test save and load BranchingDiffusion."""
+    with TemporaryFile() as tf:
+        save_branching_diffusion(tf, small_bd)
+        tf.seek(0)
+        bd = load_branching_diffusion(tf)
+    assert bd == small_bd
