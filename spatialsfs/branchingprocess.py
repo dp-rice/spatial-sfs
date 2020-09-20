@@ -32,7 +32,7 @@ class BranchingProcess:
         self.parents = parents
         self.birth_times = birth_times
         self.death_times = death_times
-        self.final_time: float = np.max(death_times[np.isfinite(death_times)])
+        self.final_time: float = np.max(death_times)
         self.selection_coefficient = selection_coefficient
 
     def num_restarts(self) -> int:

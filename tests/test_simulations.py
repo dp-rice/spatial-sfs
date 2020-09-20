@@ -121,7 +121,7 @@ def test_generate_positions_asserts(small_bp):
             (
                 np.array([0, 0, 1, 1, 3, 3]),
                 np.array([0.0, 0.0, 1.0, 1.0, 1.5, 1.5]),
-                np.array([0.0, 1.0, np.inf, 1.5, np.inf, np.inf]),
+                np.array([0.0, 1.0, 1.5, 1.5, 1.5, 1.5]),
             ),
         ),
     ],

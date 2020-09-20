@@ -111,7 +111,7 @@ def _generate_tree(
             # Restart extinct process.
             parents.append(0)
             birth_times.append(t)
-            death_times.append(np.inf)
+            death_times.append(np.nan)
             num_total += 1
             alive.append(num_total)
         t += raw_interval / len(alive)
@@ -120,11 +120,14 @@ def _generate_tree(
         death_times[parent] = t
         # Reproduce
         for i in range(noff):
-            num_total += 1
-            alive.append(num_total)
             parents.append(parent)
             birth_times.append(t)
-            death_times.append(np.inf)
+            death_times.append(np.nan)
+            num_total += 1
+            alive.append(num_total)
+    # Everyone dies in the end
+    for indiv in alive:
+        death_times[indiv] = t
     return np.array(parents), np.array(birth_times), np.array(death_times)
 
 
