@@ -1,8 +1,9 @@
-"""Helper functions for simulations."""
+"""Simulate branching processes and branching diffusions."""
 from typing import List, Tuple
 
 import numpy as np
 
+from spatialsfs import _random
 from spatialsfs.branchingdiffusion import BranchingDiffusion
 from spatialsfs.branchingprocess import BranchingProcess
 
@@ -67,26 +68,12 @@ def branch(
     seedseq1, seedseq2, seedseq3 = seedseq.spawn(3)
     return BranchingProcess(
         *_generate_tree(
-            _raw_times(num_steps, seedseq1),
-            _num_offspring(num_steps, selection_coefficient, seedseq2),
-            _parent_choices(num_steps, seedseq3),
+            _random.raw_times(num_steps, seedseq1),
+            _random.num_offspring(num_steps, selection_coefficient, seedseq2),
+            _random.parent_choices(num_steps, seedseq3),
         ),
         selection_coefficient,
     )
-
-
-def _raw_times(num_steps: int, seedseq: np.random.SeedSequence) -> np.ndarray:
-    return np.random.default_rng(seedseq).standard_exponential(size=num_steps)
-
-
-def _num_offspring(
-    num_steps: int, s: float, seedseq: np.random.SeedSequence
-) -> np.ndarray:
-    return 2 * np.random.default_rng(seedseq).binomial(1, (1 - s) / 2, size=num_steps)
-
-
-def _parent_choices(num_steps: int, seedseq: np.random.SeedSequence) -> np.ndarray:
-    return np.random.default_rng(seedseq).random(size=num_steps)
 
 
 def _generate_tree(
@@ -163,7 +150,7 @@ def diffuse(
         branching_process,
         *_generate_positions(
             branching_process,
-            _raw_distances(len(branching_process), ndim, seedseq),
+            _random.raw_distances(len(branching_process), ndim, seedseq),
             diffusion_coefficient,
         ),
         diffusion_coefficient,
@@ -191,10 +178,3 @@ def _generate_positions(
         birth_positions[i] = death_positions[branching_process.parents[i]]
         death_positions[i] = birth_positions[i] + distances[i]
     return birth_positions, death_positions
-
-
-def _raw_distances(
-    num_indivs: int, ndim: int, seedseq: np.random.SeedSequence
-) -> np.ndarray:
-    rng = np.random.default_rng(seedseq)
-    return rng.standard_normal(size=(num_indivs, ndim))
