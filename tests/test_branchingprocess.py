@@ -7,33 +7,11 @@ import pytest
 from spatialsfs.branchingprocess import BranchingProcess, separate_restarts
 
 
-@pytest.fixture
-def small_bp():
-    """Return a simple BranchingProcess with no restarts."""
-    parents = np.array([0, 0, 1, 1])
-    birth_times = np.array([0.0, 0.0, 0.5, 0.5])
-    death_times = np.array([0.0, 0.5, 0.75, np.inf])
-    s = 0.05
-    return BranchingProcess(parents, birth_times, death_times, s)
-
-
-@pytest.fixture
-def large_bp():
-    """Return a more complex BranchingProcess with one restart."""
-    s = 0.05
-    return BranchingProcess(
-        np.array([0, 0, 1, 1, 0, 4, 4]),
-        np.array([0.0, 0.0, 1.0, 1.0, 2.0, 3.5, 3.5]),
-        np.array([0.0, 1.0, 1.5, 2.0, 3.5, 4.0, np.inf]),
-        s,
-    )
-
-
 def test_setting_attributes():
     """Test __init__."""
     parents = np.array([0, 0, 1, 1])
     birth_times = np.array([0.0, 0.0, 0.5, 0.5])
-    death_times = np.array([0.0, 0.5, 0.75, np.inf])
+    death_times = np.array([0.0, 0.5, 0.75, 0.75])
     s = 0.05
     bp = BranchingProcess(parents, birth_times, death_times, s)
     assert np.array_equal(bp.parents, parents, equal_nan=True)
@@ -176,7 +154,7 @@ def test_separate_restarts(large_bp):
     assert next(bp_iterator) == BranchingProcess(
         np.array([0, 0, 1, 1]),
         np.array([0.0, 0.0, 1.5, 1.5]),
-        np.array([0.0, 1.5, 2.0, np.inf]),
+        np.array([0.0, 1.5, 2.0, 2.0]),
         large_bp.selection_coefficient,
     )
     with pytest.raises(StopIteration):

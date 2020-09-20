@@ -1,10 +1,8 @@
-"""Test spatial-sfs.simulations."""
+"""Test spatialsfs.simulations."""
 
 import numpy as np
 import pytest
 
-from spatialsfs.branchingdiffusion import BranchingDiffusion
-from spatialsfs.branchingprocess import BranchingProcess
 from spatialsfs.simulations import (
     _generate_positions,
     _generate_tree,
@@ -12,25 +10,6 @@ from spatialsfs.simulations import (
     diffuse,
     simulate_branching_diffusion,
 )
-
-
-@pytest.fixture
-def small_bp():
-    """Return a simple BranchingProcess with no restarts."""
-    parents = np.array([0, 0, 1, 1])
-    birth_times = np.array([0.0, 0.0, 0.5, 0.5])
-    death_times = np.array([0.0, 0.5, 0.75, np.inf])
-    s = 0.05
-    return BranchingProcess(parents, birth_times, death_times, s)
-
-
-@pytest.fixture
-def small_bd(small_bp):
-    """Return a simple BranchingDiffusion with no restarts."""
-    birth_positions = np.array([0.0, 0.0, 0.25, 0.25]).reshape((4, 1))
-    death_positions = np.array([0.0, 0.25, 0.35, np.nan]).reshape((4, 1))
-    d = 0.5
-    return BranchingDiffusion(small_bp, birth_positions, death_positions, d)
 
 
 @pytest.fixture
@@ -160,7 +139,15 @@ def test_generate_positions(small_bp, ndim):
     d = 4.0
     bp_expected = np.array([[0.0, 0.0, np.sqrt(0.5 * d), np.sqrt(0.5 * d)]] * ndim).T
     dp_expected = np.array(
-        [[0.0, np.sqrt(0.5 * d), np.sqrt(0.5 * d) + np.sqrt(0.25 * d), np.inf]] * ndim
+        [
+            [
+                0.0,
+                np.sqrt(0.5 * d),
+                np.sqrt(0.5 * d) + np.sqrt(0.25 * d),
+                np.sqrt(0.5 * d) + np.sqrt(0.25 * d),
+            ]
+        ]
+        * ndim
     ).T
     bp, dp = _generate_positions(small_bp, simple_distances, d)
     np.testing.assert_array_equal(bp, bp_expected)
