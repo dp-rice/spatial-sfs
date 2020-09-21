@@ -85,3 +85,46 @@ def raw_distances(num_indivs: int, ndim: int, seed) -> np.ndarray:
     """
     rng = np.random.default_rng(seed)
     return rng.standard_normal(size=(num_indivs, ndim))
+
+
+def brownian_bridge(
+    t: float,
+    t_a: np.ndarray,
+    t_b: np.ndarray,
+    x_a: np.ndarray,
+    x_b: np.ndarray,
+    diffusion_coefficient: float,
+    raw_distances: np.ndarray,
+) -> np.ndarray:
+    """Return random positions drawn from n independent Brownian bridges.
+
+    Parameters
+    ----------
+    t : float
+        The time at which to sample the Brownian bridges.
+    t_a : np.ndarray
+        1D array with the initial times of the bridges.
+        Shape is (n,)
+    t_b : np.ndarray
+        1D array with the final times of the bridges.
+        Shape is (n,)
+    x_a : np.ndarray
+        2D array with the initial positions of the bridges.
+        Shape is (n, ndim)
+    x_b : np.ndarray
+        2D array with the initial positions of the bridges.
+        Shape is (n, ndim)
+    diffusion_coefficient : float
+        The diffusion coefficient of the brownian bridge.
+    raw_distances : np.ndarray
+        Standard normal random raw distances.
+
+    Returns
+    -------
+    np.ndarray
+        The positions at t. Shape is (n, ndim).
+    """
+    assert x_a.shape == raw_distances.shape
+    means = x_a + (x_b - x_a) * ((t - t_a) / (t_b - t_a))[:, None]
+    variances = diffusion_coefficient * (t_b - t) * (t - t_a) / (t_b - t_a)
+    return means + np.sqrt(variances)[:, None] * raw_distances
