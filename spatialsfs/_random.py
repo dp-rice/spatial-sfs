@@ -1,14 +1,22 @@
 import numpy as np
 
 
-def raw_times(num_steps: int, seedseq: np.random.SeedSequence) -> np.ndarray:
+def seed_handler(seed) -> np.random.SeedSequence:
+    """Return a SeedSequence given a SeedSequence or valid source of entropy."""
+    if isinstance(seed, np.random.SeedSequence):
+        return seed
+    else:
+        return np.random.SeedSequence(seed)
+
+
+def raw_times(num_steps: int, seed) -> np.ndarray:
     """Generate random (unscaled) exponentially distributed intervals.
 
     Parameters
     ----------
     num_steps : int
         The number of times to generate
-    seedseq : np.random.SeedSequence
+    seedseq
         A random seed
 
     Returns
@@ -16,12 +24,10 @@ def raw_times(num_steps: int, seedseq: np.random.SeedSequence) -> np.ndarray:
     np.ndarray
 
     """
-    return np.random.default_rng(seedseq).standard_exponential(size=num_steps)
+    return np.random.default_rng(seed).standard_exponential(size=num_steps)
 
 
-def num_offspring(
-    num_steps: int, s: float, seedseq: np.random.SeedSequence
-) -> np.ndarray:
+def num_offspring(num_steps: int, s: float, seed) -> np.ndarray:
     """Generate random number of offspring.
 
     Parameters
@@ -30,7 +36,7 @@ def num_offspring(
         The number of sets of offspring to generate.
     s : float
         The selection coefficient
-    seedseq : np.random.SeedSequence
+    seed
         A random seed
 
     Returns
@@ -38,17 +44,17 @@ def num_offspring(
     np.ndarray
 
     """
-    return 2 * np.random.default_rng(seedseq).binomial(1, (1 - s) / 2, size=num_steps)
+    return 2 * np.random.default_rng(seed).binomial(1, (1 - s) / 2, size=num_steps)
 
 
-def parent_choices(num_steps: int, seedseq: np.random.SeedSequence) -> np.ndarray:
+def parent_choices(num_steps: int, seed):
     """Generate random uniform floats in [0, 1] representing parent choices.
 
     Parameters
     ----------
     num_steps : int
         The number of times to generate
-    seedseq : np.random.SeedSequence
+    seed
         A random seed
 
     Returns
@@ -56,12 +62,10 @@ def parent_choices(num_steps: int, seedseq: np.random.SeedSequence) -> np.ndarra
     np.ndarray
 
     """
-    return np.random.default_rng(seedseq).random(size=num_steps)
+    return np.random.default_rng(seed).random(size=num_steps)
 
 
-def raw_distances(
-    num_indivs: int, ndim: int, seedseq: np.random.SeedSequence
-) -> np.ndarray:
+def raw_distances(num_indivs: int, ndim: int, seed) -> np.ndarray:
     """Generate random ndim-dimensional multivariate Gaussian distances.
 
     Parameters
@@ -70,7 +74,7 @@ def raw_distances(
         The number of individuals to simulate.
     ndim : int
         The number of spatial dimensions
-    seedseq : np.random.SeedSequence
+    seed
         A random seed
 
     Returns
@@ -79,5 +83,5 @@ def raw_distances(
         Shape is (num_indivs, ndim)
 
     """
-    rng = np.random.default_rng(seedseq)
+    rng = np.random.default_rng(seed)
     return rng.standard_normal(size=(num_indivs, ndim))

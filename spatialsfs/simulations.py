@@ -13,7 +13,7 @@ def simulate_branching_diffusion(
     selection_coefficient: float,
     ndim: int,
     diffusion_coefficient: float,
-    seed: int,
+    seed,
 ) -> BranchingDiffusion:
     """Simulate a branching diffusion.
 
@@ -27,15 +27,16 @@ def simulate_branching_diffusion(
         The number of spatial dimensions.
     diffusion_coefficient : float
         The diffusion coefficient of the motion.
-    seed : int
+    seed
         A seed for numpy.random random number generation.
+        May be a SeedSequence or any valid entropy source.
 
     Returns
     -------
     BranchingDiffusion
 
     """
-    seedseq1, seedseq2 = np.random.SeedSequence(seed).spawn(2)
+    seedseq1, seedseq2 = _random.seed_handler(seed).spawn(2)
     return diffuse(
         branch(num_steps, selection_coefficient, seedseq1),
         ndim,
@@ -44,9 +45,7 @@ def simulate_branching_diffusion(
     )
 
 
-def branch(
-    num_steps: int, selection_coefficient: float, seedseq: np.random.SeedSequence
-) -> BranchingProcess:
+def branch(num_steps: int, selection_coefficient: float, seed) -> BranchingProcess:
     """Simulate a branching process.
 
     Parameters
@@ -55,8 +54,9 @@ def branch(
         The number of steps to simulate.
     selection_coefficient : float
         The selection coefficient against the process. Must be > 0 and < 1.
-    seedseq : np.random.SeedSequence
-        A SeedSequence for numpy.random random number generation.
+    seed
+        A seed for numpy.random random number generation.
+        May be a SeedSequence or any valid entropy source.
 
     Returns
     -------
@@ -65,7 +65,7 @@ def branch(
     """
     if selection_coefficient <= 0 or selection_coefficient >= 1:
         raise ValueError("selection_coefficient must be > 0 and < 1.")
-    seedseq1, seedseq2, seedseq3 = seedseq.spawn(3)
+    seedseq1, seedseq2, seedseq3 = _random.seed_handler(seed).spawn(3)
     return BranchingProcess(
         *_generate_tree(
             _random.raw_times(num_steps, seedseq1),
@@ -119,10 +119,7 @@ def _generate_tree(
 
 
 def diffuse(
-    branching_process: BranchingProcess,
-    ndim: int,
-    diffusion_coefficient: float,
-    seedseq: np.random.SeedSequence,
+    branching_process: BranchingProcess, ndim: int, diffusion_coefficient: float, seed
 ) -> BranchingDiffusion:
     """Simulate the positions of a branching diffusion.
 
@@ -134,8 +131,9 @@ def diffuse(
         The number of spatial dimensions.
     diffusion_coefficient : float
         The diffusion coefficient of the motion.
-    seedseq : np.random.SeedSequence
-        A SeedSequence for numpy.random random number generation.
+    seed
+        A seed for numpy.random random number generation.
+        May be a SeedSequence or any valid entropy source.
 
     Returns
     -------
@@ -150,7 +148,9 @@ def diffuse(
         branching_process,
         *_generate_positions(
             branching_process,
-            _random.raw_distances(len(branching_process), ndim, seedseq),
+            _random.raw_distances(
+                len(branching_process), ndim, _random.seed_handler(seed)
+            ),
             diffusion_coefficient,
         ),
         diffusion_coefficient,
