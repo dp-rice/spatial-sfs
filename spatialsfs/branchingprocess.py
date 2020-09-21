@@ -41,8 +41,8 @@ class BranchingProcess:
 
     def alive_at(self, time: float) -> np.ndarray:
         """Return an array of bools that are True for individuals alive at time."""
-        if time > self.final_time:
-            raise ValueError(f"time ({time}) > final_time ({self.final_time})")
+        if time >= self.final_time:
+            raise ValueError(f"time ({time}) >= final_time ({self.final_time})")
         return (self.birth_times <= time) & (self.death_times > time)
 
     def num_alive_at(self, time: float) -> int:

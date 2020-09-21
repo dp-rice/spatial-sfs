@@ -118,11 +118,15 @@ def test_alive_at(small_bp, time, expected):
 
 
 def test_alive_at_too_late(small_bp, large_bp):
-    """Test that exception is raised when given a time that's beyond the final time."""
+    """Test that exception is raised for a time that's at or beyond the final time."""
     with pytest.raises(ValueError):
-        small_bp.alive_at(0.76)
+        small_bp.alive_at(small_bp.final_time)
     with pytest.raises(ValueError):
-        large_bp.alive_at(4.1)
+        small_bp.alive_at(small_bp.final_time + 1.0)
+    with pytest.raises(ValueError):
+        large_bp.alive_at(large_bp.final_time)
+    with pytest.raises(ValueError):
+        large_bp.alive_at(large_bp.final_time + 1.0)
 
 
 @pytest.mark.parametrize(

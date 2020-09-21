@@ -79,7 +79,7 @@ def test_num_restarts(small_bd, small_bp):
     assert small_bd.num_restarts() == small_bp.num_restarts()
 
 
-@pytest.mark.parametrize("time", [-0.5, 0.0, 0.25, 0.5, 0.75])
+@pytest.mark.parametrize("time", [-0.5, 0.0, 0.25, 0.5, 0.74])
 def test_wrappers(small_bd, small_bp, time):
     """Test alive_at and num_alive_at."""
     assert small_bd.num_alive_at(time) == small_bp.num_alive_at(time)
