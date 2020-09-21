@@ -6,7 +6,7 @@ from spatialsfs import _random
 from spatialsfs.branchingdiffusion import BranchingDiffusion
 
 
-def positions_at(
+def sample_positions(
     branching_diffusion: BranchingDiffusion, time: float, seed
 ) -> np.ndarray:
     """Return random interpolated positions of individuals alive at a time.
@@ -44,3 +44,32 @@ def positions_at(
         branching_diffusion.diffusion_coefficient,
         _random.raw_distances(num_indiv, branching_diffusion.ndim, seed),
     )
+
+
+def sample_weight(
+    bd: BranchingDiffusion, t: float, x_0, sampling_kernel, seed
+) -> float:
+    """Compute the weight a BranchingDiffusion contributes to a sample.
+
+    Parameters
+    ----------
+    bd : BranchingDiffusion
+        The branching diffusion to sample from.
+    t : float
+        The time at which to take the sample.
+    x_0 : np.arraylike
+        The initial position of the branching diffusion
+    sampling_kernel :
+        The kernel used to collect the sample.
+        Must be a function with signature:
+        sampling_kernel(x: np.ndarray) -> float
+    seed :
+        A seed for numpy random number generation
+
+    Returns
+    -------
+    float
+        The weight contributed to the sample.
+
+    """
+    return sum(sampling_kernel(x_0 + x) for x in sample_positions(bd, t, seed))
