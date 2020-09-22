@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import numpy as np
 
 
@@ -128,3 +130,38 @@ def brownian_bridge(
     means = x_a + (x_b - x_a) * ((t - t_a) / (t_b - t_a))[:, None]
     variances = diffusion_coefficient * (t_b - t) * (t - t_a) / (t_b - t_a)
     return means + np.sqrt(variances)[:, None] * raw_distances
+
+
+def sample_times(num_samples: int, max_time: float, seed) -> np.ndarray:
+    """Sample random times uniformly."""
+    return np.random.default_rng(seed).uniform(max_time, size=num_samples)
+
+
+def importance_sample_x0(
+    num_samples: int, ndim: int, scale: float, seed
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Importance-sample initial locations, targeting improper uniform on R^n.
+
+    Parameters
+    ----------
+    num_samples : int
+        The number of locations to sample.
+    ndim : int
+        The number of spatial dimensions.
+    scale : float
+        The spatial scale that determines the concentration of the importance sample.
+    seed :
+        A random seed
+
+    Returns
+    -------
+    Tuple[np.ndarray, np.ndarray]
+        (sampled_positions, importance_weights)
+
+    """
+    x = np.random.default_rng(seed).standard_normal((num_samples, ndim)) * scale
+    return x, _gaussian_weight(x, scale)
+
+
+def _gaussian_weight(x: np.ndarray, scale: float) -> np.ndarray:
+    return np.exp(np.sum((x / scale) ** 2, axis=1) / 2)
