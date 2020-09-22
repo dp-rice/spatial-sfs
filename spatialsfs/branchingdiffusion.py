@@ -70,6 +70,12 @@ class BranchingDiffusion:
             self.death_positions[idx],
         )
 
+    def scale(self) -> float:
+        """Return the characteristic spatial scale sqrt(D/s)."""
+        return np.sqrt(
+            self.diffusion_coefficient / self.branching_process.selection_coefficient
+        )
+
     def num_restarts(self) -> int:
         """Return the number times the branching process went extinct and restarted."""
         return self.branching_process.num_restarts()
