@@ -107,7 +107,7 @@ def sample(
     init_positions, weights = _random.importance_sample_x0(
         num_samples,
         branching_diffusion.ndim,
-        _sampling_scale(branching_diffusion, concentration, separation),
+        _sampling_scale(branching_diffusion, concentration, separation, habitat_size),
         seed2,
     )
     positions = _generate_sample_positions(
@@ -120,9 +120,14 @@ def sample(
 
 
 def _sampling_scale(
-    bd: BranchingDiffusion, concentration: float, separation: float
+    bd: BranchingDiffusion, concentration: float, separation: float, habitat_size: float
 ) -> float:
-    return 2 * max(bd.scale(), concentration ** (-1 / 2) + separation)
+    if concentration == 0.0:
+        return habitat_size
+    else:
+        return min(
+            2 * max(bd.scale(), concentration ** (-1 / 2) + separation), habitat_size
+        )
 
 
 def _intensity(
