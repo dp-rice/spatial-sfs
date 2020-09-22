@@ -6,6 +6,12 @@ from spatialsfs.branchingdiffusion import BranchingDiffusion
 from spatialsfs.branchingprocess import BranchingProcess
 
 
+def pytest_generate_tests(metafunc):
+    """Iterate all tests over three dimensions."""
+    if "ndim" in metafunc.fixturenames:
+        metafunc.parametrize("ndim", [1, 2, 3])
+
+
 @pytest.fixture
 def small_bp():
     """Return a simple BranchingProcess with no restarts."""
@@ -29,10 +35,11 @@ def large_bp():
 
 
 @pytest.fixture
-def small_bd(small_bp):
+def small_bd(small_bp, ndim):
     """Return a simple BranchingDiffusion with no restarts."""
-    birth_positions = np.array([0.0, 0.0, 0.25, 0.25]).reshape((4, 1))
-    death_positions = np.array([0.0, 0.25, 0.35, 0.20]).reshape((4, 1))
+    # ndim = 1
+    birth_positions = np.array([0.0, 0.0, 0.25, 0.25] * ndim).reshape((ndim, -1)).T
+    death_positions = np.array([0.0, 0.25, 0.35, 0.20] * ndim).reshape((ndim, -1)).T
     d = 0.5
     return BranchingDiffusion(small_bp, birth_positions, death_positions, d)
 

@@ -132,7 +132,6 @@ def test_generate_tree(raw_times, num_offspring, parent_choices, expected):
     np.testing.assert_equal(output, expected)
 
 
-@pytest.mark.parametrize("ndim", [1, 2])
 def test_generate_positions(small_bp, ndim):
     """Test _generate_positions with ones for rng output."""
     simple_distances = np.ones((len(small_bp), ndim))
@@ -155,7 +154,6 @@ def test_generate_positions(small_bp, ndim):
 
 
 @pytest.mark.parametrize("seed", range(10))
-@pytest.mark.parametrize("ndim", [1, 2])
 def test_simulate_branching_diffusion(ndim, seed):
     """Test that everything runs."""
     num_steps = 100

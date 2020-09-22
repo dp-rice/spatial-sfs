@@ -20,7 +20,6 @@ def test_setting_attributes(small_bp):
     assert bd.ndim == 1
 
 
-@pytest.mark.parametrize("ndim", [1, 2])
 def test_type_checking(small_bp, ndim):
     """Test type checking in __init__."""
     n = len(small_bp)
@@ -41,7 +40,6 @@ def test_type_checking(small_bp, ndim):
         )
 
 
-@pytest.mark.parametrize("ndim", [1, 2])
 def test_length_checking(small_bp, ndim):
     """The input arrays must all be the same length as branching_process."""
     n = len(small_bp)

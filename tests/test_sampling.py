@@ -23,10 +23,9 @@ def test_sample_positions(small_bd):
 
 
 @pytest.mark.parametrize("kappa", [0.01, 1, 100.0])
-@pytest.mark.parametrize("ndim", [1, 2])
-def test_sample_weight(ndim, kappa):
-    """Test sample_weight."""
-    x = np.arange(10.0).reshape(-1, ndim)
+def test_sample_intensity(ndim, kappa):
+    """Test sample_intensity."""
+    x = np.arange(12.0).reshape(-1, ndim)
     L = 5.0
     assert np.isclose(
         sample_weight(kappa, L, x),

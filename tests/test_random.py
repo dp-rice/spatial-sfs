@@ -20,7 +20,6 @@ def test_seed_handler(seed):
 @pytest.mark.parametrize("x0", [0.0, 1.0])
 @pytest.mark.parametrize("d", [0.5, 1.0])
 @pytest.mark.parametrize("t", [0.0, 0.25, 1.0])
-@pytest.mark.parametrize("ndim", [1, 2])
 @pytest.mark.parametrize("num_indiv", [0, 1, 10])
 def test_brownian_bridge(num_indiv, ndim, t, d, x0, t0):
     """Test brownian_bridge."""
@@ -34,7 +33,7 @@ def test_brownian_bridge(num_indiv, ndim, t, d, x0, t0):
     np.testing.assert_array_equal(bb, expected)
 
 
-@pytest.mark.parametrize("max_time", [0.1, 10.0])
+@pytest.mark.parametrize("max_time", [0.1, 12.0])
 def test_sample_times(max_time):
     """Test sample_time."""
     num_samples = 100
@@ -45,10 +44,9 @@ def test_sample_times(max_time):
     assert min(samples) > 0.0
 
 
-@pytest.mark.parametrize("ndim", [1, 2])
 def test_gaussian_weight(ndim):
     """Check that Gaussian weights are proportional to one over normal pdf."""
-    x = np.arange(10.0).reshape((-1, ndim))
+    x = np.arange(12.0).reshape((-1, ndim))
     scale = 2.0
     ratio = _random._gaussian_weight(x, scale) * multivariate_normal(
         mean=np.zeros(ndim), cov=np.eye(ndim) * scale ** 2
@@ -56,7 +54,6 @@ def test_gaussian_weight(ndim):
     assert np.allclose(ratio, ratio[0])
 
 
-@pytest.mark.parametrize("ndim", [1, 2])
 def test_importance_sample_x0(ndim):
     """Test return shape of importance_sample_x0."""
     num_samples = 10
