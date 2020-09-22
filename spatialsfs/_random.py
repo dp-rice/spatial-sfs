@@ -1,6 +1,7 @@
 from typing import Tuple
 
 import numpy as np
+from numpy.random import default_rng as rng
 
 
 def seed_handler(seed) -> np.random.SeedSequence:
@@ -26,7 +27,7 @@ def raw_times(num_steps: int, seed) -> np.ndarray:
     np.ndarray
 
     """
-    return np.random.default_rng(seed).standard_exponential(size=num_steps)
+    return rng(seed).standard_exponential(size=num_steps)
 
 
 def num_offspring(num_steps: int, s: float, seed) -> np.ndarray:
@@ -46,7 +47,7 @@ def num_offspring(num_steps: int, s: float, seed) -> np.ndarray:
     np.ndarray
 
     """
-    return 2 * np.random.default_rng(seed).binomial(1, (1 - s) / 2, size=num_steps)
+    return 2 * rng(seed).binomial(1, (1 - s) / 2, size=num_steps)
 
 
 def parent_choices(num_steps: int, seed):
@@ -64,7 +65,7 @@ def parent_choices(num_steps: int, seed):
     np.ndarray
 
     """
-    return np.random.default_rng(seed).random(size=num_steps)
+    return rng(seed).random(size=num_steps)
 
 
 def raw_distances(num_indivs: int, ndim: int, seed) -> np.ndarray:
@@ -85,8 +86,7 @@ def raw_distances(num_indivs: int, ndim: int, seed) -> np.ndarray:
         Shape is (num_indivs, ndim)
 
     """
-    rng = np.random.default_rng(seed)
-    return rng.standard_normal(size=(num_indivs, ndim))
+    return rng(seed).standard_normal(size=(num_indivs, ndim))
 
 
 def brownian_bridge(
@@ -134,7 +134,7 @@ def brownian_bridge(
 
 def sample_times(num_samples: int, max_time: float, seed) -> np.ndarray:
     """Sample random times uniformly."""
-    return np.random.default_rng(seed).uniform(max_time, size=num_samples)
+    return rng(seed).uniform(max_time, size=num_samples)
 
 
 def importance_sample_x0(
@@ -159,7 +159,7 @@ def importance_sample_x0(
         (sampled_positions, importance_weights)
 
     """
-    x = np.random.default_rng(seed).standard_normal((num_samples, ndim)) * scale
+    x = rng(seed).standard_normal((num_samples, ndim)) * scale
     return x, _gaussian_weight(x, scale)
 
 
