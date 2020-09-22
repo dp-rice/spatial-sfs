@@ -25,10 +25,16 @@ def test_saveload_branching_process(small_bp, large_bp):
     assert bp == large_bp
 
 
-def test_saveload_branching_diffusion(small_bd):
+def test_saveload_branching_diffusion(small_bd, large_bd):
     """Test save and load BranchingDiffusion."""
     with TemporaryFile() as tf:
         save_branching_diffusion(tf, small_bd)
         tf.seek(0)
         bd = load_branching_diffusion(tf)
     assert bd == small_bd
+
+    with TemporaryFile() as tf:
+        save_branching_diffusion(tf, large_bd)
+        tf.seek(0)
+        bd = load_branching_diffusion(tf)
+    assert bd == large_bd

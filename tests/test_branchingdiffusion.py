@@ -72,16 +72,19 @@ def test_len(small_bd, small_bp):
     assert len(small_bd) == len(small_bp)
 
 
-def test_num_restarts(small_bd, small_bp):
+def test_num_restarts(small_bd, small_bp, large_bd, large_bp):
     """Test num_restarts."""
     assert small_bd.num_restarts() == small_bp.num_restarts()
+    assert large_bd.num_restarts() == large_bp.num_restarts()
 
 
 @pytest.mark.parametrize("time", [-0.5, 0.0, 0.25, 0.5, 0.74])
-def test_wrappers(small_bd, small_bp, time):
+def test_wrappers(small_bd, small_bp, large_bd, large_bp, time):
     """Test alive_at and num_alive_at."""
     assert small_bd.num_alive_at(time) == small_bp.num_alive_at(time)
     np.testing.assert_array_equal(small_bd.alive_at(time), small_bp.alive_at(time))
+    assert large_bd.num_alive_at(time) == large_bp.num_alive_at(time)
+    np.testing.assert_array_equal(large_bd.alive_at(time), large_bp.alive_at(time))
 
 
 def test_separate_restarts_small(small_bd):
@@ -101,3 +104,4 @@ def test_separate_restarts(large_bd):
         assert np.all(bd.birth_positions[0] == np.zeros(large_bd.ndim))
         assert np.all(bd.death_positions[0] == np.zeros(large_bd.ndim))
         assert bd.diffusion_coefficient == large_bd.diffusion_coefficient
+        assert bd.num_restarts() == 1
