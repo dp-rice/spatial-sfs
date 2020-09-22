@@ -35,7 +35,7 @@ def test_sample_intensity(ndim, kappa):
     L = 5.0
     assert np.isclose(
         sample_intensity(kappa, L, x),
-        np.sum(np.product(vonmises(kappa, scale=L / (4 * np.pi)).pdf(x), axis=1)),
+        np.sum(np.product(vonmises(kappa, scale=L / (2 * np.pi)).pdf(x), axis=1)),
     )
 
 

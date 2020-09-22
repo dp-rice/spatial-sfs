@@ -164,8 +164,8 @@ def sample_intensity(concentration: float, habitat_size: float, x: np.ndarray) -
 
     """
     return np.sum(
-        np.exp(concentration * np.sum(np.cos(4 * np.pi * x / habitat_size), axis=1))
-    ) / (habitat_size * i0(concentration) / 2) ** (x.shape[1])
+        np.exp(concentration * np.sum(np.cos(2 * np.pi * x / habitat_size), axis=1))
+    ) / (habitat_size * i0(concentration)) ** (x.shape[1])
 
 
 def two_sample_intensity(

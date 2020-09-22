@@ -69,7 +69,7 @@ spatialsfs.simulate_branching_diffusion(num_steps, s, ndim, d, seed)
 spatialsfs.sample(branching_diffusion, num_samples, concentration, habitat_size, seed)
 
 
-plt.hist(intensities[:, 0], weights=weights, bins=np.arange(0, 0.1, 0.001), log=True)
+plt.hist(intensities[:, 0], weights=weights, bins=np.arange(0, 0.05, 0.001), log=True)
 
 for concentration in [5, 10, 20, 40]:
     intensities, weights = spatialsfs.sample(
@@ -78,7 +78,7 @@ for concentration in [5, 10, 20, 40]:
     plt.hist(
         intensities[:, 0],
         weights=weights,
-        bins=np.logspace(-3, 0, 100),
+        bins=np.logspace(-4, -1, 100),
         log=True,
         histtype="step",
         label=concentration,
@@ -102,7 +102,30 @@ for separation in np.arange(0, 5, 1):
         intensities[:, 0],
         intensities[:, 1],
         weights=weights,
-        bins=np.logspace(-5, -1, 100),
+        bins=np.logspace(-4, -2, 100),
+        norm=LogNorm(),
+    )
+    plt.xscale("log")
+    plt.yscale("log")
+    plt.colorbar()
+    plt.show()
+
+concentration = 40
+for separation in np.arange(0, 5, 1):
+    intensities, weights = spatialsfs.sample(
+        branching_diffusion,
+        num_samples,
+        concentration,
+        habitat_size,
+        seed1,
+        num_centers=2,
+        separation=separation,
+    )
+    plt.hist2d(
+        intensities[:, 0],
+        intensities[:, 1],
+        weights=weights,
+        bins=np.logspace(-4, -2, 100),
         norm=LogNorm(),
     )
     plt.xscale("log")
