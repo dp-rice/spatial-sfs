@@ -34,16 +34,14 @@ def test_brownian_bridge(num_indiv, ndim, t, d, x0, t0):
     np.testing.assert_array_equal(bb, expected)
 
 
-def test_sample_times():
+@pytest.mark.parametrize("max_time", [0.1, 10.0])
+def test_sample_times(max_time):
     """Test sample_time."""
     num_samples = 100
-    max_time = 1e4
     seed = 1
     samples = _random.sample_times(num_samples, max_time, seed)
-    print(samples)
     assert len(samples) == num_samples
     assert max(samples) < max_time
-    assert max(samples) > 1.0
     assert min(samples) > 0.0
 
 

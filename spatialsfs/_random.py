@@ -134,7 +134,7 @@ def brownian_bridge(
 
 def sample_times(num_samples: int, max_time: float, seed) -> np.ndarray:
     """Sample random times uniformly."""
-    return rng(seed).uniform(max_time, size=num_samples)
+    return rng(seed).uniform(0.0, max_time, size=num_samples)
 
 
 def importance_sample_x0(
