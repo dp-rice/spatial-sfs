@@ -1,6 +1,7 @@
 """Test spatialsfs.sampling."""
 import numpy as np
 import pytest
+from scipy.stats import vonmises
 
 from spatialsfs.sampling import sample_positions, sample_weight
 
@@ -21,11 +22,13 @@ def test_sample_positions(small_bd):
     assert sample_positions(small_bd, 0.65, seed).shape == (2, small_bd.ndim)
 
 
-@pytest.mark.parametrize("x_0", [-1.0, 0.0, 0.5, np.ones(1)])
-@pytest.mark.parametrize("t", [-1.0, 0.0, 0.25, 0.5, 0.6])
-def test_sample_weight(small_bd, t, x_0):
+@pytest.mark.parametrize("kappa", [0.01, 1, 100.0])
+@pytest.mark.parametrize("ndim", [1, 2])
+def test_sample_weight(ndim, kappa):
     """Test sample_weight."""
-    seed = 100
-    assert sample_weight(
-        small_bd, t, x_0, lambda x: 1.0, seed,
-    ) == small_bd.num_alive_at(t)
+    x = np.arange(10.0).reshape(-1, ndim)
+    L = 5.0
+    assert np.isclose(
+        sample_weight(kappa, L, x),
+        np.sum(np.product(vonmises(kappa, scale=L / (4 * np.pi)).pdf(x), axis=1)),
+    )
