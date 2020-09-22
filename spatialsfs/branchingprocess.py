@@ -34,20 +34,32 @@ class BranchingProcess:
         self.death_times = death_times
         self.final_time: float = np.max(death_times)
         self.selection_coefficient = selection_coefficient
+        self.restarts = (self.parents == 0).nonzero()[0][1:]
+        self.restart_times = self.birth_times[self.restarts]
 
     def num_restarts(self) -> int:
         """Return the number times the branching process went extinct and restarted."""
-        return np.count_nonzero(self.parents == 0) - 1
+        return len(self.restarts)
 
     def alive_at(self, time: float) -> np.ndarray:
         """Return an array of bools that are True for individuals alive at time."""
+        if time < 0:
+            return np.array([], dtype=int)
         if time >= self.final_time:
             raise ValueError(f"time ({time}) >= final_time ({self.final_time})")
-        return (self.birth_times <= time) & (self.death_times > time)
+        idx = np.nonzero(self.restart_times <= time)[0][-1]
+        try:
+            sl = slice(self.restarts[idx], self.restarts[idx + 1])
+        except IndexError:
+            sl = slice(self.restarts[idx], None)
+        bt = self.birth_times[sl]
+        dt = self.death_times[sl]
+        return np.nonzero((bt <= time) & (dt > time))[0] + self.restarts[idx]
 
     def num_alive_at(self, time: float) -> int:
         """Return the number of individuals alive at time."""
-        return np.count_nonzero(self.alive_at(time))
+        return len(self.alive_at(time))
+        # return np.count_nonzero(self.alive_at(time))
 
     def __eq__(self, other: Any) -> bool:
         """Return true if all attributes are equal."""
@@ -82,11 +94,12 @@ class BranchingProcess:
             The separated branching processes.
 
         """
-        restarts = (self.parents == 0).nonzero()[0]
         s = self.selection_coefficient
-        for start, stop in zip(restarts[1:-1], restarts[2:]):
+        for start, stop in zip(self.restarts[:-1], self.restarts[1:]):
             yield BranchingProcess(*_reroot(*self[start:stop], start), s)
-        yield BranchingProcess(*_reroot(*self[restarts[-1] :], restarts[-1]), s)
+        yield BranchingProcess(
+            *_reroot(*self[self.restarts[-1] :], self.restarts[-1]), s
+        )
 
 
 def _reroot(

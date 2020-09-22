@@ -105,11 +105,11 @@ def test_len(small_bp, large_bp):
 @pytest.mark.parametrize(
     "time,expected",
     [
-        (-0.5, np.array([False, False, False, False])),
-        (0.0, np.array([False, True, False, False])),
-        (0.25, np.array([False, True, False, False])),
-        (0.50, np.array([False, False, True, True])),
-        (0.60, np.array([False, False, True, True])),
+        (-0.5, np.array([])),
+        (0.0, np.array([1])),
+        (0.25, np.array([1])),
+        (0.50, np.array([2, 3])),
+        (0.60, np.array([2, 3])),
     ],
 )
 def test_alive_at(small_bp, time, expected):

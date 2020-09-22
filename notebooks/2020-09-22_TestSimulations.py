@@ -38,18 +38,18 @@ def plot_branching_diffusion_2D(bd):
 # %%prun
 seed = 100
 seed1, seed2 = np.random.SeedSequence(seed).spawn(2)
-num_steps = 10000
-num_samples = 10000
+num_steps = 100000
+num_samples = 50000
 s = 0.02
 ndim = 2
 d = 1.0
 concentration = 20
 habitat_size = 400.0
 branching_diffusion = spatialsfs.simulate_branching_diffusion(
-    num_steps, s, ndim, d, seed2
+    num_steps, s, ndim, d, seed1
 )
 intensities, weights = spatialsfs.sample(
-    branching_diffusion, num_samples, concentration, habitat_size, seed1
+    branching_diffusion, num_samples, concentration, habitat_size, seed2
 )
 
 num_plotted = 0
@@ -62,29 +62,37 @@ for bd in branching_diffusion.separate_restarts():
     if num_plotted >= 5:
         break
 
-# %%prun
-spatialsfs.simulate_branching_diffusion(num_steps, s, ndim, d, seed)
-
-# %%prun
-spatialsfs.sample(branching_diffusion, num_samples, concentration, habitat_size, seed)
-
-
-plt.hist(intensities[:, 0], weights=weights, bins=np.arange(0, 0.05, 0.001), log=True)
+plt.hist(intensities[:, 0], weights=weights, bins=np.arange(0, 0.08, 0.001), log=True)
 
 for concentration in [5, 10, 20, 40]:
     intensities, weights = spatialsfs.sample(
-        branching_diffusion, num_samples, concentration, habitat_size, seed1
+        branching_diffusion, num_samples, concentration, habitat_size, seed2
     )
     plt.hist(
         intensities[:, 0],
         weights=weights,
-        bins=np.logspace(-4, -1, 100),
+        bins=np.logspace(-4, -0.5, 100),
         log=True,
         histtype="step",
         label=concentration,
         density=True,
     )
 plt.xscale("log")
+plt.legend()
+
+for concentration in [5, 10, 20, 40]:
+    intensities, weights = spatialsfs.sample(
+        branching_diffusion, num_samples, concentration, habitat_size, seed2
+    )
+    plt.hist(
+        intensities[:, 0],
+        weights=weights,
+        bins=np.arange(0, 0.08, 0.001),
+        log=True,
+        histtype="step",
+        label=concentration,
+        density=False,
+    )
 plt.legend()
 
 concentration = 20
@@ -94,7 +102,7 @@ for separation in np.arange(0, 5, 1):
         num_samples,
         concentration,
         habitat_size,
-        seed1,
+        seed2,
         num_centers=2,
         separation=separation,
     )
@@ -117,7 +125,7 @@ for separation in np.arange(0, 5, 1):
         num_samples,
         concentration,
         habitat_size,
-        seed1,
+        seed2,
         num_centers=2,
         separation=separation,
     )
