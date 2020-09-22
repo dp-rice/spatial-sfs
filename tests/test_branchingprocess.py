@@ -4,7 +4,7 @@ from copy import deepcopy
 import numpy as np
 import pytest
 
-from spatialsfs.branchingprocess import BranchingProcess, separate_restarts
+from spatialsfs.branchingprocess import BranchingProcess
 
 
 def test_setting_attributes():
@@ -146,9 +146,17 @@ def test_num_alive_at_too_late(small_bp, large_bp):
         large_bp.num_alive_at(4.1)
 
 
-def test_separate_restarts(large_bp):
+def test_separate_restarts_small(small_bp):
+    """Test separate_restarts on an example with only one restart."""
+    small_bp_iterator = small_bp.separate_restarts()
+    assert next(small_bp_iterator) == small_bp
+    with pytest.raises(StopIteration):
+        next(small_bp_iterator)
+
+
+def test_separate_restarts(small_bp, large_bp):
     """Test separating restarts."""
-    bp_iterator = separate_restarts(large_bp)
+    bp_iterator = large_bp.separate_restarts()
     assert next(bp_iterator) == BranchingProcess(
         np.array([0, 0, 1, 1]),
         np.array([0.0, 0.0, 1.0, 1.0]),

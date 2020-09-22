@@ -73,26 +73,20 @@ class BranchingProcess:
         """Let `len(bp)` be the length of its arrays."""
         return len(self.parents)
 
+    def separate_restarts(self) -> Iterator["BranchingProcess"]:
+        """Get each restarted branching process as a separate instance.
 
-def separate_restarts(bp: BranchingProcess) -> Iterator[BranchingProcess]:
-    """Get each restarted branching process as a separate instance.
+        Returns
+        -------
+        Iterator[BranchingProcess]
+            The separated branching processes.
 
-    Parameters
-    ----------
-    bp : BranchingProcess
-        The BranchingProcess to separate.
-
-    Returns
-    -------
-    Iterator[BranchingProcess]
-        The separated branching processes.
-
-    """
-    restarts = (bp.parents == 0).nonzero()[0]
-    s = bp.selection_coefficient
-    for start, stop in zip(restarts[1:-1], restarts[2:]):
-        yield BranchingProcess(*_reroot(*bp[start:stop], start), s)
-    yield BranchingProcess(*_reroot(*bp[restarts[-1] :], restarts[-1]), s)
+        """
+        restarts = (self.parents == 0).nonzero()[0]
+        s = self.selection_coefficient
+        for start, stop in zip(restarts[1:-1], restarts[2:]):
+            yield BranchingProcess(*_reroot(*self[start:stop], start), s)
+        yield BranchingProcess(*_reroot(*self[restarts[-1] :], restarts[-1]), s)
 
 
 def _reroot(

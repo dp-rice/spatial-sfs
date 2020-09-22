@@ -102,20 +102,34 @@ class BranchingDiffusion:
         """
         return self.branching_process.num_alive_at(time)
 
+    def separate_restarts(self) -> Iterator["BranchingDiffusion"]:
+        """Get each restarted branching process as a separate instance.
 
-def separate_restarts(bd: BranchingDiffusion) -> Iterator[BranchingDiffusion]:
-    """Get each restarted branching process as a separate instance.
+        Returns
+        -------
+        Iterator[BranchingDiffusion]
+            The separated branching diffusions.
 
-    Parameters
-    ----------
-    bp : BranchingDiffusion
-        The BranchingDiffusion to separate.
+        """
+        restarts = (self.branching_process.parents == 0).nonzero()[0]
+        d = self.diffusion_coefficient
+        bps = self.branching_process.separate_restarts()
+        for start, stop, bp in zip(restarts[1:-1], restarts[2:], bps):
+            yield BranchingDiffusion(
+                bp,
+                _addroot(self.birth_positions[start:stop]),
+                _addroot(self.death_positions[start:stop]),
+                d,
+            )
+        yield BranchingDiffusion(
+            next(bps),
+            _addroot(self.birth_positions[restarts[-1] :]),
+            _addroot(self.death_positions[restarts[-1] :]),
+            d,
+        )
 
-    Returns
-    -------
-    Iterator[BranchingDiffusion]
-        The separated branching diffusions.
 
-    """
-    pass
-    # restarts = (bd.branching_process.parents == 0).nonzero()[0]
+def _addroot(array: np.ndarray) -> np.ndarray:
+    new_array = np.zeros((array.shape[0] + 1, array.shape[1]))
+    new_array[1:] = array
+    return new_array

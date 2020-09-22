@@ -37,20 +37,20 @@ def large_bp():
 @pytest.fixture
 def small_bd(small_bp, ndim):
     """Return a simple BranchingDiffusion with no restarts."""
-    # ndim = 1
     birth_positions = np.array([0.0, 0.0, 0.25, 0.25] * ndim).reshape((ndim, -1)).T
     death_positions = np.array([0.0, 0.25, 0.35, 0.20] * ndim).reshape((ndim, -1)).T
     d = 0.5
     return BranchingDiffusion(small_bp, birth_positions, death_positions, d)
 
 
-# @pytest.fixture
-# def large_bd():
-#     """Return a more complex BranchingProcess with one restart."""
-#     s = 0.05
-#     return BranchingProcess(
-#         np.array([0, 0, 1, 1, 0, 4, 4]),
-#         np.array([0.0, 0.0, 1.0, 1.0, 2.0, 3.5, 3.5]),
-#         np.array([0.0, 1.0, 1.5, 2.0, 3.5, 4.0, np.inf]),
-#         s,
-#     )
+@pytest.fixture
+def large_bd(large_bp, ndim):
+    """Return a simple BranchingDiffusion with no restarts."""
+    birth_positions = (
+        np.array([0.0, 0.0, 0.25, 0.25, 0.0, 1.2, 1.2] * ndim).reshape((ndim, -1)).T
+    )
+    death_positions = (
+        np.array([0.0, 0.25, 0.35, 0.20, 1.2, 3.3, -2.5] * ndim).reshape((ndim, -1)).T
+    )
+    d = 2.0
+    return BranchingDiffusion(large_bp, birth_positions, death_positions, d)

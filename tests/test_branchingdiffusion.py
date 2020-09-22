@@ -82,3 +82,22 @@ def test_wrappers(small_bd, small_bp, time):
     """Test alive_at and num_alive_at."""
     assert small_bd.num_alive_at(time) == small_bp.num_alive_at(time)
     np.testing.assert_array_equal(small_bd.alive_at(time), small_bp.alive_at(time))
+
+
+def test_separate_restarts_small(small_bd):
+    """Test separate_restarts on an example with only one restart."""
+    small_bd_iterator = small_bd.separate_restarts()
+    assert next(small_bd_iterator) == small_bd
+    with pytest.raises(StopIteration):
+        next(small_bd_iterator)
+
+
+def test_separate_restarts(large_bd):
+    """Test separating restarts."""
+    bd_iterator = large_bd.separate_restarts()
+    bp_iterator = large_bd.branching_process.separate_restarts()
+    for bd, bp in zip(bd_iterator, bp_iterator):
+        assert bd.branching_process == bp
+        assert np.all(bd.birth_positions[0] == np.zeros(large_bd.ndim))
+        assert np.all(bd.death_positions[0] == np.zeros(large_bd.ndim))
+        assert bd.diffusion_coefficient == large_bd.diffusion_coefficient
