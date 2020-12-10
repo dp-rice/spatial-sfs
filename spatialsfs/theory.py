@@ -60,3 +60,21 @@ def gaussian_integral(
     ]
     samples = f(*locations, **kwargs)
     return np.mean(samples), np.std(samples) / np.sqrt(num_samples)
+
+
+def a2(x: np.ndarray, d: float = 1.0) -> np.ndarray:
+    """Compute the second taylor coefficient."""
+    norm_x = np.sum(x ** 2, axis=1)
+    return 2 * np.pi * np.exp(-norm_x / 2) / (1 + d * norm_x)
+
+
+def a3(x1: np.ndarray, x2: np.ndarray, d: float = 1.0) -> np.ndarray:
+    """Compute the third taylor coefficient."""
+    norm_x1 = np.sum(x1 ** 2, axis=1)
+    norm_x2 = np.sum(x2 ** 2, axis=1)
+    norm_x12 = np.sum((x1 + x2) ** 2, axis=1)
+    return (
+        (2 * np.pi) ** 2
+        * np.exp(-norm_x12 / 2)
+        / ((2 + 2 * d * norm_x12) * (3 + d * (norm_x12 + norm_x1 + norm_x2)))
+    )

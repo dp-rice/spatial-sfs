@@ -114,3 +114,40 @@ for n_samples in np.logspace(1, 5, 20):
 plt.plot([], [], "o", color="C0", label=r"|error|")
 plt.plot([], [], "o", color="C1", label=r"std-error")
 plt.legend()
+
+
+# Integrating the coefficients
+
+D = np.logspace(-2, 2, 10)
+n_samples = 10000
+ndim = 1
+seed = 100
+
+# +
+fig = plt.figure(figsize=(8, 8))
+ax1 = plt.subplot(221)
+ax2 = plt.subplot(222)
+ax3 = plt.subplot(223)
+ax4 = plt.subplot(224)
+
+for d in D:
+    ndim = 1
+    mean, sterr = th.gaussian_integral(th.a2, n_samples, 1, ndim, seed, d=d)
+    ax1.loglog(d, mean, "o", color="C0")
+    ax1.loglog(d, sterr, "o", color="C1")
+
+    mean, sterr = th.gaussian_integral(th.a3, n_samples, 2, ndim, seed, d=d)
+    ax2.loglog(d, mean, "o", color="C0")
+    ax2.loglog(d, sterr, "o", color="C1")
+
+    ndim = 2
+    mean, sterr = th.gaussian_integral(th.a2, n_samples, 1, ndim, seed, d=d)
+    ax3.loglog(d, mean, "o", color="C0")
+    ax3.loglog(d, sterr, "o", color="C1")
+
+    mean, sterr = th.gaussian_integral(th.a3, n_samples, 2, ndim, seed, d=d)
+    ax4.loglog(d, mean, "o", color="C0")
+    ax4.loglog(d, sterr, "o", color="C1")
+
+for ax in fig.axes:
+    ax.set_ylim([2e-3, 10])
