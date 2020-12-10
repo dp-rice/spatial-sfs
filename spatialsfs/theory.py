@@ -28,7 +28,7 @@ def sample_gaussian(num_samples: int, ndim: int, seed) -> np.ndarray:
 
 
 def gaussian_integral(
-    f: Callable, num_samples: int, num_vars: int, ndim: int, seed
+    f: Callable, num_samples: int, num_vars: int, ndim: int, seed, **kwargs
 ) -> Tuple[float, float]:
     """Monte Carlo integrate a function against a multidimensional gaussian density.
 
@@ -45,6 +45,8 @@ def gaussian_integral(
         The number of dimensions of each variable
     seed :
         Valid seed for numpy random
+    kwargs :
+        Keyword arguments to pass to f
 
     Returns
     -------
@@ -56,5 +58,5 @@ def gaussian_integral(
         sample_gaussian(num_samples, ndim, child_seed)
         for child_seed in SeedSequence(seed).spawn(num_vars)
     ]
-    samples = f(*locations)
+    samples = f(*locations, **kwargs)
     return np.mean(samples), np.std(samples) / np.sqrt(num_samples)

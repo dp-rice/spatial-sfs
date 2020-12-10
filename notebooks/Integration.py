@@ -27,8 +27,6 @@ import spatialsfs.theory as th
 # Some simple test functions to integrate:
 
 # +
-
-
 def f(a):
     return np.sum(a, axis=1)
 
@@ -39,6 +37,10 @@ def g(a, b):
 
 def h(a):
     return np.sum(a ** 2, axis=1)
+
+
+def f_prime(a, p=1):
+    return np.sum(a ** p, axis=1)
 
 
 # -
@@ -92,6 +94,22 @@ plt.legend()
 for n_samples in np.logspace(1, 5, 20):
     mean, sterr = th.gaussian_integral(h, int(n_samples), 1, 2, 100)
     plt.loglog(n_samples, np.abs(mean - 2), "o", color="C0")
+    plt.loglog(n_samples, sterr, "o", color="C1")
+plt.plot([], [], "o", color="C0", label=r"|error|")
+plt.plot([], [], "o", color="C1", label=r"std-error")
+plt.legend()
+
+for n_samples in np.logspace(1, 5, 20):
+    mean, sterr = th.gaussian_integral(f_prime, int(n_samples), 1, 1, 100, p=1)
+    plt.loglog(n_samples, np.abs(mean), "o", color="C0")
+    plt.loglog(n_samples, sterr, "o", color="C1")
+plt.plot([], [], "o", color="C0", label=r"|error|")
+plt.plot([], [], "o", color="C1", label=r"std-error")
+plt.legend()
+
+for n_samples in np.logspace(1, 5, 20):
+    mean, sterr = th.gaussian_integral(f_prime, int(n_samples), 1, 1, 100, p=2)
+    plt.loglog(n_samples, np.abs(mean - 1), "o", color="C0")
     plt.loglog(n_samples, sterr, "o", color="C1")
 plt.plot([], [], "o", color="C0", label=r"|error|")
 plt.plot([], [], "o", color="C1", label=r"std-error")
