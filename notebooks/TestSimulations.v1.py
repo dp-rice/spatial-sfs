@@ -82,10 +82,7 @@ def plot_branching_diffusion_2D(bd, color="gray"):
     for i in range(bd.num_total):
         col = plt.cm.viridis(bd.birth_times[i] / bd.extinction_time)
         plt.plot(
-            bd.birth_positions[i, 0],
-            bd.birth_positions[i, 1],
-            ".",
-            c=col,
+            bd.birth_positions[i, 0], bd.birth_positions[i, 1], ".", c=col,
         )
 
 
