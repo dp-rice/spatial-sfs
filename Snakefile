@@ -1,3 +1,4 @@
+"""Run simulations over parameter grid. WARNING: Code is of date."""
 import gzip, pickle
 import numpy as np
 from spatialsfs.simulations import simulate, save_populations
@@ -10,6 +11,7 @@ rule all:
     input:
         expand('simulations/branchdiff-s={s}.pkl.gz', s=s_list)
 
+# FIXME
 rule branchdiff:
     output:
         'simulations/branchdiff-s={s}.pkl.gz'
