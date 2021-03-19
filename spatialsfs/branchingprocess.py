@@ -41,6 +41,18 @@ class BranchingProcess:
         """Return the number times the branching process went extinct and restarted."""
         return len(self.restarts)
 
+    def life_events(self) -> np.ndarray:
+        """Return the unique times of 'life events' (birth and deaths).
+        Ignores the root. Excludes the final time.
+        """
+        non_root_times = set(self.birth_times[1:]) | set(self.death_times[1:])
+        non_root_times -= set([self.final_time])
+        return np.array(sorted(non_root_times))
+
+    def num_alive(self) -> np.ndarray:
+        """Return the number of individuals alive across time."""
+        return np.array([self.num_alive_at(t) for t in self.life_events()])
+
     def alive_at(self, time: float) -> np.ndarray:
         """Return an array of bools that are True for individuals alive at time."""
         if time < 0:
