@@ -18,6 +18,8 @@ def sample_positions(
     ----------
     time : float
         time
+    seed
+        A seed for numpy random generator.
 
     Returns
     -------
@@ -26,8 +28,6 @@ def sample_positions(
         The length of the array is the number of individuals alive at `time`.
         Includes individuals the moment they are born,
         but not at the moment they die.
-    seed
-        A seed for numpy random generator.
 
     Notes
     -----

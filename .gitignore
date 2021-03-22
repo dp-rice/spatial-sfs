@@ -2,3 +2,4 @@
 .snakemake/
 simulations/
 docs/_build
+__pycache__

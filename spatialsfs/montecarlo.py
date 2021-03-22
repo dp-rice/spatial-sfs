@@ -1,6 +1,7 @@
 import math, time, json
 from dataclasses import dataclass
 from typing import Dict, Iterable, Tuple
+from collections.abc import Sequence
 from numpy import random
 from numpy.random import PCG64
 from pathlib import Path
@@ -15,11 +16,11 @@ class SumDuo:
         self.sum += value
         self.sumsq += value * value
 
-    def to_hex(self) -> Tuple[float, float]:
+    def to_hex(self) -> Tuple[str, str]:
         return (float.hex(self.sum), float.hex(self.sumsq))
 
     @classmethod
-    def from_hex(self, pair : Iterable[float]):
+    def from_hex(self, pair : Sequence[str]):
         return SumDuo(float.fromhex(pair[0]), float.fromhex(pair[1]))
 
 
