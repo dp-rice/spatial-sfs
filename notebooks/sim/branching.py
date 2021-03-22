@@ -19,6 +19,7 @@ class BranchingProcessEstimator:
         )
 
 if __name__ == '__main__':
+    Dealer.handle_keyboard_interrupts()
     cache = JsonFileCache(Path(__file__).with_name('branching.json'))
     dealer = Dealer(cache, BranchingProcessEstimator)
     dealer.run(60*60)
