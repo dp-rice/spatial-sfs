@@ -4,6 +4,7 @@ import math
 from pytest import approx
 import numpy as np
 from spatialsfs.montecarlo import *
+import pandas as pd
 
 
 def fake_time_func():
@@ -43,6 +44,10 @@ def test_monte_carlo_pi():
     assert_pi(dealer.output(0), 2048)
     dealer.run()
     assert_pi(dealer.output(0), 4096)
+    s = dealer.summary()
+    assert len(s.index) == 1
+    assert s.loc[0, 'stat'] == 'pi'
+    assert s.loc[0, 'mean'] == approx(3.14, 0.01)
 
 
 def test_monte_carlo_pi_file(tmpdir):

@@ -5,11 +5,11 @@
       "s": 0.01
     },
     "seed_seed": 665,
-    "num": 1008,
+    "num": 7245,
     "sums": {
       "ave_alive": [
-        "0x1.819d48feef5efp+15",
-        "0x1.67a0c6dee4094p+21"
+        "0x1.53a0efd859c8ep+18",
+        "0x1.2607fab53b096p+24"
       ]
     }
   },
@@ -19,13 +19,14 @@
       "s": 0.02
     },
     "seed_seed": 666,
-    "num": 5087,
+    "num": 5100,
     "sums": {
       "ave_alive": [
-        "0x1.f2f83af1a9fb1p+16",
-        "0x1.99d5a59abadb0p+21"
+        "0x1.f4407fd2c7b7ap+16",
+        "0x1.9adc5890407d0p+21"
       ]
-    }
+    },
+    "target_num": 5100
   },
   {
     "sim_params": {
@@ -33,13 +34,14 @@
       "s": 0.04
     },
     "seed_seed": 667,
-    "num": 1006,
+    "num": 1010,
     "sums": {
       "ave_alive": [
-        "0x1.953e3a732df58p+13",
-        "0x1.4a1c118179bcdp+17"
+        "0x1.96d0e2b170507p+13",
+        "0x1.4b5b051feec9dp+17"
       ]
-    }
+    },
+    "target_num": 1010
   },
   {
     "sim_params": {
@@ -53,7 +55,8 @@
         "0x1.bf40031ceaf28p+10",
         "0x1.7aaebefe3308fp+13"
       ]
-    }
+    },
+    "target_num": 265
   },
   {
     "sim_params": {
@@ -67,7 +70,8 @@
         "0x1.dcb007dd44135p+9",
         "0x1.b037facb5bfbap+11"
       ]
-    }
+    },
+    "target_num": 263
   },
   {
     "sim_params": {
@@ -81,6 +85,7 @@
         "0x1.0f36a4a8c154ep+9",
         "0x1.17b69a0b197bdp+10"
       ]
-    }
+    },
+    "target_num": 263
   }
 ]

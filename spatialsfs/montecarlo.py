@@ -4,6 +4,7 @@ from typing import Dict, Iterable, Tuple
 from collections.abc import Sequence
 from numpy import random
 from numpy.random import PCG64
+import pandas as pd
 from pathlib import Path
 from copy import deepcopy
 
@@ -72,15 +73,19 @@ class SimOutput:
 
 class SimLine:
 
-    def __init__(self, sim_params, seed_seed):
+    def __init__(self, sim_params, seed_seed, target_num=None):
         self.sim_params = sim_params
         self.seed_seed = seed_seed
+        self.target_num = target_num
         self.output = SimOutput()
 
     def enable_simulation(self, simulator_factory):
         simulator = simulator_factory(self.sim_params)
         self.output.enable_simulation(self.seed_seed, simulator)
 
+    def add_simulation_if_below_target(self):
+        if self.target_num is None or self.output.num < self.target_num:
+            self.output.add_simulation()
 
 class Dealer:
 
@@ -97,6 +102,30 @@ class Dealer:
     def output(self, i):
         return self.lines[i].output
 
+    def summary(self, param_col_names=None):
+        ret = pd.DataFrame(columns=Dealer._first_columns)
+        for line in self.lines:
+            for name in line.output.stat_names():
+                d = dict(stat=name,
+                         mean=line.output.mean(name),
+                         std_err=line.output.std_err(name),
+                         num=line.output.num,
+                         **Dealer._param_rename(line.sim_params, param_col_names))
+                ret = ret.append(d, ignore_index=True)
+        return ret
+
+    _first_columns = ['stat', 'mean', 'std_err', 'num']
+
+    @staticmethod
+    def _param_rename(sim_params, param_col_names):
+        if not param_col_names:
+            param_col_names = {k: k for k in sim_params.keys()}
+        ret = {param_col_names[p]: sim_params[p] for p in param_col_names.keys()}
+        collision = any(param in Dealer._first_columns for param in ret.keys())
+        if collision:
+            raise ValueError("Invalid param_col_names")
+        return ret
+
     def run(self, exit_after_seconds=1, write_every_seconds=3) -> None:
         now = Dealer.time_func()
         exit_time = now + exit_after_seconds
@@ -106,7 +135,7 @@ class Dealer:
                 for line in self.lines:
                     if Dealer.keyboard_interrupt:
                         break
-                    line.output.add_simulation()
+                    line.add_simulation_if_below_target()
                 now = Dealer.time_func()
             self.cache.write(self.lines) 
 
@@ -144,7 +173,7 @@ class JsonFileCache:
         ret = []
         with open(self.filepath) as f:
             for d in json.load(f):
-                line = SimLine(d['sim_params'], d['seed_seed'])
+                line = SimLine(d['sim_params'], d['seed_seed'], d.get('target_num'))
                 if 'num' in d:
                     sums = d['sums']
                     for s in sums:
@@ -159,12 +188,15 @@ class JsonFileCache:
             sums = line.output.copy_sums()
             for s in sums:
                 sums[s] = sums[s].to_hex()
-            pod.append({
+            d = {
                 "sim_params": line.sim_params,
                 "seed_seed": line.seed_seed,
                 "num": line.output.num,
                 "sums": sums
-            })
+            }
+            if line.target_num:
+                d['target_num'] = line.target_num
+            pod.append(d)
         with open(self.filepath, 'w') as f:
             json.dump(pod, f, indent=2)
 

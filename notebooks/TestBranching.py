@@ -18,8 +18,7 @@ from spatialsfs.montecarlo import Dealer, JsonFileCache
 import numpy as np
 
 dealer = Dealer(JsonFileCache('sim/branching.json'))
-[(line.sim_params['s'], line.output.mean('ave_alive'), line.output.std_err('ave_alive'), line.output.num,)
- for line in dealer.lines]
+dealer.summary()
 
 
 # +
