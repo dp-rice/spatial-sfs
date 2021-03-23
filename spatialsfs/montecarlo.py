@@ -5,6 +5,7 @@ from collections.abc import Sequence
 from numpy import random
 from numpy.random import PCG64
 import pandas as pd
+import scipy.stats
 from pathlib import Path
 from copy import deepcopy
 
@@ -52,6 +53,10 @@ class SimOutput:
         var *= self.num / (self.num - 1)
         return math.sqrt(var / self.num)
 
+    def pvalue(self, name : str, null_hypothesis : float) -> float:
+        z = (self.mean(name) - null_hypothesis) / self.std_err(name)
+        return 2 * scipy.stats.t.cdf(-abs(z), self.num)
+
     def enable_simulation(self, seed_seed, simulator):
         assert self._simulator is None
         self._rng = random.PCG64(seed_seed)
@@ -83,9 +88,16 @@ class SimLine:
         simulator = simulator_factory(self.sim_params)
         self.output.enable_simulation(self.seed_seed, simulator)
 
-    def add_simulation_if_below_target(self):
+    def add_simulation_if_below_target(self) -> bool:
         if self.target_num is None or self.output.num < self.target_num:
             self.output.add_simulation()
+            return True
+        return False
+
+
+def _no_null_hypothesis(stat_name, sim_params):
+    return math.nan
+
 
 class Dealer:
 
@@ -102,41 +114,37 @@ class Dealer:
     def output(self, i):
         return self.lines[i].output
 
-    def summary(self, param_col_names=None):
-        ret = pd.DataFrame(columns=Dealer._first_columns)
+    def summary(self, null_hypothesizer=_no_null_hypothesis):
+        columns = ['stat', 'mean', 'std_err', 'null_hypo', 'pvalue', 'num']
+        ret = pd.DataFrame(columns=columns)
         for line in self.lines:
             for name in line.output.stat_names():
+                null_hypo = null_hypothesizer(name, line.sim_params)
+                params = {('param:' + k): v for k, v in line.sim_params.items()}
                 d = dict(stat=name,
                          mean=line.output.mean(name),
                          std_err=line.output.std_err(name),
+                         null_hypo=null_hypo,
+                         pvalue=line.output.pvalue(name, null_hypo),
                          num=line.output.num,
-                         **Dealer._param_rename(line.sim_params, param_col_names))
+                         **params)
                 ret = ret.append(d, ignore_index=True)
-        return ret
-
-    _first_columns = ['stat', 'mean', 'std_err', 'num']
-
-    @staticmethod
-    def _param_rename(sim_params, param_col_names):
-        if not param_col_names:
-            param_col_names = {k: k for k in sim_params.keys()}
-        ret = {param_col_names[p]: sim_params[p] for p in param_col_names.keys()}
-        collision = any(param in Dealer._first_columns for param in ret.keys())
-        if collision:
-            raise ValueError("Invalid param_col_names")
         return ret
 
     def run(self, exit_after_seconds=1, write_every_seconds=3) -> None:
         now = Dealer.time_func()
         exit_time = now + exit_after_seconds
         while now < exit_time and not Dealer.keyboard_interrupt:
+            changed = False
             write_time = min(now + write_every_seconds, exit_time)
             while now < write_time and not Dealer.keyboard_interrupt:
                 for line in self.lines:
                     if Dealer.keyboard_interrupt:
                         break
-                    line.add_simulation_if_below_target()
+                    changed |= line.add_simulation_if_below_target()
                 now = Dealer.time_func()
+            if not changed:
+                break
             self.cache.write(self.lines) 
 
     @staticmethod
