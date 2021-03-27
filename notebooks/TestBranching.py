@@ -13,21 +13,22 @@
 #     name: python3
 # ---
 
+import numpy as np
+
 import spatialsfs
 from spatialsfs.montecarlo import Dealer, JsonFileCache
-import numpy as np
 
 
 def mean_alive(stat_name, sim_params):
-    s = sim_params['s']
-    return (1+s)/s/2.0
+    s = sim_params["s"]
+    return (1 + s) / s / 2.0
+
+
 # `ave_alive_0` is average from t=0 until `num_steps`
 #
 # whereas `ave_alive` is average from `omit_steps` until `num_steps`
-dealer = Dealer(JsonFileCache('sim/branching.json'))
+dealer = Dealer(JsonFileCache("sim/branching.json"))
 dealer.summary(mean_alive)
-
-
 
 
 # # Math Appendix

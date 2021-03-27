@@ -1,19 +1,21 @@
-import math, time, json
-from dataclasses import dataclass
-from typing import Dict, Iterable, Tuple
+import json
+import math
+import time
 from collections.abc import Sequence
-from numpy import random
-from numpy.random import PCG64
+from copy import deepcopy
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, Iterable, Tuple
+
 import pandas as pd
 import scipy.stats
-from pathlib import Path
-from copy import deepcopy
+from numpy import random
 
 
 @dataclass
 class SumDuo:
-    sum : float = 0
-    sumsq : float = 0
+    sum: float = 0
+    sumsq: float = 0
 
     def add(self, value):
         self.sum += value
@@ -23,12 +25,11 @@ class SumDuo:
         return (float.hex(self.sum), float.hex(self.sumsq))
 
     @classmethod
-    def from_hex(self, pair : Sequence[str]):
+    def from_hex(self, pair: Sequence[str]):
         return SumDuo(float.fromhex(pair[0]), float.fromhex(pair[1]))
 
 
 class SimOutput:
-
     def __init__(self):
         self.num = 0
         self._sums = None
@@ -36,7 +37,7 @@ class SimOutput:
         self._simulator = None
 
     def restore(self, num, sums: Dict[str, SumDuo]) -> None:
-        self.num = num;
+        self.num = num
         self._sums = deepcopy(sums)
 
     def copy_sums(self) -> Dict[str, SumDuo]:
@@ -44,16 +45,16 @@ class SimOutput:
 
     def stat_names(self) -> Iterable[str]:
         return self._sums.keys()
-        
-    def mean(self, name : str) -> float:
+
+    def mean(self, name: str) -> float:
         return self._sums[name].sum / self.num
 
-    def std_err(self, name : str) -> float:
-        var = self._sums[name].sumsq / self.num - self.mean(name)**2
+    def std_err(self, name: str) -> float:
+        var = self._sums[name].sumsq / self.num - self.mean(name) ** 2
         var *= self.num / (self.num - 1)
         return math.sqrt(var / self.num)
 
-    def pvalue(self, name : str, null_hypothesis : float) -> float:
+    def pvalue(self, name: str, null_hypothesis: float) -> float:
         z = (self.mean(name) - null_hypothesis) / self.std_err(name)
         return 2 * scipy.stats.t.cdf(-abs(z), self.num)
 
@@ -77,7 +78,6 @@ class SimOutput:
 
 
 class SimLine:
-
     def __init__(self, sim_params, seed_seed, target_num=None):
         self.sim_params = sim_params
         self.seed_seed = seed_seed
@@ -115,19 +115,21 @@ class Dealer:
         return self.lines[i].output
 
     def summary(self, null_hypothesizer=_no_null_hypothesis):
-        columns = ['stat', 'mean', 'std_err', 'null_hypo', 'pvalue', 'num']
+        columns = ["stat", "mean", "std_err", "null_hypo", "pvalue", "num"]
         ret = pd.DataFrame(columns=columns)
         for line in self.lines:
             for name in line.output.stat_names():
                 null_hypo = null_hypothesizer(name, line.sim_params)
-                params = {('param:' + k): v for k, v in line.sim_params.items()}
-                d = dict(stat=name,
-                         mean=line.output.mean(name),
-                         std_err=line.output.std_err(name),
-                         null_hypo=null_hypo,
-                         pvalue=line.output.pvalue(name, null_hypo),
-                         num=line.output.num,
-                         **params)
+                params = {("param:" + k): v for k, v in line.sim_params.items()}
+                d = dict(
+                    stat=name,
+                    mean=line.output.mean(name),
+                    std_err=line.output.std_err(name),
+                    null_hypo=null_hypo,
+                    pvalue=line.output.pvalue(name, null_hypo),
+                    num=line.output.num,
+                    **params
+                )
                 ret = ret.append(d, ignore_index=True)
         return ret
 
@@ -145,13 +147,17 @@ class Dealer:
                 now = Dealer.time_func()
             if not changed:
                 break
-            self.cache.write(self.lines) 
+            self.cache.write(self.lines)
 
     @staticmethod
     def handle_keyboard_interrupts():
         import signal
+
         signal.signal(signal.SIGINT, Dealer._sigint_handler)
-        print("First CTRL-C gracefully waits to save calculation in progress and then exit.")
+        print(
+            "First CTRL-C"
+            " gracefully waits to save calculation in progress and then exit."
+        )
         print("Second CTRL-C will signal hard keyboard interrupt.")
 
     @staticmethod
@@ -164,7 +170,7 @@ class Dealer:
 
 @dataclass
 class FakeCache:
-    sim_params_by_seed : dict
+    sim_params_by_seed: dict
 
     def read(self) -> Iterable[SimLine]:
         return [SimLine(p, i) for i, p in self.sim_params_by_seed.items()]
@@ -173,20 +179,20 @@ class FakeCache:
         pass
 
 
-@dataclass
 class JsonFileCache:
-    filepath : Path
+    def __init__(self, filepath):
+        self.filepath = Path(filepath)
 
     def read(self) -> Iterable[SimLine]:
         ret = []
         with open(self.filepath) as f:
             for d in json.load(f):
-                line = SimLine(d['sim_params'], d['seed_seed'], d.get('target_num'))
-                if 'num' in d:
-                    sums = d['sums']
+                line = SimLine(d["sim_params"], d["seed_seed"], d.get("target_num"))
+                if "num" in d:
+                    sums = d["sums"]
                     for s in sums:
                         sums[s] = SumDuo.from_hex(sums[s])
-                    line.output.restore(d['num'], sums)
+                    line.output.restore(d["num"], sums)
                 ret.append(line)
         return ret
 
@@ -200,11 +206,11 @@ class JsonFileCache:
                 "sim_params": line.sim_params,
                 "seed_seed": line.seed_seed,
                 "num": line.output.num,
-                "sums": sums
+                "sums": sums,
             }
             if line.target_num:
-                d['target_num'] = line.target_num
+                d["target_num"] = line.target_num
             pod.append(d)
-        with open(self.filepath, 'w') as f:
+        with open(self.filepath, "w") as f:
             json.dump(pod, f, indent=2)
-
+            f.write("\n")
