@@ -104,26 +104,16 @@ def test_len(small_bp, large_bp):
 
 def test_life_events(small_bp, large_bp):
     """Test times of life events (births and non-final deaths)"""
+    np.testing.assert_array_equal(small_bp.life_events(), np.array([0.0, 0.5]))
     np.testing.assert_array_equal(
-        small_bp.life_events(),
-        np.array([0.0, 0.5])
-    )
-    np.testing.assert_array_equal(
-        large_bp.life_events(),
-        np.array([0.0, 1.0, 1.5, 2.0, 3.5])
+        large_bp.life_events(), np.array([0.0, 1.0, 1.5, 2.0, 3.5])
     )
 
 
 def test_num_alive(small_bp, large_bp):
     """Test num alive at life events"""
-    np.testing.assert_array_equal(
-        small_bp.num_alive(),
-        np.array([1, 2])
-    )
-    np.testing.assert_array_equal(
-        large_bp.num_alive(),
-        np.array([1, 2, 1, 1, 2])
-    )
+    np.testing.assert_array_equal(small_bp.num_alive(), np.array([1, 2]))
+    np.testing.assert_array_equal(large_bp.num_alive(), np.array([1, 2, 1, 1, 2]))
 
 
 @pytest.mark.parametrize(
