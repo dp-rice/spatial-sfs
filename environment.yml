@@ -4,7 +4,7 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - python>=3.8
+  - python>=3.9
   - snakemake>=5.22
   - numpy>=1.19
   - matplotlib>=3.3
