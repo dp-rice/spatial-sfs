@@ -7,7 +7,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, Tuple
 
-import pandas as pd
 import scipy.stats
 from numpy import random
 
@@ -115,8 +114,13 @@ class Dealer:
         return self.lines[i].output
 
     def summary(self, null_hypothesizer=_no_null_hypothesis):
+        try:
+            import pandas
+        except ModuleNotFoundError:
+            raise NotImplementedError("Python package pandas required")
+
         columns = ["stat", "mean", "std_err", "null_hypo", "pvalue", "num"]
-        ret = pd.DataFrame(columns=columns)
+        ret = pandas.DataFrame(columns=columns)
         for line in self.lines:
             for name in line.output.stat_names():
                 null_hypo = null_hypothesizer(name, line.sim_params)
