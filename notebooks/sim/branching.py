@@ -16,9 +16,14 @@ class BranchingProcessEstimator:
 
     def simulate(self, seed):
         branchy = spatialsfs.simulations.branch(self.num_steps, self.s, seed)
-        nums = branchy.num_alive()
+        nums = branchy.num_alive()[self.omit_steps :]
+        times = np.diff(branchy.life_events())[self.omit_steps :]
+        weights = times / np.sum(times)
         return dict(
-            ave_alive=np.mean(nums[self.omit_steps :]), ave_alive_0=np.mean(nums)
+            ave_alive=np.mean(nums),
+            ave_time=np.mean(times),
+            var_time=np.var(times),
+            ave_alive_ctime=np.sum(nums[:-1] * weights),
         )
 
 

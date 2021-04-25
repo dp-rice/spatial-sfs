@@ -49,6 +49,8 @@ class SimOutput:
         return self._sums[name].sum / self.num
 
     def std_err(self, name: str) -> float:
+        if self.num < 2:
+            return math.nan
         var = self._sums[name].sumsq / self.num - self.mean(name) ** 2
         var *= self.num / (self.num - 1)
         return math.sqrt(var / self.num)
@@ -122,19 +124,20 @@ class Dealer:
         columns = ["stat", "mean", "std_err", "null_hypo", "pvalue", "num"]
         ret = pandas.DataFrame(columns=columns)
         for line in self.lines:
-            for name in line.output.stat_names():
-                null_hypo = null_hypothesizer(name, line.sim_params)
-                params = {("param:" + k): v for k, v in line.sim_params.items()}
-                d = dict(
-                    stat=name,
-                    mean=line.output.mean(name),
-                    std_err=line.output.std_err(name),
-                    null_hypo=null_hypo,
-                    pvalue=line.output.pvalue(name, null_hypo),
-                    num=line.output.num,
-                    **params
-                )
-                ret = ret.append(d, ignore_index=True)
+            if line.output.num > 0:
+                for name in line.output.stat_names():
+                    null_hypo = null_hypothesizer(name, line.sim_params)
+                    params = {("param:" + k): v for k, v in line.sim_params.items()}
+                    d = dict(
+                        stat=name,
+                        mean=line.output.mean(name),
+                        std_err=line.output.std_err(name),
+                        null_hypo=null_hypo,
+                        pvalue=line.output.pvalue(name, null_hypo),
+                        num=line.output.num,
+                        **params
+                    )
+                    ret = ret.append(d, ignore_index=True)
         return ret
 
     def run(self, exit_after_seconds=1, write_every_seconds=3) -> None:
