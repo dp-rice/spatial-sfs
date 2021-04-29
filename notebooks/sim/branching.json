@@ -6,26 +6,26 @@
       "s": 0.01
     },
     "seed_seed": 664,
-    "num": 2048,
+    "num": 5000,
     "sums": {
       "ave_alive": [
-        "0x1.91565793dd97bp+16",
-        "0x1.8c99fb9a3daa7p+22"
+        "0x1.ea60c1719f813p+17",
+        "0x1.ebb563cbabeb3p+23"
       ],
       "ave_time": [
-        "0x1.464e0d08c13bcp+7",
-        "0x1.cac2c3bed29b2p+3"
+        "0x1.8d35239a7015ap+8",
+        "0x1.1640d309a0f3ep+5"
       ],
       "var_time": [
-        "0x1.c98c8e951d0e4p+6",
-        "0x1.d62e2e045bf3bp+2"
+        "0x1.1636f83be357dp+8",
+        "0x1.1c81219370880p+4"
       ],
       "ave_alive_ctime": [
-        "0x1.df4b24d93185ap+14",
-        "0x1.6cd1049d65b82p+19"
+        "0x1.2a300e4fa3393p+16",
+        "0x1.10390ba4b47e7p+21"
       ]
     },
-    "target_num": 2048
+    "target_num": 5000
   },
   {
     "sim_params": {
@@ -34,26 +34,26 @@
       "s": 0.01
     },
     "seed_seed": 665,
-    "num": 1024,
+    "num": 5000,
     "sums": {
       "ave_alive": [
-        "0x1.93a49e68386f3p+15",
-        "0x1.8cb90618af8ccp+21"
+        "0x1.e4c43f123ffd3p+17",
+        "0x1.bb471fef28e9fp+23"
       ],
       "ave_time": [
-        "0x1.48bc7315e9b9cp+6",
-        "0x1.c2143ab5fed8ep+2"
+        "0x1.8f5bab6b68c90p+8",
+        "0x1.0ebdcca5b425ep+5"
       ],
       "var_time": [
-        "0x1.d187a11e275eep+5",
-        "0x1.cec1b10ebd740p+1"
+        "0x1.19c36ff0f49e2p+8",
+        "0x1.142622be941e9p+4"
       ],
       "ave_alive_ctime": [
-        "0x1.baf32aa3e1099p+13",
-        "0x1.fd03510bb4065p+17"
+        "0x1.0a65383fa29c0p+16",
+        "0x1.133d553c9f972p+20"
       ]
     },
-    "target_num": 1024
+    "target_num": 5000
   },
   {
     "sim_params": {
@@ -62,26 +62,26 @@
       "s": 0.02
     },
     "seed_seed": 666,
-    "num": 1024,
+    "num": 2048,
     "sums": {
       "ave_alive": [
-        "0x1.977bcfa4fa4f0p+14",
-        "0x1.5403a9e473d94p+19"
+        "0x1.99e8f4796c739p+15",
+        "0x1.59c889e7010dep+20"
       ],
       "ave_time": [
-        "0x1.0e3b53292d1e7p+7",
-        "0x1.2187f9edea117p+4"
+        "0x1.0dfc28adedf4dp+8",
+        "0x1.21050815ea4bdp+5"
       ],
       "var_time": [
-        "0x1.a462f3f4acf9bp+6",
-        "0x1.605e932c19f1ep+3"
+        "0x1.a3d076e5ba675p+7",
+        "0x1.5f57547a6f4b8p+4"
       ],
       "ave_alive_ctime": [
-        "0x1.ecd9d06308e67p+12",
-        "0x1.e2c43bbdc91bcp+15"
+        "0x1.ed5db829306c8p+13",
+        "0x1.e3e772b7c94d7p+16"
       ]
     },
-    "target_num": 1024
+    "target_num": 2048
   },
   {
     "sim_params": {
@@ -90,26 +90,26 @@
       "s": 0.04
     },
     "seed_seed": 667,
-    "num": 512,
+    "num": 1024,
     "sums": {
       "ave_alive": [
-        "0x1.a14d07a55784ap+12",
-        "0x1.58422c29f9750p+16"
+        "0x1.9e7631a712402p+13",
+        "0x1.53aeeb3ef5143p+17"
       ],
       "ave_time": [
-        "0x1.b598d5f37c993p+6",
-        "0x1.773d01c3b6889p+4"
+        "0x1.b6f3835ec7c50p+7",
+        "0x1.79a0df86972f9p+5"
       ],
       "var_time": [
-        "0x1.7386a37c61ffcp+6",
-        "0x1.0ed39793dcaf6p+4"
+        "0x1.742d2d357a0fep+7",
+        "0x1.0fe0ce5c97f53p+5"
       ],
       "ave_alive_ctime": [
-        "0x1.2c8cbf38d62d2p+11",
-        "0x1.621bc02bf0578p+13"
+        "0x1.2bb43324b5e84p+12",
+        "0x1.60261bc777beap+14"
       ]
     },
-    "target_num": 512
+    "target_num": 1024
   },
   {
     "sim_params": {
@@ -118,26 +118,26 @@
       "s": 0.08
     },
     "seed_seed": 668,
-    "num": 256,
+    "num": 512,
     "sums": {
       "ave_alive": [
-        "0x1.b0d482869f32ap+10",
-        "0x1.6f4758985bc9ep+13"
+        "0x1.b0d9be1993c66p+11",
+        "0x1.6f318e17980b1p+14"
       ],
       "ave_time": [
-        "0x1.541e0bfa93f7bp+6",
-        "0x1.c4463b24b9d8dp+4"
+        "0x1.53cc5a5c63a38p+7",
+        "0x1.c3665751aec40p+5"
       ],
       "var_time": [
-        "0x1.352400fd010e2p+6",
-        "0x1.75cb1b8c4e9a5p+4"
+        "0x1.3494045ab83b3p+7",
+        "0x1.7469fe91468e4p+5"
       ],
       "ave_alive_ctime": [
-        "0x1.81ab4a0e97373p+9",
-        "0x1.22c2cf96698a0p+11"
+        "0x1.81f8d283bcebdp+10",
+        "0x1.23331d772065dp+12"
       ]
     },
-    "target_num": 256
+    "target_num": 512
   },
   {
     "sim_params": {
