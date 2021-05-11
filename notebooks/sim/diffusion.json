@@ -1,0 +1,107 @@
+[
+  {
+    "sim_params": {
+      "nstep": 100000,
+      "s": 0.2,
+      "ndim": 2,
+      "diffusion": 0.3
+    },
+    "seed_seed": 666,
+    "num": 128,
+    "sums": {
+      "ave_time_adj_coord": [
+        "-0x1.36019804d6f83p-5",
+        "0x1.f8f1b6f737fa7p-11"
+      ],
+      "var_dist": [
+        "0x1.332464e4c019ep+6",
+        "0x1.70855fd37ef6ap+5"
+      ]
+    },
+    "target_num": 128
+  },
+  {
+    "sim_params": {
+      "nstep": 100000,
+      "s": 0.2,
+      "ndim": 2,
+      "diffusion": 1.0
+    },
+    "seed_seed": 667,
+    "num": 128,
+    "sums": {
+      "ave_time_adj_coord": [
+        "0x1.58fa839f5d487p-8",
+        "0x1.a5478453631e6p-9"
+      ],
+      "var_dist": [
+        "0x1.000cff47765a8p+8",
+        "0x1.001d8b035dc87p+9"
+      ]
+    },
+    "target_num": 128
+  },
+  {
+    "sim_params": {
+      "nstep": 100000,
+      "s": 0.2,
+      "ndim": 2,
+      "diffusion": 3.0
+    },
+    "seed_seed": 668,
+    "num": 128,
+    "sums": {
+      "ave_time_adj_coord": [
+        "0x1.5a5c3b2753918p-5",
+        "0x1.25fd8930518bdp-7"
+      ],
+      "var_dist": [
+        "0x1.7ff3d94d8c2d9p+9",
+        "0x1.1ff166de1ac81p+12"
+      ]
+    },
+    "target_num": 128
+  },
+  {
+    "sim_params": {
+      "nstep": 100000,
+      "s": 0.2,
+      "ndim": 2,
+      "diffusion": 10.0
+    },
+    "seed_seed": 669,
+    "num": 128,
+    "sums": {
+      "ave_time_adj_coord": [
+        "-0x1.052028294f4f0p-10",
+        "0x1.0815aec83aef4p-5"
+      ],
+      "var_dist": [
+        "0x1.3fe5e0a222667p+11",
+        "0x1.8fc410e1baa07p+15"
+      ]
+    },
+    "target_num": 128
+  },
+  {
+    "sim_params": {
+      "nstep": 100000,
+      "s": 0.2,
+      "ndim": 2,
+      "diffusion": 30.0
+    },
+    "seed_seed": 670,
+    "num": 128,
+    "sums": {
+      "ave_time_adj_coord": [
+        "0x1.a3108f646d886p-5",
+        "0x1.9d314dc039829p-4"
+      ],
+      "var_dist": [
+        "0x1.dfe9583cbc885p+12",
+        "0x1.c1dc252aaa8a2p+18"
+      ]
+    },
+    "target_num": 128
+  }
+]

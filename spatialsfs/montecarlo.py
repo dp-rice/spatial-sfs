@@ -48,12 +48,15 @@ class SimOutput:
     def mean(self, name: str) -> float:
         return self._sums[name].sum / self.num
 
-    def std_err(self, name: str) -> float:
+    def std_dev(self, name: str) -> float:
         if self.num < 2:
             return math.nan
         var = self._sums[name].sumsq / self.num - self.mean(name) ** 2
-        var *= self.num / (self.num - 1)
-        return math.sqrt(var / self.num)
+        var *= self.num / (self.num - 1)  # bias correction
+        return math.sqrt(var)
+
+    def std_err(self, name: str) -> float:
+        return self.std_dev(name) / math.sqrt(self.num)
 
     def pvalue(self, name: str, null_hypothesis: float) -> float:
         z = (self.mean(name) - null_hypothesis) / self.std_err(name)
@@ -121,7 +124,7 @@ class Dealer:
         except ModuleNotFoundError:
             raise NotImplementedError("Python package pandas required")
 
-        columns = ["stat", "mean", "std_err", "null_hypo", "pvalue", "num"]
+        columns = ["stat", "mean", "std_dev", "std_err", "null_hypo", "pvalue", "num"]
         ret = pandas.DataFrame(columns=columns)
         for line in self.lines:
             if line.output.num > 0:
@@ -131,6 +134,7 @@ class Dealer:
                     d = dict(
                         stat=name,
                         mean=line.output.mean(name),
+                        std_dev=line.output.std_dev(name),
                         std_err=line.output.std_err(name),
                         null_hypo=null_hypo,
                         pvalue=line.output.pvalue(name, null_hypo),
