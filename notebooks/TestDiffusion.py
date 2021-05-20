@@ -22,7 +22,7 @@ def theoretical_stats(stat_name, sim_params):
 
 
 # +
-from spatialsfs.montecarlo import Dealer, JsonFileCache
+from montecarloop import Dealer, JsonFileCache
 
 Dealer(JsonFileCache("sim/diffusion.json")).summary(theoretical_stats)
 # -
@@ -32,7 +32,7 @@ Dealer(JsonFileCache("sim/diffusion.json")).summary(theoretical_stats)
 # In other words, file cache not used.
 
 # +
-from spatialsfs.montecarlo import Dealer, FakeCache
+from montecarloop import Dealer, FakeCache
 from spatialsfs.simestimators import DiffusionEstimator
 
 common_params = {"nstep": 100000, "s": 0.2, "ndim": 2}

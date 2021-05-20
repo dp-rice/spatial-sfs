@@ -18,8 +18,7 @@ import math
 import numpy as np
 from scipy.special import spence
 
-import spatialsfs
-from spatialsfs.montecarlo import Dealer, JsonFileCache
+from montecarloop import Dealer, JsonFileCache
 
 
 # +

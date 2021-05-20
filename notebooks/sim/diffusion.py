@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from spatialsfs.montecarlo import Dealer, JsonFileCache
+from montecarloop import Dealer, JsonFileCache
 from spatialsfs.simestimators import DiffusionEstimator
 
 if __name__ == "__main__":

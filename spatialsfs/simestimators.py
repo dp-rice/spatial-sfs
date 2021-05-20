@@ -1,8 +1,42 @@
-"""Simulation estimators to use with `montecarlo.Dealer`."""
+"""Simulation estimators to use with `montecarloop.Dealer`."""
 
 import numpy as np
 
-from spatialsfs import simulate_branching_diffusion
+from .simulations import branch, simulate_branching_diffusion
+
+
+class BranchingEstimator:
+    """Simulator/Estimator for BranchingProcess."""
+
+    def __init__(self, sim_params):
+        self.num_steps = int(sim_params["num_steps"])
+        self.omit_steps = int(sim_params.get("omit_steps", 0))
+        self.s = sim_params["s"]
+
+    def simulate(self, seed):
+        """Return dictionary of estimates from a BranchingProcess simulation.
+
+        Returned dictionary
+        -------------------
+        ave_time:
+            Average time step duration.
+        var_time:
+            Variance of time step duration.
+        ave_alive:
+            Average number alive over life-events (birth or death).
+        ave_alive_ctime:
+            Average number alive over continuous time.
+        """
+        branchy = branch(self.num_steps, self.s, seed)
+        nums = branchy.num_alive()[self.omit_steps :]
+        times = np.diff(branchy.life_events())[self.omit_steps :]
+        weights = times / np.sum(times)
+        return dict(
+            ave_alive=np.mean(nums),
+            ave_time=np.mean(times),
+            var_time=np.var(times),
+            ave_alive_ctime=np.sum(nums[:-1] * weights),
+        )
 
 
 class DiffusionEstimator:
