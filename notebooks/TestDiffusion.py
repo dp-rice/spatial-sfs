@@ -13,18 +13,11 @@
 #     name: python3
 # ---
 
-
-def theoretical_stats(stat_name, sim_params):
-    if stat_name == "var_time_adj_dist":
-        return sim_params["diffusion"] * sim_params["ndim"]
-    else:
-        return 0.0
-
-
 # +
 from montecarloop import Dealer, JsonFileCache
+from spatialsfs.simestimators import DiffusionEstimator
 
-Dealer(JsonFileCache("sim/diffusion.json")).summary(theoretical_stats)
+Dealer(JsonFileCache("sim/diffusion.json")).summary(DiffusionEstimator.theory)
 # -
 
 # ## Recompute some simulation estimates
@@ -33,7 +26,6 @@ Dealer(JsonFileCache("sim/diffusion.json")).summary(theoretical_stats)
 
 # +
 from montecarloop import Dealer, FakeCache
-from spatialsfs.simestimators import DiffusionEstimator
 
 common_params = {"nstep": 100000, "s": 0.2, "ndim": 2}
 cache = FakeCache(
@@ -46,4 +38,4 @@ dealer = Dealer(cache, DiffusionEstimator)
 dealer.run(5)
 # -
 
-dealer.summary(theoretical_stats)
+dealer.summary(DiffusionEstimator.theory)

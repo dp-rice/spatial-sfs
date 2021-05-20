@@ -13,38 +13,11 @@
 #     name: python3
 # ---
 
-import math
-
-import numpy as np
-from scipy.special import spence
-
-from montecarloop import Dealer, JsonFileCache
-
-
 # +
-def alpha(s):
-    b = 0.5 * (1 - s)
-    return b / (1 - b)
+from montecarloop import Dealer, JsonFileCache
+from spatialsfs.simestimators import BranchingEstimator
 
-
-def theoretical_stats(stat_name, sim_params):
-    s = sim_params["s"]
-    if stat_name == "ave_alive":
-        return (1 + s) / s / 2.0
-    a = alpha(s)
-    ave_time = -math.log(1 - a) * (1 - a) / a
-    if stat_name == "ave_time":
-        return ave_time
-    if stat_name == "ave_alive_ctime":
-        return 1 / ave_time
-    if stat_name == "var_time":
-        return 2 * spence(1 - a) * (1 - a) / a - ave_time ** 2
-    else:
-        return np.nan
-
-
-dealer = Dealer(JsonFileCache("sim/branching.json"))
-summary = dealer.summary(theoretical_stats)
+summary = Dealer(JsonFileCache("sim/branching.json")).summary(BranchingEstimator.theory)
 summary[summary["pvalue"] <= 0.05]  # .query("stat == 'ave_alive'")
 # -
 # # Math Appendix

@@ -1,6 +1,9 @@
 """Simulation estimators to use with `montecarloop.Dealer`."""
 
+import math
+
 import numpy as np
+from scipy.special import spence
 
 from .simulations import branch, simulate_branching_diffusion
 
@@ -36,6 +39,20 @@ class BranchingEstimator:
             ave_time=np.mean(times),
             var_time=np.var(times),
             ave_alive_ctime=np.sum(nums[:-1] * weights),
+        )
+
+    @staticmethod
+    def theory(sim_params):
+        """Theoretical expectation of statistics."""
+        s = sim_params["s"]
+        b = 0.5 * (1 - s)
+        a = b / (1 - b)
+        ave_time = -math.log(1 - a) * (1 - a) / a
+        return dict(
+            ave_alive=(1 + s) / s / 2.0,
+            ave_time=ave_time,
+            ave_alive_ctime=1 / ave_time,
+            var_time=2 * spence(1 - a) * (1 - a) / a - ave_time ** 2,
         )
 
 
@@ -77,3 +94,11 @@ class DiffusionEstimator:
         sumsqs = (z ** 2).sum(axis=1)
         assert sumsqs.shape == (len(times),)
         return dict(ave_time_adj_coord=np.mean(z), var_time_adj_dist=np.mean(sumsqs),)
+
+    @staticmethod
+    def theory(sim_params):
+        """Theoretical expectation of statistics."""
+        return dict(
+            ave_time_adj_coord=0.0,
+            var_time_adj_dist=sim_params["diffusion"] * sim_params["ndim"],
+        )
