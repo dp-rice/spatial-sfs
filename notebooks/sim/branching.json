@@ -6,18 +6,26 @@
       "s": 0.01
     },
     "seed_seed": 664,
-    "num": 11000,
+    "num": 5000,
     "sums": {
       "ave_alive": [
-        "0x1.0f85f245a1cb6p+19",
-        "0x1.15bfd47ae9d6ep+25"
+        "0x1.ea60c1719f813p+17",
+        "0x1.ebb563cbabeb3p+23"
       ],
-      "ave_alive_0": [
-        "0x1.01a6894024b45p+19",
-        "0x1.be2e6da1ecfd8p+24"
+      "ave_time": [
+        "0x1.8d35239a7015ap+8",
+        "0x1.1640d309a0f3ep+5"
+      ],
+      "var_time": [
+        "0x1.1636f83be357dp+8",
+        "0x1.1c81219370880p+4"
+      ],
+      "ave_alive_ctime": [
+        "0x1.2a300e4fa3393p+16",
+        "0x1.10390ba4b47e7p+21"
       ]
     },
-    "target_num": 11000
+    "target_num": 5000
   },
   {
     "sim_params": {
@@ -26,18 +34,26 @@
       "s": 0.01
     },
     "seed_seed": 665,
-    "num": 11000,
+    "num": 5000,
     "sums": {
       "ave_alive": [
-        "0x1.09fc2cb6ae7d2p+19",
-        "0x1.e3225e4cdd49cp+24"
+        "0x1.e4c43f123ffd3p+17",
+        "0x1.bb471fef28e9fp+23"
       ],
-      "ave_alive_0": [
-        "0x1.01bb47bf33871p+19",
-        "0x1.be3cbda9a8025p+24"
+      "ave_time": [
+        "0x1.8f5bab6b68c90p+8",
+        "0x1.0ebdcca5b425ep+5"
+      ],
+      "var_time": [
+        "0x1.19c36ff0f49e2p+8",
+        "0x1.142622be941e9p+4"
+      ],
+      "ave_alive_ctime": [
+        "0x1.0a65383fa29c0p+16",
+        "0x1.133d553c9f972p+20"
       ]
     },
-    "target_num": 11000
+    "target_num": 5000
   },
   {
     "sim_params": {
@@ -46,18 +62,26 @@
       "s": 0.02
     },
     "seed_seed": 666,
-    "num": 5100,
+    "num": 2048,
     "sums": {
       "ave_alive": [
-        "0x1.faaaf858793e1p+16",
-        "0x1.a7f00cd2c2022p+21"
+        "0x1.99e8f4796c739p+15",
+        "0x1.59c889e7010dep+20"
       ],
-      "ave_alive_0": [
-        "0x1.f4407fd2c7b7ap+16",
-        "0x1.9adc5890407d0p+21"
+      "ave_time": [
+        "0x1.0dfc28adedf4dp+8",
+        "0x1.21050815ea4bdp+5"
+      ],
+      "var_time": [
+        "0x1.a3d076e5ba675p+7",
+        "0x1.5f57547a6f4b8p+4"
+      ],
+      "ave_alive_ctime": [
+        "0x1.ed5db829306c8p+13",
+        "0x1.e3e772b7c94d7p+16"
       ]
     },
-    "target_num": 5100
+    "target_num": 2048
   },
   {
     "sim_params": {
@@ -66,18 +90,26 @@
       "s": 0.04
     },
     "seed_seed": 667,
-    "num": 1010,
+    "num": 1024,
     "sums": {
       "ave_alive": [
-        "0x1.98ac955e124bbp+13",
-        "0x1.4ecddfbf6ca19p+17"
+        "0x1.9e7631a712402p+13",
+        "0x1.53aeeb3ef5143p+17"
       ],
-      "ave_alive_0": [
-        "0x1.96d0e2b170507p+13",
-        "0x1.4b5b051feec9dp+17"
+      "ave_time": [
+        "0x1.b6f3835ec7c50p+7",
+        "0x1.79a0df86972f9p+5"
+      ],
+      "var_time": [
+        "0x1.742d2d357a0fep+7",
+        "0x1.0fe0ce5c97f53p+5"
+      ],
+      "ave_alive_ctime": [
+        "0x1.2bb43324b5e84p+12",
+        "0x1.60261bc777beap+14"
       ]
     },
-    "target_num": 1010
+    "target_num": 1024
   },
   {
     "sim_params": {
@@ -86,18 +118,26 @@
       "s": 0.08
     },
     "seed_seed": 668,
-    "num": 300,
+    "num": 512,
     "sums": {
       "ave_alive": [
-        "0x1.fadd59569b8eap+10",
-        "0x1.adb6f201cd9b2p+13"
+        "0x1.b0d9be1993c66p+11",
+        "0x1.6f318e17980b1p+14"
       ],
-      "ave_alive_0": [
-        "0x1.fa3afb549f94cp+10",
-        "0x1.ac825c145bedap+13"
+      "ave_time": [
+        "0x1.53cc5a5c63a38p+7",
+        "0x1.c3665751aec40p+5"
+      ],
+      "var_time": [
+        "0x1.3494045ab83b3p+7",
+        "0x1.7469fe91468e4p+5"
+      ],
+      "ave_alive_ctime": [
+        "0x1.81f8d283bcebdp+10",
+        "0x1.23331d772065dp+12"
       ]
     },
-    "target_num": 300
+    "target_num": 512
   },
   {
     "sim_params": {
@@ -106,18 +146,26 @@
       "s": 0.16
     },
     "seed_seed": 669,
-    "num": 300,
+    "num": 256,
     "sums": {
       "ave_alive": [
-        "0x1.0fea36b450a56p+10",
-        "0x1.ed34f2aee92f7p+11"
+        "0x1.cfd5cc63f1411p+9",
+        "0x1.a4705d32c4b0ep+11"
       ],
-      "ave_alive_0": [
-        "0x1.0fe90be0ded27p+10",
-        "0x1.ed2a640971fc5p+11"
+      "ave_time": [
+        "0x1.f65b576921c2bp+6",
+        "0x1.ecf859833eb06p+5"
+      ],
+      "var_time": [
+        "0x1.e03953789f72dp+6",
+        "0x1.c2935035ab382p+5"
+      ],
+      "ave_alive_ctime": [
+        "0x1.04f4f16c1a81dp+9",
+        "0x1.0a0c2d8376127p+10"
       ]
     },
-    "target_num": 300
+    "target_num": 256
   },
   {
     "sim_params": {
@@ -126,17 +174,25 @@
       "s": 0.32
     },
     "seed_seed": 670,
-    "num": 300,
+    "num": 128,
     "sums": {
       "ave_alive": [
-        "0x1.35781ddaf4367p+9",
-        "0x1.3f46235590e41p+10"
+        "0x1.0809397b043bap+8",
+        "0x1.105a84b4b9680p+9"
       ],
-      "ave_alive_0": [
-        "0x1.3563e2d6238dbp+9",
-        "0x1.3f1ba8c84c7cep+10"
+      "ave_time": [
+        "0x1.5cca3ea92f832p+6",
+        "0x1.db3ae6ce9dca0p+5"
+      ],
+      "var_time": [
+        "0x1.57c9b6f43d26ep+6",
+        "0x1.cdbf574221cf0p+5"
+      ],
+      "ave_alive_ctime": [
+        "0x1.77b33b76cbe61p+7",
+        "0x1.13b14e79401ecp+8"
       ]
     },
-    "target_num": 300
+    "target_num": 128
   }
 ]
