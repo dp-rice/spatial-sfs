@@ -1,7 +1,6 @@
 from scipy import integrate
 from scipy import special
 from scipy.stats import qmc
-# from matplotlib import pyplot as plt
 import numpy as np
 import math
 import pandas as pd
