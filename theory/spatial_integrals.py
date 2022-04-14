@@ -1,7 +1,7 @@
 from scipy import integrate
 from scipy import special
 from scipy.stats import qmc
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 import numpy as np
 import math
 import pandas as pd
@@ -129,7 +129,7 @@ def gausshermitequad_integral(n,sigma,func): # works for 1d only
     return (sum(series_func))
 
 def main():
-    sigma_list = np.linspace(1e-8, 100, 1000)
+    sigma_list = np.linspace(1e-2, 100, 1000)
     u2_list = [montecarlo_integral(sigma=s,pow=15,func1=h1,dim=1) for s in sigma_list]
     u2_gh_list = [gausshermitequad_integral(n=1500,sigma=s,func=h1) for s in sigma_list]
     u2_gauss_list = [gaussquad_integral(sigma=s,dim=1,integrandA=integrand1) for s in sigma_list]
