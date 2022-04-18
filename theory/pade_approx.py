@@ -84,22 +84,23 @@ def calcError(tab,coefs):
     """
     # tab = tab.reset_index()
     err_vals = []
+    coefs_vals = []
     for row in tab.itertuples():
         err = []
-        tc = row[tab.columns.get_loc('tc')].tolist()
+        tc = row[5]
         while len(tc)<len(coefs): # make lists the same length
             tc.append(0)
-        for i in range(len(tc)):
-            err.append(coefs[i]-tc[i])
+        err = [a-b for a,b in zip(coefs, tc)]
         err_vals.append(err)
+        coefs_vals.append(coefs)
     tab_new = tab
+    tab_new['coef_quad_vals'] = coefs_vals
     tab_new['error_vals'] = err_vals
     return tab_new
 
 def main():
     data = pd.read_csv('spatial_integrals.csv')
     sigma_list = data['sigma'].tolist()
-    # print(sigma_list)
     res = pd.DataFrame()
     for j in range(len(sigma_list)):
         coefs_sigma = [1]
