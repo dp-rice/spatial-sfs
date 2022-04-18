@@ -11,8 +11,9 @@ def get_residues(p,q):
     """
     rs, pl, k = residue(p,q)
     if len(pl)>0:
-        pole = pl[np.argmin(min(abs(pl)))]
-        res = rs[np.argmin(pole)]
+        pl_abs = [abs(x) for x in pl]
+        pole = pl[np.argmin(pl_abs)]
+        res = rs[np.argmin(pl_abs)]
     else:
         pole = np.nan
         res = np.nan
@@ -97,15 +98,19 @@ def calcError(tab,coefs):
 
 def main():
     data = pd.read_csv('spatial_integrals.csv')
-    sigma = 1.010900900900901 # eventually want to iterate over sigma values and save to csv
-    coefs_sigma = [1]
-    for i in range(3):
-        coefs_sigma.append(data.loc[data["sigma"]==sigma,['u2_GQ','u3_GQ','u4_GQ']].values.tolist()[0][i])
-    # coefs_sigma = [1,-1,1,-1] test case
-    res = calc_pade_table(coefs_sigma)
-    res = calcError(res,coefs_sigma)
-    res = calc_pole_res(res)
-    print(res)
+    sigma_list = data['sigma'].tolist()
+    # print(sigma_list)
+    res = pd.DataFrame()
+    for j in range(len(sigma_list)):
+        coefs_sigma = [1]
+        sigma = sigma_list[j]
+        for i in range(3):
+            coefs_sigma.append(data.loc[data["sigma"]==sigma,['u2_GQ','u3_GQ','u4_GQ']].values.tolist()[0][i])
+        temp = calc_pade_table(coefs_sigma)
+        temp = calcError(temp,coefs_sigma)
+        temp = calc_pole_res(temp)
+        temp.insert(loc=0, column='sigma', value=np.repeat(sigma,temp.shape[0]))
+        res = pd.concat([res, temp], ignore_index=True, sort=False)
     res.to_csv('pade_approx.csv', index=False)
 
 if __name__ == '__main__':
