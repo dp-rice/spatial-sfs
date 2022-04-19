@@ -10,14 +10,17 @@ def get_residues(p,q):
     Given function p/q, returns pole closest to zero and its residue
     """
     rs, pl, k = residue(p,q)
+    mult = []
     if len(pl)>0:
         pl_abs = [abs(x) for x in pl]
         pole = pl[np.argmin(pl_abs)]
         res = rs[np.argmin(pl_abs)]
+        mult_temp = len([x for x in pl if x==pole])
+        mult.append(mult_temp)
     else:
         pole = np.nan
         res = np.nan
-    return pole, res
+    return pole, res, mult
 
 
 def calc_pade_table(coefs):
@@ -57,15 +60,18 @@ def calc_pole_res(tab):
     """
     polevals = []
     resvals = []
+    multvals = []
     # tab = tab.reset_index()
     for row in tab.itertuples():
         p, q = get_pade_poly(tab,row[tab.columns.get_loc('m')+1],row[tab.columns.get_loc('n')+1])
-        pole, res = get_residues(p, q)
+        pole, res, mult = get_residues(p, q)
         polevals.append(pole)
         resvals.append(res)
+        multvals.append(mult)
     tab_new = tab
     tab_new['pole'] = polevals
     tab_new['residue'] = resvals
+    tab_new['multiplicity_pole'] = multvals
     return tab_new
 
 def get_pade_poly(tab,m,n):
