@@ -100,25 +100,32 @@ def calcError(tab,coefs):
         err_vals.append(err)
         coefs_vals.append(coefs)
     tab_new = tab
-    tab_new['coef_quad_vals'] = coefs_vals
+    tab_new['coef_input_vals'] = coefs_vals
     tab_new['error_vals'] = err_vals
     return tab_new
 
 def main():
-    data = pd.read_csv('spatial_integrals.csv')
-    sigma_list = data['sigma'].tolist()
+    # data = pd.read_csv('spatial_integrals.csv')
+    # sigma_list = data['sigma'].tolist()
+    # res = pd.DataFrame()
+    # for j in range(len(sigma_list)):
+    #     coefs_sigma = [1]
+    #     sigma = sigma_list[j]
+    #     for i in range(3):
+    #         coefs_sigma.append(data.loc[data["sigma"]==sigma,['u2_GQ','u3_GQ','u4_GQ']].values.tolist()[0][i])
+    #     temp = calc_pade_table(coefs_sigma)
+    #     temp = calcError(temp,coefs_sigma)
+    #     temp = calc_pole_res(temp)
+    #     temp.insert(loc=0, column='sigma', value=np.repeat(sigma,temp.shape[0]))
+    #     res = pd.concat([res, temp], ignore_index=True, sort=False)
     res = pd.DataFrame()
-    for j in range(len(sigma_list)):
-        coefs_sigma = [1]
-        sigma = sigma_list[j]
-        for i in range(3):
-            coefs_sigma.append(data.loc[data["sigma"]==sigma,['u2_GQ','u3_GQ','u4_GQ']].values.tolist()[0][i])
-        temp = calc_pade_table(coefs_sigma)
-        temp = calcError(temp,coefs_sigma)
-        temp = calc_pole_res(temp)
-        temp.insert(loc=0, column='sigma', value=np.repeat(sigma,temp.shape[0]))
-        res = pd.concat([res, temp], ignore_index=True, sort=False)
-    res.to_csv('pade_approx.csv', index=False)
+    coefs = np.repeat(1,10).tolist()
+    print(coefs)
+    res = calc_pade_table(coefs)
+    res = calcError(res,coefs)
+    res = calc_pole_res(res)
+
+    res.to_csv('pade_approx_test.csv', index=False)
 
 if __name__ == '__main__':
     main()

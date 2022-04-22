@@ -142,43 +142,5 @@ def main():
 
     df.to_csv('spatial_integrals.csv',index=False)
 
-    # # plot for u1 - all methods
-    # plt.figure(1)
-    # plt.plot(sigma_list,u1_list,label="u1_ev")
-    # plt.plot(sigma_list, u1_gh_list,':', label="u1_gh")
-    # plt.plot(sigma_list, u1_gauss_list,'--', label="u1_quad")
-    # plt.legend()
-    # plt.xlabel("spatial dispersion of sample (sigma)")
-    # plt.ylabel("value")
-    # plt.savefig('u1_allmethods.png')
-    #
-    # # plot for u2 - all methods
-    # plt.figure(2)
-    # plt.plot(sigma_list, u2_list, label="u2_ev")
-    # plt.plot(sigma_list, u2_gauss_list, '--', label="u2_quad")
-    # plt.legend()
-    # plt.xlabel("spatial dispersion of sample (sigma)")
-    # plt.ylabel("value")
-    # plt.savefig('u2_allmethods.png')
-    #
-    # # plot for u3 - all methods
-    # plt.figure(3)
-    # plt.plot(sigma_list, u3_list, label="u3_ev")
-    # plt.plot(sigma_list, u3_gauss_list, '--', label="u3_quad")
-    # plt.legend()
-    # plt.xlabel("spatial dispersion of sample (sigma)")
-    # plt.ylabel("value")
-    # plt.savefig('u3_allmethods.png')
-    #
-    # # plot for u1, u2, & u3 - monte carlo only
-    # plt.figure(4)
-    # plt.plot(sigma_list, u1_list, label="u1_ev")
-    # plt.plot(sigma_list, u2_list, label="u2_ev")
-    # plt.plot(sigma_list, u3_list, label="u3_ev")
-    # plt.legend()
-    # plt.xlabel("spatial dispersion of sample (sigma)")
-    # plt.ylabel("value")
-    # plt.savefig("u1u2u3_montecarlo.png")
-
 if __name__ == '__main__':
     main()
