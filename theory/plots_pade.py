@@ -23,8 +23,8 @@ def main():
     data["poly_type"] = data["m"].astype(str) + "_" + data["n"].astype(str)
     poly_type = data["poly_type"].tolist()
 
-    # df = pd.DataFrame(dict(sigma=sigma_list, residues=residues, poles=poles,poly_type=poly_type))
-    # # df.to_csv("res_pole_values.csv")
+    df = pd.DataFrame(dict(sigma=sigma_list, residues=residues, poles=poles,poly_type=poly_type))
+    df.to_csv("res_pole_values.csv")
     # df['poles'].replace('',np.nan,inplace=True)
     # df.dropna(subset='poles',inplace=True)
     # df['residues'].replace('', np.nan, inplace=True)
