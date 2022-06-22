@@ -22,16 +22,16 @@ def h2(y,x,sigma):
     """
     function evaluated in Monte Carlo integration for u3
     """
-    temp = sigma*sigma*(4*np.pi*np.pi*(y/sigma)*(y/sigma)+4*np.pi*np.pi*(y/sigma)*(y/sigma)+2)*(4*np.pi*np.pi*(-(x/sigma)-(y/sigma))*(-(x/sigma)-(y/sigma))+4*(np.pi*np.pi*(y/sigma)*(y/sigma))+4*np.pi*np.pi*(x/sigma)*(x/sigma)+1)
-    return(np.exp(-x*y)/temp)
+    temp = sigma*sigma*(8*np.pi*np.pi*(y/sigma)*(y/sigma)+2)*(4*np.pi*np.pi*(-(x/sigma)-(y/sigma))*(-(x/sigma)-(y/sigma))+4*(np.pi*np.pi*(y/sigma)*(y/sigma))+4*np.pi*np.pi*(x/sigma)*(x/sigma)+3)
+    return((2*np.exp(-x*y))/temp)
 
 def integrand2(y,x,sigma): # note - this is in terms of y=\xi'' and x=\xi' to avoid overflow errors
     """
     integrand to be evaluated by quadrature for u3
     """
-    num = math.exp(-0.5*sigma*sigma*(-x-y)*(-x-y))*math.exp(-0.5*sigma*sigma*x*x)*math.exp(-0.5*sigma*sigma*y*y)
-    denom = (4*np.pi*np.pi*y*y+4*np.pi*np.pi*y*y+2)*(4*np.pi*np.pi*(-x-y)*(-x-y)+4*np.pi*np.pi*y*y+4*np.pi*np.pi*x*x+1)
-    return(num/denom)
+    # num = math.exp(-0.5*sigma*sigma*(-x-y)*(-x-y))*math.exp(-0.5*sigma*sigma*x*x)*math.exp(-0.5*sigma*sigma*y*y)
+    # denom = (4*np.pi*np.pi*y*y+4*np.pi*np.pi*y*y+2)*(4*np.pi*np.pi*(-x-y)*(-x-y)+4*np.pi*np.pi*y*y+4*np.pi*np.pi*x*x+1)
+    return(h2(y,x,sigma)*math.exp(-x*x)*math.exp(-y*y))
 
 def h3(z,y,x,sigma):
     """
