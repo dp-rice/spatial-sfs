@@ -11,16 +11,21 @@ def get_residues(p,q):
     """
     rs, pl, k = residue(p,q)
     mult = []
+    pl_all = []
     if len(pl)>0:
         pl_abs = [abs(x) for x in pl]
+        print(pl)
+        print(pl_abs)
         pole = pl[np.argmin(pl_abs)]
+        print(pole)
         res = rs[np.argmin(pl_abs)]
         mult_temp = len([x for x in pl if x==pole])
         mult.append(mult_temp)
+        pl_all.append(pl)
     else:
         pole = np.nan
         res = np.nan
-    return pole, res, mult
+    return pole, res, mult, pl_all
 
 
 def calc_pade_table(coefs):
@@ -61,17 +66,24 @@ def calc_pole_res(tab):
     polevals = []
     resvals = []
     multvals = []
+    plvals = []
     # tab = tab.reset_index()
     for row in tab.itertuples():
         p, q = get_pade_poly(tab,row[tab.columns.get_loc('m')+1],row[tab.columns.get_loc('n')+1])
-        pole, res, mult = get_residues(p, q)
+        pole, res, mult, pl_all = get_residues(p, q)
+        print("here")
+        print(row[tab.columns.get_loc('m')+1])
+        print(row[tab.columns.get_loc('n') + 1])
+        print(pole)
         polevals.append(pole)
         resvals.append(res)
         multvals.append(mult)
+        plvals.append(pl_all)
     tab_new = tab
     tab_new['pole'] = polevals
     tab_new['residue'] = resvals
     tab_new['multiplicity_pole'] = multvals
+    tab_new['poles_all'] = plvals
     return tab_new
 
 def get_pade_poly(tab,m,n):

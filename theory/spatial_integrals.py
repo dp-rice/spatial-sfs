@@ -9,7 +9,7 @@ def h1(x,sigma):
     """
     function evaluated in Monte Carlo integration for u2
     """
-    temp = (4*np.pi*np.pi*(x/sigma)*(x/sigma)+2)*sigma
+    temp = (8*np.pi*np.pi*(x/sigma)*(x/sigma)+2)*sigma
     return(1/temp)
 
 def integrand1(x,sigma):
