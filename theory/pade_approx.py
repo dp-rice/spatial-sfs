@@ -1,9 +1,38 @@
 import numpy as np
 import numpy.linalg
 from scipy.interpolate import pade
-from scipy.interpolate import approximate_taylor_polynomial
+# from scipy.interpolate import approximate_taylor_polynomial
 from scipy.signal import residue
 import pandas as pd
+import math
+import random
+
+def deriv_rational(p,q,n=1):
+    """
+    Generate nth derivative of rational p/q using quotient rule
+    """
+    p = np.poly1d(p)
+    q = np.poly1d(q)
+    for i in range(n):
+        p_der = np.polyder(p)
+        q_der = np.polyder(q)
+        new_p = np.polysub(np.polymul(q,p_der),np.polymul(p,q_der))
+        new_q = np.polymul(q,q)
+        p = new_p
+        q = new_q
+    return p,q
+
+
+def get_taylor_coefs(p,q,m,a=0):
+    """
+    Compute Taylor series coefficients for rational function p/q
+    """
+    coefs = []
+    for i in range(m):
+        p_i, q_i = deriv_rational(p=p,q=q,n=i)
+        coefs.append((p_i(a)/q_i(a))/math.factorial(i))
+    return coefs
+
 
 def get_residues(p,q):
     """
@@ -49,8 +78,9 @@ def calc_pade_table(coefs):
                 nvals.append(n)
                 def f(x):
                     return p(x)/q(x)
-                taylor = approximate_taylor_polynomial(f,0,len(coefs)-1,1).coefficients.tolist()
-                taylor.reverse()
+                # taylor = approximate_taylor_polynomial(f,0,len(coefs)-1,1).coefficients.tolist()
+                # taylor.reverse()
+                taylor = get_taylor_coefs(p,q,len(coefs))
                 taylor_coefs.append(taylor)
             except numpy.linalg.LinAlgError as err:
                 print("Warning: error thrown for m = %s and n = %s.\n %s" % (m,n,err))
@@ -103,17 +133,23 @@ def calcError(tab,coefs):
     # tab = tab.reset_index()
     err_vals = []
     coefs_vals = []
+    err_next_vals = []
     for row in tab.itertuples():
         err = []
+        # print(row)
         tc = row[5]
+        m = row[1]
+        n = row[2]
         while len(tc)<len(coefs): # make lists the same length
             tc.append(0)
         err = [a-b for a,b in zip(coefs, tc)]
         err_vals.append(err)
         coefs_vals.append(coefs)
+        err_next_vals.append(err[m+n])
     tab_new = tab
-    tab_new['coef_quad_vals'] = coefs_vals
-    tab_new['error_vals'] = err_vals
+    tab_new['coef_input_vals'] = coefs_vals
+    tab_new['error_vals_all'] = err_vals
+    tab_new['error_next'] = err_next_vals
     return tab_new
 
 def main():
@@ -125,11 +161,21 @@ def main():
         sigma = sigma_list[j]
         for i in range(3):
             coefs_sigma.append(data.loc[data["sigma"]==sigma,['u2_GQ','u3_GQ','u4_GQ']].values.tolist()[0][i])
+        # coefs_sigma = [x+random.uniform(-5e-8,5e-8) for x in coefs_sigma]
+        # print(coefs_sigma)
         temp = calc_pade_table(coefs_sigma)
         temp = calcError(temp,coefs_sigma)
         temp = calc_pole_res(temp)
         temp.insert(loc=0, column='sigma', value=np.repeat(sigma,temp.shape[0]))
         res = pd.concat([res, temp], ignore_index=True, sort=False)
+
+    # print(get_taylor_coefs(np.poly1d([1,1,0]),np.poly1d([-1,1]),5))
+    # res = pd.DataFrame()
+    # coefs = np.repeat(1,10).tolist()
+    # print(coefs)
+    # res = calc_pade_table(coefs)
+    # res = calcError(res,coefs)
+    # res = calc_pole_res(res)
     res.to_csv('pade_approx.csv', index=False)
 
 if __name__ == '__main__':
