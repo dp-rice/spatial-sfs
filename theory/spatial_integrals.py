@@ -12,11 +12,14 @@ def h1(x,sigma):
     temp = (8*np.pi*np.pi*(x/sigma)*(x/sigma)+2)*sigma
     return(1/temp)
 
-def integrand1(x,sigma):
+def integrand1(x,sigma): #  change this to x=\xi' notation for consistency (should be equivalent)
     """
     integrand to be evaluated by quadrature for u2
     """
-    return(h1(x,sigma)*math.exp(-x*x))
+    num = math.exp(-0.5*sigma*sigma*x*x)*math.exp(-0.5*sigma*sigma*x*x)
+    denom = 8*np.pi*np.pi*x*x+2
+    return(num/denom)
+    #return(h1(x,sigma)*math.exp(-x*x))
 
 def h2(y,x,sigma):
     """
@@ -29,51 +32,59 @@ def integrand2(y,x,sigma): # note - this is in terms of y=\xi'' and x=\xi' to av
     """
     integrand to be evaluated by quadrature for u3
     """
-    # num = math.exp(-0.5*sigma*sigma*(-x-y)*(-x-y))*math.exp(-0.5*sigma*sigma*x*x)*math.exp(-0.5*sigma*sigma*y*y)
-    # denom = (4*np.pi*np.pi*y*y+4*np.pi*np.pi*y*y+2)*(4*np.pi*np.pi*(-x-y)*(-x-y)+4*np.pi*np.pi*y*y+4*np.pi*np.pi*x*x+1)
-    return(h2(y,x,sigma)*math.exp(-x*x)*math.exp(-y*y))
+    num = math.exp(-0.5*sigma*sigma*(-x-y)*(-x-y))*math.exp(-0.5*sigma*sigma*x*x)*math.exp(-0.5*sigma*sigma*y*y)
+    denom = (8*np.pi*np.pi*y*y+2)*(4*np.pi*np.pi*(-x-y)*(-x-y)+4*np.pi*np.pi*y*y+4*np.pi*np.pi*x*x+3)
+    return(2*num/denom)
 
-def h3(z,y,x,sigma):
-    """
-    LHS function evaluated in Monte Carlo integration for u4
-    """
-    temp=sigma*sigma*sigma*(4*np.pi*np.pi*(z/sigma)*(z/sigma)+4*np.pi*np.pi*(z/sigma)*(z/sigma)+2)*(4*np.pi*np.pi*(z/sigma)*(z/sigma)+4*np.pi*np.pi*(y/sigma)*(y/sigma)+4*np.pi*np.pi*(-(y/sigma)-(z/sigma))*(-(y/sigma)-(z/sigma))+3)*(4*np.pi*np.pi*(-(x/sigma)-(y/sigma)-(z/sigma))*(-(x/sigma)-(y/sigma)-(z/sigma))+4*np.pi*np.pi*(x/sigma)*(x/sigma)+4*np.pi*np.pi*(y/sigma)*(y/sigma)+4*np.pi*np.pi*(z/sigma)*(z/sigma)+4)
-    return(np.exp(-x*y)*np.exp(-x*z)*np.exp(-y*z)/temp)
+
+    # return(h2(y,x,sigma)*math.exp(-x*x)*math.exp(-y*y)) not using
+
+# def h3(z,y,x,sigma):
+#     """
+#     LHS function evaluated in Monte Carlo integration for u4
+#     """
+#     temp=sigma*sigma*sigma*(4*np.pi*np.pi*(z/sigma)*(z/sigma)+4*np.pi*np.pi*(z/sigma)*(z/sigma)+2)*(4*np.pi*np.pi*(z/sigma)*(z/sigma)+4*np.pi*np.pi*(y/sigma)*(y/sigma)+4*np.pi*np.pi*(-(y/sigma)-(z/sigma))*(-(y/sigma)-(z/sigma))+3)*(4*np.pi*np.pi*(-(x/sigma)-(y/sigma)-(z/sigma))*(-(x/sigma)-(y/sigma)-(z/sigma))+4*np.pi*np.pi*(x/sigma)*(x/sigma)+4*np.pi*np.pi*(y/sigma)*(y/sigma)+4*np.pi*np.pi*(z/sigma)*(z/sigma)+4)
+#     return(np.exp(-x*y)*np.exp(-x*z)*np.exp(-y*z)/temp)
 
 def integrand3(z,y,x,sigma): # note - this is in terms of z=\xi''', y=\xi'', and x=\xi' to avoid overflow errors
     """
     LHS integrand to be evaluated by quadrature for u4
     """
-    num = math.exp(-0.5 * sigma * sigma * (-x - y - z) * (-x - y - z)) * math.exp(
+    num = 4*math.exp(-0.5 * sigma * sigma * (-x - y - z) * (-x - y - z)) * math.exp(
         -0.5 * sigma * sigma * x * x) * math.exp(-0.5 * sigma * sigma * y * y) * math.exp(-0.5 * sigma * sigma * z * z)
-    denom = (4*np.pi*np.pi*z*z+4*np.pi*np.pi*z*z+2)*(4*np.pi*np.pi*z*z+4*np.pi*np.pi*y*y+4*np.pi*np.pi*(-y-z)*(-y-z)+3)*(4*np.pi*np.pi*(-x-y-z)*(-x-y-z)+4*np.pi*np.pi*x*x+4*np.pi*np.pi*y*y+4*np.pi*np.pi*z*z+4)
+    denom = (8*np.pi*np.pi*z*z+2)*(4*np.pi*np.pi*z*z+4*np.pi*np.pi*y*y+4*np.pi*np.pi*(-y-z)*(-y-z)+3)*(4*np.pi*np.pi*(-x-y-z)*(-x-y-z)+4*np.pi*np.pi*x*x+4*np.pi*np.pi*y*y+4*np.pi*np.pi*z*z+4)
     return(num/denom)
 
-def h4(z,y,x,sigma):
-    """
-    RHS function evaluated in Monte Carlo integration for u4
-    """
-    denom1 = sigma*sigma*sigma*(4 * np.pi * np.pi * ((y / sigma) + (z / sigma)) * ((y / sigma) + (z / sigma)) + 4 * np.pi * np.pi * (
-                -(y / sigma) - (z / sigma)) * (-(y / sigma) - (z / sigma)) + 2) * (
-                         4 * np.pi * np.pi * ((y / sigma) + (z / sigma)) * (
-                             (y / sigma) + (z / sigma)) + 4 * np.pi * np.pi * (x / sigma) * (x / sigma) + 3) * (
-                         4 * np.pi * np.pi * (z / sigma) * (z / sigma) - 4 * np.pi * np.pi*(
-                     (y / sigma) + (z / sigma)) * ((y / sigma) + (z / sigma)) + 1)
-    denom2 = sigma*sigma*sigma*(4 * np.pi * np.pi * (z / sigma) * (z / sigma) + 4 * np.pi * np.pi * (-(y / sigma) - (z / sigma)) * (
-                -(y / sigma) - (z / sigma)) + 3) * (
-                         4 * np.pi * np.pi * (z / sigma) * (z / sigma) + 4 * np.pi * np.pi * (x / sigma) * (
-                             x / sigma)+4) * (4 * np.pi * np.pi * ((y / sigma) + (z / sigma)) * (
-                (y / sigma) + (z / sigma)) - 4 * np.pi * np.pi*(z / sigma) * (z / sigma) - 1)
-    return(np.exp(-x*y)*np.exp(-x*z)*np.exp(-y*z)*((1/denom1)+(1/denom2)))
+# def h4(z,y,x,sigma):
+#     """
+#     RHS function evaluated in Monte Carlo integration for u4
+#     """
+#     denom1 = sigma*sigma*sigma*(4 * np.pi * np.pi * ((y / sigma) + (z / sigma)) * ((y / sigma) + (z / sigma)) + 4 * np.pi * np.pi * (
+#                 -(y / sigma) - (z / sigma)) * (-(y / sigma) - (z / sigma)) + 2) * (
+#                          4 * np.pi * np.pi * ((y / sigma) + (z / sigma)) * (
+#                              (y / sigma) + (z / sigma)) + 4 * np.pi * np.pi * (x / sigma) * (x / sigma) + 3) * (
+#                          4 * np.pi * np.pi * (z / sigma) * (z / sigma) - 4 * np.pi * np.pi*(
+#                      (y / sigma) + (z / sigma)) * ((y / sigma) + (z / sigma)) + 1)
+#     denom2 = sigma*sigma*sigma*(4 * np.pi * np.pi * (z / sigma) * (z / sigma) + 4 * np.pi * np.pi * (-(y / sigma) - (z / sigma)) * (
+#                 -(y / sigma) - (z / sigma)) + 3) * (
+#                          4 * np.pi * np.pi * (z / sigma) * (z / sigma) + 4 * np.pi * np.pi * (x / sigma) * (
+#                              x / sigma)+4) * (4 * np.pi * np.pi * ((y / sigma) + (z / sigma)) * (
+#                 (y / sigma) + (z / sigma)) - 4 * np.pi * np.pi*(z / sigma) * (z / sigma) - 1)
+#     return(np.exp(-x*y)*np.exp(-x*z)*np.exp(-y*z)*((1/denom1)+(1/denom2)))
 
 def integrand4(z,y,x,sigma): # note - this is in terms of z=\xi'''', y=\xi'', and x=\xi' to avoid overflow errors
     """
     RHS integrand to be evaluated by quadrature for u4
     """
-    num = math.exp(-0.5*sigma*sigma*(-x-y)*(-x-y))*math.exp(-0.5*sigma*sigma*x*x)*math.exp(-0.5*sigma*sigma*(y-z)*(y-z))*math.exp(-0.5*sigma*sigma*z*z)
-    denom1 = (4*np.pi*np.pi*y*y+4*np.pi*np.pi*y*y+2)*(4*np.pi*np.pi*y*y+4*np.pi*np.pi*x*x+3)*(4*np.pi*np.pi*z*z-4*np.pi*np.pi*y*y+1)
-    denom2 = (4*np.pi*np.pi*z*z+4*np.pi*np.pi*y*y+3)*(4*np.pi*np.pi*z*z+4*np.pi*np.pi*x*x+4)*(4*np.pi*np.pi*y*y-4*np.pi*np.pi*z*z-1)
-    return (num * ((1 / denom1) + (1 / denom2)))
+    num = math.exp(-0.5*sigma*sigma*(-x-z)*(-x-z))*math.exp(-0.5*sigma*sigma*x*x)*math.exp(-0.5*sigma*sigma*(z-y)*(z-y))*math.exp(-0.5*sigma*sigma*y*y)
+    denom1 = (8*np.pi*np.pi*z*z+2)*(4*np.pi*np.pi*x*x+4*np.pi*np.pi*z*z+4*np.pi*np.pi*(-x-z)*(-x-z)+3)*(4*np.pi*np.pi*y*y+4*np.pi*np.pi*(z-y)*(z-y)-4*np.pi*np.pi*z*z+1)
+    denom2 = (4*np.pi*np.pi*z*z+4*np.pi*np.pi*y*y+4*np.pi*np.pi*(z-y)*(z-y)+3)*(4*np.pi*np.pi*y*y+4*np.pi*np.pi*(z-y)*(z-y)+4*np.pi*np.pi*x*x+4*np.pi*np.pi*(-x-z)*(-x-z)+4)*(4*np.pi*np.pi*z*z-4*np.pi*np.pi*y*y-4*np.pi*np.pi*(z-y)*(z-y)-1)
+    try:
+        ans = num * ((1 / denom1) + (1 / denom2))
+    except ZeroDivisionError:
+        ans = 0
+        print("error: division by zero")
+    return ans
 
 def montecarlo_integral(sigma,dim,pow,func1,func2=None):
     """
@@ -112,7 +123,7 @@ def gaussquad_integral(sigma,dim,integrandA,integrandB=None):
     if dim==2:
         return(integrate.dblquad(integrandA, -np.inf, np.inf, lambda x: -np.inf, lambda x: np.inf, args=(sigma,))[0])
     if dim==3:
-        return(4*integrate.tplquad(integrandA, -np.inf, np.inf, lambda x: -np.inf, lambda x: np.inf, lambda x,y: -np.inf, lambda x,y: np.inf,args=(sigma,))[0]
+        return(integrate.tplquad(integrandA, -np.inf, np.inf, lambda x: -np.inf, lambda x: np.inf, lambda x,y: -np.inf, lambda x,y: np.inf,args=(sigma,))[0]
                + integrate.tplquad(integrandB, -np.inf, np.inf, lambda x: -np.inf, lambda x: np.inf, lambda x,y: -np.inf, lambda x,y: np.inf,args=(sigma,))[0])
 
 def gausshermitequad_integral(n,sigma,func): # works for 1d only
@@ -129,16 +140,23 @@ def gausshermitequad_integral(n,sigma,func): # works for 1d only
 
 def main():
     sigma_list = np.linspace(1e-2, 100, 1000)
-    u2_list = [montecarlo_integral(sigma=s,pow=15,func1=h1,dim=1) for s in sigma_list]
-    u2_gh_list = [gausshermitequad_integral(n=1500,sigma=s,func=h1) for s in sigma_list]
+    # u2_list = [montecarlo_integral(sigma=s,pow=15,func1=h1,dim=1) for s in sigma_list]
+    # u2_gh_list = [gausshermitequad_integral(n=1500,sigma=s,func=h1) for s in sigma_list]
+    print("calculating u2")
     u2_gauss_list = [gaussquad_integral(sigma=s,dim=1,integrandA=integrand1) for s in sigma_list]
-    u3_list = [montecarlo_integral(sigma=s, pow=15,func1=h2,dim=2) for s in sigma_list]
+    # u3_list = [montecarlo_integral(sigma=s, pow=15,func1=h2,dim=2) for s in sigma_list]
+    print("calculating u3")
     u3_gauss_list = [gaussquad_integral(sigma=s,dim=2,integrandA=integrand2) for s in sigma_list]
-    u4_list = [montecarlo_integral(sigma=s,pow=15,func1=h3,func2=h4,dim=3) for s in sigma_list]
+    # u4_list = [montecarlo_integral(sigma=s,pow=15,func1=h3,func2=h4,dim=3) for s in sigma_list]
+    print("calculating u4")
     u4_gauss_list =  [gaussquad_integral(sigma=s,dim=3,integrandA=integrand3,integrandB=integrand4) for s in sigma_list]
 
-    df = pd.DataFrame(list(zip(sigma_list, u2_list,u2_gh_list,u2_gauss_list,u3_list,u3_gauss_list,u4_list,u4_gauss_list)),
-                      columns=['sigma', 'u2_MC','u2_GH','u2_GQ','u3_MC','u3_GQ','u4_MC','u4_GQ'])
+    # df = pd.DataFrame(list(zip(sigma_list, u2_list,u2_gh_list,u2_gauss_list,u3_list,u3_gauss_list,u4_list,u4_gauss_list)),
+    #                   columns=['sigma', 'u2_MC','u2_GH','u2_GQ','u3_MC','u3_GQ','u4_MC','u4_GQ'])
+
+    df = pd.DataFrame(
+        list(zip(sigma_list, u2_gauss_list, u3_gauss_list,u4_gauss_list)),
+        columns=['sigma', 'u2_GQ', 'u3_GQ','u4_GQ'])
 
     df.to_csv('spatial_integrals.csv',index=False)
 

@@ -43,10 +43,10 @@ def get_residues(p,q):
     pl_all = []
     if len(pl)>0:
         pl_abs = [abs(x) for x in pl]
-        print(pl)
-        print(pl_abs)
+        # print(pl)
+        # print(pl_abs)
         pole = pl[np.argmin(pl_abs)]
-        print(pole)
+        # print(pole)
         res = rs[np.argmin(pl_abs)]
         mult_temp = len([x for x in pl if x==pole])
         mult.append(mult_temp)
@@ -159,10 +159,13 @@ def main():
     for j in range(len(sigma_list)):
         coefs_sigma = [1]
         sigma = sigma_list[j]
-        for i in range(3):
-            coefs_sigma.append(data.loc[data["sigma"]==sigma,['u2_GQ','u3_GQ','u4_GQ']].values.tolist()[0][i])
+        for i in range(3): # change to 3 when u4 added back
+            coefs_sigma.append(data.loc[data["sigma"]==sigma,['u2_GQ','u3_GQ','u4_GQ']].values.tolist()[0][i]) # ,'u4_GQ' take this out if only doing u2/u3
         # coefs_sigma = [x+random.uniform(-5e-8,5e-8) for x in coefs_sigma]
         # print(coefs_sigma)
+        coefs_sigma[1]=2*coefs_sigma[1]
+        coefs_sigma[2]=3*coefs_sigma[2]
+        coefs_sigma[3]=4*coefs_sigma[3]
         temp = calc_pade_table(coefs_sigma)
         temp = calcError(temp,coefs_sigma)
         temp = calc_pole_res(temp)
