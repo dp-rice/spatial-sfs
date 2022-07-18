@@ -31,7 +31,7 @@ def plot_scatter(df, xmin=0,xmax=20, poly_type_list=['1_1'], outname="fig.png",x
     plt.savefig(outname,dpi=300)
 
 def main():
-    data = pd.read_csv('pade_approx_test.csv')#('pade_approx.csv')
+    data = pd.read_csv('pade_approx.csv')#('pade_approx.csv')
     # sigma_list = [float(x) for x in data['sigma'].tolist()]
     p_coefs = [p for p in data['p'].tolist()]
     q_coefs = [q for q in data['q'].tolist()]
@@ -39,7 +39,7 @@ def main():
     poly_type = data["poly_type"].tolist()
     df = pd.DataFrame(dict(p=p_coefs, q=q_coefs,pt=poly_type))#sigma=sigma_list,
     pl =df['pt'].unique().tolist()
-    plot_scatter(df,0,2,pl,outname="test_pade.png")
+    plot_scatter(df,0,2,pl,outname="pade.png")
 
 
     # plot_scatter(df, 0.01,0,8,poly_type_list=['1_0','1_1','1_2'],outname="sigma01.png")
