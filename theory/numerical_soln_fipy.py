@@ -43,7 +43,7 @@ def run_fipy_solver(z, sigma, D=1., timeStepDuration=1, nx=100, lc=50, dx=1, xmi
     viewer = Matplotlib1DViewer(vars=u, title=title,limits={'xmin': xminval, 'xmax': xmaxval}, datamin=dataminval, datamax=datamaxval) # initialize plot
     TSVViewer(vars=u).plot(filename="fipy_output_tsv_test/soln_data_time_{0}.tsv".format(0)) # save initial values
     viewer.plot(filename="fipy_output_test/soln_data_time_{0}.png".format(0))  # save plot initial
-    res = 1e+10 # initial residual (can make smaller)
+    # res = 1e+10 # initial residual (can make smaller)
     steps=20
     for step in range(steps):
         res = 1e+10
@@ -64,7 +64,7 @@ def run_fipy_solver(z, sigma, D=1., timeStepDuration=1, nx=100, lc=50, dx=1, xmi
 
 
 def run_fipy_singularities(z_range,sigma, D=1., timeStepDuration=1, nx=100, lc=50, dx=1, resval=1e-2,nsteps=20):
-    res = 1e+10 # initial residual (can make smaller)
+    # res = 1e+10 # initial residual (can make smaller)
     steps=nsteps
     zcrit=np.nan
     for z in z_range:

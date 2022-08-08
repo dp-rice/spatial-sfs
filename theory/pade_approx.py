@@ -58,7 +58,7 @@ def get_residues(p,q):
     else:
         pole = np.nan
         res = np.nan
-    return pole, res, mult, pl_all, rs_all
+    return pole, res, mult, pl_all, rs_all, k
 
 
 def calc_pade_table(coefs):
@@ -72,8 +72,8 @@ def calc_pade_table(coefs):
     pvals = []
     qvals = []
     taylor_coefs = []
-    for m in range(0,len(coefs)-1):
-        for n in range(0,len(coefs)-1-m):
+    for m in range(0,len(coefs)):#len(coefs)-1
+        for n in range(0,len(coefs)-m):#len(coefs)-1-m)
             try:
                 p, q = pade(coefs,m,n)
                 pvals.append(p.coefficients)
@@ -98,20 +98,35 @@ def calc_pole_res(tab):
     multvals = []
     pl2vals = []
     res2vals = []
+    remvals=[]
+    kvals=[]
     # tab = tab.reset_index()
     for row in tab.itertuples():
         if row[tab.columns.get_loc('m')+1]>0:
             p, q = get_pade_poly(tab,row[tab.columns.get_loc('m')+1],row[tab.columns.get_loc('n')+1])
-            pole, res, mult, pl_all, rs_all = get_residues(p, q)
-            print(pl_all)
-            print(rs_all)
+            pole, res, mult, pl_all, rs_all, k = get_residues(p, q)
+            # print(k)
+            # print(pl_all)
+            # print(rs_all)
             # print(pl_all)
             # print(rs_all)
             polevals.append(pole)
             resvals.append(res)
             multvals.append(mult)
-            # plvals.append(pl_all)
-            # print(len(pl_all[0]))
+            remainder=0
+            if len(pl_all[0])>1: # if more than 1 pole, add remainder terms (other than k)
+                # print(pl_all[0])
+                remainder=0
+                for i in range(len(pl_all[0])): # for  each  pole
+                    p_temp=pl_all[0][i]
+                    # print(p_temp)
+                    if p_temp != pole: # if current pole isn't pole of interest
+                        remainder+=np.real(rs_all[0][i])/(pole-p_temp) # add to remainder
+            temp = np.poly1d(k)
+            remainder += temp(pole)  # add  k  term
+            # print(type(remainder))
+            remvals.append(remainder)
+            kvals.append(k)
             if len(pl_all[0])>1:
                 # print(set(pole))
                 # print(set(pl_all))
@@ -131,12 +146,16 @@ def calc_pole_res(tab):
             # plvals.append(np.nan)
             pl2vals.append(np.nan)
             res2vals.append(np.nan)
+            remvals.append(np.nan)
+            kvals.append(np.nan)
     tab_new = tab
     tab_new['pole'] = polevals
     tab_new['residue'] = resvals
     tab_new['multiplicity_pole'] = multvals
     tab_new['pole_2'] = pl2vals
     tab_new['res_2'] = res2vals
+    tab_new['remainder']=remvals
+    tab_new['k']=kvals
     return tab_new
 
 def get_pade_poly(tab,m,n):
@@ -144,8 +163,13 @@ def get_pade_poly(tab,m,n):
     Returns numpy polynomial object for a given entry in tab
     """
     tab_sub = tab[(tab['m'] == m) & (tab['n'] ==n )]
-    p = np.poly1d(tab_sub.iloc[0]['p'])
-    q = np.poly1d(tab_sub.iloc[0]['q'])
+    if type(tab_sub.iloc[0]['p'])==str:
+        p = np.poly1d([float(y) for y in tab_sub.iloc[0]['p'].strip('][').split()])
+        q = np.poly1d([float(y) for y in tab_sub.iloc[0]['q'].strip('][').split()])
+        # q = np.poly1d(tab_sub.iloc[0]['q'])
+    else:
+        p = np.poly1d(tab_sub.iloc[0]['p'])
+        q = np.poly1d(tab_sub.iloc[0]['q'])
     return p,q
 
 def calcError(tab,coefs):
@@ -160,15 +184,21 @@ def calcError(tab,coefs):
     rel_err_vals = []
     for row in tab.itertuples():
         # err = []
-        tc = row[5]
-        m = row[1]
-        n = row[2]
-        err = [a-b for a,b in zip(coefs, tc)]
-        err_vals.append(err)
-        coefs_vals.append(coefs)
-        err_next_vals.append(err[m+n+1])
-        rel_err = abs(err[m+n+1])/coefs[m+n+1]
-        rel_err_vals.append(rel_err)
+        if row[tab.columns.get_loc('m')+1]+row[tab.columns.get_loc('n')+1]<3:
+            tc = row[5]
+            m = row[1]
+            n = row[2]
+            err = [a-b for a,b in zip(coefs, tc)]
+            err_vals.append(err)
+            coefs_vals.append(coefs)
+            err_next_vals.append(err[m+n+1])
+            rel_err = abs(err[m+n+1])/coefs[m+n+1]
+            rel_err_vals.append(rel_err)
+        else:
+            err_vals.append(np.nan)
+            coefs_vals.append(np.nan)
+            err_next_vals.append(np.nan)
+            rel_err_vals.append(np.nan)
 
     tab_new = tab
     tab_new['coef_input_vals'] = coefs_vals
@@ -192,14 +222,28 @@ def main():
         temp.insert(loc=0, column='sigma', value=np.repeat(sigma,temp.shape[0]))
         res = pd.concat([res, temp], ignore_index=True, sort=False)
 
-    # print(get_taylor_coefs(np.poly1d([1,1,0]),np.poly1d([-1,1]),5))
+    # print(get_taylor_coefs(np.poly1d([1,1,0]),n p.poly1d([-1,1]),5))
     # res = pd.DataFrame()
     # coefs = np.repeat(1,10).tolist()
     # print(coefs)
     # res = calc_pade_table(coefs)
     # res = calcError(res,coefs)
     # res = calc_pole_res(res)
-    res.to_csv('pade_approx.csv', index=False)
+    res.to_csv('pade_approx_witherrorapprox.csv', index=False)
+
+    # res2 = pd.DataFrame()
+    # for j in range(len(sigma_list)):
+    #     coefs_sigma = [1]
+    #     sigma = sigma_list[j]
+    #     for i in range(3):
+    #         coefs_sigma.append(
+    #             data.loc[data["sigma"] == sigma, ['u2_GQ', 'u3_GQ', 'u4_GQ']].values.tolist()[0][i] * (i + 1))
+    #     temp = calc_pade_table(coefs_sigma)
+    #     temp = calcError(temp,coefs_sigma)
+    #     temp = calc_pole_res(temp)
+    #     temp.insert(loc=0, column='sigma', value=np.repeat(sigma, temp.shape[0]))
+    #     res2 = pd.concat([res2, temp], ignore_index=True, sort=False)
+    # res2.to_csv('pade_approx_error.csv', index=False)
 
 if __name__ == '__main__':
     main()
