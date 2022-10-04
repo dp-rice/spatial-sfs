@@ -28,7 +28,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--filename", type=str, help="name of input file", default="cleaned_data")
     parser.add_argument("--dim", type=int, help="dimension, default is 1", choices=[1, 2], default=1)
-    #parser.add_argument("--calc_error", action='store_true')
+    parser.add_argument("--ymin",type=float,help="ymin for sfs plots",default=1e-5)
+    parser.add_argument("--ymax", type=float, help="ymax for sfs plots", default=1e5)
     parser.add_argument("--pt",type=str,help="polynomial type to use",default="2_1")
     parser.add_argument("--s_list", type=list, help="values of selection coefficient, should have 6 values",default = [1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1])
     parser.add_argument("--sigma_list",type=list,help="values of sigma",default=[0.1,1,10,100])
@@ -49,7 +50,7 @@ def main():
     axs[0,0].set_title("s="+str(s_vals[0]))
     axs[0,0].set_xscale("log")
     axs[0, 0].set_yscale("log")
-    axs[0, 0].set_ylim(1e-5, 1e5)
+    axs[0, 0].set_ylim(args.ymin, args.ymax)
     colors=sns.color_palette("colorblind",len(sigma_vals_plot))
     for i in range(len(sigma_vals_plot)):
         axs[0,0].plot(x_range,gamma.pdf(x_range,
@@ -61,7 +62,7 @@ def main():
     axs[0, 1].set_title("s=" + str(s_vals[1]))
     axs[0, 1].set_xscale("log")
     axs[0, 1].set_yscale("log")
-    axs[0, 1].set_ylim(1e-5, 1e5)
+    axs[0, 1].set_ylim(args.ymin, args.ymax)
     for i in range(len(sigma_vals_plot)):
         axs[0, 1].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[1], sigma_vals=data['sigma'],
@@ -74,7 +75,7 @@ def main():
     axs[0, 2].set_title("s=" + str(s_vals[2]))
     axs[0, 2].set_xscale("log")
     axs[0, 2].set_yscale("log")
-    axs[0, 2].set_ylim(1e-5, 1e5)
+    axs[0, 2].set_ylim(args.ymin, args.ymax)
     for i in range(len(sigma_vals_plot)):
         axs[0, 2].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[2], sigma_vals=data['sigma'],
@@ -87,7 +88,7 @@ def main():
     axs[1, 0].set_title("s=" + str(s_vals[3]))
     axs[1, 0].set_xscale("log")
     axs[1, 0].set_yscale("log")
-    axs[1, 0].set_ylim(1e-5, 1e5)
+    axs[1, 0].set_ylim(args.ymin, args.ymax)
     for i in range(len(sigma_vals_plot)):
         axs[1,0].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[3], sigma_vals=data['sigma'],
@@ -100,7 +101,7 @@ def main():
     axs[1, 1].set_title("s=" + str(s_vals[4]))
     axs[1, 1].set_xscale("log")
     axs[1, 1].set_yscale("log")
-    axs[1, 1].set_ylim(1e-5,1e5)
+    axs[1, 1].set_ylim(args.ymin, args.ymax)
     for i in range(len(sigma_vals_plot)):
         axs[1, 1].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[4], sigma_vals=data['sigma'],
@@ -113,7 +114,7 @@ def main():
     axs[1, 2].set_title("s=" + str(s_vals[5]))
     axs[1, 2].set_xscale("log")
     axs[1, 2].set_yscale("log")
-    axs[1, 2].set_ylim(1e-5,1e5)
+    axs[1, 2].set_ylim(args.ymin, args.ymax)
     for i in range(len(sigma_vals_plot)):
         axs[1, 2].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[5], sigma_vals=data['sigma'],
