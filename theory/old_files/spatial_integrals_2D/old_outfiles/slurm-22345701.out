@@ -1,0 +1,130 @@
+[<Process name='Integral' pid=19001 parent=18920 stopped exitcode=0>, <Process name='Integral' pid=19624 parent=18920 stopped exitcode=0>, <Process name='Integral' pid=20247 parent=18920 stopped exitcode=0>, <Process name='Integral' pid=20870 parent=18920 stopped exitcode=0>, <Process name='Integral' pid=21494 parent=18920 stopped exitcode=0>]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+[<Process name='Integral' pid=51078 parent=51065 stopped exitcode=0>, <Process name='Integral' pid=51702 parent=51065 stopped exitcode=0>, <Process name='Integral' pid=52323 parent=51065 stopped exitcode=0>, <Process name='Integral' pid=52943 parent=51065 stopped exitcode=0>, <Process name='Integral' pid=53564 parent=51065 stopped exitcode=0>]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons
+[<Process name='Integral' pid=20550 parent=20537 stopped exitcode=0>, <Process name='Integral' pid=21171 parent=20537 stopped exitcode=0>, <Process name='Integral' pid=21793 parent=20537 stopped exitcode=0>, <Process name='Integral' pid=22423 parent=20537 stopped exitcode=0>, <Process name='Integral' pid=23051 parent=20537 stopped exitcode=0>]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons
+[<Process name='Integral' pid=23475 parent=23427 stopped exitcode=0>, <Process name='Integral' pid=24100 parent=23427 stopped exitcode=0>, <Process name='Integral' pid=24725 parent=23427 stopped exitcode=0>, <Process name='Integral' pid=25351 parent=23427 stopped exitcode=0>, <Process name='Integral' pid=25978 parent=23427 stopped exitcode=0>]
+[<Process name='Integral' pid=23478 parent=23428 stopped exitcode=0>, <Process name='Integral' pid=24099 parent=23428 stopped exitcode=0>, <Process name='Integral' pid=24724 parent=23428 stopped exitcode=0>, <Process name='Integral' pid=25349 parent=23428 stopped exitcode=0>, <Process name='Integral' pid=25977 parent=23428 stopped exitcode=0>]
+[<Process name='Integral' pid=23476 parent=23429 stopped exitcode=0>, <Process name='Integral' pid=24101 parent=23429 stopped exitcode=0>, <Process name='Integral' pid=24726 parent=23429 stopped exitcode=0>, <Process name='Integral' pid=25348 parent=23429 stopped exitcode=0>, <Process name='Integral' pid=25974 parent=23429 stopped exitcode=0>]
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+[<Process name='Integral' pid=23477 parent=23430 stopped exitcode=0>, <Process name='Integral' pid=24097 parent=23430 stopped exitcode=0>, <Process name='Integral' pid=24722 parent=23430 stopped exitcode=0>, <Process name='Integral' pid=25347 parent=23430 stopped exitcode=0>, <Process name='Integral' pid=25975 parent=23430 stopped exitcode=0>]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+[<Process name='Integral' pid=23473 parent=23425 stopped exitcode=-SIGTERM>, <Process name='Integral' pid=24102 parent=23425 stopped exitcode=0>, <Process name='Integral' pid=24723 parent=23425 stopped exitcode=0>, <Process name='Integral' pid=25350 parent=23425 stopped exitcode=0>, <Process name='Integral' pid=25976 parent=23425 stopped exitcode=0>]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons
+[<Process name='Integral' pid=29752 parent=29738 stopped exitcode=0>, <Process name='Integral' pid=30370 parent=29738 stopped exitcode=0>, <Process name='Integral' pid=30991 parent=29738 stopped exitcode=0>, <Process name='Integral' pid=31611 parent=29738 stopped exitcode=0>, <Process name='Integral' pid=32234 parent=29738 stopped exitcode=0>]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons
+[<Process name='Integral' pid=23474 parent=23426 stopped exitcode=0>, <Process name='Integral' pid=24098 parent=23426 stopped exitcode=0>, <Process name='Integral' pid=24727 parent=23426 stopped exitcode=-SIGTERM>, <Process name='Integral' pid=25352 parent=23426 stopped exitcode=0>, <Process name='Integral' pid=25979 parent=23426 stopped exitcode=0>]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 100, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 86, in main
+    new_u3_list = comm.gather(u3_gauss_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1578, in mpi4py.MPI.Comm.gather
+  File "mpi4py/MPI/msgpickle.pxi", line 772, in mpi4py.MPI.PyMPI_gather
+  File "mpi4py/MPI/msgpickle.pxi", line 145, in mpi4py.MPI.pickle_dump
+  File "mpi4py/MPI/msgpickle.pxi", line 131, in mpi4py.MPI.cdumps
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/multiprocessing/process.py", line 353, in __reduce__
+    raise TypeError(
+TypeError: Pickling an AuthenticationString object is disallowed for security reasons

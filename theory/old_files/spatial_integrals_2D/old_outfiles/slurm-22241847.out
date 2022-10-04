@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+    sigma_list = comm.scatter(sigma_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1587, in mpi4py.MPI.Comm.scatter
+  File "mpi4py/MPI/msgpickle.pxi", line 823, in mpi4py.MPI.PyMPI_scatter
+  File "mpi4py/MPI/msgpickle.pxi", line 161, in mpi4py.MPI.pickle_dumpv
+ValueError: expecting 10 items, got 50
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd-midway2-0395: error: *** JOB 22241847 ON midway2-0395 CANCELLED AT 2022-08-29T10:32:50 ***

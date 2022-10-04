@@ -1,0 +1,40 @@
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+                                                                                     ^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+                                                                                     ^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+                                                                                     ^^^^^^^
+                                                                                     ^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+                                                                                     ^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+                                                                                     ^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+                                                                                     ^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+                                                                                     ^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+                                                                                     ^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74
+    integ = multiprocessing.Process(target=gaussquad_integral,name="Integral",arges=(sigam=s,dim=4,integrandA=integrand6,)
+                                                                                     ^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?

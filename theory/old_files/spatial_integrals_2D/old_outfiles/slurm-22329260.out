@@ -1,0 +1,67 @@
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+    time.sleep(600)
+NameError: name 'time' is not defined
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    time.sleep(600)
+NameError: name 'time' is not defined
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+    main()
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    time.sleep(600)
+NameError: name 'time' is not defined
+    time.sleep(600)
+NameError: name 'time' is not defined
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+Traceback (most recent call last):
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    time.sleep(600)
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+NameError: name 'time' is not defined
+    time.sleep(600)
+Traceback (most recent call last):
+NameError: name 'time' is not defined
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 99, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    time.sleep(600)
+    time.sleep(600)
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+NameError: name 'time' is not defined
+    main()
+NameError: name 'time' is not defined
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    time.sleep(600)
+    time.sleep(600)
+NameError: name 'time' is not defined
+NameError: name 'time' is not defined
+/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py:1151: IntegrationWarning: The occurrence of roundoff error is detected, which prevents 
+  the requested tolerance from being achieved.  The error may be 
+  underestimated.
+  quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd-midway2-0071: error: *** STEP 22329260.0 ON midway2-0071 CANCELLED AT 2022-09-01T07:22:37 ***
+slurmstepd-midway2-0071: error: *** JOB 22329260 ON midway2-0071 CANCELLED AT 2022-09-01T07:22:37 ***

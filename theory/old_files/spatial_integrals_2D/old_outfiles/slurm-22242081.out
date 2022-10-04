@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 81, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+    data = [[sigma_list_tuple[x]] for x in range(size)]
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in <listcomp>
+    data = [[sigma_list_tuple[x]] for x in range(size)]
+IndexError: list index out of range
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd-midway2-0167: error: *** STEP 22242081.0 ON midway2-0167 CANCELLED AT 2022-08-29T11:17:12 ***
+slurmstepd-midway2-0167: error: *** JOB 22242081 ON midway2-0167 CANCELLED AT 2022-08-29T11:17:12 ***

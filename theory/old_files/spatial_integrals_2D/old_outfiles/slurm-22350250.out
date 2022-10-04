@@ -1,0 +1,60 @@
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+Traceback (most recent call last):
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+    main()
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+    main()
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+    main()
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+Traceback (most recent call last):
+Traceback (most recent call last):
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 101, in <module>
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'
+    main()
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 85, in main
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+    u3_gauss_list.append(gaussquad_integral(sigma=s,dim=4,integrandA=integrand6,opts=[options,options,options,options]))
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'
+TypeError: gaussquad_integral() got an unexpected keyword argument 'opts'

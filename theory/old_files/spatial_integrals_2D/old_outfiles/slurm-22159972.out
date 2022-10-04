@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 74, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 58, in main
+    sigma_list = comm.scatter(sigma_list,root=0)
+  File "mpi4py/MPI/Comm.pyx", line 1587, in mpi4py.MPI.Comm.scatter
+  File "mpi4py/MPI/msgpickle.pxi", line 823, in mpi4py.MPI.PyMPI_scatter
+  File "mpi4py/MPI/msgpickle.pxi", line 161, in mpi4py.MPI.pickle_dumpv
+ValueError: expecting 10 items, got 50
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd-midway2-0394: error: *** JOB 22159972 ON midway2-0394 CANCELLED AT 2022-08-25T04:49:56 DUE TO TIME LIMIT ***
+slurmstepd-midway2-0394: error: *** STEP 22159972.0 ON midway2-0394 CANCELLED AT 2022-08-25T04:49:56 DUE TO TIME LIMIT ***

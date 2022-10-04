@@ -1,0 +1,57 @@
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 82, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 82, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 82, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 82, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    list(zip(sigma_list,new_u3_list)),
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+TypeError: 'NoneType' object is not iterable
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 82, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 82, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 82, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 82, in <module>
+Traceback (most recent call last):
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 82, in <module>
+    main()
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    list(zip(sigma_list,new_u3_list)),
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+    main()
+    list(zip(sigma_list,new_u3_list)),
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+TypeError: 'NoneType' object is not iterable
+TypeError: 'NoneType' object is not iterable
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 76, in main
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd-midway2-0167: error: *** STEP 22242297.0 ON midway2-0167 CANCELLED AT 2022-08-29T11:52:18 ***
+slurmstepd-midway2-0167: error: *** JOB 22242297 ON midway2-0167 CANCELLED AT 2022-08-29T11:52:18 ***

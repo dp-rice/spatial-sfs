@@ -1,0 +1,360 @@
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+    main()
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 83, in <module>
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+    main()
+    main()
+    main()
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 71, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+    u3_gauss_list.append(gaussquad_integral(sigma=item,dim=4,integrandA=integrand6))
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 45, in gaussquad_integral
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+    return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1097, in nquad
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+TypeError: only size-1 arrays can be converted to Python scalars
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+TypeError: only size-1 arrays can be converted to Python scalars
+TypeError: only size-1 arrays can be converted to Python scalars
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+TypeError: only size-1 arrays can be converted to Python scalars
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _NQuad(func, ranges, opts, full_output).integrate(*args)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+TypeError: only size-1 arrays can be converted to Python scalars
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+TypeError: only size-1 arrays can be converted to Python scalars
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+TypeError: only size-1 arrays can be converted to Python scalars
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+TypeError: only size-1 arrays can be converted to Python scalars
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 1151, in integrate
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 411, in quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    retval = _quad(func, a, b, args, full_output, epsabs, epsrel, limit,
+  File "/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py", line 525, in _quad
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+TypeError: only size-1 arrays can be converted to Python scalars
+    return _quadpack._qagie(func,bound,infbounds,args,full_output,epsabs,epsrel,limit)
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 19, in integrand6
+    num = math.exp(-0.5*sigma*sigma*((-x1-y1)*(-x1-y1)+(-x2-y2)*(-x2-y2)))*math.exp(-0.5*sigma*sigma*(y1*y1+y2*y2))*math.exp(-0.5*sigma*sigma*(x1*x1+x2*x2))
+TypeError: only size-1 arrays can be converted to Python scalars

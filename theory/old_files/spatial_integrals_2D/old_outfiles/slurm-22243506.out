@@ -1,0 +1,64 @@
+[10.21306122 12.25367347 14.29428571 16.33489796 18.3755102 ]
+[30.61918367 32.65979592 34.70040816 36.74102041 38.78163265]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+[51.02530612 53.06591837 55.10653061 57.14714286 59.1877551 ]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    list(zip(sigma_list,new_u3_list)),
+    main()
+TypeError: 'NoneType' object is not iterable
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+[20.41612245 22.45673469 24.49734694 26.53795918 28.57857143]
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+[71.43142857 73.47204082 75.51265306 77.55326531 79.59387755]
+[61.22836735 63.26897959 65.30959184 67.35020408 69.39081633]
+Traceback (most recent call last):
+[40.8222449  42.86285714 44.90346939 46.94408163 48.98469388]
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    main()
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    list(zip(sigma_list,new_u3_list)),
+    list(zip(sigma_list,new_u3_list)),
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+TypeError: 'NoneType' object is not iterable
+TypeError: 'NoneType' object is not iterable
+[81.6344898  83.67510204 85.71571429 87.75632653 89.79693878]
+[ 91.83755102  93.87816327  95.91877551  97.95938776 100.        ]
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    list(zip(sigma_list,new_u3_list)),
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+TypeError: 'NoneType' object is not iterable
+[0.01       2.05061224 4.09122449 6.13183673 8.17244898]

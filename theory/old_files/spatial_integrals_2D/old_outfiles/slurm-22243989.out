@@ -1,0 +1,61 @@
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+/home/steinerm/.conda/envs/parallel/lib/python3.10/site-packages/scipy/integrate/_quadpack_py.py:1151: IntegrationWarning: The occurrence of roundoff error is detected, which prevents 
+  the requested tolerance from being achieved.  The error may be 
+  underestimated.
+  quad_r = quad(f, low, high, args=args, full_output=self.full_output,
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    list(zip(sigma_list,new_u3_list)),
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    if __name__ == '__main__':
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    df = pd.DataFrame(
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    if __name__ == '__main__':
+    if __name__ == '__main__':
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    df = pd.DataFrame(
+TypeError: 'NoneType' object is not iterable
+    df = pd.DataFrame(
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    if __name__ == '__main__':
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    df = pd.DataFrame(
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 84, in <module>
+    
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 78, in main
+    if rank==0:
+TypeError: 'NoneType' object is not iterable
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd-midway2-0002: error: *** STEP 22243989.0 ON midway2-0002 CANCELLED AT 2022-08-29T16:05:58 ***
+slurmstepd-midway2-0002: error: *** JOB 22243989 ON midway2-0002 CANCELLED AT 2022-08-29T16:05:58 ***

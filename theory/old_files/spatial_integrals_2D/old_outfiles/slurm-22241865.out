@@ -1,0 +1,63 @@
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+    main()
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+UnboundLocalError: local variable 'sigma_list_tuple' referenced before assignment
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+    main()
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+UnboundLocalError: local variable 'sigma_list_tuple' referenced before assignment
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+UnboundLocalError: local variable 'sigma_list_tuple' referenced before assignment
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+UnboundLocalError: local variable 'sigma_list_tuple' referenced before assignment
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+UnboundLocalError: local variable 'sigma_list_tuple' referenced before assignment
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+UnboundLocalError: local variable 'sigma_list_tuple' referenced before assignment
+UnboundLocalError: local variable 'sigma_list_tuple' referenced before assignment
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+    main()
+  File "mpi4py/MPI/Comm.pyx", line 1587, in mpi4py.MPI.Comm.scatter
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+  File "mpi4py/MPI/msgpickle.pxi", line 823, in mpi4py.MPI.PyMPI_scatter
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+UnboundLocalError: local variable 'sigma_list_tuple' referenced before assignment
+  File "mpi4py/MPI/msgpickle.pxi", line 161, in mpi4py.MPI.pickle_dumpv
+ValueError: expecting 10 items, got 5
+Traceback (most recent call last):
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 75, in <module>
+    main()
+  File "/project2/jnovembre/steinerm/rvsfs/spatial_integrals/spatial_integrals_2D.py", line 59, in main
+    sigma_list = comm.scatter(sigma_list_tuple,root=0)
+UnboundLocalError: local variable 'sigma_list_tuple' referenced before assignment
