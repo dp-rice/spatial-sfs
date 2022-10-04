@@ -22,7 +22,7 @@ def scale_p(sigma,s,sigma_vals,pole_vals,N=10000,D=1,d=1):
 def rate_p(sigma,s,sigma_vals,res_vals,mu=1e-8,N=10000,D=1,d=1):
     l_c = np.sqrt(D / s)
     return(mu*N*(l_c**d)*residues(sigma/l_c,sigma_vals,res_vals))
-
+k
 
 def main():
     parser = argparse.ArgumentParser()
