@@ -22,7 +22,7 @@ def scale_p(sigma,s,sigma_vals,pole_vals,N=10000,D=1,d=1):
 def rate_p(sigma,s,sigma_vals,res_vals,mu=1e-8,N=10000,D=1,d=1):
     l_c = np.sqrt(D / s)
     return(mu*N*(l_c**d)*residues(sigma/l_c,sigma_vals,res_vals))
-k
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -53,9 +53,9 @@ def main():
     colors=sns.color_palette("colorblind",len(sigma_vals_plot))
     for i in range(len(sigma_vals_plot)):
         axs[0,0].plot(x_range,gamma.pdf(x_range,
-                                        a=rate_p(sigma=sigma_vals_plot[i],s=s_vals[0],sigma_vals=data['sigma'],res_vals=data['residues']),
+                                        a=rate_p(sigma=sigma_vals_plot[i],s=s_vals[0],sigma_vals=data['sigma'],res_vals=data['residues'],d=args.dim),
                                         scale=1 / scale_p(sigma=sigma_vals_plot[i], s=s_vals[0], sigma_vals=data['sigma'],
-                                                      pole_vals=data['poles'])),color=colors[i])
+                                                      pole_vals=data['poles'],d=args.dim)),color=colors[i])
     axs[0, 0].legend(labels=labs, title="sigma")
 
     axs[0, 1].set_title("s=" + str(s_vals[1]))
@@ -65,10 +65,10 @@ def main():
     for i in range(len(sigma_vals_plot)):
         axs[0, 1].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[1], sigma_vals=data['sigma'],
-                                                   res_vals=data['residues']),
+                                                   res_vals=data['residues'],d=args.dim),
                                           scale=1 / scale_p(sigma=sigma_vals_plot[i], s=s_vals[1],
                                                             sigma_vals=data['sigma'],
-                                                            pole_vals=data['poles'])), color=colors[i])
+                                                            pole_vals=data['poles'],d=args.dim)), color=colors[i])
     axs[0, 1].legend(labels=labs, title="sigma")
 
     axs[0, 2].set_title("s=" + str(s_vals[2]))
@@ -78,10 +78,10 @@ def main():
     for i in range(len(sigma_vals_plot)):
         axs[0, 2].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[2], sigma_vals=data['sigma'],
-                                                   res_vals=data['residues']),
+                                                   res_vals=data['residues'],d=args.dim),
                                           scale=1 / scale_p(sigma=sigma_vals_plot[i], s=s_vals[2],
                                                             sigma_vals=data['sigma'],
-                                                            pole_vals=data['poles'])), color=colors[i])
+                                                            pole_vals=data['poles'],d=args.dim)), color=colors[i])
     axs[0, 2].legend(labels=labs, title="sigma")
 
     axs[1, 0].set_title("s=" + str(s_vals[3]))
@@ -91,10 +91,10 @@ def main():
     for i in range(len(sigma_vals_plot)):
         axs[1,0].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[3], sigma_vals=data['sigma'],
-                                                   res_vals=data['residues']),
+                                                   res_vals=data['residues'],d=args.dim),
                                           scale=1 / scale_p(sigma=sigma_vals_plot[i], s=s_vals[3],
                                                             sigma_vals=data['sigma'],
-                                                            pole_vals=data['poles'])), color=colors[i])
+                                                            pole_vals=data['poles'],d=args.dim)), color=colors[i])
     axs[1, 0].legend(labels=labs, title="sigma")
 
     axs[1, 1].set_title("s=" + str(s_vals[4]))
@@ -104,10 +104,10 @@ def main():
     for i in range(len(sigma_vals_plot)):
         axs[1, 1].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[4], sigma_vals=data['sigma'],
-                                                   res_vals=data['residues']),
+                                                   res_vals=data['residues'],d=args.dim),
                                           scale=1 / scale_p(sigma=sigma_vals_plot[i], s=s_vals[4],
                                                             sigma_vals=data['sigma'],
-                                                            pole_vals=data['poles'])), color=colors[i])
+                                                            pole_vals=data['poles'],d=args.dim)), color=colors[i])
     axs[1, 1].legend(labels=labs, title="sigma")
 
     axs[1, 2].set_title("s=" + str(s_vals[5]))
@@ -117,10 +117,10 @@ def main():
     for i in range(len(sigma_vals_plot)):
         axs[1, 2].plot(x_range, gamma.pdf(x_range,
                                           a=rate_p(sigma=sigma_vals_plot[i], s=s_vals[5], sigma_vals=data['sigma'],
-                                                   res_vals=data['residues']),
+                                                   res_vals=data['residues'],d=args.dim),
                                           scale=1 / scale_p(sigma=sigma_vals_plot[i], s=s_vals[5],
                                                             sigma_vals=data['sigma'],
-                                                            pole_vals=data['poles'])), color=colors[i])
+                                                            pole_vals=data['poles'],d=args.dim)), color=colors[i])
     axs[1, 2].legend(labels=labs, title="sigma")
 
     plt.savefig("plots_sfs_dim" + str(args.dim) + "_polytype_" + args.pt + ".png")
@@ -130,10 +130,10 @@ def main():
     fig, axs = plt.subplots(1,2)
     s_range=np.linspace(10e-6,1)
     axs[0].plot(s_range,
-             rate_p(s=s_range, sigma=1, sigma_vals=data['sigma'].tolist(), res_vals=data['residues'].tolist()),color=colors[0])
+             rate_p(s=s_range, sigma=1, sigma_vals=data['sigma'].tolist(), res_vals=data['residues'].tolist(),d=args.dim),color=colors[0])
     axs[0].plot(s_range,
-             rate_p(s=s_range, sigma=10, sigma_vals=data['sigma'].tolist(), res_vals=data['residues'].tolist()),color=colors[1])
-    axs[0].plot(s_range,rate_p(s=s_range,sigma=100,sigma_vals=data['sigma'].tolist(),res_vals=data['residues'].tolist()),color=colors[2])
+             rate_p(s=s_range, sigma=10, sigma_vals=data['sigma'].tolist(), res_vals=data['residues'].tolist(),d=args.dim),color=colors[1])
+    axs[0].plot(s_range,rate_p(s=s_range,sigma=100,sigma_vals=data['sigma'].tolist(),res_vals=data['residues'].tolist(),d=args.dim),color=colors[2])
     axs[0].legend(labels=['1','10','100'],title="sigma")
     axs[0].set_xscale("log")
     axs[0].set_yscale("log")
@@ -141,11 +141,11 @@ def main():
     axs[0].set_xlabel("s")
 
     axs[1].plot(s_range,
-                scale_p(s=s_range, sigma=1, sigma_vals=data['sigma'].tolist(), pole_vals=data['poles'].tolist()),color=colors[0])
+                scale_p(s=s_range, sigma=1, sigma_vals=data['sigma'].tolist(), pole_vals=data['poles'].tolist(),d=args.dim),color=colors[0])
     axs[1].plot(s_range,
-                scale_p(s=s_range, sigma=10, sigma_vals=data['sigma'].tolist(), pole_vals=data['poles'].tolist()),color=colors[1])
+                scale_p(s=s_range, sigma=10, sigma_vals=data['sigma'].tolist(), pole_vals=data['poles'].tolist(),d=args.dim),color=colors[1])
     axs[1].plot(s_range,
-                scale_p(s=s_range, sigma=100, sigma_vals=data['sigma'].tolist(), pole_vals=data['poles'].tolist()),color=colors[2])
+                scale_p(s=s_range, sigma=100, sigma_vals=data['sigma'].tolist(), pole_vals=data['poles'].tolist(),d=args.dim),color=colors[2])
     axs[1].legend(labels=['1', '10', '100'], title="sigma")
     axs[1].set_xscale("log")
     axs[1].set_yscale("log")
