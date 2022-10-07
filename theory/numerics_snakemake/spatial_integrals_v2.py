@@ -87,12 +87,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--smin", type=float, help="lower bound for sigma", default=1e-2)
     parser.add_argument("--smax", type=float, help="upper bound for sigma", default=100)
-    parser.add_argument("--nsamp", type=int, help="number of samples for sigma", default=50)
+    parser.add_argument("--nsamp", type=int, help="number of samples for sigma", default=100)
     parser.add_argument("--dim", type=int, help="dimension, default is 1", choices=[1,2], default=1)
     parser.add_argument("--outname", type=str, help="name for output file (without extension)", default="spatial_integrals")
     args = parser.parse_args()
 
-    sigma_list = np.linspace(args.smin,args.smax,args.nsamp)
+    sigma_list = np.logspace(args.smin,args.smax,args.nsamp)
     d=args.dim
 
     if d==1:
