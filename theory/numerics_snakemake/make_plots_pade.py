@@ -3,11 +3,13 @@ import pandas as pd
 import seaborn as sns
 import argparse
 
-def plot_scatter(df,y,x="sigma",outname="fig.png",xtrans=None,ytrans=None,ylab=None):
+def plot_scatter(df,y,x="sigma",outname="fig.png",xtrans=None,ytrans=None,ylab=None,linthreshy=None):
     sns.lmplot(x, y, data=df, hue='poly_type', fit_reg=False,scatter_kws={"s": 2},legend=False,palette="colorblind")
     if xtrans is not None:
         plt.xscale(xtrans)
-    if ytrans is not None:
+    if ytrans is not None and linthreshy is not None:
+        plt.yscale(ytrans,linthreshy=linthreshy)
+    elif ytrans is not None:
         plt.yscale(ytrans)
     if ylab is not None:
         plt.ylabel(ylab)
@@ -34,7 +36,7 @@ def main():
 
     plot_scatter(data,y='residues',
                  outname=args.outname+"_residues_dim"+str(args.dim)+"_error"+str(args.calc_error)+".png",
-                 xtrans='log',ytrans='symlog')
+                 xtrans='log',ytrans='symlog',linthreshy=1e-1)
 
     plot_scatter(data,y='remainder',
                  outname=args.outname+"_remainder_dim"+str(args.dim)+"_error"+str(args.calc_error)+".png",
@@ -59,6 +61,10 @@ def main():
         plot_scatter(data, y='error_pole',
                      outname=args.outname + "_pole_error_dim" + str(args.dim) + "_error" + str(
                          args.calc_error) + ".png")
+
+
+
+
 
 if __name__ == '__main__':
     main()
