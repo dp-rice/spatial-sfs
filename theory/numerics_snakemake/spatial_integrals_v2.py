@@ -60,7 +60,7 @@ def integrand6(y1,y2,x1,x2,sigma): #x1=\xi_1', x2=\xi_2', y_1=\xi_1'',y_2=\xi_2'
     return (num / denom)
 
 
-def gaussquad_integral(sigma,dim,integrandA,integrandB=None):
+def gaussquad_integral(sigma,dim,integrandA,integrandB=None,opts=None):
     """
     function to perform Gaussian quadrature
     :param sigma: dispersion of sampling kernel f
@@ -81,7 +81,7 @@ def gaussquad_integral(sigma,dim,integrandA,integrandB=None):
             return (integrate.tplquad(integrandA, -np.inf, np.inf, lambda x: -np.inf, lambda x: np.inf, lambda x, y: -np.inf,
                               lambda x, y: np.inf, args=(sigma,))[0])
     if dim==4:
-        return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,))[0])
+        return(integrate.nquad(func=integrandA,ranges=[(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf),(-np.inf,np.inf)],args=(sigma,),opts=opts)[0])
 
 def main():
     parser = argparse.ArgumentParser()
@@ -107,10 +107,11 @@ def main():
             columns=['sigma', 'u2_GQ', 'u3_GQ','u4_GQ'])
 
     elif d==2:
+        options = {'epsrel': 1e-6, 'epsabs': 1e-6}
         print("calculating u2 (2D)")
         u2_gauss_list=[gaussquad_integral(sigma=s,dim=2,integrandA=integrand5) for s in sigma_list]
         print("calculating u3 (2D)")
-        u3_gauss_list = [gaussquad_integral(sigma=s, dim=4, integrandA=integrand6) for s in sigma_list]
+        u3_gauss_list = [gaussquad_integral(sigma=s, dim=4, integrandA=integrand6,opts=[options,options,options,options]) for s in sigma_list]
         df = pd.DataFrame(
             list(zip(sigma_list, u2_gauss_list, u3_gauss_list)),
             columns=['sigma', 'u2_GQ', 'u3_GQ'])
