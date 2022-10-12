@@ -44,7 +44,7 @@ def main():
     # SFS with  fixed s, varying sigma
     sigma_vals_plot = args.sigma_list
     labs = [str(l) for l in sigma_vals_plot]
-    x_range = np.logspace(1e-6, 1e-2,100)
+    x_range = np.logspace(-6, -2,100)
 
     s_vals = args.s_list
     fig, axs = plt.subplots(2, 3,figsize=(10,8))

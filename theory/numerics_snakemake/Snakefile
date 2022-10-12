@@ -29,16 +29,19 @@ rule all:
         "plots_sfs_dim2_polytype_1_1_N1000.png",
         "plots_params_selection_dim2_polytype_1_1_N1000.png"
 
-rule calc_integrals:
+rule calc_integrals_dim1:
     input:
     output:
-        "spatial_integrals_dim1.csv",
+        "spatial_integrals_dim1.csv"
+    shell:
+        "python spatial_integrals_v2.py --dim 1"
+
+rule calc_integrals_dim2:
+    input:
+    output:
         "spatial_integrals_dim2.csv"
     shell:
-        """
-        python spatial_integrals_v2.py --dim 1
-        python spatial_integrals_v2.py --dim 2
-        """
+        "python spatial_integrals_v2.py --dim 2"
 
 rule plot_cumulants:
     input:
