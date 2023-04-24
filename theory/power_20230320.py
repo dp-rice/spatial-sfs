@@ -4,7 +4,6 @@ import sys
 import math
 sys.path.insert(1,'numerics_snakemake')
 from plot_sfs import *
-import matplotlib.cm as cm
 import matplotlib as mpl
 
 
@@ -130,21 +129,6 @@ def main():
         axs[0].plot(sigma2G_list,
                 [power_all(sigma_vals[i], 0.1, sigma_vals, kappa_list, res_vals, pole_vals, sigma2G=s2g, sigma2R=1e-8) for s2g
                  in sigma2G_list],color=colors[i])
-    # ax.plot(sigma2G_list,
-    #         [power_all(0.01, 0.1, sigma_vals, kappa_list, res_vals, pole_vals, sigma2G=s2g, sigma2R=1e-8) for s2g
-    #          in sigma2G_list])
-    # ax.plot(sigma2G_list,
-    #         [power_all(sigma_vals[20], 0.1, sigma_vals, kappa_list, res_vals, pole_vals, sigma2G=s2g, sigma2R=1e-8) for
-    #          s2g
-    #          in sigma2G_list])
-    # ax.plot(sigma2G_list,
-    #         [power_all(sigma_vals[50], 0.1, sigma_vals, kappa_list, res_vals, pole_vals, sigma2G=s2g, sigma2R=1e-8) for
-    #          s2g
-    #          in sigma2G_list])
-    # ax.plot(sigma2G_list,
-    #         [power_all(sigma_vals[75], 0.1, sigma_vals, kappa_list, res_vals, pole_vals, sigma2G=s2g, sigma2R=1e-8) for
-    #          s2g
-    #          in sigma2G_list])
     axs[0].set_xscale("log")
     axs[0].set_yscale("log")
     axs[0].set_xlabel("sigma_G^2")
@@ -266,160 +250,7 @@ def main():
         axs[i].set_ylabel("V_E")
     plt.tight_layout()
     plt.savefig("plots_20230125/VE_sigma_sigma2G.png",format='png')
-    #
-    # plot power over sigma
 
-    # def power_all(sigma, s, sigma_vals, kappa_list,
-    #               res_vals, pole_vals,
-    #               sigma2R=0.1, sigma2G=1, Nval=10000, n=10000, a=1e-8, L=10000, mu=1e-8, d=2, D=1, l=1):
-    #     Vg = calc_V_G(kappa_list, s, sel_grad=1.0, N=Nval, L=L, mu=mu, d=d, D=D)[sigma_vals.index(sigma)]
-    #     Ve = calc_V_E(sigma, sigma2R, sigma2G, l, d)
-    #     Vp = Vg + Ve
-    #     zs = get_zs(s, sel_grad=sel_grad, Vp=Vp, n=n, a=a)
-    #     power_val = power(zs, sigma, s, sigma_vals, res_vals, pole_vals, Nval)
-    #     return (power_val)
-
-    # s_list = [1,1,1]
-    # sigma2G_list = [0,0.01, 1]
-    # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    # for i in range(3):
-    #     axs[i].plot(sigma_vals, [power_all(sg,s_list[i],sigma_vals,kappa_list,res_vals,pole_vals,sigma2G=sigma2G_list[i],sigma2R=0.1) for sg in sigma_vals])
-    #     axs[i].set_xscale("log")
-    #     axs[i].set_yscale("log")
-    #     axs[i].set_title("s="+ str(s_list[i])+", sigma2G="+str(sigma2G_list[i])+", sigma2R=0.1")
-    #     # axs[i].set_ylim(1e-15, 1e-6)
-    #     axs[i].set_xlabel("sigma")
-    #     axs[i].set_ylabel("Power")
-    # plt.tight_layout()
-    # plt.savefig("plots_20230125/power_sigma_s1_sigma2R01.png",format='png')
-    #
-    # s_list = [0.01,0.01,0.01]
-    # sigma2G_list = [0,0.01, 1]
-    # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    # for i in range(3):
-    #     axs[i].plot(sigma_vals, [power_all(sg,s_list[i],sigma_vals,kappa_list,res_vals,pole_vals,sigma2G=sigma2G_list[i],sigma2R=0.1) for sg in sigma_vals])
-    #     # axs[i].set_xscale("log")
-    #     # axs[i].set_yscale("log")
-    #     axs[i].set_title("s="+ str(s_list[i])+", sigma2G="+str(sigma2G_list[i])+", sigma2R=0.1")
-    #     # axs[i].set_ylim(1e-15, 1e-6)
-    #     axs[i].set_xlabel("sigma")
-    #     axs[i].set_ylabel("Power")
-    # plt.tight_layout()
-    # plt.savefig("plots_20230125/power_sigma_s01_sigma2R01.png",format='png')
-    #
-    # s_list = [1, 1, 1]
-    # sigma2G_list = [0, 0.01, 1]
-    # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    # for i in range(3):
-    #     axs[i].plot(sigma_vals, [
-    #         power_all(sg, s_list[i], sigma_vals, kappa_list, res_vals, pole_vals,sigma2G=sigma2G_list[i],
-    #                   sigma2R=1e-8) for sg in sigma_vals])
-    #     axs[i].set_xscale("log")
-    #     axs[i].set_yscale("log")
-    #     axs[i].set_title("s=" + str(s_list[i]) + ", sigma2G=" + str(sigma2G_list[i]) + ", sigma2R=1e-8")
-    #     # axs[i].set_ylim(1e-15, 1e-6)
-    #     axs[i].set_xlabel("sigma")
-    #     axs[i].set_ylabel("Power")
-    # plt.tight_layout()
-    # plt.savefig("plots_20230125/power_sigma_s1_sigma2R1e-8.png",format='png')
-    #
-    # s_list = [0.01, 0.01, 0.01]
-    # sigma2G_list = [0, 0.01, 1]
-    # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    # for i in range(3):
-    #     axs[i].plot(sigma_vals, [
-    #         power_all(sg, s_list[i], sigma_vals, kappa_list, res_vals, pole_vals, sigma2G=sigma2G_list[i],
-    #                   sigma2R=1e-8) for sg in sigma_vals])
-    #     axs[i].set_xscale("log")
-    #     axs[i].set_yscale("log")
-    #     axs[i].set_title("s=" + str(s_list[i]) + ", sigma2G=" + str(sigma2G_list[i]) + ", sigma2R=1e-8")
-    #     # axs[i].set_ylim(1e-15, 1e-6)
-    #     axs[i].set_xlabel("sigma")
-    #     axs[i].set_ylabel("Power")
-    # plt.tight_layout()
-    # plt.savefig("plots_20230125/power_sigma_s01_sigma2R1e-8.png",format='png')
-    #
-    # # s_list = [2,2,2]
-    # # sigma2G_list = [0, 0.01, 1]
-    # # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    # # for i in range(3):
-    # #     axs[i].plot(sigma_vals, [
-    # #         power_all(sg, s_list[i], sigma_vals, kappa_list, res_vals, pole_vals, sigma2R=1e-8, sigma2G=sigma2G_list[i])
-    # #         for sg in sigma_vals])
-    # #     axs[i].set_xscale("log")
-    # #     axs[i].set_yscale("log")
-    # #     axs[i].set_title("s=" + str(s_list[i]) + ", sigma2G=" + str(sigma2G_list[i]))
-    # #     # axs[i].set_ylim(1e-15, 1e-6)
-    # #     axs[i].set_xlabel("sigma")
-    # #     axs[i].set_ylabel("Power")
-    # # plt.tight_layout()
-    # # plt.show()
-    #
-    # s_list = [1, 1, 1]
-    # sigma2G_list = [0, 0.01, 1]
-    # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    # for i in range(3):
-    #     axs[i].plot(sigma_vals, [
-    #         power_all(sg, s_list[i], sigma_vals, kappa_list, res_vals, pole_vals, sigma2G=sigma2G_list[i],
-    #                   sigma2R=0) for sg in sigma_vals])
-    #     axs[i].set_xscale("log")
-    #     axs[i].set_yscale("log")
-    #     axs[i].set_title("s=" + str(s_list[i]) + ", sigma2G=" + str(sigma2G_list[i]) + ", sigma2R=0")
-    #     # axs[i].set_ylim(1e-15, 1e-6)
-    #     axs[i].set_xlabel("sigma")
-    #     axs[i].set_ylabel("Power")
-    # plt.tight_layout()
-    # plt.savefig("plots_20230125/power_sigma_s1_sigma2R0.png",format='png')
-    #
-    # s_list = [0.01, 0.01, 0.01]
-    # sigma2G_list = [0, 0.01, 1]
-    # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    # for i in range(3):
-    #     axs[i].plot(sigma_vals, [
-    #         power_all(sg, s_list[i], sigma_vals, kappa_list, res_vals, pole_vals, sigma2G=sigma2G_list[i],
-    #                   sigma2R=0) for sg in sigma_vals])
-    #     axs[i].set_xscale("log")
-    #     axs[i].set_yscale("log")
-    #     axs[i].set_title("s=" + str(s_list[i]) + ", sigma2G=" + str(sigma2G_list[i]) + ", sigma2R=0")
-    #     # axs[i].set_ylim(1e-15, 1e-6)
-    #     axs[i].set_xlabel("sigma")
-    #     axs[i].set_ylabel("Power")
-    # plt.tight_layout()
-    # plt.savefig("plots_20230125/power_sigma_s01_sigma2R0.png",format='png')
-    #
-    # s_list = [1, 1, 1]
-    # sigma2G_list = [0.01,0.1,1]
-    # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    # for i in range(3):
-    #     axs[i].plot(sigma_vals, [
-    #         calc_V_G(kappa_list,s_list[i])[sigma_vals.index(sg)]/(calc_V_G(kappa_list,s_list[i])[sigma_vals.index(sg)]+calc_V_E(sg,sigma2R=1e-8,sigma2G=sigma2G_list[i])) for sg in sigma_vals])
-    #     axs[i].set_xscale("log")
-    #     axs[i].set_yscale("log")
-    #     axs[i].set_title("s=" + str(s_list[i]) + ", sigma2G=" + str(sigma2G_list[i]) + ", sigma2R=1e-8")
-    #     # axs[i].set_ylim(1e-15, 1e-6)
-    #     axs[i].set_xlabel("sigma")
-    #     axs[i].set_ylabel("h^2")
-    # plt.tight_layout()
-    # plt.savefig("plots_20230125/heritability_v1.png", format='png')
-    #
-    # s_list = [0.01, 0.1, 1]
-    # sigma2G_list = [1,1, 1]
-    # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    # for i in range(3):
-    #     axs[i].plot(sigma_vals, [
-    #         calc_V_G(kappa_list, s_list[i])[sigma_vals.index(sg)] / (
-    #                     calc_V_G(kappa_list, s_list[i])[sigma_vals.index(sg)] + calc_V_E(sg, sigma2R=1e-8,
-    #                                                                                      sigma2G=sigma2G_list[i])) for
-    #         sg in sigma_vals])
-    #     axs[i].set_xscale("log")
-    #     axs[i].set_yscale("log")
-    #     axs[i].set_title("s=" + str(s_list[i]) + ", sigma2G=" + str(sigma2G_list[i]) + ", sigma2R=1e-8")
-    #     # axs[i].set_ylim(1e-15, 1e-6)
-    #     axs[i].set_xlabel("sigma")
-    #     axs[i].set_ylabel("h^2")
-    # plt.tight_layout()
-    # plt.savefig("plots_20230125/heritability_v2.png", format='png')
-    #
     s_list = [0.001, 0.01, 0.1]
     sigma2G_list = [0,1e-4,1e-2]
     fig, axs = plt.subplots(3, 3, figsize=(15, 15))
