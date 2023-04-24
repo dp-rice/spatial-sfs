@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc802fac-8301-4f15-8381-0fb380ffddc0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/theory/finite_sample_SFS.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/theory/finite_sample_SFS.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/theory/numerics_snakemake/plot_sfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/theory/numerics_snakemake/plot_sfs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/theory/numerics_snakemake/plots_sfs_dim2_polytype_1_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/theory/numerics_snakemake/plots_sfs_dim2_polytype_1_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/theory/power_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/theory/power_v2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,24 +18,112 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plot_sfs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/theory/power_v2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="13" column="49" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/theory/plot_sfs_poster.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="127">
+              <caret line="83" column="26" selection-start-line="83" selection-start-column="19" selection-end-line="83" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/theory/plot_params_poster.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-211">
+              <caret line="53" column="32" selection-start-line="18" selection-start-column="4" selection-end-line="53" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plot_cumulants.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/spatial_integrals_v2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_sfs_dim2_polytype_1_1.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/theory/plot_expseg.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1155">
+              <caret line="77" selection-start-line="77" selection-end-line="77" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_params_selection_dim1_polytype_2_1.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/theory/plot_power.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-12">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_sfs_dim1_polytype_2_1.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_residues_dim2_errorFalse.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/theory/plot_exp_het_poster.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-219">
+              <caret line="10" selection-start-line="10" selection-end-line="13" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -47,22 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fig3</find>
-      <find>fi1</find>
-      <find>taylor</find>
-      <find>0.</find>
-      <find>datamax</find>
-      <find>u0</find>
-      <find>loc</find>
-      <find>nx</find>
-      <find>Taylor</find>
-      <find>get_taylor</find>
-      <find>real</find>
-      <find>print(&quot;heere&quot;</find>
-      <find>un</find>
-      <find>Viewer</find>
-      <find>pade_table</find>
-      <find>filename</find>
       <find>error_</find>
       <find>get_pade_poly</find>
       <find>coefs</find>
@@ -77,10 +151,27 @@
       <find>set_ylim(1e-5,1e5)</find>
       <find>d=args.dim</find>
       <find>set_ylim(1e-5, 1e5)</find>
+      <find>v2</find>
+      <find>L=</find>
+      <find>L=1e6</find>
+      <find>L=1e5</find>
+      <find>plt.</find>
+      <find>power_over</find>
+      <find>sigma_vals</find>
+      <find>power_over_zs</find>
+      <find>get_</find>
+      <find>power_over_sigma</find>
+      <find>power_over_sigma2g_v2</find>
+      <find>rate_p</find>
+      <find>legend</find>
+      <find>plots_params</find>
+      <find>integrand1</find>
+      <find>shape_p</find>
     </findStrings>
     <replaceStrings>
       <replace>dim2</replace>
       <replace>set_ylim(args.ymin, args.ymax)</replace>
+      <replace>plt.savefig(&quot;plots_20230125/</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -106,13 +197,18 @@
         <option value="$PROJECT_DIR$/theory/numerics_snakemake/clean_data.py" />
         <option value="$PROJECT_DIR$/theory/numerics_snakemake/make_plots_pade.py" />
         <option value="$PROJECT_DIR$/theory/numerics_snakemake/Snakefile" />
+        <option value="$PROJECT_DIR$/theory/power_v2.py" />
+        <option value="$PROJECT_DIR$/theory/power_20230320.py" />
+        <option value="$PROJECT_DIR$/theory/plot_het_overN.py" />
         <option value="$PROJECT_DIR$/theory/numerics_snakemake/plot_sfs.py" />
+        <option value="$PROJECT_DIR$/theory/plot_sfs_poster.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="y" value="25" />
     <option name="width" value="1680" />
-    <option name="height" value="1050" />
+    <option name="height" value="1025" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -126,6 +222,11 @@
             <path>
               <item name="spatial-sfs-repo" type="b2602c69:ProjectViewProjectNode" />
               <item name="spatial-sfs-repo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spatial-sfs-repo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spatial-sfs-repo" type="462c0819:PsiDirectoryNode" />
+              <item name="spatialsfs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="spatial-sfs-repo" type="b2602c69:ProjectViewProjectNode" />
@@ -148,7 +249,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/theory/spatial_integrals_2D" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -191,9 +292,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49914822" visible="true" weight="0.26190478" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49914822" visible="true" weight="0.24847375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5008518" side_tool="true" weight="0.25274727" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -204,7 +304,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32959184" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32959184" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.498779" visible="true" weight="0.35408163" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.498779" visible="true" weight="0.3255102" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.501221" side_tool="true" weight="0.4010204" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3479592" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -215,300 +315,217 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/theory/spatial_integrals.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14805">
-          <caret line="987" column="49" selection-start-line="986" selection-start-column="49" selection-end-line="987" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/spatial_integrals.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1965">
-          <caret line="137" column="36" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/spatial_integrals_2D.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="67" column="51" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/spatial_integrals_2D/spatial_integrals_2D.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="106" column="49" selection-start-line="106" selection-start-column="49" selection-end-line="106" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/spatial_integrals_2D/spatial_integrals_2D_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1515">
-          <caret line="105" column="47" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/spatial_integrals_2D/u4_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="63" column="26" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/spatial_integrals_2D/parallel-u3.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/makeplots_cumulants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/test.png">
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_poles_dim2_errorTrue.png" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_poles_dim2_errorFalse.png" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_poles_vs_residues_dim2_errorTrue.png" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_remainder_dim2_errorTrue.png" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_remainder_dim2_errorFalse.png" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_residues_dim2_errorFalse.png" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_sfs_dim1_polytype_2_1.png" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_params_selection_dim1_polytype_2_1.png" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_sfs_dim2_polytype_1_1.png" />
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230125/power_sigma_s01_sigma2R01.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/test_dim1.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/spatial_integrals_dim2.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/cumulants_dim2.png">
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230206/power_over_zs_sigma2G1e-4.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/pade_approx_dim2.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230206/power_over_zs_sigma2G1e-3.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/pade_approx_2d.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230206/VE_vs_VG.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/pade_approx_dim1.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4061">
-          <caret line="285" column="55" selection-start-line="285" selection-start-column="55" selection-end-line="285" selection-end-column="55" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230206/power_over_zs_sigma2G1e-8.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/pade_approx_dim1_errorFalse.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="62" selection-start-line="26" selection-start-column="62" selection-end-line="26" selection-end-column="62" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230206/power_over_zs_smallsigma2G.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/plots_pade.py">
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230206/power_over_zs_sigma2G1e-2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230206/power_over_zs.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230125/VG_sigma_mu.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/power_20230320.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+        <state relative-caret-position="330">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/cumulants_dim1.png">
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230125/VE_sigma_sigma2G.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_remainder_residues_dim1_errorFalse.png">
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230125/power_sigma_s1_sigma2R01.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_dim1_errorFalse.png">
+    <entry file="file://$PROJECT_DIR$/theory/plots_20230125/power_sigma_s1_sigma2R0.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_remainder_dim1_errorFalse.png">
+    <entry file="file://$PROJECT_DIR$/theory/power_over_sigma_s_n.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_paderel_error_dim1_errorTrue.png">
+    <entry file="file://$PROJECT_DIR$/theory/power_over_sigma_s_sigma2G_v2.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/pade_approx_dim1_errorTrue.csv">
+    <entry file="file://$PROJECT_DIR$/theory/power_over_sigma_s.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/power_over_sigma2g_sigma_v3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/power_over_sigma2g_v2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/power_over_sigma2g_sigma_v2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/Power_constant_sel.ipynb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/power_over_sigma_s_sigma2G.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/power_over_sigma2g.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Jupyter/runtime/nbserver-29513-open.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/plot_het_overN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="81" lean-forward="true" selection-start-line="21" selection-start-column="81" selection-end-line="21" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/cleaned_data_dim1_errorTrue.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="39" lean-forward="true" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/clean_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+        <state relative-caret-position="810">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/spatial_integrals_v2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="707">
-          <caret line="116" selection-start-line="116" selection-end-line="116" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/theory/files_v1_20221007/plots_pade_linthresh_poles_dim2_errorFalse.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/old_files/plots_pade_functions/1_0_sigma0.01.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/old_files/plots_pade_functions/1_0_sigma10.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/old_files/plots_pade_functions/1_1_sigma0.01.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/old_files/plots_pade_functions/3_0_sigma0.01.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/old_files/plots_pade_functions/sigma01.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/old_files/plots_pade_functions/sigma1_v2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/old_files/plots_pade_functions/sigma10.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plot_cumulants.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="420">
+          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/pade_approx_v2.py">
+    <entry file="file://$PROJECT_DIR$/theory/plot_params_poster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="225" selection-start-line="225" selection-end-line="225" />
+        <state relative-caret-position="-211">
+          <caret line="53" column="32" selection-start-line="18" selection-start-column="4" selection-end-line="53" selection-end-column="32" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_residues_dim1_errorFalse.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_residues_dim2_errorTrue.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_pole_error_dim1_errorTrue.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_error_dim1_errorTrue.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/cleaned_data_dim1_errorFalse.csv">
+    <entry file="file://$PROJECT_DIR$/theory/plot_power.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3117">
-          <caret line="47" column="53" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/make_plots_pade.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_poles_dim1_errorFalse.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/git_status.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1440">
-          <caret line="18" column="32" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_poles_vs_residues_dim1_errorFalse.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/Snakefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1189">
+        <state relative-caret-position="-12">
           <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/theory/power_v2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="13" column="49" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plot_sfs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+        <state relative-caret-position="330">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_poles_vs_residues_dim2_errorFalse.png">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plot_expseg.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_residues_dim1_errorTrue.png">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/spatial_integrals_v2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_params_selection_dim2_polytype_1_1.png">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/theory/plot_sfs_poster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="83" column="26" selection-start-line="83" selection-start-column="19" selection-end-line="83" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_poles_dim2_errorTrue.png">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/theory/plot_exp_het_poster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-219">
+          <caret line="10" selection-start-line="10" selection-end-line="13" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_poles_dim2_errorFalse.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_poles_vs_residues_dim2_errorTrue.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_remainder_dim2_errorTrue.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_remainder_dim2_errorFalse.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_pade_residues_dim2_errorFalse.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_sfs_dim1_polytype_2_1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_params_selection_dim1_polytype_2_1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/theory/numerics_snakemake/plots_sfs_dim2_polytype_1_1.png">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/theory/plot_expseg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
