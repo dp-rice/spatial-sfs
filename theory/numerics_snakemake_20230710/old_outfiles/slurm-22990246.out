@@ -1,0 +1,24 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	calc_integrals
+	1	clean_data
+	1	make_plots
+	1	pade_approx
+	1	plot_cumulants
+	1	plot_sfs
+	7
+
+[Sat Oct  8 10:24:24 2022]
+rule calc_integrals:
+    output: spatial_integrals_dim1.csv, spatial_integrals_dim2.csv
+    jobid: 4
+
+calculating u2
+calculating u3
+calculating u4
+slurmstepd-midway2-0089: error: *** JOB 22990246 ON midway2-0089 CANCELLED AT 2022-10-09T22:24:42 DUE TO TIME LIMIT ***

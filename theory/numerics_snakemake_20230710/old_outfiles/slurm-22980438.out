@@ -1,0 +1,99 @@
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	calc_integrals
+	1	clean_data
+	1	make_plots
+	1	pade_approx
+	1	plot_cumulants
+	1	plot_sfs
+	7
+
+[Fri Oct  7 14:48:10 2022]
+rule calc_integrals:
+    output: spatial_integrals_dim1.csv, spatial_integrals_dim2.csv
+    jobid: 5
+
+/software/python-anaconda-2020.02-el7-x86_64/lib/python3.7/site-packages/scipy/integrate/quadpack.py:880: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  **opt)
+calculating u2
+calculating u3
+calculating u4
+/software/python-anaconda-2020.02-el7-x86_64/lib/python3.7/site-packages/scipy/integrate/quadpack.py:880: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  **opt)
+calculating u2 (2D)
+calculating u3 (2D)
+[Fri Oct  7 15:33:04 2022]
+Finished job 5.
+1 of 7 steps (14%) done
+
+[Fri Oct  7 15:33:04 2022]
+rule pade_approx:
+    input: spatial_integrals_dim1.csv, spatial_integrals_dim2.csv
+    output: pade_approx_dim1_errorFalse.csv, pade_approx_dim1_errorTrue.csv, pade_approx_dim2_errorFalse.csv, pade_approx_dim2_errorTrue.csv
+    jobid: 6
+
+
+[Fri Oct  7 15:33:04 2022]
+rule plot_cumulants:
+    input: spatial_integrals_dim1.csv, spatial_integrals_dim2.csv
+    output: cumulants_dim1.png, cumulants_dim2.png
+    jobid: 3
+
+Warning: error thrown for m = 1 and n = 1.
+ Matrix is singular.
+Warning: error thrown for m = 1 and n = 2.
+ Matrix is singular.
+Warning: error thrown for m = 2 and n = 1.
+ Matrix is singular.
+Traceback (most recent call last):
+  File "pade_approx_v2.py", line 228, in <module>
+    main()
+  File "pade_approx_v2.py", line 221, in main
+    temp = calc_pole_res(temp)
+  File "pade_approx_v2.py", line 119, in calc_pole_res
+    if len(pl_all[0])>1: # if more than 1 pole, add remainder terms (other than k)
+IndexError: list index out of range
+[Fri Oct  7 15:33:08 2022]
+Error in rule pade_approx:
+    jobid: 6
+    output: pade_approx_dim1_errorFalse.csv, pade_approx_dim1_errorTrue.csv, pade_approx_dim2_errorFalse.csv, pade_approx_dim2_errorTrue.csv
+
+RuleException:
+CalledProcessError in line 66 of /project2/jnovembre/steinerm/rvsfs/spatial-sfs/theory/numerics_snakemake/Snakefile:
+Command ' set -euo pipefail;  
+        python pade_approx_v2.py --dim 1
+        python pade_approx_v2.py --dim 1 --calc_error
+        python pade_approx_v2.py --dim 2
+        python pade_approx_v2.py --dim 2 --calc_error ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/rvsfs/spatial-sfs/theory/numerics_snakemake/Snakefile", line 66, in __rule_pade_approx
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Fri Oct  7 15:33:10 2022]
+Finished job 3.
+2 of 7 steps (29%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /project2/jnovembre/steinerm/rvsfs/spatial-sfs/theory/numerics_snakemake/.snakemake/log/2022-10-07T144809.947466.snakemake.log

@@ -1,0 +1,28 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	calc_integrals_dim1
+	1	calc_integrals_dim2
+	1	clean_data
+	1	make_plots
+	1	pade_approx
+	1	plot_cumulants
+	1	plot_sfs
+	8
+
+[Mon Oct 10 12:18:52 2022]
+rule calc_integrals_dim2:
+    output: spatial_integrals_dim2.csv
+    jobid: 5
+
+
+[Mon Oct 10 12:18:52 2022]
+rule calc_integrals_dim1:
+    output: spatial_integrals_dim1.csv
+    jobid: 4
+
+slurmstepd-midway2-0186: error: *** JOB 23053837 ON midway2-0186 CANCELLED AT 2022-10-10T13:42:33 ***
