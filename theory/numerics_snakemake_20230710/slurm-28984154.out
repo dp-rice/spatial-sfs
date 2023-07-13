@@ -1,0 +1,80 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	calc_integrals_dim1
+	1	calc_integrals_dim2
+	1	clean_data
+	1	make_plots
+	1	pade_approx
+	1	plot_cumulants
+	1	plot_sfs
+	8
+
+[Mon Jul 10 19:41:24 2023]
+rule calc_integrals_dim2:
+    output: spatial_integrals_dim2.csv
+    jobid: 5
+
+
+[Mon Jul 10 19:41:24 2023]
+rule calc_integrals_dim1:
+    output: spatial_integrals_dim1.csv
+    jobid: 6
+
+calculating u2
+calculating u3
+calculating u4
+[Mon Jul 10 21:43:35 2023]
+Finished job 6.
+1 of 8 steps (12%) done
+/home/steinerm/.conda/envs/snakemake/lib/python3.6/site-packages/scipy/integrate/quadpack.py:881: IntegrationWarning: The occurrence of roundoff error is detected, which prevents 
+  the requested tolerance from being achieved.  The error may be 
+  underestimated.
+  **opt)
+/home/steinerm/.conda/envs/snakemake/lib/python3.6/site-packages/scipy/integrate/quadpack.py:881: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  **opt)
+calculating u2 (2D)
+calculating u3 (2D)
+[Wed Jul 12 20:34:07 2023]
+Finished job 5.
+2 of 8 steps (25%) done
+
+[Wed Jul 12 20:34:07 2023]
+rule plot_cumulants:
+    input: spatial_integrals_dim1.csv, spatial_integrals_dim2.csv
+    output: cumulants_dim1.png, cumulants_dim2.png
+    jobid: 3
+
+
+[Wed Jul 12 20:34:07 2023]
+rule pade_approx:
+    input: spatial_integrals_dim1.csv, spatial_integrals_dim2.csv
+    output: pade_approx_dim1_errorFalse.csv, pade_approx_dim1_errorTrue.csv, pade_approx_dim2_errorFalse.csv, pade_approx_dim2_errorTrue.csv
+    jobid: 7
+
+Traceback (most recent call last):
+  File "plot_cumulants.py", line 1, in <module>
+    from matplotlib import pyplot as plt
+ModuleNotFoundError: No module named 'matplotlib'
+[Wed Jul 12 20:34:07 2023]
+Error in rule plot_cumulants:
+    jobid: 3
+    output: cumulants_dim1.png, cumulants_dim2.png
+
+RuleException:
+CalledProcessError in line 54 of /project2/jnovembre/steinerm/spatial-sfs/theory/numerics_snakemake_20230710/Snakefile:
+Command ' set -euo pipefail;  
+        python plot_cumulants.py --dim 1
+        python plot_cumulants.py --dim 2 ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/numerics_snakemake_20230710/Snakefile", line 54, in __rule_plot_cumulants
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Jul 12 20:34:24 2023]
+Finished job 7.
+3 of 8 steps (38%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /project2/jnovembre/steinerm/spatial-sfs/theory/numerics_snakemake_20230710/.snakemake/log/2023-07-10T194124.055253.snakemake.log
