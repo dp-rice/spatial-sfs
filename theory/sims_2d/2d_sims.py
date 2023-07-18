@@ -61,6 +61,7 @@ def simulate_WF(m,dims,pop_size,s,num_intervals):
         # store freqs every 1/s
         if (i + 1) % interval == 0:
             output[i // interval] = f
+            print("Interval: " +str(i // interval))
     return output, reset_gens
 
 
@@ -81,13 +82,16 @@ def get_exp_values(s_list=[1e-3,1e-2,1e-1],L=1,l=1,m=1e-3,Nd=1000,num_intervals=
     k_list = get_all_indices(L, L)
 
     list1 = np.zeros((len(s_list), len(k_list)))
-    list2 = np.zeros((len(s_list), len(k_list)))
+    # list2 = np.zeros((len(s_list), len(k_list)))
     list3 = np.zeros((len(s_list), len(k_list)))
     time_ext_list = []
+    sim_output_list = []
     for i in range(len(s_list)):
         # run simulation
         # print("*** starting simulation ***")
+        print("s="+str(s_list[i]))
         sim_output, sim_gens = simulate_WF(m=m, dims=dims, pop_size=Nd, s=s_list[i], num_intervals=num_intervals)
+        sim_output_list.append(sim_output)
         # print("*** finished simulation ***")
         prev_gen=0
         time_ext = []
@@ -96,17 +100,17 @@ def get_exp_values(s_list=[1e-3,1e-2,1e-1],L=1,l=1,m=1e-3,Nd=1000,num_intervals=
             time_ext.append(diff)
             prev_gen = g
         time_ext_list.append(time_ext)
-        dft = np.zeros(tuple([num_intervals]) + dims)
+        # dft = np.zeros(tuple([num_intervals]) + dims)
         dft_abs = np.zeros(tuple([num_intervals]) + dims)
         for t in range(num_intervals):
-            dft[t] = fft2(sim_output[t])
+            # dft[t] = fft2(sim_output[t])
             dft_abs[t] = np.abs(fft2(sim_output[t]))
         dft_mean_abs = np.mean(dft_abs, axis=0)  # take mean over timesteps
         dft_mean_square_abs = np.mean(dft_abs ** 2, axis=0)
-        dft_mean = np.mean(dft,axis=0)
+        # dft_mean = np.mean(dft,axis=0)
         for j in range(len(k_list)):
             list1[i,j] = dft_mean_abs[k_list[j][0],k_list[j][1]]
-            list2[i,j] = np.abs(dft_mean[k_list[j][0],k_list[j][1]])**2
+            # list2[i,j] = np.abs(dft_mean[k_list[j][0],k_list[j][1]])**2
             list3[i,j] = dft_mean_square_abs[k_list[j][0],k_list[j][1]]
 
     time_ext_arr = np.array(time_ext_list, dtype=object)
@@ -125,20 +129,32 @@ def get_exp_values(s_list=[1e-3,1e-2,1e-1],L=1,l=1,m=1e-3,Nd=1000,num_intervals=
 
 
 
-    return list1,list2,list3,time_means,k_list,s_list
+    return list1,list3,time_means,k_list,s_list,sim_output_list
 
 def main():
-    L_list = [1,2,10]
+    L_list = [1,2,10]#[1,2,10]
+    Nd_val = 10000
+    nreps = 10000
     for Lval in L_list:
         L = Lval # later iterate across L's
-        l1,l2,l3,times,k_list,s_list = get_exp_values(L=L)
+        print("L="+str(Lval))
+        l1,l3,times,k_list,s_list,sim_output_list = get_exp_values(L=L,Nd=Nd_val,num_intervals=nreps)
+        exptot_man = [np.mean([np.sum(mat) for mat in sim_output * Nd_val]) for sim_output in sim_output_list]
         np.savetxt('L'+str(L)+'_list1.csv', l1, delimiter=',')
-        np.savetxt('L'+str(L)+'_list2.csv', l2, delimiter=',')
+        # np.savetxt('L'+str(L)+'_list2.csv', l2, delimiter=',')
         np.savetxt('L'+str(L)+'_list3.csv', l3, delimiter=',')
         np.savetxt('L'+str(L)+'_times.csv', times, delimiter=',')
         np.savetxt('L' + str(L) + '_k_list.csv', k_list, delimiter=',')
         np.savetxt('L' + str(L) + '_s_list.csv', s_list, delimiter=',')
+        np.savetxt('L'+str(L)+'_exptot_manual.csv',exptot_man,delimiter=',')
 
+        # print(sim_output_list)
+        # print([sim_output*Nd_val for sim_output in sim_output_list])
+        # print(exptot_man)
+
+        # print(sim_output)
+        # print(sim_output*1000)
+        # print(np.mean([np.sum(mat) for mat in sim_output*Nd_val]))
     # L = 3  # later iterate across L's
     # l1, l2, l3, times, k_list, s_list = get_exp_values(L=L)
     # np.savetxt('L' + str(L) + '_list1.csv', l1, delimiter=',')
