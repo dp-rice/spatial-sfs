@@ -1,0 +1,31 @@
+import numpy as np
+
+s_grid = np.logspace(-6,-1,6)
+m_grid = np.logspace(-4,-1,4)
+
+L = 50
+pop_size = 1e4
+l = 1
+n = 1000
+num_intervals = 10000
+
+checks_results_pattern = "output/test_vals_L"+str(L)+"_l"+str(l)+"_m{mvals}_s{svals}_N"+str(pop_size)+"_numint"+str(num_intervals)+".csv"
+sfs_results_pattern = "output/sfs_vals_L"+ str(L) + "_l" + str(l) + "_n"+str(n)+"_m{mvals}_s{svals}"+"_N" + str(pop_size) + "_numint" + str(num_intervals) + ".csv"
+
+checks_results = expand(checks_results_pattern,mvals=m_grid,svals=s_grid)
+sfs_results = expand(checks_results_pattern,mvals=m_grid,svals=s_grid)
+
+rule all:
+    input:
+        checks_results,
+        sfs_results
+
+rule run_sims:
+    input:
+    output:
+        "output/test_vals_L{L}_l{l}_m{mval}_s{sval}_N{pop_size}_numint{num_intervals}.csv",
+        "output/sfs_vals_L{L}_l{l}_n{n}_m{mval}_s{sval}_N{pop_size}_numint{num_intervals}.csv"
+
+    run:
+        "python scripts/2d_sims.py -m {wildcards.mval} -L {L} --pop_size {pop_size} -s {wildcards.sval} -l {l} -n {n} --num_intervals {num_intervals} --outdir output --check_sims --calc_sfs"
+
