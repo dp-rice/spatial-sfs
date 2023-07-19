@@ -132,8 +132,8 @@ def main():
     parser.add_argument("--num_intervals", type=int, help="number of intervals to store", default=100)
     parser.add_argument("--outdir", type=str, help="output path", default="output")
     parser.add_argument("--seed", type=int, help="random seed", default=1234)
-    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
-    parser.add_argument("--calc_sfs", action=argparse.BooleanOptionalAction)
+    parser.add_argument("--check_sims",action='store_true')
+    parser.add_argument("--calc_sfs", action='store_true')
     args = parser.parse_args()
 
     # set seed

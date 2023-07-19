@@ -1,0 +1,301 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	24	run_sims
+	25
+
+[Tue Jul 18 16:01:13 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.001_N10000.0_numint10000.csv
+    log: logs/0.0001_0.001_stdout.log, logs/0.0001_0.001_stderr.log
+    jobid: 7
+    wildcards: mval=0.0001, sval=0.001
+
+
+[Tue Jul 18 16:01:13 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.001_0.0001_stdout.log, logs/0.001_0.0001_stderr.log
+    jobid: 9
+    wildcards: mval=0.001, sval=0.0001
+
+
+[Tue Jul 18 16:01:13 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.0001_0.0001_stdout.log, logs/0.0001_0.0001_stderr.log
+    jobid: 10
+    wildcards: mval=0.0001, sval=0.0001
+
+
+[Tue Jul 18 16:01:14 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.001_N10000.0_numint10000.csv
+    log: logs/0.001_0.001_stdout.log, logs/0.001_0.001_stderr.log
+    jobid: 17
+    wildcards: mval=0.001, sval=0.001
+
+
+[Tue Jul 18 16:01:14 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.1_N10000.0_numint10000.csv
+    log: logs/0.1_0.1_stdout.log, logs/0.1_0.1_stderr.log
+    jobid: 19
+    wildcards: mval=0.1, sval=0.1
+
+
+[Tue Jul 18 16:01:14 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.01_N10000.0_numint10000.csv
+    log: logs/0.01_0.01_stdout.log, logs/0.01_0.01_stderr.log
+    jobid: 23
+    wildcards: mval=0.01, sval=0.01
+
+
+[Tue Jul 18 16:01:14 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-05_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-05_N10000.0_numint10000.csv
+    log: logs/0.0001_1e-05_stdout.log, logs/0.0001_1e-05_stderr.log
+    jobid: 14
+    wildcards: mval=0.0001, sval=1e-05
+
+
+[Tue Jul 18 16:01:14 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s1e-05_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s1e-05_N10000.0_numint10000.csv
+    log: logs/0.001_1e-05_stdout.log, logs/0.001_1e-05_stderr.log
+    jobid: 18
+    wildcards: mval=0.001, sval=1e-05
+
+
+[Tue Jul 18 16:01:14 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.0001_1e-06_stdout.log, logs/0.0001_1e-06_stderr.log
+    jobid: 8
+    wildcards: mval=0.0001, sval=1e-06
+
+
+[Tue Jul 18 16:01:14 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.1_N10000.0_numint10000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+    jobid: 16
+    wildcards: mval=0.01, sval=0.1
+
+
+[Tue Jul 18 16:01:14 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.001_1e-06_stdout.log, logs/0.001_1e-06_stderr.log
+    jobid: 2
+    wildcards: mval=0.001, sval=1e-06
+
+
+[Tue Jul 18 16:01:14 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.01_N10000.0_numint10000.csv
+    log: logs/0.1_0.01_stdout.log, logs/0.1_0.01_stderr.log
+    jobid: 5
+    wildcards: mval=0.1, sval=0.01
+
+
+[Tue Jul 18 16:01:15 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s1e-05_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s1e-05_N10000.0_numint10000.csv
+    log: logs/0.1_1e-05_stdout.log, logs/0.1_1e-05_stderr.log
+    jobid: 4
+    wildcards: mval=0.1, sval=1e-05
+
+
+[Tue Jul 18 16:01:15 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.1_1e-06_stdout.log, logs/0.1_1e-06_stderr.log
+    jobid: 21
+    wildcards: mval=0.1, sval=1e-06
+
+/usr/bin/bash: line 1: 15933 Bus error               python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:37:05 2023]
+Error in rule run_sims:
+    jobid: 23
+    output: output/test_vals_L50_l1.0_m0.01_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.01_N10000.0_numint10000.csv
+    log: logs/0.01_0.01_stdout.log, logs/0.01_0.01_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15923 Bus error               python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 0.0001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:52:41 2023]
+Error in rule run_sims:
+    jobid: 10
+    output: output/test_vals_L50_l1.0_m0.0001_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.0001_0.0001_stdout.log, logs/0.0001_0.0001_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 0.0001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15925 Bus error               python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:52:56 2023]
+Error in rule run_sims:
+    jobid: 17
+    output: output/test_vals_L50_l1.0_m0.001_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.001_N10000.0_numint10000.csv
+    log: logs/0.001_0.001_stdout.log, logs/0.001_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15962 Bus error               python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:53:31 2023]
+Error in rule run_sims:
+    jobid: 21
+    output: output/test_vals_L50_l1.0_m0.1_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.1_1e-06_stdout.log, logs/0.1_1e-06_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15937 Bus error               python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 1e-05 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:53:42 2023]
+Error in rule run_sims:
+    jobid: 14
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-05_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-05_N10000.0_numint10000.csv
+    log: logs/0.0001_1e-05_stdout.log, logs/0.0001_1e-05_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 1e-05 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15916 Bus error               python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:53:53 2023]
+Error in rule run_sims:
+    jobid: 7
+    output: output/test_vals_L50_l1.0_m0.0001_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.001_N10000.0_numint10000.csv
+    log: logs/0.0001_0.001_stdout.log, logs/0.0001_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15961 Bus error               python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 1e-05 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:54:19 2023]
+Error in rule run_sims:
+    jobid: 4
+    output: output/test_vals_L50_l1.0_m0.1_s1e-05_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s1e-05_N10000.0_numint10000.csv
+    log: logs/0.1_1e-05_stdout.log, logs/0.1_1e-05_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 1e-05 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15939 Bus error               python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 1e-05 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:54:28 2023]
+Error in rule run_sims:
+    jobid: 18
+    output: output/test_vals_L50_l1.0_m0.001_s1e-05_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s1e-05_N10000.0_numint10000.csv
+    log: logs/0.001_1e-05_stdout.log, logs/0.001_1e-05_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 1e-05 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15919 Bus error               python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.0001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:54:35 2023]
+Error in rule run_sims:
+    jobid: 9
+    output: output/test_vals_L50_l1.0_m0.001_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.001_0.0001_stdout.log, logs/0.001_0.0001_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.0001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15953 Bus error               python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:54:42 2023]
+Error in rule run_sims:
+    jobid: 2
+    output: output/test_vals_L50_l1.0_m0.001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.001_1e-06_stdout.log, logs/0.001_1e-06_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15929 Bus error               python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 17:54:47 2023]
+Error in rule run_sims:
+    jobid: 19
+    output: output/test_vals_L50_l1.0_m0.1_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.1_N10000.0_numint10000.csv
+    log: logs/0.1_0.1_stdout.log, logs/0.1_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15958 Bus error               python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 18:08:17 2023]
+Error in rule run_sims:
+    jobid: 5
+    output: output/test_vals_L50_l1.0_m0.1_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.01_N10000.0_numint10000.csv
+    log: logs/0.1_0.01_stdout.log, logs/0.1_0.01_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+/usr/bin/bash: line 1: 15942 Bus error               python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs
+[Tue Jul 18 18:30:58 2023]
+Error in rule run_sims:
+    jobid: 8
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.0001_1e-06_stdout.log, logs/0.0001_1e-06_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 135.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 9.10 TiB for an array with shape (1001, 50, 10000, 50, 50) and data type float64
+[Tue Jul 18 18:30:59 2023]
+Error in rule run_sims:
+    jobid: 16
+    output: output/test_vals_L50_l1.0_m0.01_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.1_N10000.0_numint10000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/.snakemake/log/2023-07-18T160113.664103.snakemake.log

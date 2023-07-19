@@ -5,7 +5,7 @@ m_grid = np.logspace(-4,-1,4)
 
 L = 50
 pop_size = 1e4
-l = 1
+l = 1.0
 n = 1000
 num_intervals = 10000
 
@@ -23,9 +23,9 @@ rule all:
 rule run_sims:
     input:
     output:
-        "output/test_vals_L{L}_l{l}_m{mval}_s{sval}_N{pop_size}_numint{num_intervals}.csv",
-        "output/sfs_vals_L{L}_l{l}_n{n}_m{mval}_s{sval}_N{pop_size}_numint{num_intervals}.csv"
-
-    run:
-        "python scripts/2d_sims.py -m {wildcards.mval} -L {L} --pop_size {pop_size} -s {wildcards.sval} -l {l} -n {n} --num_intervals {num_intervals} --outdir output --check_sims --calc_sfs"
+        "output/test_vals_L50_l1.0_m{mval}_s{sval}_N10000.0_numint10000.csv",
+        "output/sfs_vals_L50_l1.0_n1000_m{mval}_s{sval}_N10000.0_numint10000.csv"
+    log: out = "logs/{mval}_{sval}_stdout.log", err = "logs/{mval}_{sval}_stderr.log"
+    shell:
+        "python scripts/2d_sims.py -m {wildcards.mval} -L 50 --pop_size 10000 -s {wildcards.sval} -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs"
 

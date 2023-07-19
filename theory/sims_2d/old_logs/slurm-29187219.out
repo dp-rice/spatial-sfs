@@ -1,0 +1,251 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	24	run_sims
+	25
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.0001_s1e-05_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.0001_s1e-05_N10000.0_numint10000.csv
+    log: logs/0.0001_1e-05_stdout.log, logs/0.0001_1e-05_stderr.log
+    jobid: 21
+    wildcards: mval=0.0001, sval=1e-05
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.001_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.001_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.001_0.0001_stdout.log, logs/0.001_0.0001_stderr.log
+    jobid: 14
+    wildcards: mval=0.001, sval=0.0001
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.0001_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.0001_s0.001_N10000.0_numint10000.csv
+    log: logs/0.0001_0.001_stdout.log, logs/0.0001_0.001_stderr.log
+    jobid: 24
+    wildcards: mval=0.0001, sval=0.001
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.0001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.0001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.0001_1e-06_stdout.log, logs/0.0001_1e-06_stderr.log
+    jobid: 2
+    wildcards: mval=0.0001, sval=1e-06
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.001_1e-06_stdout.log, logs/0.001_1e-06_stderr.log
+    jobid: 13
+    wildcards: mval=0.001, sval=1e-06
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.0001_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.0001_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.0001_0.0001_stdout.log, logs/0.0001_0.0001_stderr.log
+    jobid: 7
+    wildcards: mval=0.0001, sval=0.0001
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.01_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.01_s0.01_N10000.0_numint10000.csv
+    log: logs/0.01_0.01_stdout.log, logs/0.01_0.01_stderr.log
+    jobid: 11
+    wildcards: mval=0.01, sval=0.01
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.001_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.001_s0.001_N10000.0_numint10000.csv
+    log: logs/0.001_0.001_stdout.log, logs/0.001_0.001_stderr.log
+    jobid: 12
+    wildcards: mval=0.001, sval=0.001
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.1_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.1_s0.1_N10000.0_numint10000.csv
+    log: logs/0.1_0.1_stdout.log, logs/0.1_0.1_stderr.log
+    jobid: 1
+    wildcards: mval=0.1, sval=0.1
+
+[Tue Jul 18 15:40:58 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.001_s1e-05_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.001_s1e-05_N10000.0_numint10000.csv
+    log: logs/0.001_1e-05_stdout.log, logs/0.001_1e-05_stderr.log
+    jobid: 20
+    wildcards: mval=0.001, sval=1e-05
+
+[Tue Jul 18 15:40:59 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.01_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.01_s0.1_N10000.0_numint10000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+    jobid: 15
+    wildcards: mval=0.01, sval=0.1
+
+[Tue Jul 18 15:40:59 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.1_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.1_s0.01_N10000.0_numint10000.csv
+    log: logs/0.1_0.01_stdout.log, logs/0.1_0.01_stderr.log
+    jobid: 19
+    wildcards: mval=0.1, sval=0.01
+
+[Tue Jul 18 15:40:59 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.1_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.1_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.1_0.0001_stdout.log, logs/0.1_0.0001_stderr.log
+    jobid: 18
+    wildcards: mval=0.1, sval=0.0001
+
+[Tue Jul 18 15:40:59 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1_m0.0001_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1_n1000_m0.0001_s0.1_N10000.0_numint10000.csv
+    log: logs/0.0001_0.1_stdout.log, logs/0.0001_0.1_stderr.log
+    jobid: 8
+    wildcards: mval=0.0001, sval=0.1
+
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[33mJob counts:
+	count	jobs
+	1	run_sims
+	1[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.0001_s1e-05_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.0001_s1e-05_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.001_s0.0001_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.001_s0.0001_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.0001_s0.001_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.0001_s0.001_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.001_s1e-06_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.001_s1e-06_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.0001_s1e-06_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.0001_s1e-06_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.01_s0.01_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.01_s0.01_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.001_s1e-05_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.001_s1e-05_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.001_s0.001_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.001_s0.001_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.0001_s0.0001_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.0001_s0.0001_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.1_s0.1_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.1_s0.1_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.1_s0.0001_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.1_s0.0001_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.01_s0.1_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.01_s0.1_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.1_s0.01_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.1_s0.01_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+[31mMissingOutputException in line 23 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Missing files after 30 seconds:
+output/test_vals_L50_l1_m0.0001_s0.1_N10000.0_numint10000.csv
+output/sfs_vals_L50_l1_n1000_m0.0001_s0.1_N10000.0_numint10000.csv
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.[0m
+[31mExiting because a job execution failed. Look above for error message[0m
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/.snakemake/log/2023-07-18T154058.645775.snakemake.log

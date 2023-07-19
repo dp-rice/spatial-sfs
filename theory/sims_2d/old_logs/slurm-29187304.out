@@ -1,0 +1,362 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	24	run_sims
+	25
+
+[Tue Jul 18 15:54:35 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.01_N10000.0_numint10000.csv
+    log: logs/0.1_0.01_stdout.log, logs/0.1_0.01_stderr.log
+    jobid: 8
+    wildcards: mval=0.1, sval=0.01
+
+
+[Tue Jul 18 15:54:35 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.0001_1e-06_stdout.log, logs/0.0001_1e-06_stderr.log
+    jobid: 6
+    wildcards: mval=0.0001, sval=1e-06
+
+
+[Tue Jul 18 15:54:35 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.1_N10000.0_numint10000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+    jobid: 16
+    wildcards: mval=0.01, sval=0.1
+
+
+[Tue Jul 18 15:54:35 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.001_1e-06_stdout.log, logs/0.001_1e-06_stderr.log
+    jobid: 3
+    wildcards: mval=0.001, sval=1e-06
+
+
+[Tue Jul 18 15:54:36 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.01_1e-06_stdout.log, logs/0.01_1e-06_stderr.log
+    jobid: 20
+    wildcards: mval=0.01, sval=1e-06
+
+
+[Tue Jul 18 15:54:36 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.1_0.0001_stdout.log, logs/0.1_0.0001_stderr.log
+    jobid: 17
+    wildcards: mval=0.1, sval=0.0001
+
+
+[Tue Jul 18 15:54:36 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.1_N10000.0_numint10000.csv
+    log: logs/0.0001_0.1_stdout.log, logs/0.0001_0.1_stderr.log
+    jobid: 9
+    wildcards: mval=0.0001, sval=0.1
+
+
+[Tue Jul 18 15:54:36 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.1_N10000.0_numint10000.csv
+    log: logs/0.001_0.1_stdout.log, logs/0.001_0.1_stderr.log
+    jobid: 14
+    wildcards: mval=0.001, sval=0.1
+
+
+[Tue Jul 18 15:54:36 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.001_N10000.0_numint10000.csv
+    log: logs/0.1_0.001_stdout.log, logs/0.1_0.001_stderr.log
+    jobid: 10
+    wildcards: mval=0.1, sval=0.001
+
+
+[Tue Jul 18 15:54:36 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.1_1e-06_stdout.log, logs/0.1_1e-06_stderr.log
+    jobid: 12
+    wildcards: mval=0.1, sval=1e-06
+
+
+[Tue Jul 18 15:54:36 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.01_0.0001_stdout.log, logs/0.01_0.0001_stderr.log
+    jobid: 2
+    wildcards: mval=0.01, sval=0.0001
+
+
+[Tue Jul 18 15:54:36 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.01_N10000.0_numint10000.csv
+    log: logs/0.0001_0.01_stdout.log, logs/0.0001_0.01_stderr.log
+    jobid: 11
+    wildcards: mval=0.0001, sval=0.01
+
+
+[Tue Jul 18 15:54:37 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.001_N10000.0_numint10000.csv
+    log: logs/0.01_0.001_stdout.log, logs/0.01_0.001_stderr.log
+    jobid: 7
+    wildcards: mval=0.01, sval=0.001
+
+
+[Tue Jul 18 15:54:37 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.01_N10000.0_numint10000.csv
+    log: logs/0.001_0.01_stdout.log, logs/0.001_0.01_stderr.log
+    jobid: 15
+    wildcards: mval=0.001, sval=0.01
+
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+[Tue Jul 18 15:54:39 2023]
+Error in rule run_sims:
+    jobid: 6
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.0001_1e-06_stdout.log, logs/0.0001_1e-06_stderr.log
+
+[Tue Jul 18 15:54:39 2023]
+Error in rule run_sims:
+    jobid: 8
+    output: output/test_vals_L50_l1.0_m0.1_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.01_N10000.0_numint10000.csv
+    log: logs/0.1_0.01_stdout.log, logs/0.1_0.01_stderr.log
+
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Tue Jul 18 15:54:39 2023]
+Error in rule run_sims:
+    jobid: 16
+    output: output/test_vals_L50_l1.0_m0.01_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.1_N10000.0_numint10000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+[Tue Jul 18 15:54:39 2023]
+Error in rule run_sims:
+    jobid: 3
+    output: output/test_vals_L50_l1.0_m0.001_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.001_1e-06_stdout.log, logs/0.001_1e-06_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 20
+    output: output/test_vals_L50_l1.0_m0.01_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.01_1e-06_stdout.log, logs/0.01_1e-06_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 17
+    output: output/test_vals_L50_l1.0_m0.1_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.1_0.0001_stdout.log, logs/0.1_0.0001_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.0001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 9
+    output: output/test_vals_L50_l1.0_m0.0001_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.1_N10000.0_numint10000.csv
+    log: logs/0.0001_0.1_stdout.log, logs/0.0001_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 14
+    output: output/test_vals_L50_l1.0_m0.001_s0.1_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.1_N10000.0_numint10000.csv
+    log: logs/0.001_0.1_stdout.log, logs/0.001_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 10
+    output: output/test_vals_L50_l1.0_m0.1_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.001_N10000.0_numint10000.csv
+    log: logs/0.1_0.001_stdout.log, logs/0.1_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 12
+    output: output/test_vals_L50_l1.0_m0.1_s1e-06_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s1e-06_N10000.0_numint10000.csv
+    log: logs/0.1_1e-06_stdout.log, logs/0.1_1e-06_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 135, in main
+    parser.add_argument("--check_sims",action=argparse.BooleanOptionalAction)
+AttributeError: module 'argparse' has no attribute 'BooleanOptionalAction'
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 2
+    output: output/test_vals_L50_l1.0_m0.01_s0.0001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.0001_N10000.0_numint10000.csv
+    log: logs/0.01_0.0001_stdout.log, logs/0.01_0.0001_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.0001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 11
+    output: output/test_vals_L50_l1.0_m0.0001_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.01_N10000.0_numint10000.csv
+    log: logs/0.0001_0.01_stdout.log, logs/0.0001_0.01_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 15
+    output: output/test_vals_L50_l1.0_m0.001_s0.01_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.01_N10000.0_numint10000.csv
+    log: logs/0.001_0.01_stdout.log, logs/0.001_0.01_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Tue Jul 18 15:54:40 2023]
+Error in rule run_sims:
+    jobid: 7
+    output: output/test_vals_L50_l1.0_m0.01_s0.001_N10000.0_numint10000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.001_N10000.0_numint10000.csv
+    log: logs/0.01_0.001_stdout.log, logs/0.01_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 30 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 30, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/.snakemake/log/2023-07-18T155432.744682.snakemake.log
