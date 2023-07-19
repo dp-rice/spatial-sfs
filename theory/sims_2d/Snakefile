@@ -1,16 +1,12 @@
 import numpy as np
 
-s_grid = np.logspace(-6,-1,6)
-m_grid = np.logspace(-4,-1,4)
+configfile: "config.yaml"
 
-L = 50
-pop_size = 1e4
-l = 1.0
-n = 1000
-num_intervals = 10000
+s_grid = np.logspace(config["s_min"],config["s_max"],config["s_num"])
+m_grid = np.logspace(config["m_min"],config["m_max"],config["m_num"])
 
-checks_results_pattern = "output/test_vals_L"+str(L)+"_l"+str(l)+"_m{mvals}_s{svals}_N"+str(pop_size)+"_numint"+str(num_intervals)+".csv"
-sfs_results_pattern = "output/sfs_vals_L"+ str(L) + "_l" + str(l) + "_n"+str(n)+"_m{mvals}_s{svals}"+"_N" + str(pop_size) + "_numint" + str(num_intervals) + ".csv"
+checks_results_pattern = "output/test_vals_L"+config["L"]+"_l"+config["l"]+"_m{mvals}_s{svals}_N"+config["pop_size"]+"_numint"+config["num_intervals"]+".csv"
+sfs_results_pattern = "output/sfs_vals_L"+ config["L"] + "_l" + config["l"] + "_n"+config["n"]+"_m{mvals}_s{svals}"+"_N" + config["pop_size"] + "_numint" + config["num_intervals"] + ".csv"
 
 checks_results = expand(checks_results_pattern,mvals=m_grid,svals=s_grid)
 sfs_results = expand(checks_results_pattern,mvals=m_grid,svals=s_grid)
@@ -23,9 +19,9 @@ rule all:
 rule run_sims:
     input:
     output:
-        "output/test_vals_L50_l1.0_m{mval}_s{sval}_N10000.0_numint10000.csv",
-        "output/sfs_vals_L50_l1.0_n1000_m{mval}_s{sval}_N10000.0_numint10000.csv"
+        "output/test_vals_L"+config["L"]+"_l"+config["l"]+"_m{mval}_s{sval}_N"+config["pop_size"]+"_numint"+config["num_intervals"]+".csv",
+        "output/sfs_vals_L"+ config["L"] + "_l" + config["l"] + "_n"+config["n"]+"_m{mval}_s{sval}"+"_N" + config["pop_size"] + "_numint" + config["num_intervals"] + ".csv"
     log: out = "logs/{mval}_{sval}_stdout.log", err = "logs/{mval}_{sval}_stderr.log"
     shell:
-        "python scripts/2d_sims.py -m {wildcards.mval} -L 50 --pop_size 10000 -s {wildcards.sval} -l 1.0 -n 1000 --num_intervals 10000 --check_sims --calc_sfs"
+        "python scripts/2d_sims.py -m {wildcards.mval} -L {config[L]} --pop_size {config[pop_size]} -s {wildcards.sval} -l {config[l]} -n {config[l]} --num_intervals {config[num_intervals]} --check_sims --calc_sfs"
 
