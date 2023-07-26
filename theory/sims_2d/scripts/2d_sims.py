@@ -97,7 +97,7 @@ def sample_f(f):
 
 def freq_sfs(f,n):
     # create array to store entries of sfs
-    sfs = np.zeros(tuple([n + 1]) + f.shape)
+    sfs = np.zeros(tuple([n + 1]) + f.shape,dtype=np.float32)
     # iterate over entries in sfs
     for j in range(n + 1):
         # calculate SFS entry from frequency using binomial sampling

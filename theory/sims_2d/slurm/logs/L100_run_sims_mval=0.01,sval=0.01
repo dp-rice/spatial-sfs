@@ -1,0 +1,41 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	run_sims
+	1
+
+[Wed Jul 26 16:54:09 2023]
+rule run_sims:
+    output: output/20230726/test_vals_L100_l1.0_m0.01_s0.01_N10000_numint1000.csv, output/20230726/sfs_vals_L100_l1.0_n1000_m0.01_s0.01_N10000_numint1000.csv
+    log: logs/20230726/0.01_0.01_stdout.log, logs/202307260.01_0.01_stderr.log
+    jobid: 0
+    wildcards: mval=0.01, sval=0.01
+
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape,dtype=np.float32)
+numpy.core._exceptions.MemoryError: Unable to allocate 3.64 TiB for an array with shape (1001, 100, 1000, 100, 100) and data type float32
+[Wed Jul 26 17:09:21 2023]
+Error in rule run_sims:
+    jobid: 0
+    output: output/20230726/test_vals_L100_l1.0_m0.01_s0.01_N10000_numint1000.csv, output/20230726/sfs_vals_L100_l1.0_n1000_m0.01_s0.01_N10000_numint1000.csv
+    log: logs/20230726/0.01_0.01_stdout.log, logs/202307260.01_0.01_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py --outdir output/20230726 -m 0.01 -L 100 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/20230726/test_vals_L100_l1.0_m0.01_s0.01_N10000_numint1000.csv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message

@@ -1,2 +1,2 @@
-cluster: "sbatch --time=4-00:00:00 --mem=50GB -p jnovembre -o slurm/logs/{rule}_{wildcards} -e slurm/logs/{rule}_{wildcards}"
+cluster: "sbatch --time=4-00:00:00 --mem=50GB -p jnovembre -o slurm/logs/L100_{rule}_{wildcards} -e slurm/logs/L100_{rule}_{wildcards}"
 jobs: 1
