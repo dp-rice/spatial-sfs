@@ -1,0 +1,2 @@
+SyntaxError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command must be given as string after the shell keyword. (Snakefile, line 26)

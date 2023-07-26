@@ -1,0 +1,7 @@
+TypeError in line 5 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+'str' object cannot be interpreted as an integer
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 5, in <module>
+  File "<__array_function__ internals>", line 6, in logspace
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/site-packages/numpy/core/function_base.py", line 263, in logspace
+  File "<__array_function__ internals>", line 6, in linspace
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/site-packages/numpy/core/function_base.py", line 113, in linspace

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH -J rvsfs
-#SBATCH --mem=10000
+#SBATCH --mem=50G
 #SBATCH --time=4-00:00:00
 #SBATCH --account=pi-jnovembre
 #SBATCH --mail-type ALL

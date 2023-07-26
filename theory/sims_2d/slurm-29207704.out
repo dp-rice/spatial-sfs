@@ -1,0 +1,246 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	24	run_sims
+	25
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.001_s1e-06_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.001_s1e-06_N10000_numint1000.csv
+    log: logs/0.001_1e-06_stdout.log, logs/0.001_1e-06_stderr.log
+    jobid: 21
+    wildcards: mval=0.001, sval=1e-06
+
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.001_s0.0001_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.001_s0.0001_N10000_numint1000.csv
+    log: logs/0.001_0.0001_stdout.log, logs/0.001_0.0001_stderr.log
+    jobid: 7
+    wildcards: mval=0.001, sval=0.0001
+
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.0001_s0.001_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.0001_s0.001_N10000_numint1000.csv
+    log: logs/0.0001_0.001_stdout.log, logs/0.0001_0.001_stderr.log
+    jobid: 23
+    wildcards: mval=0.0001, sval=0.001
+
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.1_s0.0001_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.1_s0.0001_N10000_numint1000.csv
+    log: logs/0.1_0.0001_stdout.log, logs/0.1_0.0001_stderr.log
+    jobid: 10
+    wildcards: mval=0.1, sval=0.0001
+
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.0001_s0.1_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.0001_s0.1_N10000_numint1000.csv
+    log: logs/0.0001_0.1_stdout.log, logs/0.0001_0.1_stderr.log
+    jobid: 12
+    wildcards: mval=0.0001, sval=0.1
+
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.1_s1e-06_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.1_s1e-06_N10000_numint1000.csv
+    log: logs/0.1_1e-06_stdout.log, logs/0.1_1e-06_stderr.log
+    jobid: 15
+    wildcards: mval=0.1, sval=1e-06
+
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.001_s0.01_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.001_s0.01_N10000_numint1000.csv
+    log: logs/0.001_0.01_stdout.log, logs/0.001_0.01_stderr.log
+    jobid: 8
+    wildcards: mval=0.001, sval=0.01
+
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.01_s0.001_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.01_s0.001_N10000_numint1000.csv
+    log: logs/0.01_0.001_stdout.log, logs/0.01_0.001_stderr.log
+    jobid: 9
+    wildcards: mval=0.01, sval=0.001
+
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.1_s1e-05_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.1_s1e-05_N10000_numint1000.csv
+    log: logs/0.1_1e-05_stdout.log, logs/0.1_1e-05_stderr.log
+    jobid: 17
+    wildcards: mval=0.1, sval=1e-05
+
+
+[Thu Jul 20 13:15:15 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.001_s1e-05_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.001_s1e-05_N10000_numint1000.csv
+    log: logs/0.001_1e-05_stdout.log, logs/0.001_1e-05_stderr.log
+    jobid: 4
+    wildcards: mval=0.001, sval=1e-05
+
+
+[Thu Jul 20 13:15:16 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.01_s0.1_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.01_s0.1_N10000_numint1000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+    jobid: 20
+    wildcards: mval=0.01, sval=0.1
+
+
+[Thu Jul 20 13:15:16 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.1_s0.01_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.1_s0.01_N10000_numint1000.csv
+    log: logs/0.1_0.01_stdout.log, logs/0.1_0.01_stderr.log
+    jobid: 11
+    wildcards: mval=0.1, sval=0.01
+
+
+[Thu Jul 20 13:15:16 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.1_s0.001_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.1_s0.001_N10000_numint1000.csv
+    log: logs/0.1_0.001_stdout.log, logs/0.1_0.001_stderr.log
+    jobid: 14
+    wildcards: mval=0.1, sval=0.001
+
+
+[Thu Jul 20 13:15:16 2023]
+rule run_sims:
+    output: output/test_vals_L15_l1.0_m0.001_s0.1_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.001_s0.1_N10000_numint1000.csv
+    log: logs/0.001_0.1_stdout.log, logs/0.001_0.1_stderr.log
+    jobid: 18
+    wildcards: mval=0.001, sval=0.1
+
+/usr/bin/bash: line 1:  6906 Killed                  python scripts/2d_sims.py -m 0.0001 -L 15 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs
+[Thu Jul 20 13:39:13 2023]
+Error in rule run_sims:
+    jobid: 12
+    output: output/test_vals_L15_l1.0_m0.0001_s0.1_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.0001_s0.1_N10000_numint1000.csv
+    log: logs/0.0001_0.1_stdout.log, logs/0.0001_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 15 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 137.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L15_l1.0_m0.0001_s0.1_N10000_numint1000.csv
+/usr/bin/bash: line 1:  6924 Killed                  python scripts/2d_sims.py -m 0.01 -L 15 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs
+[Thu Jul 20 13:44:17 2023]
+Error in rule run_sims:
+    jobid: 20
+    output: output/test_vals_L15_l1.0_m0.01_s0.1_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.01_s0.1_N10000_numint1000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 15 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 137.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L15_l1.0_m0.01_s0.1_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 25.2 GiB for an array with shape (1001, 15, 1000, 15, 15) and data type float64
+[Thu Jul 20 13:50:49 2023]
+Error in rule run_sims:
+    jobid: 14
+    output: output/test_vals_L15_l1.0_m0.1_s0.001_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.1_s0.001_N10000_numint1000.csv
+    log: logs/0.1_0.001_stdout.log, logs/0.1_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 15 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L15_l1.0_m0.1_s0.001_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 25.2 GiB for an array with shape (1001, 15, 1000, 15, 15) and data type float64
+[Thu Jul 20 13:51:05 2023]
+Error in rule run_sims:
+    jobid: 9
+    output: output/test_vals_L15_l1.0_m0.01_s0.001_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.01_s0.001_N10000_numint1000.csv
+    log: logs/0.01_0.001_stdout.log, logs/0.01_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 15 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L15_l1.0_m0.01_s0.001_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 25.2 GiB for an array with shape (1001, 15, 1000, 15, 15) and data type float64
+[Thu Jul 20 13:51:41 2023]
+Error in rule run_sims:
+    jobid: 23
+    output: output/test_vals_L15_l1.0_m0.0001_s0.001_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.0001_s0.001_N10000_numint1000.csv
+    log: logs/0.0001_0.001_stdout.log, logs/0.0001_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 15 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L15_l1.0_m0.0001_s0.001_N10000_numint1000.csv
+/usr/bin/bash: line 1:  6932 Killed                  python scripts/2d_sims.py -m 0.001 -L 15 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs
+[Thu Jul 20 13:52:01 2023]
+Error in rule run_sims:
+    jobid: 18
+    output: output/test_vals_L15_l1.0_m0.001_s0.1_N10000_numint1000.csv, output/sfs_vals_L15_l1.0_n1000_m0.001_s0.1_N10000_numint1000.csv
+    log: logs/0.001_0.1_stdout.log, logs/0.001_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 15 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 137.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L15_l1.0_m0.001_s0.1_N10000_numint1000.csv
+[Thu Jul 20 14:01:45 2023]
+Finished job 8.
+1 of 25 steps (4%) done
+[Thu Jul 20 14:05:48 2023]
+Finished job 11.
+2 of 25 steps (8%) done
+[Thu Jul 20 16:28:48 2023]
+Finished job 7.
+3 of 25 steps (12%) done
+[Thu Jul 20 16:51:37 2023]
+Finished job 10.
+4 of 25 steps (16%) done
+slurmstepd-midway2-0401: error: *** JOB 29207704 ON midway2-0401 CANCELLED AT 2023-07-20T17:39:41 ***
+slurmstepd-midway2-0401: error: Detected 1503 oom_kill events in StepId=29207704.batch. Some of the step tasks have been OOM Killed.

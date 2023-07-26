@@ -5,8 +5,8 @@ configfile: "config.yaml"
 s_grid = np.logspace(config["s_min"],config["s_max"],config["s_num"])
 m_grid = np.logspace(config["m_min"],config["m_max"],config["m_num"])
 
-checks_results_pattern = "output/test_vals_L"+config["L"]+"_l"+config["l"]+"_m{mvals}_s{svals}_N"+config["pop_size"]+"_numint"+config["num_intervals"]+".csv"
-sfs_results_pattern = "output/sfs_vals_L"+ config["L"] + "_l" + config["l"] + "_n"+config["n"]+"_m{mvals}_s{svals}"+"_N" + config["pop_size"] + "_numint" + config["num_intervals"] + ".csv"
+checks_results_pattern = "output/test_vals_L"+str(config["L"])+"_l"+str(config["l"])+"_m{mvals}_s{svals}_N"+str(config["pop_size"])+"_numint"+str(config["num_intervals"])+".csv"
+sfs_results_pattern = "output/sfs_vals_L"+ str(config["L"]) + "_l" + str(config["l"]) + "_n"+str(config["n"])+"_m{mvals}_s{svals}"+"_N" + str(config["pop_size"]) + "_numint" + str(config["num_intervals"]) + ".csv"
 
 checks_results = expand(checks_results_pattern,mvals=m_grid,svals=s_grid)
 sfs_results = expand(checks_results_pattern,mvals=m_grid,svals=s_grid)
@@ -19,9 +19,8 @@ rule all:
 rule run_sims:
     input:
     output:
-        "output/test_vals_L"+config["L"]+"_l"+config["l"]+"_m{mval}_s{sval}_N"+config["pop_size"]+"_numint"+config["num_intervals"]+".csv",
-        "output/sfs_vals_L"+ config["L"] + "_l" + config["l"] + "_n"+config["n"]+"_m{mval}_s{sval}"+"_N" + config["pop_size"] + "_numint" + config["num_intervals"] + ".csv"
+        "output/test_vals_L"+str(config["L"])+"_l"+str(config["l"])+"_m{mval}_s{sval}_N"+str(config["pop_size"])+"_numint"+str(config["num_intervals"])+".csv",
+        "output/sfs_vals_L"+ str(config["L"]) + "_l" + str(config["l"]) + "_n"+str(config["n"])+"_m{mval}_s{sval}"+"_N" + str(config["pop_size"]) + "_numint" + str(config["num_intervals"]) + ".csv"
     log: out = "logs/{mval}_{sval}_stdout.log", err = "logs/{mval}_{sval}_stderr.log"
     shell:
-        "python scripts/2d_sims.py -m {wildcards.mval} -L {config[L]} --pop_size {config[pop_size]} -s {wildcards.sval} -l {config[l]} -n {config[l]} --num_intervals {config[num_intervals]} --check_sims --calc_sfs"
-
+        "python scripts/2d_sims.py -m {wildcards.mval} -L {config[L]} --pop_size {config[pop_size]} -s {wildcards.sval} -l {config[l]} -n {config[n]} --num_intervals {config[num_intervals]} --check_sims --calc_sfs"

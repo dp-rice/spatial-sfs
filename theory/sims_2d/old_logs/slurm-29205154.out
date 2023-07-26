@@ -1,0 +1,291 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	9	run_sims
+	10
+
+[Thu Jul 20 07:23:55 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.1_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.1_N10000_numint1000.csv
+    log: logs/0.001_0.1_stdout.log, logs/0.001_0.1_stderr.log
+    jobid: 4
+    wildcards: mval=0.001, sval=0.1
+
+
+[Thu Jul 20 07:23:55 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.001_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.001_N10000_numint1000.csv
+    log: logs/0.1_0.001_stdout.log, logs/0.1_0.001_stderr.log
+    jobid: 8
+    wildcards: mval=0.1, sval=0.001
+
+
+[Thu Jul 20 07:23:55 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.001_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.001_N10000_numint1000.csv
+    log: logs/0.01_0.001_stdout.log, logs/0.01_0.001_stderr.log
+    jobid: 5
+    wildcards: mval=0.01, sval=0.001
+
+
+[Thu Jul 20 07:23:55 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.01_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.01_N10000_numint1000.csv
+    log: logs/0.001_0.01_stdout.log, logs/0.001_0.01_stderr.log
+    jobid: 7
+    wildcards: mval=0.001, sval=0.01
+
+
+[Thu Jul 20 07:23:55 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.01_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.01_N10000_numint1000.csv
+    log: logs/0.1_0.01_stdout.log, logs/0.1_0.01_stderr.log
+    jobid: 1
+    wildcards: mval=0.1, sval=0.01
+
+
+[Thu Jul 20 07:23:55 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.1_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.1_N10000_numint1000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+    jobid: 6
+    wildcards: mval=0.01, sval=0.1
+
+
+[Thu Jul 20 07:23:55 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.01_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.01_N10000_numint1000.csv
+    log: logs/0.01_0.01_stdout.log, logs/0.01_0.01_stderr.log
+    jobid: 2
+    wildcards: mval=0.01, sval=0.01
+
+
+[Thu Jul 20 07:23:55 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.001_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.001_N10000_numint1000.csv
+    log: logs/0.001_0.001_stdout.log, logs/0.001_0.001_stderr.log
+    jobid: 9
+    wildcards: mval=0.001, sval=0.001
+
+
+[Thu Jul 20 07:23:55 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.1_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.1_N10000_numint1000.csv
+    log: logs/0.1_0.1_stdout.log, logs/0.1_0.1_stderr.log
+    jobid: 3
+    wildcards: mval=0.1, sval=0.1
+
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 932. GiB for an array with shape (1001, 50, 1000, 50, 50) and data type float64
+[Thu Jul 20 07:48:53 2023]
+Error in rule run_sims:
+    jobid: 4
+    output: output/test_vals_L50_l1.0_m0.001_s0.1_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.1_N10000_numint1000.csv
+    log: logs/0.001_0.1_stdout.log, logs/0.001_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L50_l1.0_m0.001_s0.1_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 932. GiB for an array with shape (1001, 50, 1000, 50, 50) and data type float64
+[Thu Jul 20 07:48:59 2023]
+Error in rule run_sims:
+    jobid: 3
+    output: output/test_vals_L50_l1.0_m0.1_s0.1_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.1_N10000_numint1000.csv
+    log: logs/0.1_0.1_stdout.log, logs/0.1_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L50_l1.0_m0.1_s0.1_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 932. GiB for an array with shape (1001, 50, 1000, 50, 50) and data type float64
+[Thu Jul 20 07:49:17 2023]
+Error in rule run_sims:
+    jobid: 6
+    output: output/test_vals_L50_l1.0_m0.01_s0.1_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.1_N10000_numint1000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L50_l1.0_m0.01_s0.1_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 932. GiB for an array with shape (1001, 50, 1000, 50, 50) and data type float64
+[Thu Jul 20 07:50:50 2023]
+Error in rule run_sims:
+    jobid: 1
+    output: output/test_vals_L50_l1.0_m0.1_s0.01_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.01_N10000_numint1000.csv
+    log: logs/0.1_0.01_stdout.log, logs/0.1_0.01_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L50_l1.0_m0.1_s0.01_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 932. GiB for an array with shape (1001, 50, 1000, 50, 50) and data type float64
+[Thu Jul 20 07:51:35 2023]
+Error in rule run_sims:
+    jobid: 7
+    output: output/test_vals_L50_l1.0_m0.001_s0.01_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.01_N10000_numint1000.csv
+    log: logs/0.001_0.01_stdout.log, logs/0.001_0.01_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L50_l1.0_m0.001_s0.01_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 932. GiB for an array with shape (1001, 50, 1000, 50, 50) and data type float64
+[Thu Jul 20 07:52:05 2023]
+Error in rule run_sims:
+    jobid: 2
+    output: output/test_vals_L50_l1.0_m0.01_s0.01_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.01_N10000_numint1000.csv
+    log: logs/0.01_0.01_stdout.log, logs/0.01_0.01_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L50_l1.0_m0.01_s0.01_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 932. GiB for an array with shape (1001, 50, 1000, 50, 50) and data type float64
+[Thu Jul 20 08:01:46 2023]
+Error in rule run_sims:
+    jobid: 8
+    output: output/test_vals_L50_l1.0_m0.1_s0.001_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.001_N10000_numint1000.csv
+    log: logs/0.1_0.001_stdout.log, logs/0.1_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L50_l1.0_m0.1_s0.001_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 932. GiB for an array with shape (1001, 50, 1000, 50, 50) and data type float64
+[Thu Jul 20 08:02:09 2023]
+Error in rule run_sims:
+    jobid: 9
+    output: output/test_vals_L50_l1.0_m0.001_s0.001_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.001_N10000_numint1000.csv
+    log: logs/0.001_0.001_stdout.log, logs/0.001_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L50_l1.0_m0.001_s0.001_N10000_numint1000.csv
+Traceback (most recent call last):
+  File "scripts/2d_sims.py", line 160, in <module>
+    main()
+  File "scripts/2d_sims.py", line 154, in main
+    sfs_vals = calc_sfs(output,args.n)
+  File "scripts/2d_sims.py", line 115, in calc_sfs
+    sfs = freq_sfs(f_filt,n).T
+  File "scripts/2d_sims.py", line 100, in freq_sfs
+    sfs = np.zeros(tuple([n + 1]) + f.shape)
+numpy.core._exceptions.MemoryError: Unable to allocate 932. GiB for an array with shape (1001, 50, 1000, 50, 50) and data type float64
+[Thu Jul 20 08:02:11 2023]
+Error in rule run_sims:
+    jobid: 5
+    output: output/test_vals_L50_l1.0_m0.01_s0.001_N10000_numint1000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.001_N10000_numint1000.csv
+    log: logs/0.01_0.001_stdout.log, logs/0.01_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1000 --num_intervals 1000 --check_sims --calc_sfs ' returned non-zero exit status 1.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job run_sims since they might be corrupted:
+output/test_vals_L50_l1.0_m0.01_s0.001_N10000_numint1000.csv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/.snakemake/log/2023-07-20T072354.919109.snakemake.log

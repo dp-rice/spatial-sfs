@@ -1,0 +1,334 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	24	run_sims
+	25
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.001_N10000_numint5000.csv
+    log: logs/0.001_0.001_stdout.log, logs/0.001_0.001_stderr.log
+    jobid: 4
+    wildcards: mval=0.001, sval=0.001
+
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.1_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.1_N10000_numint5000.csv
+    log: logs/0.1_0.1_stdout.log, logs/0.1_0.1_stderr.log
+    jobid: 5
+    wildcards: mval=0.1, sval=0.1
+
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s0.0001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.0001_N10000_numint5000.csv
+    log: logs/0.0001_0.0001_stdout.log, logs/0.0001_0.0001_stderr.log
+    jobid: 10
+    wildcards: mval=0.0001, sval=0.0001
+
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-06_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-06_N10000_numint5000.csv
+    log: logs/0.0001_1e-06_stdout.log, logs/0.0001_1e-06_stderr.log
+    jobid: 8
+    wildcards: mval=0.0001, sval=1e-06
+
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.01_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.01_N10000_numint5000.csv
+    log: logs/0.01_0.01_stdout.log, logs/0.01_0.01_stderr.log
+    jobid: 11
+    wildcards: mval=0.01, sval=0.01
+
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.001_N10000_numint5000.csv
+    log: logs/0.1_0.001_stdout.log, logs/0.1_0.001_stderr.log
+    jobid: 12
+    wildcards: mval=0.1, sval=0.001
+
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.1_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.1_N10000_numint5000.csv
+    log: logs/0.001_0.1_stdout.log, logs/0.001_0.1_stderr.log
+    jobid: 22
+    wildcards: mval=0.001, sval=0.1
+
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-05_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-05_N10000_numint5000.csv
+    log: logs/0.0001_1e-05_stdout.log, logs/0.0001_1e-05_stderr.log
+    jobid: 24
+    wildcards: mval=0.0001, sval=1e-05
+
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.0001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.0001_N10000_numint5000.csv
+    log: logs/0.001_0.0001_stdout.log, logs/0.001_0.0001_stderr.log
+    jobid: 3
+    wildcards: mval=0.001, sval=0.0001
+
+
+[Wed Jul 19 11:23:38 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s0.001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.001_N10000_numint5000.csv
+    log: logs/0.0001_0.001_stdout.log, logs/0.0001_0.001_stderr.log
+    jobid: 18
+    wildcards: mval=0.0001, sval=0.001
+
+
+[Wed Jul 19 11:23:39 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s1e-06_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s1e-06_N10000_numint5000.csv
+    log: logs/0.001_1e-06_stdout.log, logs/0.001_1e-06_stderr.log
+    jobid: 17
+    wildcards: mval=0.001, sval=1e-06
+
+
+[Wed Jul 19 11:23:39 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s1e-05_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s1e-05_N10000_numint5000.csv
+    log: logs/0.1_1e-05_stdout.log, logs/0.1_1e-05_stderr.log
+    jobid: 23
+    wildcards: mval=0.1, sval=1e-05
+
+
+[Wed Jul 19 11:23:39 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s0.1_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.1_N10000_numint5000.csv
+    log: logs/0.0001_0.1_stdout.log, logs/0.0001_0.1_stderr.log
+    jobid: 9
+    wildcards: mval=0.0001, sval=0.1
+
+
+[Wed Jul 19 11:23:39 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.0001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.0001_N10000_numint5000.csv
+    log: logs/0.1_0.0001_stdout.log, logs/0.1_0.0001_stderr.log
+    jobid: 20
+    wildcards: mval=0.1, sval=0.0001
+
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 10
+    output: output/test_vals_L50_l1.0_m0.0001_s0.0001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.0001_N10000_numint5000.csv
+    log: logs/0.0001_0.0001_stdout.log, logs/0.0001_0.0001_stderr.log
+
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 4
+    output: output/test_vals_L50_l1.0_m0.001_s0.001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.001_N10000_numint5000.csv
+    log: logs/0.001_0.001_stdout.log, logs/0.001_0.001_stderr.log
+
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 5
+    output: output/test_vals_L50_l1.0_m0.1_s0.1_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.1_N10000_numint5000.csv
+    log: logs/0.1_0.1_stdout.log, logs/0.1_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 0.0001 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 8
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-06_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-06_N10000_numint5000.csv
+    log: logs/0.0001_1e-06_stdout.log, logs/0.0001_1e-06_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 11
+    output: output/test_vals_L50_l1.0_m0.01_s0.01_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.01_N10000_numint5000.csv
+    log: logs/0.01_0.01_stdout.log, logs/0.01_0.01_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.01 -L 50 --pop_size 10000 -s 0.01 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 12
+    output: output/test_vals_L50_l1.0_m0.1_s0.001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.001_N10000_numint5000.csv
+    log: logs/0.1_0.001_stdout.log, logs/0.1_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 22
+    output: output/test_vals_L50_l1.0_m0.001_s0.1_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.1_N10000_numint5000.csv
+    log: logs/0.001_0.1_stdout.log, logs/0.001_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 3
+    output: output/test_vals_L50_l1.0_m0.001_s0.0001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.0001_N10000_numint5000.csv
+    log: logs/0.001_0.0001_stdout.log, logs/0.001_0.0001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 0.0001 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 24
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-05_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-05_N10000_numint5000.csv
+    log: logs/0.0001_1e-05_stdout.log, logs/0.0001_1e-05_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 1e-05 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 18
+    output: output/test_vals_L50_l1.0_m0.0001_s0.001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.001_N10000_numint5000.csv
+    log: logs/0.0001_0.001_stdout.log, logs/0.0001_0.001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 0.001 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+usage: 2d_sims.py [-h] [-m M] [-L L] [--pop_size POP_SIZE] [-s S] [-l L]
+                  [-n N] [--num_intervals NUM_INTERVALS] [--outdir OUTDIR]
+                  [--seed SEED] [--check_sims] [--calc_sfs]
+2d_sims.py: error: argument -n: invalid int value: '1.0'
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 23
+    output: output/test_vals_L50_l1.0_m0.1_s1e-05_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s1e-05_N10000_numint5000.csv
+    log: logs/0.1_1e-05_stdout.log, logs/0.1_1e-05_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 1e-05 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 17
+    output: output/test_vals_L50_l1.0_m0.001_s1e-06_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s1e-06_N10000_numint5000.csv
+    log: logs/0.001_1e-06_stdout.log, logs/0.001_1e-06_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.001 -L 50 --pop_size 10000 -s 1e-06 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 9
+    output: output/test_vals_L50_l1.0_m0.0001_s0.1_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.1_N10000_numint5000.csv
+    log: logs/0.0001_0.1_stdout.log, logs/0.0001_0.1_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.0001 -L 50 --pop_size 10000 -s 0.1 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Jul 19 11:23:41 2023]
+Error in rule run_sims:
+    jobid: 20
+    output: output/test_vals_L50_l1.0_m0.1_s0.0001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.0001_N10000_numint5000.csv
+    log: logs/0.1_0.0001_stdout.log, logs/0.1_0.0001_stderr.log
+
+RuleException:
+CalledProcessError in line 26 of /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile:
+Command ' set -euo pipefail;  python scripts/2d_sims.py -m 0.1 -L 50 --pop_size 10000 -s 0.0001 -l 1.0 -n 1.0 --num_intervals 5000 --check_sims --calc_sfs ' returned non-zero exit status 2.
+  File "/project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/Snakefile", line 26, in __rule_run_sims
+  File "/home/steinerm/.conda/envs/snakemake/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/.snakemake/log/2023-07-19T112335.296324.snakemake.log

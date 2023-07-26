@@ -1,0 +1,122 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	24	run_sims
+	25
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.01_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.01_N10000_numint5000.csv
+    log: logs/0.01_0.01_stdout.log, logs/0.01_0.01_stderr.log
+    jobid: 9
+    wildcards: mval=0.01, sval=0.01
+
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.1_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.1_N10000_numint5000.csv
+    log: logs/0.1_0.1_stdout.log, logs/0.1_0.1_stderr.log
+    jobid: 14
+    wildcards: mval=0.1, sval=0.1
+
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.001_N10000_numint5000.csv
+    log: logs/0.001_0.001_stdout.log, logs/0.001_0.001_stderr.log
+    jobid: 17
+    wildcards: mval=0.001, sval=0.001
+
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.1_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.1_N10000_numint5000.csv
+    log: logs/0.01_0.1_stdout.log, logs/0.01_0.1_stderr.log
+    jobid: 18
+    wildcards: mval=0.01, sval=0.1
+
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.01_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.01_N10000_numint5000.csv
+    log: logs/0.1_0.01_stdout.log, logs/0.1_0.01_stderr.log
+    jobid: 20
+    wildcards: mval=0.1, sval=0.01
+
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s0.0001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s0.0001_N10000_numint5000.csv
+    log: logs/0.0001_0.0001_stdout.log, logs/0.0001_0.0001_stderr.log
+    jobid: 21
+    wildcards: mval=0.0001, sval=0.0001
+
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s0.001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s0.001_N10000_numint5000.csv
+    log: logs/0.01_0.001_stdout.log, logs/0.01_0.001_stderr.log
+    jobid: 6
+    wildcards: mval=0.01, sval=0.001
+
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.1_s0.001_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.1_s0.001_N10000_numint5000.csv
+    log: logs/0.1_0.001_stdout.log, logs/0.1_0.001_stderr.log
+    jobid: 19
+    wildcards: mval=0.1, sval=0.001
+
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-06_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-06_N10000_numint5000.csv
+    log: logs/0.0001_1e-06_stdout.log, logs/0.0001_1e-06_stderr.log
+    jobid: 12
+    wildcards: mval=0.0001, sval=1e-06
+
+
+[Wed Jul 19 11:27:30 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.1_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.1_N10000_numint5000.csv
+    log: logs/0.001_0.1_stdout.log, logs/0.001_0.1_stderr.log
+    jobid: 2
+    wildcards: mval=0.001, sval=0.1
+
+
+[Wed Jul 19 11:27:31 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s0.01_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s0.01_N10000_numint5000.csv
+    log: logs/0.001_0.01_stdout.log, logs/0.001_0.01_stderr.log
+    jobid: 22
+    wildcards: mval=0.001, sval=0.01
+
+
+[Wed Jul 19 11:27:31 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.0001_s1e-05_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.0001_s1e-05_N10000_numint5000.csv
+    log: logs/0.0001_1e-05_stdout.log, logs/0.0001_1e-05_stderr.log
+    jobid: 5
+    wildcards: mval=0.0001, sval=1e-05
+
+
+[Wed Jul 19 11:27:31 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.001_s1e-05_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.001_s1e-05_N10000_numint5000.csv
+    log: logs/0.001_1e-05_stdout.log, logs/0.001_1e-05_stderr.log
+    jobid: 15
+    wildcards: mval=0.001, sval=1e-05
+
+
+[Wed Jul 19 11:27:31 2023]
+rule run_sims:
+    output: output/test_vals_L50_l1.0_m0.01_s1e-05_N10000_numint5000.csv, output/sfs_vals_L50_l1.0_n1000_m0.01_s1e-05_N10000_numint5000.csv
+    log: logs/0.01_1e-05_stdout.log, logs/0.01_1e-05_stderr.log
+    jobid: 3
+    wildcards: mval=0.01, sval=1e-05
+
+slurmstepd-midway2-0405: error: *** JOB 29192960 ON midway2-0405 CANCELLED AT 2023-07-19T11:28:24 ***

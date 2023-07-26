@@ -1,10 +1,10 @@
-s_min: -6
+s_min: -3
 s_max: -1
-s_num: 6
-m_min: -4
+s_num: 3
+m_min: -3
 m_max: -1
-m_num: 4
-L: 15
+m_num: 3
+L: 10
 pop_size: 10000
 l: 1.0
 n: 1000
