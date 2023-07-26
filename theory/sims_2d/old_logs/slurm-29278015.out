@@ -1,0 +1,27 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 1
+Job counts:
+	count	jobs
+	1	all
+	9	run_sims
+	10
+
+[Wed Jul 26 15:26:45 2023]
+rule run_sims:
+    output: output/20230726/test_vals_L50_l1.0_m0.1_s0.01_N10000_numint100.csv, output/20230726/sfs_vals_L50_l1.0_n1000_m0.1_s0.01_N10000_numint100.csv
+    log: logs/20230726/0.1_0.01_stdout.log, logs/202307260.1_0.01_stderr.log
+    jobid: 2
+    wildcards: mval=0.1, sval=0.01
+
+Submitted job 2 with external jobid 'Submitted batch job 29278016'.
+[Wed Jul 26 15:27:05 2023]
+Error in rule run_sims:
+    jobid: 2
+    output: output/20230726/test_vals_L50_l1.0_m0.1_s0.01_N10000_numint100.csv, output/20230726/sfs_vals_L50_l1.0_n1000_m0.1_s0.01_N10000_numint100.csv
+    log: logs/20230726/0.1_0.01_stdout.log, logs/202307260.1_0.01_stderr.log
+    cluster_jobid: Submitted batch job 29278016
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /project2/jnovembre/steinerm/spatial-sfs/theory/sims_2d/.snakemake/log/2023-07-26T152645.042396.snakemake.log

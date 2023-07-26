@@ -1,0 +1,19 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	run_sims
+	1
+
+[Wed Jul 26 15:55:53 2023]
+rule run_sims:
+    output: output/20230726/test_vals_L20_l1.0_m0.001_s0.01_N10000_numint100.csv, output/20230726/sfs_vals_L20_l1.0_n1000_m0.001_s0.01_N10000_numint100.csv
+    log: logs/20230726/0.001_0.01_stdout.log, logs/202307260.001_0.01_stderr.log
+    jobid: 0
+    wildcards: mval=0.001, sval=0.01
+
+[Wed Jul 26 15:56:42 2023]
+Finished job 0.
+1 of 1 steps (100%) done

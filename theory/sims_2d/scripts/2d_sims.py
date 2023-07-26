@@ -102,7 +102,7 @@ def freq_sfs(f,n):
     for j in range(n + 1):
         # calculate SFS entry from frequency using binomial sampling
         sfs[j] = binom(n, j) * f ** j * (1 - f) ** (n - j)
-    return sfs
+    return np.array(sfs)
 
 def calc_sfs(f,n):
     # store list of sigma values
